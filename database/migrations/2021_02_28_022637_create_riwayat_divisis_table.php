@@ -17,7 +17,8 @@ class CreateRiwayatDivisisTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_pegawai');
             $table->unsignedBigInteger('id_divisi');
-            $table->year('tahun');
+            $table->year('thn_mulai');
+            $table->year('thn_selesai');
             $table->timestamps();
 
             $table->index('id_pegawai');
