@@ -52,17 +52,27 @@
             </div>
         </div>
     </li>
-    
+
     <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+    <hr class="sidebar-divider my-0">
 
+    {{-- <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block"> --}}
 
-
-    <!-- Nav Item - Dashboard -->
+    <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('divisi.index') }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#divisi" aria-expanded="true"
+            aria-controls="divisi">
             <i class="fas fa-fw fa-braille"></i>
-            <span>Data Divisi</span></a>
+            <span>Divisi</span>
+        </a>
+        <div id="divisi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Fitur </h6>
+                <a class="collapse-item" href="{{ route('divisi.index') }}">List Divisi </a>
+                <a class="collapse-item" href="{{ route('divisi.create') }}">Tambah Data Divisi </a>
+            </div>
+        </div>
     </li>
 
     <!-- Divider -->
