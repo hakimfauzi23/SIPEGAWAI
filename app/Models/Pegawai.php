@@ -71,6 +71,16 @@ class Pegawai extends Model
         return $this->hasMany('App\Models\Rekap_kehadiran');
     }
 
+    public function riwayat_jabatan()
+    {
+        return $this->hasMany('App\Models\Riwayat_jabatan');
+    }
+
+    public function riwayat_divisi()
+    {
+        return $this->hasMany('App\Models\Riwayat_Divisi');
+    }
+
 
 
 
@@ -88,16 +98,4 @@ class Pegawai extends Model
     {
         return $this->belongsTo('App\Models\Role', 'id_role', 'id');
     }
-
-
-    public function riwayat_divisi()
-    {
-        return $this->belongsToMany('App\Models\Divisi');
-    }
-
-    public function riwayat_jabatan()
-    {
-        return $this->belongsToMany('App\Models\Jabatan');
-    }
-
 }

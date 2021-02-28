@@ -30,6 +30,6 @@ class Divisi extends Model
 
     public function riwayat_divisi()
     {
-        return $this->belongsToMany('App\Models\Pegawai');
+        return $this->hasMany('App\Models\Riwayat_divisi');
     }
 }

@@ -20,4 +20,15 @@ class Riwayat_jabatan extends Model
         'thn_selesai'
     ];
 
+
+    public function pegawai()
+    {
+        return $this->belongsTo('App\Models\Pegawai','id_pegawai','id');
+    }
+
+    public function jabatan()
+    {
+        return $this->belongsTo('App\Models\Jabatan','id_jabatan','id');
+
+    }
 }

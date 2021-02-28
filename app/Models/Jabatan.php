@@ -31,6 +31,6 @@ class Jabatan extends Model
 
     public function riwayat_jabatan()
     {
-        return $this->belongsToMany('App\Models\Pegawai');
+        return $this->hasMany('App\Models\Riwayat_jabatan');
     }
 }

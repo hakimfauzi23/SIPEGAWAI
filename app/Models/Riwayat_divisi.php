@@ -17,4 +17,14 @@ class Riwayat_divisi extends Model
         'thn_mulai',
         'thn_selesai'
     ];
+
+    public function pegawai()
+    {
+        return $this->belongsTo('App\Models\Pegawai', 'id_pegawai', 'id');
+    }
+
+    public function divisi()
+    {
+        return $this->belongsTo('App\Models\Divisi', 'id_divisi', 'id');
+    }
 }
