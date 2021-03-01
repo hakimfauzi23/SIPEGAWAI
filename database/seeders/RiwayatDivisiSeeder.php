@@ -20,7 +20,7 @@ class RiwayatDivisiSeeder extends Seeder
 
         for ($i = 0; $i < 3; $i++) {
             DB::table('riwayat_divisi')->insert([
-                'id_pegawai' => 21020001,
+                'id_pegawai' => date("ym") . "0002",
                 'id_divisi' => $faker->numberBetween(1, 9),
                 'tgl_mulai' => $faker->date(),
             ]);

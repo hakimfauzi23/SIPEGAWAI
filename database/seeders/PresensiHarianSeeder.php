@@ -21,7 +21,7 @@ class PresensiHarianSeeder extends Seeder
 
         for ($i=1; $i < 3 ; $i++) { 
             DB::table('presensi_harian')->insert([
-                'id_pegawai' => 21020001,
+                'id_pegawai' => date("ym") . "0002",
                 'tanggal' => $faker->date,
                 'ket' => $ket[$faker->numberBetween(0, 2)],
                 'jam_dtg' => $faker->time('H:i'),

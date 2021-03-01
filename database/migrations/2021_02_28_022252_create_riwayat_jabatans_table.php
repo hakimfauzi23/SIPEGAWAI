@@ -17,7 +17,7 @@ class CreateRiwayatJabatansTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_pegawai');
             $table->unsignedBigInteger('id_jabatan');
-            $table->year('tgl_mulai');
+            $table->date('tgl_mulai');
             $table->timestamps();
 
             $table->index('id_pegawai');

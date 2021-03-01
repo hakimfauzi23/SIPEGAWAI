@@ -20,7 +20,7 @@ class RiwayatJabatanSeeder extends Seeder
 
         for ($i=0; $i < 3 ; $i++) { 
             DB::table('riwayat_jabatan')->insert([
-                'id_pegawai'=> 21020001,
+                'id_pegawai' => date("ym") . "0002",
                 'id_jabatan'=> $faker->numberBetween(1, 9),
                 'tgl_mulai'=> $faker->date(),
             ]);
