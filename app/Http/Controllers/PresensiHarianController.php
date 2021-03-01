@@ -7,9 +7,6 @@ use App\Models\Presensi_harian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class PresensiHarianController extends Controller
 {

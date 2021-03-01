@@ -94,6 +94,24 @@
         </div>
     </li>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#cuti" aria-expanded="true"
+            aria-controls="cuti">
+            <i class="fas fa-fw fa-braille"></i>
+            <span>Cuti</span>
+        </a>
+        <div id="cuti" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Fitur </h6>
+                <a class="collapse-item" href="{{ route('cuti.index') }}">Data Pengajuan Cuti </a>
+            </div>
+        </div>
+    </li>
+
 
 
     <!-- Divider -->

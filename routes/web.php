@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CutiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\JabatanController;
@@ -56,3 +57,13 @@ Route::post('/presensi/store', [PresensiHarianController::class, 'store'])->name
 Route::get('/presensi/edit/{data}', [PresensiHarianController::class, 'edit'])->name('presensi.edit');
 Route::put('/presensi/update/{data}', [PresensiHarianController::class, 'update'])->name('presensi.update');
 Route::get('/presensi/destroy/{data}', [PresensiHarianController::class, 'destroy'])->name('presensi.destroy');
+
+
+//Cuti 
+Route::get('/cuti', [CutiController::class, 'index'])->name('cuti.index');
+Route::get('/cuti/detail/{data}', [CutiController::class, 'show'])->name('cuti.details');
+Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create');
+Route::post('/cuti/store', [CutiController::class, 'store'])->name('cuti.store');
+Route::get('/cuti/edit/{data}', [CutiController::class, 'edit'])->name('cuti.edit');
+Route::put('/cuti/update/{data}', [CutiController::class, 'update'])->name('cuti.update');
+Route::get('/cuti/destroy/{data}', [CutiController::class, 'destroy'])->name('cuti.destroy');
