@@ -16,8 +16,7 @@ class Riwayat_jabatan extends Model
     protected $fillable = [
         'id_pegawai',
         'id_jabatan',
-        'thn_mulai',
-        'thn_selesai'
+        'tgl_mulai',
     ];
 
 

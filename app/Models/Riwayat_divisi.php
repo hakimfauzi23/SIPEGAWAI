@@ -14,8 +14,7 @@ class Riwayat_divisi extends Model
     protected $fillable = [
         'id_pegawai',
         'id_divisi',
-        'thn_mulai',
-        'thn_selesai'
+        'tgl_mulai',
     ];
 
     public function pegawai()

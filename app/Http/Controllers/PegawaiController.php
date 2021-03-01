@@ -114,20 +114,19 @@ class PegawaiController extends Controller
         ]);
 
 
-        if ($riwayat_jabatan == 0 || $riwayat_divisi == 0) {
+        if ($riwayat_jabatan == 0) {
 
             Riwayat_jabatan::create([
                 'id_pegawai' => $id,
                 'id_jabatan' => $request->id_jabatan,
-                'thn_mulai' => date('Y'),
-                'thn_selesai' => date('Y')
+                'tgl_mulai' => $request->tgl_masuk,
             ]);
-
+        }
+        if ($riwayat_divisi == 0) {
             Riwayat_divisi::create([
                 'id_pegawai' => $id,
-                'id_divisi' => $request->id_jabatan,
-                'thn_mulai' => date('Y'),
-                'thn_selesai' => date('Y')
+                'id_divisi' => $request->id_divisi,
+                'tgl_mulai' => $request->tgl_masuk,
             ]);
         }
 
@@ -259,20 +258,19 @@ class PegawaiController extends Controller
             $pegawai->path = $imgname;
             $pegawai->save();
 
-            if ($riwayat_jabatan == 0 || $riwayat_divisi == 0) {
+            if ($riwayat_jabatan == 0) {
 
                 Riwayat_jabatan::create([
                     'id_pegawai' => $id,
                     'id_jabatan' => $request->id_jabatan,
-                    'thn_mulai' => date('Y'),
-                    'thn_selesai' => date('Y')
+                    'tgl_mulai' => date("Y-m-d"),
                 ]);
-
+            }
+            if ($riwayat_divisi == 0) {
                 Riwayat_divisi::create([
                     'id_pegawai' => $id,
-                    'id_divisi' => $request->id_jabatan,
-                    'thn_mulai' => date('Y'),
-                    'thn_selesai' => date('Y')
+                    'id_divisi' => $request->id_divisi,
+                    'tgl_mulai' => date("Y-m-d"),
                 ]);
             }
 
@@ -321,23 +319,22 @@ class PegawaiController extends Controller
             $pegawai->save();
 
 
-            if ($riwayat_jabatan == 0 || $riwayat_divisi == 0) {
+            if ($riwayat_jabatan == 0) {
 
                 Riwayat_jabatan::create([
                     'id_pegawai' => $id,
                     'id_jabatan' => $request->id_jabatan,
-                    'thn_mulai' => date('Y'),
-                    'thn_selesai' => date('Y')
-
-                ]);
-
-                Riwayat_divisi::create([
-                    'id_pegawai' => $id,
-                    'id_divisi' => $request->id_jabatan,
-                    'thn_mulai' => date('Y'),
-                    'thn_selesai' => date('Y')
+                    'tgl_mulai' => date("Y-m-d"),
                 ]);
             }
+            if ($riwayat_divisi == 0) {
+                Riwayat_divisi::create([
+                    'id_pegawai' => $id,
+                    'id_divisi' => $request->id_divisi,
+                    'tgl_mulai' => date("Y-m-d"),
+                ]);
+            }
+
 
             Alert::success('success', ' Berhasil Update Data !');
             return redirect(route('pegawai.details', $data));

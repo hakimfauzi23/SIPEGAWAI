@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('page_title', 'Tambah Data Divisi')
+@section('page_title', 'Edit Data Divisi')
 
 
 @section('content')

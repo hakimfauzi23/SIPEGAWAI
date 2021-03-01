@@ -201,7 +201,7 @@
                                 @foreach ($riwayat_jabatan as $i)
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6> {{ $i->jabatan->nm_jabatan }} </h6>
-                                        <span class="text-secondary">{{ $i->thn_mulai }}</span>
+                                        <span class="text-secondary">{{ date('M y', strtotime($i->tgl_mulai)) }}</span>
                                     </li>
                                 @endforeach
                             </ul>
@@ -216,7 +216,7 @@
                                 @foreach ($riwayat_divisi as $i)
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6> {{ $i->divisi->nm_divisi }} </h6>
-                                        <span class="text-secondary">{{ $i->thn_mulai }}</span>
+                                        <span class="text-secondary">{{ date('M y', strtotime($i->tgl_mulai)) }}</span>
                                     </li>
                                 @endforeach
                             </ul>

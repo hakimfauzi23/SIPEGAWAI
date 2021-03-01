@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('page_title', 'Tambah Pengajuan Cuti')
+@section('page_title', 'Edit Pengajuan Cuti')
 
 
 @section('content')
