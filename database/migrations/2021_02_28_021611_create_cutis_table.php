@@ -16,12 +16,12 @@ class CreateCutisTable extends Migration
         Schema::create('cuti', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_pegawai');
-            $table->enum('tipe_cuti', ['tahunan', 'besar', 'bersama', 'hamil', 'sakit', 'penting']);
+            $table->enum('tipe_cuti', ['Tahunan', 'Besar', 'Bersama', 'Hamil', 'Sakit', 'Penting']);
             $table->date('tgl_pengajuan');
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
             $table->text('ket');
-            $table->enum('status', ['disetujui', 'ditolak', 'diproses']);
+            $table->enum('status', ['Disetujui', 'Ditolak', 'Diproses']);
             $table->date('tgl_disetujui')->nullable();
             $table->date('tgl_ditolak')->nullable();
             $table->timestamps();

@@ -18,13 +18,13 @@ class CreatePegawaisTable extends Migration
             $table->unsignedBigInteger('id_role');
             $table->string('nik')->unique();
             $table->string('nama');
-            $table->enum('jk', ['pria', 'wanita']);
+            $table->enum('jk', ['Pria', 'Wanita']);
             $table->string('agama');
             $table->string('tempat_lahir');
             $table->date('tgl_lahir');
             $table->string('alamat_ktp');
             $table->string('alamat_dom');
-            $table->enum('status', ['menikah', 'lajang']);
+            $table->enum('status', ['Menikah', 'Lajang']);
             $table->integer('jml_anak');
             $table->string('no_hp');
             $table->string('email')->unique();
