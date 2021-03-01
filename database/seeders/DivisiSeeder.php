@@ -23,7 +23,7 @@ class DivisiSeeder extends Seeder
 
             DB::table('divisi')->insert([
                 [
-                    'nm_divisi' => 'non-divisi',
+                    'nm_divisi' => 'Eksekutif',
                 ],
                 [
                     'nm_divisi' => 'Human Resource',

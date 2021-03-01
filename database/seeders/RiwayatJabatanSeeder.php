@@ -22,8 +22,7 @@ class RiwayatJabatanSeeder extends Seeder
             DB::table('riwayat_jabatan')->insert([
                 'id_pegawai'=> 21020001,
                 'id_jabatan'=> $faker->numberBetween(1, 9),
-                'thn_mulai'=> $faker->year(),
-                'thn_selesai'=> $faker->year(),
+                'tgl_mulai'=> $faker->date(),
             ]);
         }
     }

@@ -22,8 +22,7 @@ class RiwayatDivisiSeeder extends Seeder
             DB::table('riwayat_divisi')->insert([
                 'id_pegawai' => 21020001,
                 'id_divisi' => $faker->numberBetween(1, 9),
-                'thn_mulai' => $faker->year(),
-                'thn_selesai' => $faker->year(),
+                'tgl_mulai' => $faker->date(),
             ]);
         }
     }

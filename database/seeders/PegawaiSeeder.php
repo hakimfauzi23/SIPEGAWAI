@@ -19,8 +19,8 @@ class PegawaiSeeder extends Seeder
     {
         //
         $faker = Faker::create('id_ID');
-        $jk = array('pria','wanita');
-        $status = array('menikah','lajang');
+        $jk = array('Pria','Wanita');
+        $status = array('Menikah','Lajang');
         $agama = array('Islam','Kristen','Katholik','Buddha','Hindu','Protestan');
 
             for($i = 1 ; $i <= 3; $i++){

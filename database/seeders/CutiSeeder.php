@@ -20,8 +20,8 @@ class CutiSeeder extends Seeder
         $faker = Faker::create('id_ID');
         $count = DB::table('pegawai')->count();
 
-        $tp_cuti = array('tahunan', 'besar', 'bersama', 'hamil', 'sakit');
-        $stat = array('disetujui', 'ditolak', 'diproses');
+        $tp_cuti = array('Tahunan', 'Besar', 'Bersama', 'Hamil', 'Sakit');
+        $stat = array('Disetujui', 'Ditolak', 'Diproses');
 
 
         for ($i = 1; $i < 3; $i++) {
