@@ -26,7 +26,6 @@
                     <tr>
                         <th>@sortablelink('id','ID JABATAN')</th>
                         <th>@sortablelink('nm_jabatan','JABATAN')</th>
-                        <th>@sortablelink('golongan','GOLONGAN')</th>
                         <th>@sortablelink('gaji_pokok','GAJI POKOK')</th>
                         <th>Aksi</th>
                     </tr>
@@ -37,7 +36,6 @@
                             <tr>
                                 <td>{{ $p->id }}</td>
                                 <td>{{ $p->nm_jabatan }}</td>
-                                <td>{{ $p->golongan }}</td>
                                 <td>{{ $p->gaji_pokok }}</td>
                                 <td>
                                     <?php $encyrpt = Crypt::encryptString($p->id); ?>

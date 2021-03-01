@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\DivisiController;
+use App\Http\Controllers\PresensiHarianController;
 
 
 /*
@@ -46,3 +47,12 @@ Route::post('/divisi/store', [DivisiController::class, 'store'])->name('divisi.s
 Route::get('/divisi/edit/{data}', [DivisiController::class, 'edit'])->name('divisi.edit');
 Route::put('/divisi/update/{data}', [DivisiController::class, 'update'])->name('divisi.update');
 Route::get('/divisi/destroy/{data}', [DivisiController::class, 'destroy'])->name('divisi.destroy');
+
+
+//Presensi 
+Route::get('/presensi', [PresensiHarianController::class, 'index'])->name('presensi.index');
+Route::get('/presensi/create', [PresensiHarianController::class, 'create'])->name('presensi.create');
+Route::post('/presensi/store', [PresensiHarianController::class, 'store'])->name('presensi.store');
+Route::get('/presensi/edit/{data}', [PresensiHarianController::class, 'edit'])->name('presensi.edit');
+Route::put('/presensi/update/{data}', [PresensiHarianController::class, 'update'])->name('presensi.update');
+Route::get('/presensi/destroy/{data}', [PresensiHarianController::class, 'destroy'])->name('presensi.destroy');

@@ -76,6 +76,27 @@
     </li>
 
     <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#presensi" aria-expanded="true"
+            aria-controls="presensi">
+            <i class="fas fa-fw fa-braille"></i>
+            <span>Presensi</span>
+        </a>
+        <div id="presensi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Fitur </h6>
+                <a class="collapse-item" href="{{ route('presensi.index') }}">Data Presensi Harian </a>
+                <a class="collapse-item" href="{{ route('presensi.create') }}">Tambah Data Divisi </a>
+            </div>
+        </div>
+    </li>
+
+
+
+    <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
