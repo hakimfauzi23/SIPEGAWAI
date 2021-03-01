@@ -7,7 +7,7 @@
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Presensi Harian / </li>
+            <li class="breadcrumb-item active" aria-current="page">Data Presensi Harian / </li>
         </ol>
     </nav>
     <!-- /Breadcrumb -->

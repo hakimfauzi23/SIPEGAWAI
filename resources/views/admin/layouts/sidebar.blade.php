@@ -29,7 +29,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Fitur </h6>
                 <a class="collapse-item" href="{{ route('pegawai.index') }}">List Pegawai </a>
-                <a class="collapse-item" href="{{ route('pegawai.create') }}">Tambah Pegawai </a>
             </div>
         </div>
     </li>
@@ -48,7 +47,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Fitur </h6>
                 <a class="collapse-item" href="{{ route('jabatan.index') }}">List Jabatan </a>
-                <a class="collapse-item" href="{{ route('jabatan.create') }}">Tambah Data Jabatan </a>
             </div>
         </div>
     </li>
@@ -70,7 +68,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Fitur </h6>
                 <a class="collapse-item" href="{{ route('divisi.index') }}">List Divisi </a>
-                <a class="collapse-item" href="{{ route('divisi.create') }}">Tambah Data Divisi </a>
             </div>
         </div>
     </li>
@@ -82,14 +79,13 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#presensi" aria-expanded="true"
             aria-controls="presensi">
-            <i class="fas fa-fw fa-braille"></i>
+            <i class="fas fa-fw fa-fingerprint"></i>
             <span>Presensi</span>
         </a>
         <div id="presensi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Fitur </h6>
                 <a class="collapse-item" href="{{ route('presensi.index') }}">Data Presensi Harian </a>
-                <a class="collapse-item" href="{{ route('presensi.create') }}">Tambah Data Divisi </a>
             </div>
         </div>
     </li>
@@ -101,7 +97,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#cuti" aria-expanded="true"
             aria-controls="cuti">
-            <i class="fas fa-fw fa-braille"></i>
+            <i class="fas fa-fw fa-bed"></i>
             <span>Cuti</span>
         </a>
         <div id="cuti" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
