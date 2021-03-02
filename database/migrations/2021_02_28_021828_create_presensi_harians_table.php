@@ -18,8 +18,8 @@ class CreatePresensiHariansTable extends Migration
             $table->unsignedBigInteger('id_pegawai');
             $table->date('tanggal');
             $table->enum('ket', ['Hadir', 'Cuti', 'Alpha']);
-            $table->time('jam_dtg');
-            $table->time('jam_plg');
+            $table->time('jam_dtg')->nullable();
+            $table->time('jam_plg')->nullable();
             $table->timestamps();
 
             $table->index('id_pegawai');
