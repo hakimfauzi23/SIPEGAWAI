@@ -9,6 +9,7 @@ use Kyslik\ColumnSortable\Sortable;
 
 class Riwayat_jabatan extends Model
 {
+    use Sortable;
     use HasFactory;
 
     protected $table = 'riwayat_jabatan';
@@ -17,6 +18,13 @@ class Riwayat_jabatan extends Model
         'id_pegawai',
         'id_jabatan',
         'tgl_mulai',
+    ];
+
+    protected $sortable = [
+        'id_pegawai',
+        'id_jabatan',
+        'tgl_mulai',
+
     ];
 
 
