@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\PresensiCsvImport;
 use App\Models\Pegawai;
 use App\Models\Presensi_harian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PresensiHarianController extends Controller
 {
@@ -129,7 +131,6 @@ class PresensiHarianController extends Controller
 
         Alert::success('success', ' Berhasil Update Data !');
         return redirect('presensi');
-
     }
 
     /**
@@ -148,6 +149,21 @@ class PresensiHarianController extends Controller
 
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect('presensi');
+    }
 
+    public function import()
+    {
+        Excel::import(new PresensiCsvImport, request()->file('file'));
+        Alert::success('success', ' Berhasil Hapus Data !');
+        return redirect('presensi');
+    }
+
+    public function download()
+    {
+        $filePath = public_path("/storage/template/TemplatePresensi.csv");
+        $headers = ['Content-Type: application/pdf'];
+        $fileName = 'TemplatePresensi.csv';
+
+        return response()->download($filePath, $fileName, $headers);
     }
 }

@@ -21,6 +21,7 @@
             @endif
             <a href="{{ route('presensi.create') }}" class="btn btn-primary">Tambah Data Baru</a>
             <div class="mb-3"></div>
+            
             <table style="text-align:center" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>

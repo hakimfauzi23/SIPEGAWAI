@@ -13,9 +13,23 @@
         </ol>
     </nav>
     <!-- /Breadcrumb -->
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title mb-4">Input Multiple Data</h5>
+            <a href="{{ route('presensi.template') }}">Download Template</a>
+            <form action="{{ route('presensi.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file" accept=".csv">
+                <div class="mb-2"></div>
+                <button class="btn btn-success">Import Sekarang</button>
+            </form>
+        </div>
+    </div>
+
 
     <div class="card mt-4">
         <div class="card-body">
+            <h5 class="card-title mb-4">Input Single Data</h5>
 
             <form method="post" action="{{ route('presensi.store') }}">
 

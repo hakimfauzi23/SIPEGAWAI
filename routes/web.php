@@ -6,6 +6,7 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\PresensiHarianController;
+use App\Http\Controllers\DownloadFileController;
 
 
 /*
@@ -57,6 +58,8 @@ Route::post('/presensi/store', [PresensiHarianController::class, 'store'])->name
 Route::get('/presensi/edit/{data}', [PresensiHarianController::class, 'edit'])->name('presensi.edit');
 Route::put('/presensi/update/{data}', [PresensiHarianController::class, 'update'])->name('presensi.update');
 Route::get('/presensi/destroy/{data}', [PresensiHarianController::class, 'destroy'])->name('presensi.destroy');
+Route::post('/presensi/import_excel', [PresensiHarianController::class, 'import'])->name('presensi.import');
+Route::get('/presensi/template_download', [PresensiHarianController::class, 'download'])->name('presensi.template');
 
 
 //Cuti 
