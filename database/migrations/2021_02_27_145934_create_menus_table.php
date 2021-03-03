@@ -24,7 +24,12 @@ class CreateMenusTable extends Migration
             $table->timestamps();
 
             $table->index('id_group');
-            $table->foreign('id_group')->references('id')->on('group_menu')->onDelete('cascade');
+            $table->foreign('id_group')
+                ->references('id')
+                ->on('group_menu')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

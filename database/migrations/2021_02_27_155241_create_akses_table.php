@@ -23,10 +23,18 @@ class CreateAksesTable extends Migration
 
             $table->index('id_role');
             $table->index('id_menu');
-            $table->foreign('id_role')->references('id')->on('role')->onDelete('cascade');
-            $table->foreign('id_menu')->references('id')->on('menu')->onDelete('cascade');
+            $table->foreign('id_role')
+                ->references('id')
+                ->on('role')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
-            
+            $table->foreign('id_menu')->references('id')
+                ->on('menu')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

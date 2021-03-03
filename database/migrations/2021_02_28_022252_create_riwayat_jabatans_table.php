@@ -22,9 +22,19 @@ class CreateRiwayatJabatansTable extends Migration
 
             $table->index('id_pegawai');
             $table->index('id_jabatan');
-            $table->foreign('id_pegawai')->references('id')->on('pegawai');
-            $table->foreign('id_jabatan')->references('id')->on('jabatan');
+            $table->foreign('id_pegawai')
+                ->references('id')
+                ->on('pegawai')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
+            $table->foreign('id_jabatan')
+                ->references('id')
+                ->on('jabatan')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

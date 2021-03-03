@@ -38,9 +38,26 @@ class CreatePegawaisTable extends Migration
             $table->index('id_jabatan');
             $table->index('id_divisi');
             $table->index('id_role');
-            $table->foreign('id_jabatan')->references('id')->on('jabatan');
-            $table->foreign('id_divisi')->references('id')->on('divisi');
-            $table->foreign('id_role')->references('id')->on('role');
+            $table->foreign('id_jabatan')
+                ->references('id')
+                ->on('jabatan')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('id_divisi')
+                ->references('id')
+                ->on('divisi')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('id_role')
+                ->references('id')
+                ->on('role')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

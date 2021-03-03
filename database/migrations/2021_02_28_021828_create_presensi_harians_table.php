@@ -23,7 +23,12 @@ class CreatePresensiHariansTable extends Migration
             $table->timestamps();
 
             $table->index('id_pegawai');
-            $table->foreign('id_pegawai')->references('id')->on('pegawai');
+            $table->foreign('id_pegawai')
+                ->references('id')
+                ->on('pegawai')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

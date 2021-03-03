@@ -22,8 +22,18 @@ class CreateRiwayatDivisisTable extends Migration
 
             $table->index('id_pegawai');
             $table->index('id_divisi');
-            $table->foreign('id_pegawai')->references('id')->on('pegawai');
-            $table->foreign('id_divisi')->references('id')->on('divisi');
+            $table->foreign('id_pegawai')
+                ->references('id')
+                ->on('pegawai')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('id_divisi')
+                ->references('id')
+                ->on('divisi')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
