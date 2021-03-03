@@ -1,11 +1,11 @@
 @extends('admin.layouts.base')
 
-@section('page_title', 'Edit Data Riwayat Jabatan')
+@section('page_title', 'Edit Data Riwayat divisi')
 
 
 @section('content')
     @php
-    $encrypt = Crypt::encryptString($riwayat_jabatan->id_pegawai);
+    $encrypt = Crypt::encryptString($riwayat_divisi->id_pegawai);
     @endphp
 
     <!-- Breadcrumb -->
@@ -13,13 +13,13 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('pegawai.index') }}">List Pegawai</a></li>
             <li class="breadcrumb-item">
-                <a href="{{ route('pegawai.details', $encrypt) }}">{{ $riwayat_jabatan->pegawai->id . '-' . $riwayat_jabatan->pegawai->nama }}
+                <a href="{{ route('pegawai.details', $encrypt) }}">{{ $riwayat_divisi->pegawai->id . '-' . $riwayat_divisi->pegawai->nama }}
                 </a>
             </li>
-            <li class="breadcrumb-item"><a href="{{ route('riwayatJabatan.show', $encrypt) }}">List Riwayat Jabatan
+            <li class="breadcrumb-item"><a href="{{ route('riwayatDivisi.show', $encrypt) }}">List Riwayat divisi
                 </a>
             </li>
-            <li class="breadcrumb-item">Edit Data Jabatan</li>
+            <li class="breadcrumb-item">Edit Data divisi</li>
 
         </ol>
     </nav>
@@ -28,17 +28,17 @@
     <div class="card mt-4">
         <div class="card-body">
 
-            <form method="post" action="{{ route('riwayatJabatan.update', $id) }}">
+            <form method="post" action="{{ route('riwayatDivisi.update', $id) }}">
 
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
 
                 <div class="form-group mb-3 ">
-                    <input type="text" name="id" value="{{ $riwayat_jabatan->id }}" hidden>
+                    <input type="text" name="id" value="{{ $riwayat_divisi->id }}" hidden>
                     <label for="inputState">Pegawai</label>
-                    <input type="text" name="#" class="form-control" value="{{ $riwayat_jabatan->pegawai->nama }}"
+                    <input type="text" name="#" class="form-control" value="{{ $riwayat_divisi->pegawai->nama }}"
                         disabled>
-                    <input type="text" name="id_pegawai" class="form-control" value="{{ $riwayat_jabatan->id_pegawai }}"
+                    <input type="text" name="id_pegawai" class="form-control" value="{{ $riwayat_divisi->id_pegawai }}"
                         hidden>
 
                     @if ($errors->has('id_pegawai'))
@@ -51,29 +51,29 @@
 
                 <div class="form-row mb-3">
                     <div class="form-group col-md-6">
-                        <label for="inputState">Jabatan</label>
+                        <label for="inputState">Divisi</label>
                         <select class="form-control selectpicker" data-live-search="true" searchable="Search here.."
-                            name="id_jabatan">
-                            <option>Pilih Jabatan</option>
-                            @foreach ($jabatan as $key => $value)
+                            name="id_divisi">
+                            <option>Pilih divisi</option>
+                            @foreach ($divisi as $key => $value)
                                 <option value="{{ $key }}"
-                                    {{ $riwayat_jabatan->id_jabatan == $key ? 'selected' : '' }}>
+                                    {{ $riwayat_divisi->id_divisi == $key ? 'selected' : '' }}>
                                     {{ $value }}
                                 </option>
                             @endforeach
                         </select>
 
-                        @if ($errors->has('id_jabatan'))
+                        @if ($errors->has('id_divisi'))
                             <div class="text-danger">
-                                {{ $errors->first('id_jabatan') }}
+                                {{ $errors->first('id_divisi') }}
                             </div>
                         @endif
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="inputState">Tanggal Mulai Jabatan</label>
+                        <label for="inputState">Tanggal Mulai Masuk Divisi</label>
                         <input type="date" name="tgl_mulai" class="form-control"
-                            value="{{ $riwayat_jabatan->tgl_mulai }}">
+                            value="{{ $riwayat_divisi->tgl_mulai }}">
 
                         @if ($errors->has('tgl_mulai'))
                             <div class="text-danger">

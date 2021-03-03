@@ -212,7 +212,8 @@
                 <div class="col-sm-6 mb-3">
                     <div class="card border-left-secondary shadow h-100">
                         <div class="card-body">
-                            <h6 class="d-flex align-items-center mb-3">Riwayat Divisi (<a href="#">edit</a>)</h6>
+                            <h6 class="d-flex align-items-center mb-3">Riwayat Divisi (<a
+                                    href="{{ route('riwayatDivisi.show', $encyrpt) }}">edit</a>)</h6>
                             <ul class="list-group list-group-flush">
                                 @foreach ($riwayat_divisi as $i)
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">

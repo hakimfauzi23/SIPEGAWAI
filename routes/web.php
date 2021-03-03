@@ -8,7 +8,7 @@ use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\PresensiHarianController;
 use App\Http\Controllers\RiwayatJabatanController;
 use App\Http\Controllers\DownloadFileController;
-
+use App\Http\Controllers\RiwayatDivisiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,3 +78,10 @@ Route::get('/riwayat_jabatan/show/{data}', [RiwayatJabatanController::class, 'sh
 Route::get('/riwayat_jabatan/edit/{data}', [RiwayatJabatanController::class, 'edit'])->name('riwayatJabatan.edit');
 Route::put('/riwayat_jabatan/update/{data}', [RiwayatJabatanController::class, 'update'])->name('riwayatJabatan.update');
 Route::get('/riwayat_jabatan/destroy/{data}', [RiwayatJabatanController::class, 'destroy'])->name('riwayatJabatan.destroy');
+
+
+//RiwayatDivisi
+Route::get('/riwayat_divisi/show/{data}', [RiwayatDivisiController::class, 'show'])->name('riwayatDivisi.show');
+Route::get('/riwayat_divisi/edit/{data}', [RiwayatDivisiController::class, 'edit'])->name('riwayatDivisi.edit');
+Route::put('/riwayat_divisi/update/{data}', [RiwayatDivisiController::class, 'update'])->name('riwayatDivisi.update');
+Route::get('/riwayat_divisi/destroy/{data}', [RiwayatDivisiController::class, 'destroy'])->name('riwayatDivisi.destroy');
