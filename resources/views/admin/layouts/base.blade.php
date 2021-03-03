@@ -115,12 +115,13 @@
     <script src="{{ URL::to('/admin') }}/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ URL::to('/admin') }}/js/demo/chart-area-demo.js"></script>
-    <script src="{{ URL::to('/admin') }}/js/demo/chart-pie-demo.js"></script>
+    {{-- <script src="{{ URL::to('/admin') }}/js/demo/chart-area-demo.js"></script>
+    <script src="{{ URL::to('/admin') }}/js/demo/chart-pie-demo.js"></script> --}}
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
+        @yield('customScript')
 
 
 </body>

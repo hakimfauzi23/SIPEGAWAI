@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Divisi;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
+use App\Models\Presensi_harian;
 use App\Models\Riwayat_divisi;
 use App\Models\Riwayat_jabatan;
 use App\Models\Role;
@@ -151,6 +152,19 @@ class PegawaiController extends Controller
         $riwayat_divisi = Riwayat_divisi::where('id_pegawai', $id)
             ->orderBy('id')
             ->get();
+        $hadir = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', date('m'))
+            ->where('ket', "Hadir")
+            ->count();
+        $cuti = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', date('m'))
+            ->where('ket', "Cuti")
+            ->count();
+        $alpha = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', date('m'))
+            ->where('ket', "Alpha")
+            ->count();
+
 
         // dd([$pegawai,$riwayat_jabatan]);
         return view('admin.pegawai.details', [
@@ -158,6 +172,10 @@ class PegawaiController extends Controller
             'pegawai' => $pegawai,
             'riwayat_jabatan' => $riwayat_jabatan,
             'riwayat_divisi' => $riwayat_divisi,
+            'hadir' => $hadir,
+            'cuti' => $cuti,
+            'alpha' => $alpha,
+
         ]);
     }
 

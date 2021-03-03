@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card border-left-success shadow mt-3">
+            <div class="card border-left-success shadow mt-3 mb-3">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -85,6 +85,43 @@
                 </ul>
             </div>
 
+            <div class="card border-left-primary shadow ">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Rekap Kehadiran Bulan Ini</h6>
+                    {{-- <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Fitur</div>
+                            <a class="dropdown-item" href="{{ route('riwayatJabatan.show', $encyrpt) }}">Edit
+                                Riwayat Jabatan</a>
+                        </div>
+                    </div> --}}
+                </div>
+
+                <div class="card-body">
+                    <div class="chart-pie pt-3 pb-2">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-primary"></i> Hadir
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-success"></i> Alpha
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-info"></i> Cuti
+                        </span>
+                    </div>
+
+
+
+                </div>
+            </div>
 
         </div>
 
@@ -195,9 +232,23 @@
             <div class="row gutters-sm">
                 <div class="col-sm-6 mb-3">
                     <div class="card border-left-secondary shadow h-100">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Riwayat Jabatan</h6>
+                            <div class="dropdown no-arrow">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                    aria-labelledby="dropdownMenuLink">
+                                    <div class="dropdown-header">Fitur</div>
+                                    <a class="dropdown-item" href="{{ route('riwayatJabatan.show', $encyrpt) }}">Edit
+                                        Riwayat Jabatan</a>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card-body">
-                            <h6 class="d-flex align-items-center mb-3">Riwayat Jabatan (<a
-                                    href="{{ route('riwayatJabatan.show', $encyrpt) }}">edit</a>)</h6>
                             <ul class="list-group list-group-flush">
                                 @foreach ($riwayat_jabatan as $i)
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -211,9 +262,23 @@
                 </div>
                 <div class="col-sm-6 mb-3">
                     <div class="card border-left-secondary shadow h-100">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Riwayat Divisi</h6>
+                            <div class="dropdown no-arrow">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                    aria-labelledby="dropdownMenuLink">
+                                    <div class="dropdown-header">Fitur</div>
+                                    <a class="dropdown-item" href="{{ route('riwayatDivisi.show', $encyrpt) }}">Edit
+                                        Riwayat Divisi</a>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card-body">
-                            <h6 class="d-flex align-items-center mb-3">Riwayat Divisi (<a
-                                    href="{{ route('riwayatDivisi.show', $encyrpt) }}">edit</a>)</h6>
                             <ul class="list-group list-group-flush">
                                 @foreach ($riwayat_divisi as $i)
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -228,5 +293,48 @@
 
             </div>
         </div>
+
     </div>
+@endsection
+
+@section('customScript')
+    <script>
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = 'Nunito',
+            '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+
+        // Pie Chart Example
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Hadir", "Alpha", "Cuti"],
+                datasets: [{
+                    data: [{{ $hadir }}, {{ $alpha }}, {{ $cuti }}],
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 30,
+            },
+        });
+
+    </script>
 @endsection
