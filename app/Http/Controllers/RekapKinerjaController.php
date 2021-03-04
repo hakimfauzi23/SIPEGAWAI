@@ -57,15 +57,16 @@ class RekapKinerjaController extends Controller
         $kehadiran = Presensi_harian::where('id_pegawai', $id_pegawai)
             ->whereMonth('tanggal', date("m"))
             ->where('ket', '!=', 'Hadir')
-            ->where('ket', '!=', 'Cuti')
+            ->orWhere('ket', '!=', 'Cuti')
             ->count();
+
 
         $presensiTdkHadir = Presensi_harian::sortable()
             ->where('id_pegawai', $id_pegawai)
             ->where('ket', '!=', 'Hadir')
             ->whereMonth('tanggal', date('m'))
             ->orderBy('tanggal', 'desc')
-            ->paginate(3);
+            ->paginate(3, ['*'], 'presensi');
 
         $hadir = ($hari - $kehadiran) / $hari * 100;
         $persentaseHadir = number_format($hadir, 2);
@@ -114,7 +115,7 @@ class RekapKinerjaController extends Controller
             ->whereMonth('tgl_mulai', date("m"))
             ->where('status', 'Disetujui')
             ->orderBy('tgl_mulai', 'desc')
-            ->paginate(3);
+            ->paginate(3, ['*'], 'cuti');
 
 
 

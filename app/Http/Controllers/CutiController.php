@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cuti;
 use App\Models\Pegawai;
+use App\Models\Presensi_harian;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -168,6 +169,23 @@ class CutiController extends Controller
             $cuti->tgl_disetujui = date("Y-m-d");
             $cuti->tgl_ditolak = NULL;
             $cuti->save();
+
+            $date1 = new DateTime($request->tgl_mulai);
+            $date2 = new DateTime($request->tgl_selesai);
+
+            $interval = $date1->diff($date2);
+            $dt = $request->tgl_mulai;
+            // $gg = date("Y-m-d", strtotime($dt . ' + 40 days'));
+            // dd($gg);
+            for ($i = 0; $i < $interval->d; $i++) {
+                Presensi_harian::create([
+                    'id_pegawai' => $request->id_pegawai,
+                    'tanggal' => date("Y-m-d", strtotime($dt . ' + ' . $i . 'days')),
+                    'ket' => 'Cuti',
+                    'jam_dtg' => NULL,
+                    'jam_plg' => NULL,
+                ]);
+            }
         } else if ($cekStatus == "Diproses" || $request->status == "Ditolak") {
             $cuti->id_pegawai = $request->id_pegawai;
             $cuti->tipe_cuti = $request->tipe_cuti;

@@ -53,7 +53,9 @@
 
                         Page : {{ $presensiTdkHadir->currentPage() }}
                         || Total Data : {{ $presensiTdkHadir->total() }}
-                        {{ $presensiTdkHadir->links() }}
+
+                        {{ $presensiTdkHadir->appends(['cuti' => $cuti->currentPage()])->links() }}
+
 
                     </div>
                 </div>
@@ -140,7 +142,7 @@
 
                         Page : {{ $cuti->currentPage() }}
                         || Total Data : {{ $cuti->total() }}
-                        {{ $cuti->links() }}
+                        {{ $cuti->appends(['presensi' => $presensiTdkHadir->currentPage()])->links() }}
 
                     </div>
                 </div>
