@@ -23,7 +23,7 @@ use App\Http\Controllers\RiwayatDivisiController;
 */
 
 Route::get('/', function () {
-    return view('apps.landingPage');
+    return view('user.layouts.base');
 });
 
 
