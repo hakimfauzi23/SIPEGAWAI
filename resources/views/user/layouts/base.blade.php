@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Regna Bootstrap Template</title>
+    <title>@yield('title')</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -49,41 +49,18 @@
                 <!--<h1><a href="#hero">Regna</a></h1>-->
             </div>
 
-            <nav id="nav-menu-container">
-                <ul class="nav-menu">
-                    <li class="menu-active"><a href="#">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#team">Team</a></li>
-                    <li class="menu-has-children"><a href="">Drop Down</a>
-                        <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="menu-has-children"><a href="#">Drop Down 2</a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                            <li><a href="#">Drop Down 5</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#contact">Contact Us</a></li>
-                </ul>
-            </nav><!-- #nav-menu-container -->
+            <!-- nav-menu-container -->
+            @include('user.layouts.navbar')
+            <!-- #nav-menu-container -->
         </div>
     </header><!-- End Header -->
 
-    <!-- ======= Hero Section ======= -->
+    @yield('content')
+    {{-- <!-- ======= Hero Section ======= -->
     <section id="hero">
         <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
-            <h1>Welcome to Regna</h1>
-            <h2>We are team of talented designers making websites with Bootstrap</h2>
+            <h1>SIPEGAWAI</h1>
+            <h2>Have a Nice Day & Good Human Resource Management With Us! </h2>
             <a href="#about" class="btn-get-started">Get Started</a>
         </div>
     </section><!-- End Hero Section -->
@@ -130,7 +107,7 @@
                 </div>
 
             </div>
-        </section><!-- End About Section -->
+        </section><!-- End About Section --> --}}
 
         {{-- <!-- ======= Facts Section ======= -->
         <section id="facts">
@@ -167,7 +144,7 @@
             </div>
         </section><!-- End Facts Section --> --}}
 
-        <!-- ======= Services Section ======= -->
+        {{-- <!-- ======= Services Section ======= -->
         <section id="services">
             <div class="container" data-aos="fade-up">
                 <div class="section-header">
@@ -246,7 +223,7 @@
                 </div>
 
             </div>
-        </section><!-- End Call To Action Section -->
+        </section><!-- End Call To Action Section --> --}}
 
         {{-- <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="portfolio">
@@ -561,28 +538,7 @@
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <footer id="footer">
-        <div class="footer-top">
-            <div class="container">
-
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="copyright">
-                &copy; Copyright <strong>Regna</strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!--
-        All the links in the footer should remain intact.
-        You can delete the links only if you purchased the pro version.
-        Licensing information: https://bootstrapmade.com/license/
-        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Regna
-      -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
-        </div>
-    </footer>
+    @include('user.layouts.footer')
     <!-- End Footer -->
 
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
