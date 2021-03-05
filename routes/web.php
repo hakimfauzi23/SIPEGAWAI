@@ -8,6 +8,7 @@ use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\PresensiHarianController;
 use App\Http\Controllers\RiwayatJabatanController;
 use App\Http\Controllers\DownloadFileController;
+use App\Http\Controllers\HrdPegawaiController;
 use App\Http\Controllers\RekapKinerjaController;
 use App\Http\Controllers\RiwayatDivisiController;
 
@@ -90,3 +91,9 @@ Route::get('/riwayat_divisi/destroy/{data}', [RiwayatDivisiController::class, 'd
 
 //RekapKinerja
 Route::get('/kinerja/show/{data}', [RekapKinerjaController::class, 'show'])->name('rekapKinerja.show');
+
+
+
+ // HRD MENU!! // 
+ 
+ Route::resource('hrdPegawai', HrdPegawaiController::class);
