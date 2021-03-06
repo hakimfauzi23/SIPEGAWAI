@@ -1,0 +1,119 @@
+/* =================================== */
+
+/*  Footer Styles
+/* =================================== */
+
+.footer-area {
+    background: #0e1424;
+    .single-footer-widget {
+      @media (max-width: 991px) {
+        margin-bottom: 30px;
+      }
+      h4 {
+        color: #ffffff;
+        margin-bottom: 35px;
+        @media (max-width: 1024px) {
+          font-size: 18px;
+        }
+        @media (max-width: 991px) {
+          margin-bottom: 15px;
+        }
+      }
+      ul {
+        padding-left: 0;
+        li {
+          margin-bottom: 15px;
+          list-style: none;
+          a {
+            @include transition();
+            color: $text-color;
+            &:hover {
+              color: #ffffff;
+            }
+          }
+        }
+      }
+      .form-wrap {
+        margin-top: 25px;
+      }
+      input {
+        height: 40px;
+        border: none;
+        width: 80% !important;
+        font-weight: 300;
+        background: #334f6c;
+        color: #ffffff;
+        border-radius: 0;
+        font-size: 14px;
+        padding: 10px;
+        padding-left: 20px;
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+      .click-btn {
+        background: $white;
+        background-size: 200% auto;
+        color: $title-color;
+        border-radius: 0;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        padding: 8px 20px;
+        margin-left: -60px;
+        font-size: 15px;
+        text-transform: capitalize;
+        font-family: $title-font;
+        font-weight: 500;
+        border: 0;
+        @include transition();
+        span {
+          font-weight: 500;
+        }
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+        &:hover {
+          background-position: right center;
+        }
+      }
+    }
+    .footer-bottom {
+      margin-top: 50px;
+      @media (max-width: 991px) {
+        margin-top: 20px;
+      }
+      a {
+        color: $primary-color;
+      }
+      .footer-social {
+        text-align: right;
+        a {
+          background: #334f6c;
+          width: 20px;
+          width: 40px;
+          display: inline-table;
+          height: 40px;
+          text-align: center;
+          padding-top: 10px;
+          @include transition();
+          &:hover {
+            background: $primary-color;
+            i {
+              color: $title-color;
+            }
+          }
+        }
+        i {
+          color: #cccccc;
+          @include transition();
+        }
+        @media (max-width: 991px) {
+          text-align: left;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+  

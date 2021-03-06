@@ -1,0 +1,150 @@
+.section-gap {
+	padding: 130px 0;
+	@media (max-width: 991px) {
+		padding: 70px 0;
+	}
+}
+
+.section-gap-top {
+	padding-top: 130px;
+	@media (max-width: 991px) {
+		padding-top: 70px;
+	}
+}
+
+.section-gap-bottom {
+	padding-bottom: 130px;
+	@media (max-width: 991px) {
+		padding-bottom: 70px;
+	}
+}
+
+/* Main Title Area css
+============================================================================================ */
+
+.section-title  {
+	text-align: center;
+	margin-bottom: 80px;
+	@media (max-width: 991px) {
+		margin-bottom: 40px;
+	}
+	h4 {
+		color: $primary-color;
+		font-weight: 400;
+		@media (max-width:767px) {
+			margin-bottom: 10px;
+		}
+	}
+	h2 {
+		font-size: 42px;
+		margin-top: 10px;
+		margin-bottom: 20px;
+		@media (max-width: 991px) {
+			margin-bottom: 5px;
+			margin-top: 0px;
+		}
+		@media (max-width: 991px) {
+			font-size: 30px;
+		}
+	}
+}
+
+/* End Main Title Area css
+============================================================================================ */
+
+
+/* Start Buttons Area css
+============================================================================================ */
+
+.primary-btn {
+	position: relative;
+	display: inline-block;
+	color: $title-color;
+	padding: 12px 35px;
+	font-family: $primary-font;
+	font-size: 15px;
+	font-weight: 500;
+	outline: none !important;
+	text-align: center;
+	cursor: pointer;
+	text-transform: capitalize;
+	background: transparent;
+	border: 1px solid $primary-color;
+	@include transition();
+	&:hover {
+		background: $primary-color;
+		color: $white;
+	}
+}
+
+/* End Buttons Area css
+============================================================================================ */
+
+/* Start Overlay css
+============================================================================================ */
+.overlay {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+
+/* End Overlay css
+============================================================================================ */
+
+/* Start Video Play css
+============================================================================================ */
+
+.video-play-button {
+    position: relative;
+    box-sizing: content-box;
+    display: inline-block;
+    width: 32px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 46px 8px 18px 28px;
+    &:before, &:after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        @include transform(translate(-50%, -50%));
+        display: block;
+        width: 80px;
+        height: 80px;
+        background: $white;
+        border-radius: 50%;
+    }
+    &:before {
+        z-index: 0;
+        @include animation(pulse-border 2000ms ease-out infinite);
+    }
+    &:after {
+        z-index: 1;
+        @include transition(all 200ms ease);
+    }
+    span {
+        display: block;
+        position: relative;
+        z-index: 3;
+        width: 0;
+        height: 0;
+        border-left: 16px solid $primary-color;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+    }
+}
+
+@include keyframes(pulse-border) {
+    0% {
+        @include transform(translate(-50%, -50%) translateZ(0) scale(1));
+        opacity: .7;
+    }
+    100% {
+        @include transform(translate(-50%, -50%) translateZ(0) scale(1.5));
+        opacity: 0.1;
+    }
+}
+/* End Video Play css
+============================================================================================ */

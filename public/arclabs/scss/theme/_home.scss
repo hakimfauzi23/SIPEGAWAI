@@ -1,0 +1,724 @@
+//--------- Start Banner Area -------------//
+.parallax-mirror {
+	max-height: 900px;
+}
+
+.home-banner-area {
+	.template-name {
+		@include transform(rotate(-90deg));
+		position: absolute;
+		top: 24%;
+		left: -1%;
+		font-size: 150px;
+		font-weight: 700;
+		text-transform: uppercase;
+		color: rgba($white, 0.05);
+
+		@media (max-width: 767px) {
+			display: none;
+		}
+	}
+
+	.fullscreen {
+		height: 900px;
+
+		@include media-breakpoint-down (lg) {
+			height: 700px;
+		}
+	}
+
+	.overlay {
+		background: rgba(5, 10, 52, 0.6);
+	}
+
+	.banner-content {
+		margin-top: 25%;
+
+		@media (max-width: 991px) {
+			margin-top: 37%;
+			text-align: center;
+		}
+
+		@media (max-width: 767px) {
+			margin-top: 50%;
+			text-align: center;
+		}
+
+		h1 {
+			color: $white;
+			font-size: 100px;
+			line-height: 100px;
+			font-weight: 700;
+			text-transform: uppercase;
+			margin-bottom: 20px;
+
+			@include media-breakpoint-down(md) {
+				font-size: 45px;
+				line-height: 60px;
+			}
+
+			br {
+				@include media-breakpoint-down (md) {
+					display: none;
+				}
+			}
+
+			@media (max-width:414px) {
+				font-size: 40px;
+				line-height: 50px;
+			}
+		}
+
+		p {
+			font-size: 18px;
+			font-weight: 300;
+			text-transform: uppercase;
+			color: $white;
+		}
+
+		.primary-btn {
+			border: 1px solid $white;
+			color: $white;
+			margin-top: 20px;
+
+			&:hover {
+				border: 1px solid $primary-color;
+			}
+		}
+	}
+}
+
+.banner-area {
+	background: url(../img/common-banner.jpg) no-repeat;
+	background-size: cover;
+
+	.banner-content {
+		min-height: 450px;
+	}
+
+	.overlay-bg {
+		background: rgba(#07041f, .6);
+	}
+
+	h1 {
+		font-size: 50px;
+		margin-bottom: 10px;
+
+		@media(max-width: 768px) {
+			font-size: 35px;
+		}
+	}
+
+	p {
+		margin-bottom: 0px;
+		color: $white;
+	}
+}
+
+.head-bottom-meta {
+	position: absolute;
+	bottom: 50px;
+	left: 50px;
+	color: $white;
+
+	@media (max-width: 991px) {
+		left: 50%;
+		@include transform(translateX(-50%));
+	}
+
+	.meta-left a {
+		margin-right: 20px;
+		color: $white;
+		cursor: pointer;
+		@include transition();
+
+		&:hover {
+			color: $primary-color;
+		}
+	}
+
+	@media(max-width:767px) {
+		.flex-row {
+			flex-direction: column !important;
+		}
+
+		.d-flex {
+			display: block !important;
+		}
+	}
+}
+
+//--------- End Banner Area -------------//
+
+.top-section-area {
+	#imaginary_container {
+		background: #fff;
+		padding: 24px;
+	}
+}
+
+
+
+.top-section-area {
+
+	.stylish-input-group .form-control {
+		border-right: 0;
+		box-shadow: 0 0 0;
+		border-color: #eee;
+		background-color: $offwhite;
+	}
+
+	.input-group-addon {
+		background-color: $offwhite !important;
+		border-color: #eee;
+	}
+
+	.stylish-input-group button {
+		border: 0;
+		background: transparent;
+	}
+
+	input {
+		font-size: 14px;
+	}
+}
+
+/* Start Features Area css
+============================================================================================ */
+.features-area {
+	padding-bottom: 80px;
+
+	@media (max-width: 991px) {
+		padding-bottom: 20px;
+	}
+}
+
+.feature-item {
+	padding: 0px 17px;
+	text-align: center;
+	margin-bottom: 50px;
+
+	i {
+		margin-bottom: 35px;
+		font-size: 65px;
+		border: 1px solid #9499a5;
+		padding: 36px 41px;
+		display: inline-block;
+		color: $title-color;
+		@include transition();
+
+		@media (max-width: 767px) {
+			margin-bottom: 20px;
+		}
+	}
+
+	h4 {
+		font-size: 20px;
+		margin-bottom: 15px;
+		text-transform: capitalize;
+		@include transition();
+	}
+
+	p {
+		margin-bottom: 0px;
+	}
+
+	&:hover {
+		i {
+			border: 1px solid $primary-color;
+		}
+
+		h4 {
+			color: $primary-color;
+		}
+	}
+}
+
+/* End Features Area css
+============================================================================================ */
+
+/*-------- Start About Area ------------*/
+
+.about-area {
+	background: $offwhite;
+
+	.about-left {
+		@media(max-width: 991px) {
+			margin-bottom: 50px;
+		}
+	}
+}
+
+.about-right {
+	padding-left: 40px;
+
+	@media (max-width: 1199px) {
+		padding-left: 15px;
+	}
+
+	.section-title {
+		margin-bottom: 20px;
+	}
+
+	.primary-btn {
+		margin-top: 35px;
+	}
+
+	p {
+		&:last-child {
+			margin-bottom: 0px;
+		}
+	}
+}
+
+.about-content {
+	margin-top: 135px;
+	margin-bottom: 112px;
+	color: $white;
+	position: relative;
+
+	@media(max-width: 767px) {
+		margin-top: 140px;
+	}
+}
+
+//--------- End About Area -------------//
+
+//--------- start Service Area ------------- //
+.offer-area {
+	background: $offwhite;
+	padding: 130px 0px 100px;
+
+	@media (max-width: 991px) {
+		padding: 70px 0px 40px;
+	}
+
+	&:after {
+		position: absolute;
+		content: "";
+		top: 70px;
+		left: 0;
+		width: 36%;
+		bottom: 70px;
+		background: url(../img/offer.jpg) no-repeat center center/cover;
+		z-index: 1;
+
+		@media(max-width: 1199px) {
+			width: 32%;
+		}
+
+		@media(max-width: 991px) {
+			display: none;
+		}
+	}
+
+	@media(max-width:991px) {
+		.justify-content-end {
+			justify-content: flex-start !important;
+		}
+	}
+
+	.offer-right {
+		padding-left: 35px;
+
+		@media(max-width: 1024px) {
+			padding-left: 15px;
+		}
+	}
+
+	.single-offer {
+		padding: 50px;
+		background: $white;
+		margin-bottom: 30px;
+		border: 1px solid transparent;
+		@include transition();
+
+		h4 {
+			margin: 0px 0px 20px;
+			font-weight: 400;
+		}
+
+		p {
+			margin-bottom: 0px;
+
+		}
+
+		&:hover {
+			border: 1px solid $primary-color;
+		}
+	}
+}
+
+
+//--------- end Service Area -------------//
+
+/*--------- Start Work Area -------------*/
+
+.project-area {
+	padding-bottom: 100px;
+
+	@media (max-width: 991px) {
+		padding-bottom: 40px;
+	}
+
+	.filters {
+		text-align: center;
+
+		@media (max-width: 991px) {
+			margin-top: 40px;
+		}
+
+		ul {
+			padding: 0;
+
+			@media (max-width: 991px) {
+				text-align: center;
+			}
+
+			li {
+				list-style: none;
+				display: inline-block;
+				padding: 0 15px;
+				cursor: pointer;
+				position: relative;
+				text-transform: uppercase;
+				font-size: 13px;
+				color: $title-color;
+				&:last-child {
+					padding-right: 0;
+				}
+
+				@media (max-width: 991px) {
+					&:first-child {
+						padding-left: 0;
+					}
+				}
+
+				&.active,
+				&:hover {
+					color: $primary-color;
+				}
+			}
+		}
+	}
+
+	.filters-content {
+		.show {
+			opacity: 1;
+			visibility: visible;
+			transition: all 350ms;
+		}
+
+		.hide {
+			opacity: 0;
+			visibility: hidden;
+			transition: all 350ms;
+		}
+
+		img {
+			border-radius: 10px;
+			width: 100%;
+		}
+	}
+}
+
+
+.single-project {
+	border-radius: 5px;
+	margin-bottom: 30px;
+
+	.thumb {
+		.image {
+			opacity: 1;
+			display: block;
+			width: 100%;
+			height: 100%;
+			transition: 0.5s ease;
+			backface-visibility: hidden;
+		}
+	}
+
+	.middle {
+		transition: 0.5s ease;
+		position: absolute;
+		right: 0;
+		top: 0px;
+		min-width: 290px;
+		background: $white;
+		box-shadow: 0px -10px 30px rgba($title-color, 0.1);
+		padding: 34px 30px;
+
+		@media(min-width: 1200px){
+			right: 10px;
+		}
+
+		h4 {
+			font-size: 20px;
+			margin-bottom: 5px;
+		}
+
+		.cat {
+			@include transition();
+		}
+	}
+
+	&:hover {
+		.thumb {}
+
+		.middle {
+			.cat {
+				color: $primary-color;
+			}
+		}
+	}
+}
+
+/*--------- End Work Area -------------*/
+
+/*--------- Start callto Area -------------*/
+
+.callto-area {
+	background: url(../img/ct1.jpg) center;
+	background-size: cover;
+	text-align: center;
+
+	.call-wrap {
+		position: relative;
+	}
+
+	h1 {
+		font-size: 42px;
+		color: $white;
+		text-align: center;
+		margin-bottom: 50px;
+	}
+
+	p {
+		margin-bottom: 0px;
+		font-weight: 500;
+		margin-top: 20px;
+		color: $white;
+	}
+
+	.overlay-bg {
+		background: rgba(#050a34, .7)
+	}
+}
+
+/*--------- end callto Area -------------*/
+
+//--------- start testimonial area  -------------//
+
+.testimonial-area {
+	background: $offwhite;
+
+	.owl-controls {
+		margin-top: 70px;
+
+		@media (max-width: 991px) {
+			display: none;
+		}
+	}
+
+	.owl-dots {
+		text-align: center;
+		bottom: 5px;
+		margin-top: 0px;
+		width: 100%;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	.owl-dot {
+		height: 4px;
+		width: 20px;
+		display: inline-block;
+		background: rgba(127, 127, 127, 0.5);
+		margin: 0px 10px;
+		border-radius: 5px;
+		@include transition();
+	}
+
+	.owl-dot.active {
+		@include transition;
+		padding: 0px 25px 0px 0px;
+		background: $primary-color;
+	}
+
+}
+
+.single-testimonial {
+	background-color: $white;
+	padding: 30px;
+	border: 1px solid transparent;
+	@include transition();
+
+	h4 {
+		margin: 20px 0px 10px;
+		font-size: 18px;
+		text-transform: uppercase;
+	}
+
+	p {
+		margin-bottom: 0px;
+	}
+
+	.thumb {
+		margin-right: 20px;
+
+		img {
+			width: auto;
+		}
+	}
+
+	&:hover {
+		border: 1px solid $primary-color;
+	}
+}
+
+//--------- end testimonial area  -------------//
+
+/*--------- start brand Area -------------*/
+
+.brands-area {
+	padding: 60px 0px;
+
+	.brand-wrap {
+		padding: 40px 0;
+
+		.owl-carousel .owl-item img {
+			width: auto !important;
+		}
+
+		.single-brand {
+			text-align: center;
+			@include filter(grayscale(100%));
+			opacity: .3;
+			@include transition();
+
+			&:hover {
+				@include filter(grayscale(0%));
+				opacity: 1;
+			}
+		}
+	}
+
+}
+
+/*--------- end brand Area -------------*/
+
+/*============== contact_area css ================*/
+.contact_area {
+}
+.mapBox {
+  height: 420px;
+  margin-bottom: 80px;
+}
+.contact_info {
+  .info_item {
+    position: relative;
+    padding-left: 45px;
+    i {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 20px;
+      line-height: 24px;
+      color: $title-color;
+      font-weight: 600;
+    }
+    h6 {
+      font-size: 16px;
+      line-height: 24px;
+      color: $primary-font;
+      font-weight: bold;
+      margin-bottom: 0px;
+      color: $title-color;
+      a {
+        color: $title-color;
+      }
+    }
+    p {
+      font-size: 14px;
+      line-height: 24px;
+      padding: 2px 0px;
+    }
+  }
+}
+.contact_form {
+  .form-group {
+    margin-bottom: 10px;
+    .form-control {
+      line-height: 26px;
+      color: #999;
+      border: 1px solid #eeeeee;
+      font-family: $primary-font;
+      border-radius: 0px;
+      padding-left: 20px;
+      &:focus {
+        box-shadow: none;
+        outline: none;
+      }
+      @include placeholder {
+        color: $title-color;
+        font-size: 13px;
+      }
+    }
+    textarea {
+      resize: none;
+      &.form-control {
+        height: 140px;
+      }
+    }
+  }
+  .primary-btn {
+    margin-top: 20px;
+    cursor: pointer;
+  }
+}
+
+/* Contact Success and error Area css
+============================================================================================ */
+.modal-message {
+  .modal-dialog {
+    position: absolute;
+    top: 36%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) !important;
+    margin: 0px;
+    max-width: 500px;
+    width: 100%;
+    .modal-content {
+      .modal-header {
+        text-align: center;
+        display: block;
+        border-bottom: none;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        .close {
+          position: absolute;
+          right: -15px;
+          top: -15px;
+          padding: 0px;
+          color: #fff;
+          opacity: 1;
+          cursor: pointer;
+        }
+        h2 {
+          display: block;
+          text-align: center;
+          color: $primary-color;
+          padding-bottom: 10px;
+          font-family: $primary-font;
+        }
+        p {
+          display: block;
+        }
+      }
+    }
+  }
+}
+/* End Contact Success and error Area css
+============================================================================================ */
