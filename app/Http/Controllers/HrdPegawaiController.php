@@ -26,8 +26,12 @@ class HrdPegawaiController extends Controller
     public function index()
     {
         //
-        $pegawai = Pegawai::sortable()->paginate(10);
-        return view('user.hrd.pegawai.index', ['pegawai' => $pegawai]);
+        $currentPage = 'HRD';
+        $pegawai = Pegawai::sortable()->paginate(15);
+        return view('user.hrd.pegawai.index', [
+            'pegawai' => $pegawai,
+            'currentPage' => $currentPage,
+        ]);
     }
 
     /**
@@ -38,6 +42,16 @@ class HrdPegawaiController extends Controller
     public function create()
     {
         //
+        $currentPage = 'HRD';
+        $jabatan = Jabatan::pluck('nm_jabatan', 'id');
+        $divisi = Divisi::pluck('nm_divisi', 'id');
+        $role = Role::pluck('nm_role', 'id');
+        return view('user.hrd.pegawai.create', [
+            'jabatan' => $jabatan,
+            'divisi' => $divisi,
+            'role' => $role,
+            'currentPage' => $currentPage,
+        ]);
     }
 
     /**
@@ -49,6 +63,80 @@ class HrdPegawaiController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'id_role' => 'required',
+            'nik' => 'required',
+            'nama' => 'required',
+            'jk' => 'required',
+            'agama' => 'required',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'alamat_ktp' => 'required',
+            'alamat_dom' => 'required',
+            'status' => 'required',
+            'jml_anak' => 'required',
+            'no_hp' => 'required',
+            'email' => 'required',
+            'id_jabatan' => 'required',
+            'id_divisi' => 'required',
+            'tgl_masuk' => 'required',
+            'imgupload' => 'required|mimes:jpeg,png,jpg,gif,svg|file|max:5000'
+        ]);
+
+        $extension = $request->file('imgupload')->extension();
+        $imgname = $request->nik . '_' . date('dmyHi') . '.' . $extension;
+        $path = Storage::putFileAs('public/images', $request->file('imgupload'), $imgname);
+        $id = IdGenerator::generate(['table' => 'pegawai', 'length' => 8, 'prefix' => date('ym')]);
+        $password = Str::random(12);
+        $riwayat_jabatan = Riwayat_jabatan::where('id_pegawai', $id)
+            ->where('id_jabatan', $request->id_jabatan)
+            ->count();
+
+        $riwayat_divisi = Riwayat_divisi::where('id_pegawai', $id)
+            ->where('id_divisi', $request->id_divisi)
+            ->count();
+
+        Pegawai::create([
+            'id' => $id,
+            'id_role' => $request->id_role,
+            'nik' => $request->nik,
+            'nama' => $request->nama,
+            'jk' => $request->jk,
+            'agama' => $request->agama,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'alamat_ktp' => $request->alamat_ktp,
+            'alamat_dom' => $request->alamat_dom,
+            'status' => $request->status,
+            'jml_anak' => $request->jml_anak,
+            'no_hp' => $request->no_hp,
+            'email' => $request->email,
+            'password' => $password,
+            'tgl_masuk' => $request->tgl_masuk,
+            'id_jabatan' => $request->id_jabatan,
+            'id_divisi' => $request->id_divisi,
+            'path' => $imgname
+        ]);
+
+
+        if ($riwayat_jabatan == 0) {
+
+            Riwayat_jabatan::create([
+                'id_pegawai' => $id,
+                'id_jabatan' => $request->id_jabatan,
+                'tgl_mulai' => $request->tgl_masuk,
+            ]);
+        }
+        if ($riwayat_divisi == 0) {
+            Riwayat_divisi::create([
+                'id_pegawai' => $id,
+                'id_divisi' => $request->id_divisi,
+                'tgl_mulai' => $request->tgl_masuk,
+            ]);
+        }
+
+        Alert::success('success', ' Berhasil Input Data !');
+        return redirect('hrdPegawai');
     }
 
     /**
@@ -57,9 +145,45 @@ class HrdPegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($data)
     {
         //
+
+        $id = Crypt::decryptString($data);
+        $pegawai = Pegawai::find($id);
+        $riwayat_jabatan = Riwayat_jabatan::where('id_pegawai', $id)
+            ->orderBy('id')
+            ->get();
+        $riwayat_divisi = Riwayat_divisi::where('id_pegawai', $id)
+            ->orderBy('id')
+            ->get();
+        $hadir = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', date('m'))
+            ->where('ket', "Hadir")
+            ->count();
+        $cuti = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', date('m'))
+            ->where('ket', "Cuti")
+            ->count();
+        $alpha = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', date('m'))
+            ->where('ket', "Alpha")
+            ->count();
+
+        $currentPage = 'HRD';
+
+        // dd([$pegawai,$riwayat_jabatan]);
+        return view('user.hrd.pegawai.details', [
+            'id' => $id,
+            'pegawai' => $pegawai,
+            'riwayat_jabatan' => $riwayat_jabatan,
+            'riwayat_divisi' => $riwayat_divisi,
+            'hadir' => $hadir,
+            'cuti' => $cuti,
+            'alpha' => $alpha,
+            'currentPage' => $currentPage,
+
+        ]);
     }
 
     /**
@@ -68,9 +192,24 @@ class HrdPegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($data)
     {
         //
+        $id = Crypt::decryptString($data);
+        $pegawai = Pegawai::find($id);
+        $jabatan = Jabatan::pluck('nm_jabatan', 'id');
+        $divisi = Divisi::pluck('nm_divisi', 'id');
+        $role = Role::pluck('nm_role', 'id');
+        $currentPage = 'HRD';
+        return view('user.hrd.pegawai.edit', [
+            'id' => $data,
+            'pegawai' => $pegawai,
+            'jabatan' => $jabatan,
+            'divisi' => $divisi,
+            'role' => $role,
+            'currentPage' => $currentPage,
+
+        ]);
     }
 
     /**
@@ -80,9 +219,154 @@ class HrdPegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $data)
     {
         //
+        $id = Crypt::decryptString($data);
+
+        $riwayat_jabatan = Riwayat_jabatan::where('id_pegawai', $id)
+            ->where('id_jabatan', $request->id_jabatan)
+            ->count();
+
+        $riwayat_divisi = Riwayat_divisi::where('id_pegawai', $id)
+            ->where('id_divisi', $request->id_divisi)
+            ->count();
+
+
+        if ($request->hasFile('imgupload')) {
+
+
+
+            $extension = $request->file('imgupload')->extension();
+            $imgname = $request->nik . '_' . date('dmyHi') . '.' . $extension;
+
+            $this->validate($request, [
+                'id_role' => 'required',
+                'nik' => 'required',
+                'nama' => 'required',
+                'jk' => 'required',
+                'agama' => 'required',
+                'tempat_lahir' => 'required',
+                'tgl_lahir' => 'required',
+                'alamat_ktp' => 'required',
+                'alamat_dom' => 'required',
+                'status' => 'required',
+                'jml_anak' => 'required',
+                'no_hp' => 'required',
+                'email' => 'required',
+                'id_jabatan' => 'required',
+                'id_divisi' => 'required',
+                'tgl_masuk' => 'required',
+                'imgupload' => 'required|mimes:jpeg,png,jpg,gif,svg|file|max:5000'
+            ]);
+
+
+
+            $pegawai = Pegawai::find($id);
+            $path = Storage::putFileAs('public/images', $request->file('imgupload'), $imgname);
+
+
+            $pegawai->id_role = $request->id_role;
+            $pegawai->nik = $request->nik;
+            $pegawai->nama = $request->nama;
+            $pegawai->jk = $request->jk;
+            $pegawai->agama = $request->agama;
+            $pegawai->tempat_lahir = $request->tempat_lahir;
+            $pegawai->tgl_lahir = $request->tgl_lahir;
+            $pegawai->alamat_ktp = $request->alamat_ktp;
+            $pegawai->alamat_dom = $request->alamat_dom;
+            $pegawai->status = $request->status;
+            $pegawai->jml_anak = $request->jml_anak;
+            $pegawai->no_hp = $request->no_hp;
+            $pegawai->email = $request->email;
+            $pegawai->id_jabatan = $request->id_jabatan;
+            $pegawai->id_divisi = $request->id_divisi;
+            $pegawai->tgl_masuk = $request->tgl_masuk;
+            $pegawai->password = $request->password;
+            $pegawai->path = $imgname;
+            $pegawai->save();
+
+            if ($riwayat_jabatan == 0) {
+
+                Riwayat_jabatan::create([
+                    'id_pegawai' => $id,
+                    'id_jabatan' => $request->id_jabatan,
+                    'tgl_mulai' => date("Y-m-d"),
+                ]);
+            }
+            if ($riwayat_divisi == 0) {
+                Riwayat_divisi::create([
+                    'id_pegawai' => $id,
+                    'id_divisi' => $request->id_divisi,
+                    'tgl_mulai' => date("Y-m-d"),
+                ]);
+            }
+
+            Alert::success('success', ' Berhasil Update Data !');
+            return redirect(route('hrdPegawai.show', $data));
+        } else {
+
+            $this->validate($request, [
+                'id_role' => 'required',
+                'nik' => 'required',
+                'nama' => 'required',
+                'jk' => 'required',
+                'agama' => 'required',
+                'tempat_lahir' => 'required',
+                'tgl_lahir' => 'required',
+                'alamat_ktp' => 'required',
+                'alamat_dom' => 'required',
+                'status' => 'required',
+                'jml_anak' => 'required',
+                'no_hp' => 'required',
+                'email' => 'required',
+                'id_jabatan' => 'required',
+                'id_divisi' => 'required',
+                'tgl_masuk' => 'required',
+            ]);
+
+            $pegawai = Pegawai::find($id);
+
+            $pegawai->id_role = $request->id_role;
+            $pegawai->nik = $request->nik;
+            $pegawai->nama = $request->nama;
+            $pegawai->jk = $request->jk;
+            $pegawai->agama = $request->agama;
+            $pegawai->tempat_lahir = $request->tempat_lahir;
+            $pegawai->tgl_lahir = $request->tgl_lahir;
+            $pegawai->alamat_ktp = $request->alamat_ktp;
+            $pegawai->alamat_dom = $request->alamat_dom;
+            $pegawai->status = $request->status;
+            $pegawai->jml_anak = $request->jml_anak;
+            $pegawai->no_hp = $request->no_hp;
+            $pegawai->email = $request->email;
+            $pegawai->id_jabatan = $request->id_jabatan;
+            $pegawai->id_divisi = $request->id_divisi;
+            $pegawai->tgl_masuk = $request->tgl_masuk;
+            $pegawai->password = $request->password;
+            $pegawai->save();
+
+
+            if ($riwayat_jabatan == 0) {
+
+                Riwayat_jabatan::create([
+                    'id_pegawai' => $id,
+                    'id_jabatan' => $request->id_jabatan,
+                    'tgl_mulai' => date("Y-m-d"),
+                ]);
+            }
+            if ($riwayat_divisi == 0) {
+                Riwayat_divisi::create([
+                    'id_pegawai' => $id,
+                    'id_divisi' => $request->id_divisi,
+                    'tgl_mulai' => date("Y-m-d"),
+                ]);
+            }
+
+
+            Alert::success('success', ' Berhasil Update Data !');
+            return redirect(route('hrdPegawai.show', $data));
+        }
     }
 
     /**
@@ -91,8 +375,14 @@ class HrdPegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($data)
     {
         //
+        $id = Crypt::decryptString($data);
+        $pegawai = Pegawai::find($id);
+        $pegawai->delete();
+
+        Alert::success('success', ' Berhasil Hapus Data !');
+        return redirect(route('hrdPegawai.index'));
     }
 }

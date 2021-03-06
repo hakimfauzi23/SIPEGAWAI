@@ -11,6 +11,7 @@ use App\Http\Controllers\DownloadFileController;
 use App\Http\Controllers\HrdPegawaiController;
 use App\Http\Controllers\RekapKinerjaController;
 use App\Http\Controllers\RiwayatDivisiController;
+use PhpOffice\PhpSpreadsheet\Chart\Layout;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,8 @@ use App\Http\Controllers\RiwayatDivisiController;
 */
 
 Route::get('/', function () {
-    return view('user.landingPage');
+    $currentPage = 'home';
+    return view('user.layouts.landingPage', ['currentPage' => $currentPage]);
 });
 
 
@@ -94,6 +96,12 @@ Route::get('/kinerja/show/{data}', [RekapKinerjaController::class, 'show'])->nam
 
 
 
- // HRD MENU!! // 
- 
- Route::resource('hrdPegawai', HrdPegawaiController::class);
+// HRD MENU!! // 
+
+Route::resource('hrdPegawai', HrdPegawaiController::class);
+Route::get('landingPage', function () {
+    $currentPage = 'home';
+    return view('user.layouts.landingPage', ['currentPage' => $currentPage]);
+});
+Route::get('/hrdPegawai/destroy/{data}', [HrdPegawaiController::class, 'destroy'])->name('hrdPegawai.destroy');
+
