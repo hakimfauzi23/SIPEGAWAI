@@ -56,8 +56,7 @@ class RekapKinerjaController extends Controller
         $hari = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
         $kehadiran = Presensi_harian::where('id_pegawai', $id_pegawai)
             ->whereMonth('tanggal', date("m"))
-            ->where('ket', '!=', 'Hadir')
-            ->orWhere('ket', '!=', 'Cuti')
+            ->where('ket', '==', 'Alpha')
             ->count();
 
 

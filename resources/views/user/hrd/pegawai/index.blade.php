@@ -67,7 +67,7 @@
 
                 Page : {{ $pegawai->currentPage() }}
                 || Total Data : {{ $pegawai->total() }}
-                {{ $pegawai->links() }}
+                {{ $pegawai->appends(\Request::except('page'))->render() }}
 
             </div>
         </div>
