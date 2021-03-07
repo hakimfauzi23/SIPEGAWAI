@@ -3789,7 +3789,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-area {
-    background: #0e1424
+    background: #0e1424;
+    padding: 25px 0
 }
 
 @media (max-width: 991px) {
