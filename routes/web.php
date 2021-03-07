@@ -112,7 +112,10 @@ Route::get('/hrdPegawai/rekapKinerja/{data}', [HrdPegawaiController::class, 'rek
 
 //RiwayatDivisi
 Route::resource('hrdRiwayatDivisi', HrdRiwayatDivisiController::class);
+Route::get('/hrdRiwayatDivisi/destroy/{data}', [HrdRiwayatDivisiController::class, 'destroy'])->name('hrdRiwayatDivisi.destroy');
 
 
 //RiwayatJabatan
 Route::resource('hrdRiwayatJabatan', HrdRiwayatJabatanController::class);
+Route::get('/hrdRiwayatJabatan/destroy/{data}', [HrdRiwayatJabatanController::class, 'destroy'])->name('hrdRiwayatJabatan.destroy');
+

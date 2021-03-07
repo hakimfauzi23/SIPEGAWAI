@@ -51,7 +51,7 @@
                                     <?php $encyrpt = Crypt::encryptString($p->id); ?>
                                     <a href="{{ route('hrdRiwayatDivisi.edit', $encyrpt) }}"
                                         class="btn btn-warning">Edit</a>
-                                    <a href="{{ route('riwayatDivisi.destroy', $encyrpt) }}"
+                                    <a href="{{ route('hrdRiwayatDivisi.destroy', $encyrpt) }}"
                                         class="btn btn-danger delete-confirm">Delete</a>
                                 </td>
                             </tr>

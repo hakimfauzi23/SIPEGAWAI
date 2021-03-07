@@ -119,8 +119,17 @@ class RiwayatDivisiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($data)
     {
         //
+        $id = Crypt::decryptString($data);
+        $riwayat_divisi = Riwayat_divisi::find($id);
+        $riwayat_divisi->delete();
+
+        $encrypt = Crypt::encryptString($riwayat_divisi->id_pegawai);
+
+        Alert::success('success', ' Berhasil Hapus Data !');
+        return redirect(route('riwayatDivisi.show', $encrypt));
+
     }
 }

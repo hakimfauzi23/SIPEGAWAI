@@ -125,8 +125,16 @@ class HrdRiwayatJabatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($data)
     {
         //
+        $id = Crypt::decryptString($data);
+        $riwayat_jabatan = Riwayat_jabatan::find($id);
+        $riwayat_jabatan->delete();
+
+        $encrypt = Crypt::encryptString($riwayat_jabatan->id_pegawai);
+
+        Alert::success('success', ' Berhasil Hapus Data !');
+        return redirect(route('hrdRiwayatJabatan.show', $encrypt));
     }
 }
