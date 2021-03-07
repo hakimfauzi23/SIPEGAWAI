@@ -10,6 +10,7 @@ use App\Http\Controllers\RiwayatJabatanController;
 use App\Http\Controllers\DownloadFileController;
 use App\Http\Controllers\HrdPegawaiController;
 use App\Http\Controllers\HrdRiwayatDivisiController;
+use App\Http\Controllers\HrdRiwayatJabatanController;
 use App\Http\Controllers\RekapKinerjaController;
 use App\Http\Controllers\RiwayatDivisiController;
 use PhpOffice\PhpSpreadsheet\Chart\Layout;
@@ -110,4 +111,8 @@ Route::get('/hrdPegawai/rekapKinerja/{data}', [HrdPegawaiController::class, 'rek
 
 
 //RiwayatDivisi
-Route::resource('hrdRiwayatDivisi',HrdRiwayatDivisiController::class);
+Route::resource('hrdRiwayatDivisi', HrdRiwayatDivisiController::class);
+
+
+//RiwayatJabatan
+Route::resource('hrdRiwayatJabatan', HrdRiwayatJabatanController::class);
