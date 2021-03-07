@@ -285,7 +285,7 @@
                                             aria-labelledby="dropdownMenuLink">
                                             <div class="dropdown-header">Fitur</div>
                                             <a class="dropdown-item"
-                                                href="{{ route('riwayatDivisi.show', $encyrpt) }}">Edit
+                                                href="{{ route('hrdRiwayatDivisi.show', $encyrpt) }}">Edit
                                                 Riwayat Divisi</a>
                                         </div>
                                     </div>

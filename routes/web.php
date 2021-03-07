@@ -9,6 +9,7 @@ use App\Http\Controllers\PresensiHarianController;
 use App\Http\Controllers\RiwayatJabatanController;
 use App\Http\Controllers\DownloadFileController;
 use App\Http\Controllers\HrdPegawaiController;
+use App\Http\Controllers\HrdRiwayatDivisiController;
 use App\Http\Controllers\RekapKinerjaController;
 use App\Http\Controllers\RiwayatDivisiController;
 use PhpOffice\PhpSpreadsheet\Chart\Layout;
@@ -98,6 +99,7 @@ Route::get('/kinerja/show/{data}', [RekapKinerjaController::class, 'show'])->nam
 
 // HRD MENU!! // 
 
+//Pegawai
 Route::resource('hrdPegawai', HrdPegawaiController::class);
 Route::get('landingPage', function () {
     $currentPage = 'home';
@@ -106,3 +108,6 @@ Route::get('landingPage', function () {
 Route::get('/hrdPegawai/destroy/{data}', [HrdPegawaiController::class, 'destroy'])->name('hrdPegawai.destroy');
 Route::get('/hrdPegawai/rekapKinerja/{data}', [HrdPegawaiController::class, 'rekapKinerja'])->name('hrdRekapKinerja.show');
 
+
+//RiwayatDivisi
+Route::resource('hrdRiwayatDivisi',HrdRiwayatDivisiController::class);
