@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Divisi;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
+use App\Models\Cuti;
 use App\Models\Presensi_harian;
 use App\Models\Riwayat_divisi;
 use App\Models\Riwayat_jabatan;
@@ -384,5 +385,99 @@ class HrdPegawaiController extends Controller
 
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect(route('hrdPegawai.index'));
+    }
+
+    public function rekapKinerja($data)
+    {
+        $id_pegawai = Crypt::decryptString($data);
+        $pegawai = Pegawai::find($id_pegawai);
+        $hari = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
+        $kehadiran = Presensi_harian::where('id_pegawai', $id_pegawai)
+            ->whereMonth('tanggal', date("m"))
+            ->where('ket', '!=', 'Hadir')
+            ->orWhere('ket', '!=', 'Cuti')
+            ->count();
+
+
+        $presensiTdkHadir = Presensi_harian::sortable()
+            ->where('id_pegawai', $id_pegawai)
+            ->where('ket', '!=', 'Hadir')
+            ->whereMonth('tanggal', date('m'))
+            ->orderBy('tanggal', 'desc')
+            ->paginate(3, ['*'], 'presensi');
+
+        $hadir = ($hari - $kehadiran) / $hari * 100;
+        $persentaseHadir = number_format($hadir, 2);
+        $TdkHadir = 100 - $persentaseHadir;
+        $persentaseTdkHadir = number_format($TdkHadir, 2);
+
+        //Cuti
+        $tahunan = Cuti::where('id_pegawai', $id_pegawai)
+            ->whereMonth('tgl_mulai', date("m"))
+            ->where('tipe_cuti', 'Tahunan')
+            ->where('status', 'Disetujui')
+            ->count();
+
+        $besar = Cuti::where('id_pegawai', $id_pegawai)
+            ->whereMonth('tgl_mulai', date("m"))
+            ->where('tipe_cuti', 'Besar')
+            ->where('status', 'Disetujui')
+            ->count();
+
+        $bersama = Cuti::where('id_pegawai', $id_pegawai)
+            ->whereMonth('tgl_mulai', date("m"))
+            ->where('tipe_cuti', 'Bersama')
+            ->where('status', 'Disetujui')
+            ->count();
+
+        $hamil = Cuti::where('id_pegawai', $id_pegawai)
+            ->whereMonth('tgl_mulai', date("m"))
+            ->where('tipe_cuti', 'Hamil')
+            ->where('status', 'Disetujui')
+            ->count();
+
+        $sakit = Cuti::where('id_pegawai', $id_pegawai)
+            ->whereMonth('tgl_mulai', date("m"))
+            ->where('tipe_cuti', 'Sakit')
+            ->where('status', 'Disetujui')
+            ->count();
+
+        $penting = Cuti::where('id_pegawai', $id_pegawai)
+            ->whereMonth('tgl_mulai', date("m"))
+            ->where('tipe_cuti', 'Penting')
+            ->where('status', 'Disetujui')
+            ->count();
+
+        $cuti = Cuti::sortable()
+            ->where('id_pegawai', $id_pegawai)
+            ->whereMonth('tgl_mulai', date("m"))
+            ->where('status', 'Disetujui')
+            ->orderBy('tgl_mulai', 'desc')
+            ->paginate(3, ['*'], 'cuti');
+
+
+
+
+        // dd($tahunan);
+
+        $currentPage = 'HRD';
+
+        return view('user.hrd.pegawai.rekapKinerja', [
+            'presensiTdkHadir' => $presensiTdkHadir,
+            'id_pegawai' => $data,
+            'pegawai' => $pegawai,
+            'persentaseHadir' => $persentaseHadir,
+            'persentaseTdkHadir' => $persentaseTdkHadir,
+            'currentPage' => $currentPage,
+
+            //Cuti
+            'tahunan' => $tahunan,
+            'besar' => $besar,
+            'bersama' => $bersama,
+            'hamil' => $hamil,
+            'sakit' => $sakit,
+            'penting' => $penting,
+            'cuti' => $cuti,
+        ]);
     }
 }

@@ -108,7 +108,7 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                     aria-labelledby="dropdownMenuLink">
                                     <div class="dropdown-header">Fitur</div>
-                                    <a class="dropdown-item" href="{{ route('rekapKinerja.show', $encyrpt) }}">Lihat
+                                    <a class="dropdown-item" href="{{ route('hrdRekapKinerja.show', $encyrpt) }}">Lihat
                                         Selengkapnya</a>
                                 </div>
                             </div>

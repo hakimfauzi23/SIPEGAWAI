@@ -22,7 +22,8 @@
    CSS
    ============================================= -->
     <link rel="stylesheet" href="{{ URL::to('/arclabs') }}/css/linearicons.css">
-    <link rel="stylesheet" href="{{ URL::to('/arclabs') }}/css/font-awesome.min.css">
+    {{-- <link rel="stylesheet" href="{{ URL::to('/arclabs') }}/css/font-awesome.min.css"> --}}
+    <link href="{{ URL::to('/admin') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ URL::to('/arclabs') }}/css/bootstrap.css">
     <link rel="stylesheet" href="{{ URL::to('/arclabs') }}/css/owl.carousel.css">
     <link rel="stylesheet" href="{{ URL::to('/arclabs') }}/css/magnific-popup.css">

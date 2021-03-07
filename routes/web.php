@@ -104,4 +104,5 @@ Route::get('landingPage', function () {
     return view('user.layouts.landingPage', ['currentPage' => $currentPage]);
 });
 Route::get('/hrdPegawai/destroy/{data}', [HrdPegawaiController::class, 'destroy'])->name('hrdPegawai.destroy');
+Route::get('/hrdPegawai/rekapKinerja/{data}', [HrdPegawaiController::class, 'rekapKinerja'])->name('hrdRekapKinerja.show');
 
