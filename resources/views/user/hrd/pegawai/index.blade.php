@@ -4,6 +4,7 @@
 
 @section('content')
 
+
     <!-- Start top-section Area -->
     <section class="banner-area relative">
         <div class="overlay overlay-bg"></div>
@@ -19,13 +20,17 @@
     <!-- End top-section Area -->
 
 
+
+
     <section class="about-area section-gap">
         <div class="container">
-
-            <div class="section-title text-center">
-                <h4>List Data Pegawai</h4>
-            </div>
-
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">List Pegawai / </li>
+                </ol>
+            </nav>
+            <!-- /Breadcrumb -->
 
             @if (session('success_message'))
                 <div class="alert alert success">

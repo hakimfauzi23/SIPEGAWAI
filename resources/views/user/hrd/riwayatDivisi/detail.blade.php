@@ -22,11 +22,18 @@
     <section class="about-area section-gap">
         <div class="container">
 
-            <div class="section-title text-center">
-                <h4>List Riwayat Divisi Pegawai</h4>
-            </div>
-
-
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('hrdPegawai.index') }}">List Pegawai</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('hrdPegawai.show', $id) }}">{{ $pegawai->id . '-' . $pegawai->nama }} </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">List Riwayat Divisi</li>
+                </ol>
+            </nav>
+            <!-- /Breadcrumb -->
+            
             @if (session('success_message'))
                 <div class="alert alert success">
                     {{ session('success_message') }}

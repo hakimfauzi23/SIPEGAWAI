@@ -25,10 +25,23 @@
     <section class="about-area section-gap">
         <div class="container">
 
-            <div class="section-title text-center">
-                <h4>Edit Riwayat Divisi Pegawai</h4>
-            </div>
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('hrdPegawai.index') }}">List Pegawai</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('hrdPegawai.show', $encrypt) }}">{{ $riwayat_divisi->pegawai->id . '-' . $riwayat_divisi->pegawai->nama }}
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="{{ route('hrdRiwayatDivisi.show', $encrypt) }}">List Riwayat
+                            divisi
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">Edit Data divisi</li>
 
+                </ol>
+            </nav>
+            <!-- /Breadcrumb -->
 
             <form method="post" action="{{ route('hrdRiwayatDivisi.update', $id) }}">
 

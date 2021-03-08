@@ -1,12 +1,13 @@
 @extends('user.layouts.base')
 
-@section('title','Welcome To SIPEGAWAI')
-    
+@section('title', 'Welcome To SIPEGAWAI')
+
 @section('content')
     <!-- start banner Area -->
-    <section class="home-banner-area relative" id="home" data-parallax="scroll" data-image-src="{{ URL::to('/arclabs') }}/img/bg.gif">
+    <section class="home-banner-area relative" id="home" data-parallax="scroll"
+        data-image-src="{{ URL::to('/arclabs') }}/img/bg.gif">
         <div class="overlay-bg overlay"></div>
-        <h1 class="template-name">arclabs</h1>
+        <h1 class="template-name">WELCOME</h1>
         <div class="container">
             <div class="row fullscreen">
                 <div class="banner-content col-lg-12">
@@ -15,7 +16,6 @@
                         Aplikasi <br>
                         SIPEGAWAI
                     </h1>
-                    <a href="#" class="primary-btn">View project</a>
                 </div>
             </div>
         </div>

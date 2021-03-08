@@ -721,7 +721,7 @@ td, th {
 }
 
 .section-gap {
-    padding: 100px 0
+    padding: 50px 0
 }
 
 @media (max-width: 991px) {
@@ -1297,7 +1297,7 @@ td, th {
 }
 
 .banner-area .banner-content {
-    min-height: 450px
+    min-height: 250px
 }
 
 .banner-area .overlay-bg {

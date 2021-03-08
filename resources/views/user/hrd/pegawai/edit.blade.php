@@ -22,10 +22,17 @@
     <section class="about-area section-gap">
         <div class="container">
 
-            <div class="section-title text-center">
-                <h4>Edit Data Pegawai</h4>
-            </div>
-
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('hrdPegawai.index') }}">List Pegawai</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('hrdPegawai.show', $id) }}">{{ $pegawai->id . '-' . $pegawai->nama }} </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Data Pegawai</li>
+                </ol>
+            </nav>
+            <!-- /Breadcrumb -->
 
             <form method="post" enctype="multipart/form-data" action="{{ route('hrdPegawai.update', $id) }}">
 

@@ -26,11 +26,23 @@
 
     <section class="about-area section-gap">
         <div class="container">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('hrdPegawai.index') }}">List Pegawai</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('hrdPegawai.show', $encrypt) }}">{{ $riwayat_jabatan->pegawai->id . '-' . $riwayat_jabatan->pegawai->nama }}
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="{{ route('hrdRiwayatJabatan.show', $encrypt) }}">List Riwayat
+                            Jabatan
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">Edit Data Jabatan</li>
 
-            <div class="section-title text-center">
-                <h4>List Riwayat Jabatan Pegawai</h4>
-            </div>
-
+                </ol>
+            </nav>
+            <!-- /Breadcrumb -->
 
             <form method="post" action="{{ route('hrdRiwayatJabatan.update', $id) }}">
 
