@@ -34,8 +34,11 @@
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('hrdPegawai.index') }}">Data Pegawai</a>
-                            <a class="dropdown-item" href="#">Data Cuti</a>
-                            <a class="dropdown-item" href="#">Data Presensi</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('hrdCuti.pengajuan') }}">Pengajuan Cuti</a>
+                            <a class="dropdown-item" href="{{ route('hrdCuti.index') }}">Data Cuti</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('hrdPresensi.index') }}">Data Presensi</a>
                         </div>
                     </li>
                     <li><a class="" href="projects.html">Profil</a></li>

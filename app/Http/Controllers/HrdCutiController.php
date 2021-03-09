@@ -10,8 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
 
-
-class CutiController extends Controller
+class HrdCutiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,9 +20,13 @@ class CutiController extends Controller
     public function index()
     {
         //
-        $cuti = Cuti::sortable()->paginate(10);
-        return view('admin.cuti.index', [
-            'cuti' => $cuti
+        $currentPage = 'HRD';
+        $cuti = Cuti::sortable()
+            ->orderBy('tgl_pengajuan', 'desc')
+            ->paginate(10);
+        return view('user.hrd.cuti.index', [
+            'cuti' => $cuti,
+            'currentPage' => $currentPage
         ]);
     }
 
@@ -35,9 +38,12 @@ class CutiController extends Controller
     public function create()
     {
         //
+        $currentPage = 'HRD';
         $pegawai = Pegawai::pluck('nama', 'id');
-        return view('admin.cuti.create', [
-            'pegawai' => $pegawai
+        return view('user.hrd.cuti.create', [
+            'pegawai' => $pegawai,
+            'currentPage' => $currentPage
+
         ]);
     }
 
@@ -71,7 +77,7 @@ class CutiController extends Controller
         ]);
 
         Alert::success('success', ' Berhasil Input Data !');
-        return redirect('cuti');
+        return redirect('hrdCuti');
     }
 
     /**
@@ -83,6 +89,7 @@ class CutiController extends Controller
     public function show($data)
     {
         //
+        $currentPage = 'HRD';
         $id = Crypt::decryptString($data);
         $cuti = Cuti::find($id);
 
@@ -94,10 +101,11 @@ class CutiController extends Controller
 
         $interval = $date1->diff($date2);
 
-        return view('admin.cuti.details', [
+        return view('user.hrd.cuti.details', [
             'id' => $id,
             'cuti' => $cuti,
-            'interval' => $interval
+            'interval' => $interval,
+            'currentPage' => $currentPage
         ]);
     }
 
@@ -110,15 +118,17 @@ class CutiController extends Controller
     public function edit($data)
     {
         //
-
+        $currentPage = 'HRD';
         $id = Crypt::decryptString($data);
         $cuti = Cuti::find($id);
         $pegawai = Pegawai::pluck('nama', 'id');
 
-        return view('admin.cuti.edit', [
+        return view('user.hrd.cuti.edit', [
             'id' => $data,
             'cuti' => $cuti,
-            'pegawai' => $pegawai
+            'pegawai' => $pegawai,
+            'currentPage' => $currentPage
+
         ]);
     }
 
@@ -132,7 +142,6 @@ class CutiController extends Controller
     public function update(Request $request, $data)
     {
         //
-
         $id = Crypt::decryptString($data);
 
         $this->validate($request, [
@@ -146,7 +155,6 @@ class CutiController extends Controller
         ]);
 
         $cuti = Cuti::find($id);
-
         if ($request->status == "Disetujui") {
 
             $cuti->id_pegawai = $request->id_pegawai;
@@ -201,7 +209,7 @@ class CutiController extends Controller
         }
 
         Alert::success('success', ' Berhasil Update Data !');
-        return redirect(route('cuti.details', $data));
+        return redirect(route('hrdCuti.show', $data));
     }
 
     /**
@@ -213,12 +221,67 @@ class CutiController extends Controller
     public function destroy($data)
     {
         //
-
         $id = Crypt::decryptString($data);
         $cuti = Cuti::find($id);
         $cuti->delete();
 
         Alert::success('success', ' Berhasil Hapus Data !');
-        return redirect('cuti');
+        return redirect('hrdCuti');
+    }
+
+
+    public function pengajuan()
+    {
+        $currentPage = 'HRD';
+        $cuti = Cuti::where('status', 'Diproses')
+            ->sortable()
+            ->orderBy('tgl_pengajuan', 'desc')
+            ->paginate(5);
+        // dd($cuti);
+        return view('user.hrd.cuti.pengajuan', [
+            'cuti' => $cuti,
+            'currentPage' => $currentPage
+        ]);
+    }
+
+
+    public function keputusan(Request $request, $data)
+    {
+        $id = Crypt::decryptString($data);
+        $cuti = Cuti::find($id);
+        $status = $request->status;
+        $cuti->status = $status;
+        $cuti->tgl_disetujui = date("Y-m-d");
+        $cuti->save();
+
+        if ($status == 'Disetujui') {
+            Alert::success('success', ' Pengajuan Berhasil Disetujui !');
+            return redirect('hrdCuti/pengajuan');
+        } else {
+            Alert::success('success', ' Pengajuan Berhasil Ditolak !');
+            return redirect('hrdCuti/pengajuan');
+        }
+    }
+
+    public function detail_pengajuan($data)
+    {
+        $currentPage = 'HRD';
+        $id = Crypt::decryptString($data);
+        $cuti = Cuti::find($id);
+
+        $tgl_masuk = $cuti->pegawai->tgl_masuk;
+        $tgl_now = date("Y-m-d");
+
+        $date1 = new DateTime($tgl_masuk);
+        $date2 = new DateTime($tgl_now);
+
+        $interval = $date1->diff($date2);
+
+        return view('user.hrd.cuti.details_pengajuan', [
+            'id' => $id,
+            'cuti' => $cuti,
+            'interval' => $interval,
+            'currentPage' => $currentPage
+        ]);
     }
 }

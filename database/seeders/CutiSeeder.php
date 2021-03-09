@@ -35,7 +35,7 @@ class CutiSeeder extends Seeder
                 'tgl_mulai' => date("Y-m-d"),
                 'tgl_selesai' => $faker->date,
                 'ket' => $faker->sentence(5),
-                'status' => $stat[$faker->numberBetween(0, 0)],
+                'status' => $stat[$faker->numberBetween(2, 2)],
                 'tgl_disetujui' => $faker->date,
                 'tgl_ditolak' => $faker->date,
 

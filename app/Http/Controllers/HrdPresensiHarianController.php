@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
 use Maatwebsite\Excel\Facades\Excel;
 
-class PresensiHarianController extends Controller
+
+class HrdPresensiHarianController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +21,14 @@ class PresensiHarianController extends Controller
     public function index()
     {
         //
-        $presensi = Presensi_harian::sortable()->paginate(10);
-        return view('admin.presensi.index', ['presensi' => $presensi]);
+        $currentPage = 'HRD';
+        $presensi = Presensi_harian::sortable()
+            ->orderBy('tanggal', 'desc')
+            ->paginate(15);
+        return view('user.hrd.presensi.index', [
+            'presensi' => $presensi,
+            'currentPage' => $currentPage
+        ]);
     }
 
     /**
@@ -32,9 +39,13 @@ class PresensiHarianController extends Controller
     public function create()
     {
         //
+        //
+        $currentPage = 'HRD';
         $pegawai = Pegawai::pluck('nama', 'id');
-        return view('admin.presensi.create', [
-            'pegawai' => $pegawai
+        return view('user.hrd.presensi.create', [
+            'pegawai' => $pegawai,
+            'currentPage' => $currentPage
+
         ]);
     }
 
@@ -47,7 +58,6 @@ class PresensiHarianController extends Controller
     public function store(Request $request)
     {
         //
-
         $this->validate($request, [
             'id_pegawai' => 'required',
             'tanggal' => 'required',
@@ -65,7 +75,7 @@ class PresensiHarianController extends Controller
         ]);
 
         Alert::success('success', ' Berhasil Input Data !');
-        return redirect('presensi');
+        return redirect('hrdPresensi');
     }
 
     /**
@@ -88,14 +98,16 @@ class PresensiHarianController extends Controller
     public function edit($data)
     {
         //
+        $currentPage = 'HRD';
         $id = Crypt::decryptString($data);
         $presensi = Presensi_harian::find($id);
         $pegawai = Pegawai::pluck('nama', 'id');
 
-        return view('admin.presensi.edit', [
+        return view('user.hrd.presensi.edit', [
             'id' => $data,
             'presensi' => $presensi,
-            'pegawai' => $pegawai
+            'pegawai' => $pegawai,
+            'currentPage' => $currentPage
         ]);
     }
 
@@ -109,7 +121,6 @@ class PresensiHarianController extends Controller
     public function update(Request $request, $data)
     {
         //
-
         $id = Crypt::decryptString($data);
 
         $this->validate($request, [
@@ -130,7 +141,7 @@ class PresensiHarianController extends Controller
         $presensi->save();
 
         Alert::success('success', ' Berhasil Update Data !');
-        return redirect('presensi');
+        return redirect('hrdPresensi');
     }
 
     /**
@@ -142,28 +153,18 @@ class PresensiHarianController extends Controller
     public function destroy($data)
     {
         //
-
         $id = Crypt::decryptString($data);
         $presensi = Presensi_harian::find($id);
         $presensi->delete();
 
         Alert::success('success', ' Berhasil Hapus Data !');
-        return redirect('presensi');
+        return redirect('hrdPresensi');
     }
 
     public function import()
     {
         Excel::import(new PresensiCsvImport, request()->file('file'));
         Alert::success('success', ' Berhasil Import Data !!');
-        return redirect('presensi');
-    }
-
-    public function download()
-    {
-        $filePath = public_path("/storage/template/TemplatePresensi.csv");
-        $headers = ['Content-Type: application/pdf'];
-        $fileName = 'TemplatePresensi.csv';
-
-        return response()->download($filePath, $fileName, $headers);
+        return redirect('hrdPresensi');
     }
 }

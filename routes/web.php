@@ -9,8 +9,10 @@ use App\Http\Controllers\PresensiHarianController;
 use App\Http\Controllers\RiwayatJabatanController;
 use App\Http\Controllers\DownloadFileController;
 use App\Http\Controllers\HrdPegawaiController;
+use App\Http\Controllers\HrdCutiController;
 use App\Http\Controllers\HrdRiwayatDivisiController;
 use App\Http\Controllers\HrdRiwayatJabatanController;
+use App\Http\Controllers\HrdPresensiHarianController;
 use App\Http\Controllers\RekapKinerjaController;
 use App\Http\Controllers\RiwayatDivisiController;
 use PhpOffice\PhpSpreadsheet\Chart\Layout;
@@ -119,3 +121,16 @@ Route::get('/hrdRiwayatDivisi/destroy/{data}', [HrdRiwayatDivisiController::clas
 Route::resource('hrdRiwayatJabatan', HrdRiwayatJabatanController::class);
 Route::get('/hrdRiwayatJabatan/destroy/{data}', [HrdRiwayatJabatanController::class, 'destroy'])->name('hrdRiwayatJabatan.destroy');
 
+
+//Cuti
+Route::get('/hrdCuti/pengajuan', [HrdCutiController::class, 'pengajuan'])->name('hrdCuti.pengajuan');
+Route::resource('hrdCuti', HrdCutiController::class);
+Route::get('/hrdCuti/destroy/{data}', [HrdCutiController::class, 'destroy'])->name('hrdCuti.destroy');
+Route::put('/hrdCuti/keputusan/{data}', [HrdCutiController::class, 'keputusan'])->name('hrdCuti.keputusan');
+Route::get('/hrdCuti/detail_pengajuan/{data}', [HrdCutiController::class, 'detail_pengajuan'])->name('hrdCuti.detailPengajuan');
+
+
+//PresensiHarian
+Route::resource('hrdPresensi', HrdPresensiHarianController::class);
+Route::post('/hrdPresensi/import_excel', [HrdPresensiHarianController::class, 'import'])->name('hrdPresensi.import');
+Route::get('/hrdPresensi/destroy/{data}', [HrdPresensiHarianController::class, 'destroy'])->name('hrdPresensi.destroy');

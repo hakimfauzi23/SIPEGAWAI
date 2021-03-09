@@ -25,6 +25,7 @@ class Cuti extends Model
     ];
 
     public $sortable = [
+        'id',
         'id_pegawai',
         'tipe_cuti',
         'tgl_pengajuan',

@@ -24,6 +24,7 @@ class Presensi_harian extends Model
     ];
 
     protected $sortable = [
+        'id',
         'id_pegawai',
         'tanggal',
         'jam_dtg',
