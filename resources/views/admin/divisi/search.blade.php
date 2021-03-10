@@ -7,7 +7,8 @@
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">List Divisi / </li>
+            <li class="breadcrumb-item"><a href="{{ route('divisi.index') }}">List Divisi </a></li>
+            <li class="breadcrumb-item"> Hasil Pencarian </li>
         </ol>
     </nav>
     <!-- /Breadcrumb -->

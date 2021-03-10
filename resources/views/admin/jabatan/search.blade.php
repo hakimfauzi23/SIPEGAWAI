@@ -1,14 +1,15 @@
 @extends('admin.layouts.base')
 
-@section('page_title', 'List Divisi')
+@section('page_title', 'List Jabatan')
 
 @section('content')
 
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">List Divisi / </li>
-        </ol>
+            <li class="breadcrumb-item"><a href="{{ route('jabatan.index') }}">List Jabatan </a></li>
+            <li class="breadcrumb-item"> Hasil Pencarian </li>
+</ol>
     </nav>
     <!-- /Breadcrumb -->
 
@@ -19,19 +20,18 @@
                     {{ session('success_message') }}
                 </div>
             @endif
-
             <div class="row">
                 <div class="col">
-                    <a href="{{ route('divisi.create') }}" class="btn btn-primary">Tambah Divisi Baru</a>
+                    <a href="{{ route('jabatan.create') }}" class="btn btn-primary">Tambah Jabatan Baru</a>
                 </div>
                 <div class="col"></div>
                 <div class="col">
-                    <form action="{{ route('divisi.search') }}" method="GET" class="form-inline">
+                    <form action="{{ route('jabatan.search') }}" method="GET" class="form-inline">
                         {{ csrf_field() }}
 
                         <div class="form-group ml-5">
                             <div class="input-group">
-                                <input class="form-control mr-2" type="text" name="cari" placeholder="Cari Divisi .."
+                                <input class="form-control mr-2" type="text" name="cari" placeholder="Cari Jabatan .."
                                     value="{{ old('cari') }}">
                                 <span class="input-group-btn">
                                     <button class="btn btn-info" type="submit">Go!</button>
@@ -47,21 +47,23 @@
             <table style="text-align:center" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>@sortablelink('id','ID DIVISI')</th>
-                        <th>@sortablelink('nm_divisi','DIVISI')</th>
+                        <th>@sortablelink('id','ID JABATAN')</th>
+                        <th>@sortablelink('nm_jabatan','JABATAN')</th>
+                        <th>@sortablelink('gaji_pokok','GAJI POKOK')</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($divisi->count())
-                        @foreach ($divisi as $key => $p)
+                    @if ($jabatan->count())
+                        @foreach ($jabatan as $key => $p)
                             <tr>
                                 <td>{{ $p->id }}</td>
-                                <td>{{ $p->nm_divisi }}</td>
+                                <td>{{ $p->nm_jabatan }}</td>
+                                <td>{{ $p->gaji_pokok }}</td>
                                 <td>
                                     <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                    <a href="{{ route('divisi.edit', $encyrpt) }}" class="btn btn-warning">Edit</a>
-                                    <a href="{{ route('divisi.destroy', $encyrpt) }}"
+                                    <a href="{{ route('jabatan.edit', $encyrpt) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('jabatan.destroy', $encyrpt) }}"
                                         class="btn btn-danger delete-confirm">Delete</a>
                                 </td>
                             </tr>
@@ -73,9 +75,9 @@
             <br />
             <div class="pagenation">
 
-                Page : {{ $divisi->currentPage() }}
-                || Total Data : {{ $divisi->total() }}
-                {{ $divisi->links() }}
+                Page : {{ $jabatan->currentPage() }}
+                || Total Data : {{ $jabatan->total() }}
+                {{ $jabatan->links() }}
 
             </div>
         </div>

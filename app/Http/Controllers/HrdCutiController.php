@@ -284,4 +284,33 @@ class HrdCutiController extends Controller
             'currentPage' => $currentPage
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $cari = $request->cari;
+        $currentPage = 'HRD';
+
+        $cuti = Cuti::where('id', $cari)
+            ->paginate(10);
+
+        return view('user.hrd.cuti.search', [
+            'cuti' => $cuti,
+            'currentPage' => $currentPage,
+        ]);
+    }
+
+    public function search_pengajuan(Request $request)
+    {
+        $cari = $request->cari;
+        $currentPage = 'HRD';
+
+        $cuti = Cuti::where('id', $cari)
+            ->paginate(10);
+
+        return view('user.hrd.cuti.search_pengajuan', [
+            'cuti' => $cuti,
+            'currentPage' => $currentPage,
+        ]);
+    }
+
 }
