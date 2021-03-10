@@ -101,7 +101,7 @@
 
                 Page : {{ $presensi->currentPage() }}
                 || Total Data : {{ $presensi->total() }}
-                {{ $presensi->links() }}
+                {{ $presensi->appends(\Request::except('page'))->render() }}
 
             </div>
         </div>

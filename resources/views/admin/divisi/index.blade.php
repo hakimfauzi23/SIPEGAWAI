@@ -75,7 +75,7 @@
 
                 Page : {{ $divisi->currentPage() }}
                 || Total Data : {{ $divisi->total() }}
-                {{ $divisi->links() }}
+                {{ $divisi->->appends(\Request::except('page'))->render() }}
 
             </div>
         </div>

@@ -75,7 +75,7 @@
 
                 Page : {{ $cuti->currentPage() }}
                 || Total Data : {{ $cuti->total() }}
-                {{ $cuti->links() }}
+                {{ $cuti->appends(\Request::except('page'))->render() }}
 
             </div>
         </div>

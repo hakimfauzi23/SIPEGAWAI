@@ -76,7 +76,7 @@
 
                 Page : {{ $jabatan->currentPage() }}
                 || Total Data : {{ $jabatan->total() }}
-                {{ $jabatan->links() }}
+                {{ $jabatan->->appends(\Request::except('page'))->render() }}
 
             </div>
         </div>
