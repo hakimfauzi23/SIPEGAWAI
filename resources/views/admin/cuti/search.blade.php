@@ -1,37 +1,19 @@
-@extends('user.layouts.base')
+@extends('admin.layouts.base')
 
-@section('title', 'Data Pegawai')
+@section('page_title', 'List Pengajuan Cuti')
 
 @section('content')
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('cuti.index') }}">List Pengajuan Cuti </a></li>
+            <li class="breadcrumb-item"> Hasil Pencarian </li>
+</ol>
+    </nav>
+    <!-- /Breadcrumb -->
 
-
-    <!-- Start top-section Area -->
-    <section class="banner-area relative">
-        <div class="overlay overlay-bg"></div>
-        <div class="container">
-            <div class="row justify-content-between align-items-center text-center banner-content">
-                <div class="col-lg-12">
-                    <h1 class="text-white">Data Cuti Pegawai</h1>
-                    <p>Mengelola Data Cuti Pegawai untuk mengawasi aktivitas cuti pegawai. </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End top-section Area -->
-
-
-
-
-    <section class="about-area section-gap">
-        <div class="container">
-            <!-- Breadcrumb -->
-            <nav aria-label="breadcrumb" class="main-breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Data Pengajuan Cuti / </li>
-                </ol>
-            </nav>
-            <!-- /Breadcrumb -->
-
+    <div class="card mt-4">
+        <div class="card-body">
             @if (session('success_message'))
                 <div class="alert alert success">
                     {{ session('success_message') }}
@@ -39,16 +21,16 @@
             @endif
             <div class="row">
                 <div class="col">
-                    <a href="{{ route('hrdCuti.create') }}" class="btn btn-primary">Tambah Pengajuan Cuti Baru</a>
+                    <a href="{{ route('cuti.create') }}" class="btn btn-primary">Tambah Pengajuan Cuti Baru</a>
                 </div>
                 <div class="col"></div>
                 <div class="col">
-                    <form action="{{ route('hrdCuti.search') }}" method="GET" class="form-inline">
+                    <form action="{{ route('cuti.search') }}" method="GET" class="form-inline">
                         {{ csrf_field() }}
 
                         <div class="form-group ml-5">
                             <div class="input-group">
-                                <input class="form-control mr-2" type="text" name="cari" placeholder="Cari ID Cuti"
+                                <input class="form-control mr-2" type="text" name="cari" placeholder="Cari ID Data Cuti .."
                                     value="{{ old('cari') }}">
                                 <span class="input-group-btn">
                                     <button class="btn btn-info" type="submit">Go!</button>
@@ -81,7 +63,7 @@
                                 <td>{{ $p->status }}</td>
                                 <td>
                                     <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                    <a href="{{ route('hrdCuti.show', $encyrpt) }}" class="btn btn-success">Detail</a>
+                                    <a href="{{ route('cuti.details', $encyrpt) }}" class="btn btn-success">Detail</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -94,9 +76,12 @@
 
                 Page : {{ $cuti->currentPage() }}
                 || Total Data : {{ $cuti->total() }}
-                {{ $cuti->appends(\Request::except('page'))->render() }}
+                {{ $cuti->links() }}
 
             </div>
         </div>
-    </section>
+
+    </div>
+
+
 @endsection

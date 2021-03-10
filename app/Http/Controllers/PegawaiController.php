@@ -375,4 +375,17 @@ class PegawaiController extends Controller
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect(route('pegawai.index'));
     }
+
+    public function search(Request $request)
+    {
+        $cari = $request->cari;
+
+        $pegawai = Pegawai::where('nama', 'like', "%" . $cari . "%")
+            ->paginate(10);
+
+        return view('admin.pegawai.search', [
+            'pegawai' => $pegawai,
+        ]);
+    }
+
 }

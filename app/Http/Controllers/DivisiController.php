@@ -119,6 +119,16 @@ class DivisiController extends Controller
 
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect('/divisi');
+    }
 
+    public function search(Request $request)
+    {
+        $cari = $request->cari;
+        $divisi = Divisi::where('nm_divisi', 'like', "%" . $cari . "%")
+            ->paginate(10);
+
+        return view('admin.divisi.search', [
+            'divisi' => $divisi,
+        ]);
     }
 }

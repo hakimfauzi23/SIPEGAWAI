@@ -221,4 +221,16 @@ class CutiController extends Controller
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect('cuti');
     }
+
+    public function search(Request $request)
+    {
+        $cari = $request->cari;
+
+        $cuti = Cuti::where('id', $cari)
+            ->paginate(10);
+
+        return view('admin.cuti.search', [
+            'cuti' => $cuti,
+        ]);
+    }
 }

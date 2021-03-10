@@ -127,4 +127,15 @@ class JabatanController extends Controller
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect('/jabatan');
     }
+
+    public function search(Request $request)
+    {
+        $cari = $request->cari;
+        $jabatan = Jabatan::where('nm_jabatan', 'like', "%" . $cari . "%")
+            ->paginate(10);
+
+        return view('admin.jabatan.search', [
+            'jabatan' => $jabatan,
+        ]);
+    }
 }

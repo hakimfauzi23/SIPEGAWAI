@@ -27,7 +27,8 @@
             <!-- Breadcrumb -->
             <nav aria-label="breadcrumb" class="main-breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Data Pengajuan Cuti / </li>
+                    <li class="breadcrumb-item"><a href="{{ route('hrdCuti.index') }}">Data Cuti </a></li>
+                    <li class="breadcrumb-item"> Hasil Pencarian </li>
                 </ol>
             </nav>
             <!-- /Breadcrumb -->
@@ -94,7 +95,7 @@
 
                 Page : {{ $cuti->currentPage() }}
                 || Total Data : {{ $cuti->total() }}
-                {{ $cuti->appends(\Request::except('page'))->render() }}
+                {{ $cuti->links() }}
 
             </div>
         </div>

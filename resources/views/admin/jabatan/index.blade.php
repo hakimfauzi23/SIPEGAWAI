@@ -19,7 +19,29 @@
                     {{ session('success_message') }}
                 </div>
             @endif
-            <a href="{{ route('jabatan.create') }}" class="btn btn-primary">Tambah Jabatan Baru</a>
+            <div class="row">
+                <div class="col">
+                    <a href="{{ route('jabatan.create') }}" class="btn btn-primary">Tambah Jabatan Baru</a>
+                </div>
+                <div class="col"></div>
+                <div class="col">
+                    <form action="{{ route('jabatan.search') }}" method="GET" class="form-inline">
+                        {{ csrf_field() }}
+
+                        <div class="form-group ml-5">
+                            <div class="input-group">
+                                <input class="form-control mr-2" type="text" name="cari" placeholder="Cari Jabatan .."
+                                    value="{{ old('cari') }}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info" type="submit">Go!</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
             <div class="mb-3"></div>
             <table style="text-align:center" class="table table-bordered table-hover table-striped">
                 <thead>
@@ -54,7 +76,7 @@
 
                 Page : {{ $jabatan->currentPage() }}
                 || Total Data : {{ $jabatan->total() }}
-                {{ $jabatan->links() }}
+                {{ $jabatan->->appends(\Request::except('page'))->render() }}
 
             </div>
         </div>

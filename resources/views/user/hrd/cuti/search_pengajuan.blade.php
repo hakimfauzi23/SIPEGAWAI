@@ -4,15 +4,14 @@
 
 @section('content')
 
-
     <!-- Start top-section Area -->
     <section class="banner-area relative">
         <div class="overlay overlay-bg"></div>
         <div class="container">
             <div class="row justify-content-between align-items-center text-center banner-content">
                 <div class="col-lg-12">
-                    <h1 class="text-white">Data Cuti Pegawai</h1>
-                    <p>Mengelola Data Cuti Pegawai untuk mengawasi aktivitas cuti pegawai. </p>
+                    <h1 class="text-white">Pengajuan Cuti Pegawai</h1>
+                    <p>Memempermudah HRD untuk mengetahui pengajuan cuti yang belum disetujui atau baru dibuat. </p>
                 </div>
             </div>
         </div>
@@ -27,7 +26,8 @@
             <!-- Breadcrumb -->
             <nav aria-label="breadcrumb" class="main-breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Data Pengajuan Cuti / </li>
+                    <li class="breadcrumb-item"><a href="{{ route('hrdCuti.pengajuan') }}">Data Pengajuan Cuti </a></li>
+                    <li class="breadcrumb-item"> Hasil Pencarian </li>
                 </ol>
             </nav>
             <!-- /Breadcrumb -->
@@ -39,11 +39,10 @@
             @endif
             <div class="row">
                 <div class="col">
-                    <a href="{{ route('hrdCuti.create') }}" class="btn btn-primary">Tambah Pengajuan Cuti Baru</a>
                 </div>
                 <div class="col"></div>
                 <div class="col">
-                    <form action="{{ route('hrdCuti.search') }}" method="GET" class="form-inline">
+                    <form action="{{ route('hrdCuti.searchPengajuan') }}" method="GET" class="form-inline">
                         {{ csrf_field() }}
 
                         <div class="form-group ml-5">
@@ -64,10 +63,11 @@
             <table style="text-align:center" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>@sortablelink('id','ID Cuti')</th>
+                        <th>@sortablelink('id','ID CUTI')</th>
                         <th>@sortablelink('nama','NAMA ')</th>
                         <th>@sortablelink('tgl_pengajuan','TGL PENGAJUAN')</th>
-                        <th>@sortablelink('status','STATUS')</th>
+                        <th>@sortablelink('tipe_cuti','TIPE')</th>
+                        <th>@sortablelink('ket','KET')</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -78,10 +78,23 @@
                                 <td>{{ $p->id }}</td>
                                 <td>{{ $p->pegawai->nama }}</td>
                                 <td>{{ $p->tgl_pengajuan }}</td>
-                                <td>{{ $p->status }}</td>
+                                <td>{{ $p->tipe_cuti }}</td>
+                                <td>{{ $p->ket }}</td>
                                 <td>
                                     <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                    <a href="{{ route('hrdCuti.show', $encyrpt) }}" class="btn btn-success">Detail</a>
+
+                                    <form method="post" action="{{ route('hrdCuti.keputusan', $encyrpt) }}">
+
+                                        {{ csrf_field() }}
+                                        {{ method_field('PUT') }}
+
+                                        <button class="btn btn-success approve-confirm" name="status" type="submit"
+                                            value="Disetujui"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <button class="btn btn-danger" name="status" type="submit" value="Ditolak"><i
+                                                class="fa fa-times" aria-hidden="true"></i></button>
+                                        <a href="{{ route('hrdCuti.detailPengajuan', $encyrpt) }}"
+                                            class="btn btn-info"><i class="fa fa-info" aria-hidden="true"></i></a>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -99,4 +112,6 @@
             </div>
         </div>
     </section>
+
+
 @endsection

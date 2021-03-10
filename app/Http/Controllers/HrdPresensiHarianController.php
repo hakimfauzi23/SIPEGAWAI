@@ -167,4 +167,19 @@ class HrdPresensiHarianController extends Controller
         Alert::success('success', ' Berhasil Import Data !!');
         return redirect('hrdPresensi');
     }
+
+    public function search(Request $request)
+    {
+        $cari = $request->cari;
+        $currentPage = 'HRD';
+
+        $presensi = Presensi_harian::where('id', $cari)
+            ->paginate(10);
+
+        return view('user.hrd.presensi.search', [
+            'presensi' => $presensi,
+            'currentPage' => $currentPage,
+        ]);
+    }
+
 }

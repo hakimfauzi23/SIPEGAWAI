@@ -19,9 +19,32 @@
                     {{ session('success_message') }}
                 </div>
             @endif
-            <a href="{{ route('presensi.create') }}" class="btn btn-primary">Tambah Data Baru</a>
+
+            <div class="row">
+                <div class="col">
+                    <a href="{{ route('presensi.create') }}" class="btn btn-primary">Tambah Data Baru</a>
+                </div>
+                <div class="col"></div>
+                <div class="col">
+                    <form action="{{ route('presensi.search') }}" method="GET" class="form-inline">
+                        {{ csrf_field() }}
+
+                        <div class="form-group ml-5">
+                            <div class="input-group">
+                                <input class="form-control mr-2" type="text" name="cari" placeholder="Cari ID Presensi .."
+                                    value="{{ old('cari') }}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info" type="submit">Go!</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
             <div class="mb-3"></div>
-            
+
             <table style="text-align:center" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
@@ -61,7 +84,7 @@
 
                 Page : {{ $presensi->currentPage() }}
                 || Total Data : {{ $presensi->total() }}
-                {{ $presensi->links() }}
+                {{ $presensi->appends(\Request::except('page'))->render() }}
 
             </div>
         </div>

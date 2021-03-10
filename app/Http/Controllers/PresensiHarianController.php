@@ -166,4 +166,17 @@ class PresensiHarianController extends Controller
 
         return response()->download($filePath, $fileName, $headers);
     }
+
+
+    public function search(Request $request)
+    {
+        $cari = $request->cari;
+
+        $presensi = Presensi_harian::where('id', $cari)
+            ->paginate(10);
+
+        return view('admin.presensi.search', [
+            'presensi' => $presensi,
+        ]);
+    }
 }

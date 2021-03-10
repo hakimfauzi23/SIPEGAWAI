@@ -36,6 +36,28 @@
                     {{ session('success_message') }}
                 </div>
             @endif
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col"></div>
+                <div class="col">
+                    <form action="{{ route('hrdCuti.searchPengajuan') }}" method="GET" class="form-inline">
+                        {{ csrf_field() }}
+
+                        <div class="form-group ml-5">
+                            <div class="input-group">
+                                <input class="form-control mr-2" type="text" name="cari" placeholder="Cari ID Cuti"
+                                    value="{{ old('cari') }}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info" type="submit">Go!</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
             <div class="mb-3"></div>
             <table style="text-align:center" class="table table-bordered table-hover table-striped">
                 <thead>
@@ -69,8 +91,8 @@
                                             value="Disetujui"><i class="fa fa-check" aria-hidden="true"></i></button>
                                         <button class="btn btn-danger" name="status" type="submit" value="Ditolak"><i
                                                 class="fa fa-times" aria-hidden="true"></i></button>
-                                        <a href="{{ route('hrdCuti.detailPengajuan', $encyrpt) }}" class="btn btn-info"><i
-                                                class="fa fa-info" aria-hidden="true"></i></a>
+                                        <a href="{{ route('hrdCuti.detailPengajuan', $encyrpt) }}"
+                                            class="btn btn-info"><i class="fa fa-info" aria-hidden="true"></i></a>
                                     </form>
                                 </td>
                             </tr>

@@ -479,4 +479,18 @@ class HrdPegawaiController extends Controller
             'cuti' => $cuti,
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $cari = $request->cari;
+        $currentPage = 'HRD';
+
+        $pegawai = Pegawai::where('nama', 'like', "%" . $cari . "%")
+            ->paginate(10);
+
+        return view('user.hrd.pegawai.search', [
+            'pegawai' => $pegawai,
+            'currentPage' => $currentPage,
+        ]);
+    }
 }
