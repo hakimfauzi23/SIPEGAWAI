@@ -30,6 +30,7 @@ class CreatePegawaisTable extends Migration
             $table->string('email')->unique();
             $table->text('password');
             $table->date('tgl_masuk');
+            $table->unsignedBigInteger('id_atasan')->nullable();
             $table->unsignedBigInteger('id_jabatan');
             $table->unsignedBigInteger('id_divisi');
             $table->string('path');
@@ -55,6 +56,13 @@ class CreatePegawaisTable extends Migration
             $table->foreign('id_role')
                 ->references('id')
                 ->on('role')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('id_atasan')
+                ->references('id')
+                ->on('pegawai')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

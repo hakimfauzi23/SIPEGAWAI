@@ -31,6 +31,7 @@ class Pegawai extends Model
         'email',
         'password',
         'tgl_masuk',
+        'id_atasan',
         'id_jabatan',
         'id_divisi',
         'path'
@@ -81,6 +82,12 @@ class Pegawai extends Model
         return $this->hasMany('App\Models\Riwayat_Divisi');
     }
 
+    public function bawahan()
+    {
+        return $this->hasMany(self::class, 'id_atasan');
+    }
+
+
 
 
 
@@ -97,5 +104,10 @@ class Pegawai extends Model
     public function role()
     {
         return $this->belongsTo('App\Models\Role', 'id_role', 'id');
+    }
+
+    public function atasan()
+    {
+        return $this->belongsTo(self::class, 'id');
     }
 }
