@@ -29,8 +29,7 @@ use PhpOffice\PhpSpreadsheet\Chart\Layout;
 */
 
 Route::get('/', function () {
-    $currentPage = 'home';
-    return view('user.layouts.landingPage', ['currentPage' => $currentPage]);
+    return view('admin.content');
 });
 
 
