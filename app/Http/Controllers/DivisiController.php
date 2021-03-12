@@ -18,7 +18,7 @@ class DivisiController extends Controller
     public function index()
     {
         //
-        $divisi = Divisi::sortable()->paginate(10);
+        $divisi = Divisi::all();
         return view('admin.divisi.index', ['divisi' => $divisi]);
     }
 
@@ -76,7 +76,10 @@ class DivisiController extends Controller
         //
         $id = Crypt::decryptString($data);
         $divisi = Divisi::find($id);
-        return view('admin.divisi.edit', ['divisi' => $divisi]);
+        return view('admin.divisi.edit', [
+            'divisi' => $divisi,
+            'id' => $data
+        ]);
     }
 
     /**
