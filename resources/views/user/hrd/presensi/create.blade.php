@@ -1,6 +1,6 @@
 @extends('user.layouts.base')
 
-@section('title', 'Data Presensi Pegawai')
+@section('title', 'Tambah Data Presensi Pegawai')
 
 @section('content')
 
@@ -11,7 +11,7 @@
         <div class="container">
             <div class="row justify-content-between align-items-center text-center banner-content">
                 <div class="col-lg-12">
-                    <h1 class="text-white">Data Presensi Harian Pegawai</h1>
+                    <h1 class="text-white">Tambah Data Presensi Harian Pegawai</h1>
                     <p>Mengelola Data Presensi Pegawai sebagai data master untuk pengawasan Pegawai. </p>
                 </div>
             </div>

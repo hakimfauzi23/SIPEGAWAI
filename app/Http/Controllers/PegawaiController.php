@@ -29,7 +29,9 @@ class PegawaiController extends Controller
     {
         //
         $pegawai = Pegawai::all();
-        return view('admin.pegawai.index', ['pegawai' => $pegawai]);
+        return view('admin.pegawai.index', [
+            'pegawai' => $pegawai,
+        ]);
     }
 
     /**

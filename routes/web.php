@@ -67,7 +67,7 @@ Route::get('/divisi/destroy/{data}', [DivisiController::class, 'destroy'])->name
 
 
 //Presensi 
-Route::get('/presensi/search', [PresensiHarianController::class, 'search'])->name('presensi.search');
+Route::get('/presensi/tanggal/', [PresensiHarianController::class, 'tglPresensi'])->name('presensi.search');
 Route::get('/presensi', [PresensiHarianController::class, 'index'])->name('presensi.index');
 Route::get('/presensi/create', [PresensiHarianController::class, 'create'])->name('presensi.create');
 Route::post('/presensi/store', [PresensiHarianController::class, 'store'])->name('presensi.store');

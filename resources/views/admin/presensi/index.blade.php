@@ -1,60 +1,54 @@
-@extends('admin.layouts.base')
+@extends('admin.layout.base')
 
-@section('page_title', 'List Presensi Harian')
 
-@section('content')
+@section('title', 'Data Presensi')
 
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="main-breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Data Presensi Harian / </li>
-        </ol>
-    </nav>
-    <!-- /Breadcrumb -->
 
-    <div class="card mt-4">
-        <div class="card-body">
-            @if (session('success_message'))
-                <div class="alert alert success">
-                    {{ session('success_message') }}
-                </div>
-            @endif
-
-            <div class="row">
-                <div class="col">
-                    <a href="{{ route('presensi.create') }}" class="btn btn-primary">Tambah Data Baru</a>
-                </div>
-                <div class="col"></div>
-                <div class="col">
-                    <form action="{{ route('presensi.search') }}" method="GET" class="form-inline">
-                        {{ csrf_field() }}
-
-                        <div class="form-group ml-5">
-                            <div class="input-group">
-                                <input class="form-control mr-2" type="text" name="cari" placeholder="Cari ID Presensi .."
-                                    value="{{ old('cari') }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-info" type="submit">Go!</button>
-                                </span>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
+@section('content_header')
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-notebook"></i> <span class="text-semibold">Presensi</span>
+                    - List Data Presensi</h4>
             </div>
 
-            <div class="mb-3"></div>
+        </div>
 
-            <table style="text-align:center" class="table table-bordered table-hover table-striped">
-                <thead>
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><i class="active icon-home2 position-left"></i> List Data Presensi</li>
+                {{-- <li class="active">Dashboard</li> --}}
+            </ul>
+        </div>
+    </div>
+@endsection
+
+@section('content')
+    <!-- Basic datatable -->
+    <div class="col-md-10">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <a href="{{ route('presensi.create') }}"><i class="icon-file-plus"></i> Tambah Data Presensi Baru</a>
+                {{-- <h5 class="panel-title">List Data Presensi</h5> --}}
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                        <li><a data-action="reload"></a></li>
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <table class="table datatable-basic table-bordered table-striped table-hover">
+                <thead class="bg-primary-300">
                     <tr>
-                        <th>@sortablelink('id','ID PRESENSI')</th>
-                        <th>@sortablelink('nama','NAMA PEGAWAI')</th>
-                        <th>@sortablelink('tanggal','TANGGAL')</th>
-                        <th>@sortablelink('ket','KETERANGAN')</th>
-                        <th>@sortablelink('jam_dtg','JAM DATANG')</th>
-                        <th>@sortablelink('jam_plg','JAM PULANG')</th>
-                        <th>Aksi</th>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Tanggal</th>
+                        <th>Keterangan</th>
+                        <th>Waktu Kerja</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,32 +58,68 @@
                                 <td>{{ $p->id }}</td>
                                 <td>{{ $p->pegawai->nama }}</td>
                                 <td>{{ $p->tanggal }}</td>
-                                <td>{{ $p->ket }}</td>
-                                <td>{{ $p->jam_dtg }}</td>
-                                <td>{{ $p->jam_plg }}</td>
-                                <td>
-                                    <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                    <a href="{{ route('presensi.edit', $encyrpt) }}" class="btn btn-warning">Edit</a>
-                                    <a href="{{ route('presensi.destroy', $encyrpt) }}"
-                                        class="btn btn-danger delete-confirm">Delete</a>
+                                <td class="text-center"><span <?php if ($p->ket == 'Hadir') {
+                                        echo 'class="label bg-success"';
+                                        }
+                                        if ($p->ket == 'Alpha') {
+                                        echo 'class="label bg-danger"';
+                                        }
+                                        if ($p->ket == 'Cuti') {
+                                        echo 'class="label bg-info"';
+                                        }
+                                        ?>>{{ $p->ket }}</span></td>
+                                <td>{{ $p->jam_dtg . ' - ' . $p->jam_plg }}</td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="icon-menu9"></i>
+                                            </a>
+
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                                <li><a href="{{ route('presensi.destroy', $encyrpt) }}"><i
+                                                            class=" icon-trash"></i> Hapus</a>
+                                                </li>
+                                                <li><a href="{{ route('presensi.edit', $encyrpt) }}"><i
+                                                            class=" icon-pencil5"></i> Edit</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                         @endforeach
                     @endif
+
                 </tbody>
             </table>
-
-            <br />
-            <div class="pagenation">
-
-                Page : {{ $presensi->currentPage() }}
-                || Total Data : {{ $presensi->total() }}
-                {{ $presensi->appends(\Request::except('page'))->render() }}
-
-            </div>
         </div>
-
     </div>
+    <!-- /basic datatable -->
+    <div class="col-md-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h5 class="panel-title">Tanggal</h5>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <form method="get" action="{{ route('presensi.search') }}">
 
+                {{ csrf_field() }}
+
+                <input class="form-control" type="date" name="dari" id="" value="{{ $dari }}">
+                <div class="text-center"> TO : </div>
+                <input class="form-control " type="date" name="ke" id="" value="{{ $ke }}">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-danger btn-rounded"><i class=" icon-search4"></i> GO</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
 
 @endsection

@@ -60,11 +60,21 @@
     </script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/forms/styling/uniform.min.js">
     </script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/notifications/jgrowl.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/anytime.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.time.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/legacy.js"></script>
 
 
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/app.js"></script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/datatables_basic.js"></script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/form_layouts.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/picker_date.js"></script>
+
     <!-- /theme JS files -->
 
 
@@ -89,7 +99,7 @@
         <div class="page-content">
 
             <!-- Main sidebar -->
-            <div class="sidebar sidebar-main sidebar-fixed">
+            <div class="sidebar sidebar-main sidebar-fixed ">
                 <div class="sidebar-content">
 
                     <!-- User menu -->

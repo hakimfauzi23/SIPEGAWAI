@@ -20,8 +20,31 @@ class PresensiHarianController extends Controller
     public function index()
     {
         //
-        $presensi = Presensi_harian::sortable()->paginate(10);
-        return view('admin.presensi.index', ['presensi' => $presensi]);
+        $dari = date("Y-m-d");
+        $ke = date("Y-m-d");
+
+        $presensi = Presensi_harian::where('tanggal', date("Y-m-d"))->get();
+        // dd($presensi);
+        return view('admin.presensi.index', [
+            'presensi' => $presensi,
+            'dari' => $dari,
+            'ke' => $ke,
+
+        ]);
+    }
+
+    public function tglPresensi(Request $request)
+    {
+        $dari = $request->dari;
+        $ke = $request->ke;
+        // dd($ke);
+        $presensi = Presensi_harian::whereBetween('tanggal', [$dari, $ke])->get();
+        return view('admin.presensi.index', [
+            'presensi' => $presensi,
+            'dari' => $dari,
+            'ke' => $ke,
+
+        ]);
     }
 
     /**
@@ -165,18 +188,5 @@ class PresensiHarianController extends Controller
         $fileName = 'TemplatePresensi.csv';
 
         return response()->download($filePath, $fileName, $headers);
-    }
-
-
-    public function search(Request $request)
-    {
-        $cari = $request->cari;
-
-        $presensi = Presensi_harian::where('id', $cari)
-            ->paginate(10);
-
-        return view('admin.presensi.search', [
-            'presensi' => $presensi,
-        ]);
     }
 }
