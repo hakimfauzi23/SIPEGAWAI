@@ -15,7 +15,7 @@ class CreatePegawaisTable extends Migration
     {
         Schema::create('pegawai', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_role');
+            $table->unsignedBigInteger('id_role')->nullable();
             $table->string('nik')->unique();
             $table->string('nama');
             $table->enum('jk', ['Pria', 'Wanita']);
@@ -31,8 +31,8 @@ class CreatePegawaisTable extends Migration
             $table->text('password');
             $table->date('tgl_masuk');
             $table->unsignedBigInteger('id_atasan')->nullable();
-            $table->unsignedBigInteger('id_jabatan');
-            $table->unsignedBigInteger('id_divisi');
+            $table->unsignedBigInteger('id_jabatan')->nullable();
+            $table->unsignedBigInteger('id_divisi')->nullable();
             $table->string('path');
             $table->timestamps();
 
@@ -44,28 +44,28 @@ class CreatePegawaisTable extends Migration
                 ->on('jabatan')
                 ->constrained()
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('set null');
 
             $table->foreign('id_divisi')
                 ->references('id')
                 ->on('divisi')
                 ->constrained()
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('set null');
 
             $table->foreign('id_role')
                 ->references('id')
                 ->on('role')
                 ->constrained()
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('set null');
 
             $table->foreign('id_atasan')
                 ->references('id')
                 ->on('pegawai')
                 ->constrained()
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('set null');
         });
     }
 

@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Limitless - Responsive Web Application Kit by Eugene Kopyov</title>
+    <title>@yield('name')</title>
+    {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
 
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet"
@@ -17,12 +18,6 @@
     <link href="{{ URL::to('/admin') }}/assets/css/colors.css" rel="stylesheet" type="text/css">
     <!-- /global stylesheets -->
 
-    <!-- Core JS files -->
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/loaders/pace.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/libraries/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/libraries/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/loaders/blockui.min.js"></script>
-    <!-- /core JS files -->
 
     <!-- Theme JS files -->
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/visualization/d3/d3.min.js">
@@ -50,6 +45,33 @@
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/layout_navbar_hideable_sidebar.js">
     </script>
     <!-- /theme JS files -->
+
+    <!-- Core JS files -->
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+
+    <!-- Theme JS files -->
+    <script type="text/javascript"
+        src="{{ URL::to('/admin') }}/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/forms/selects/select2.min.js">
+    </script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/forms/selects/select2.min.js">
+    </script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/forms/styling/uniform.min.js">
+    </script>
+
+
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/app.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/datatables_basic.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/form_layouts.js"></script>
+    <!-- /theme JS files -->
+
+
+
+
 
 </head>
 
@@ -96,6 +118,7 @@
                 <!-- Page header -->
                 @yield('content_header')
                 <!-- /page header -->
+                @include('sweetalert::alert')
 
 
                 <!-- Content area -->
@@ -104,27 +127,43 @@
                 </div>
                 <!-- /dashboard content -->
 
-
                 <!-- Footer -->
-                <div class="footer text-muted ml-3">
-                    &copy; 2015. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov"
-                        target="_blank">Eugene Kopyov</a>
+                <div class="footer text-muted">&copy; 2015. <a href="#">Limitless Web App Kit</a> by <a
+                        href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
                 </div>
                 <!-- /footer -->
 
+
             </div>
             <!-- /content area -->
+
 
         </div>
         <!-- /main content -->
 
     </div>
     <!-- /page content -->
-    
+
     </div>
     <!-- /page container -->
 
     @yield('custom_script')
+    {{-- <script>
+        $('.delete-confirm').on('click', function(event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            swal({
+                title: 'Are you sure?',
+                text: 'This record and it`s details will be permanantly deleted!',
+                icon: 'warning',
+                buttons: ["Cancel", "Yes!"],
+            }).then(function(value) {
+                if (value) {
+                    window.location.href = url;
+                }
+            });
+        });
+    </script> --}}
 </body>
 
 </html>

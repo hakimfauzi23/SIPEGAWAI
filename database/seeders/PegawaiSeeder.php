@@ -50,7 +50,7 @@ class PegawaiSeeder extends Seeder
                 'email' => $faker->email,
                 'password' => $faker->password,
                 'tgl_masuk' => $faker->date,
-                'id_atasan' => $atasan[$numAtasan],
+                'id_atasan' => NULL,
                 'id_jabatan' => $jbtn,
                 'id_divisi' => $dvs,
                 'path' => 'foto.jpg'

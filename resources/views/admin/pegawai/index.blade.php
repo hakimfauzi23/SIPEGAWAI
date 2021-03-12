@@ -1,87 +1,118 @@
-@extends('admin.layouts.base')
+@extends('admin.layout.base')
 
-@section('page_title', 'List Pegawai')
 
-@section('content')
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="main-breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">List Pegawai / </li>
-        </ol>
-    </nav>
-    <!-- /Breadcrumb -->
+@section('title', 'Data Pegawai')
 
-    <div class="card mt-4">
-        <div class="card-body">
-            @if (session('success_message'))
-                <div class="alert alert success">
-                    {{ session('success_message') }}
-                </div>
-            @endif
 
-            <div class="row">
-                <div class="col">
-                    <a href="{{ route('pegawai.create') }}" class="btn btn-primary">Tambah Pegawai Baru</a>
-                </div>
-                <div class="col"></div>
-                <div class="col">
-                    <form action="{{ route('pegawai.search') }}" method="GET" class="form-inline">
-                        {{ csrf_field() }}
-
-                        <div class="form-group ml-5">
-                            <div class="input-group">
-                                <input class="form-control mr-2" type="text" name="cari" placeholder="Cari Pegawai .."
-                                    value="{{ old('cari') }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-info" type="submit">Go!</button>
-                                </span>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
+@section('content_header')
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-users4"></i> <span class="text-semibold">Pegawai</span>
+                    - List Data Pegawai</h4>
             </div>
 
-            <div class="mb-3"></div>
-            <table style="text-align:center" class="table table-bordered table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>@sortablelink('id','ID Pegawai')</th>
-                        <th>@sortablelink('nama','NAMA ')</th>
-                        <th>@sortablelink('id_jabatan','JABATAN')</th>
-                        <th>@sortablelink('id_divisi','DIVISI')</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ($pegawai->count())
-                        @foreach ($pegawai as $key => $p)
-                            <tr>
-                                <td>{{ $p->id }}</td>
-                                <td>{{ $p->nama }}</td>
-                                <td>{{ $p->jabatan->nm_jabatan }}</td>
-                                <td>{{ $p->divisi->nm_divisi }}</td>
-                                <td>
-                                    <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                    <a href="{{ route('pegawai.details', $encyrpt) }}" class="btn btn-success">Detail</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
-                </tbody>
-            </table>
+        </div>
 
-            <br />
-            <div class="pagenation">
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><i class="active icon-home2 position-left"></i> List Data Pegawai</li>
+                {{-- <li class="active">Dashboard</li> --}}
+            </ul>
+        </div>
+    </div>
+@endsection
 
-                Page : {{ $pegawai->currentPage() }}
-                || Total Data : {{ $pegawai->total() }}
-                {{ $pegawai->appends(\Request::except('page'))->render() }}
-
+@section('content')
+    <!-- Basic datatable -->
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <a href="{{ route('pegawai.create') }}"><i class="icon-file-plus"></i> Tambah Pegawai Baru</a>
+            {{-- <h5 class="panel-title">List Data Pegawai</h5> --}}
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    <li><a data-action="close"></a></li>
+                </ul>
             </div>
         </div>
 
-    </div>
 
+        <table class="table datatable-basic">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Jabatan</th>
+                    <th>Divisi</th>
+                    <th>Status</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if ($pegawai->count())
+                    @foreach ($pegawai as $key => $p)
+                        <tr>
+                            <td>{{ $p->id }}</td>
+                            <td>{{ $p->nama }}</td>
+                            <td>{{ $p->jabatan->nm_jabatan }}</td>
+                            <td>{{ $p->divisi->nm_divisi }}</td>
+                            <td><span class="label label-success">Active</span></td>
+                            <td class="text-center">
+                                <ul class="icons-list">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="icon-menu9"></i>
+                                        </a>
+
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                            <li><a href="{{ route('hrdPegawai.show', $encyrpt) }}"><i
+                                                        class="icon-file-eye"></i> Detail </a>
+                                            </li>
+                                            <li><a href="{{ route('pegawai.destroy', $p->id) }}" class="delete-confirm"><i
+                                                        class=" icon-trash"></i> Hapus</a>
+                                            </li>
+                                            <li><a href="{{ route('pegawai.edit', $encyrpt) }}"><i
+                                                        class=" icon-pencil5"></i> Edit</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+
+                {{-- <tr>
+                    <td>Marth</td>
+                    <td><a href="#">Enright</a></td>
+                    <td>Traffic Court Referee</td>
+                    <td>22 Jun 1972</td>
+                    <td><span class="label label-success">Active</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a>
+                                    </li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a>
+                                    </li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr> --}}
+            </tbody>
+        </table>
+    </div>
+    <!-- /basic datatable -->
 
 @endsection

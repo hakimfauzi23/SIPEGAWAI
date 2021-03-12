@@ -28,7 +28,7 @@ class PegawaiController extends Controller
     public function index()
     {
         //
-        $pegawai = Pegawai::sortable()->paginate(10);
+        $pegawai = Pegawai::all();
         return view('admin.pegawai.index', ['pegawai' => $pegawai]);
     }
 
@@ -42,11 +42,13 @@ class PegawaiController extends Controller
         //
         $jabatan = Jabatan::pluck('nm_jabatan', 'id');
         $divisi = Divisi::pluck('nm_divisi', 'id');
+        $pegawai = Pegawai::pluck('nama', 'id');
         $role = Role::pluck('nm_role', 'id');
         return view('admin.pegawai.create', [
             'jabatan' => $jabatan,
             'divisi' => $divisi,
             'role' => $role,
+            'pegawai' => $pegawai,
         ]);
     }
 
@@ -73,6 +75,7 @@ class PegawaiController extends Controller
             'jml_anak' => 'required',
             'no_hp' => 'required',
             'email' => 'required',
+            'id_atasan' => 'required',
             'id_jabatan' => 'required',
             'id_divisi' => 'required',
             'tgl_masuk' => 'required',
@@ -109,6 +112,7 @@ class PegawaiController extends Controller
             'email' => $request->email,
             'password' => $password,
             'tgl_masuk' => $request->tgl_masuk,
+            'id_atasan' => $request->id_atasan,
             'id_jabatan' => $request->id_jabatan,
             'id_divisi' => $request->id_divisi,
             'path' => $imgname
@@ -193,12 +197,14 @@ class PegawaiController extends Controller
         $jabatan = Jabatan::pluck('nm_jabatan', 'id');
         $divisi = Divisi::pluck('nm_divisi', 'id');
         $role = Role::pluck('nm_role', 'id');
+        $atasan = Pegawai::pluck('nama', 'id');
         return view('admin.pegawai.edit', [
             'id' => $data,
             'pegawai' => $pegawai,
             'jabatan' => $jabatan,
             'divisi' => $divisi,
             'role' => $role,
+            'atasan' => $atasan,
         ]);
     }
 
@@ -244,6 +250,7 @@ class PegawaiController extends Controller
                 'jml_anak' => 'required',
                 'no_hp' => 'required',
                 'email' => 'required',
+                'id_update' => 'required',
                 'id_jabatan' => 'required',
                 'id_divisi' => 'required',
                 'tgl_masuk' => 'required',
@@ -269,6 +276,7 @@ class PegawaiController extends Controller
             $pegawai->jml_anak = $request->jml_anak;
             $pegawai->no_hp = $request->no_hp;
             $pegawai->email = $request->email;
+            $pegawai->id_atasan = $request->id_atasan;
             $pegawai->id_jabatan = $request->id_jabatan;
             $pegawai->id_divisi = $request->id_divisi;
             $pegawai->tgl_masuk = $request->tgl_masuk;
@@ -330,6 +338,7 @@ class PegawaiController extends Controller
             $pegawai->jml_anak = $request->jml_anak;
             $pegawai->no_hp = $request->no_hp;
             $pegawai->email = $request->email;
+            $pegawai->id_atasan = $request->id_atasan;
             $pegawai->id_jabatan = $request->id_jabatan;
             $pegawai->id_divisi = $request->id_divisi;
             $pegawai->tgl_masuk = $request->tgl_masuk;
@@ -355,7 +364,7 @@ class PegawaiController extends Controller
 
 
             Alert::success('success', ' Berhasil Update Data !');
-            return redirect(route('pegawai.details', $data));
+            return redirect(route('pegawai.index'));
         }
     }
 
@@ -368,9 +377,9 @@ class PegawaiController extends Controller
     public function destroy($data)
     {
         //
-        $id = Crypt::decryptString($data);
-        $pegawai = Pegawai::find($id);
-        $pegawai->delete();
+        // $id = Crypt::decryptString($data);
+        Pegawai::where('id', $data)->delete();
+        // dd($pegawai);
 
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect(route('pegawai.index'));
@@ -387,5 +396,4 @@ class PegawaiController extends Controller
             'pegawai' => $pegawai,
         ]);
     }
-
 }

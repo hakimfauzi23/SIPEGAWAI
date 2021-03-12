@@ -28,9 +28,12 @@ use PhpOffice\PhpSpreadsheet\Chart\Layout;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.content');
-});
+// Route::get('/', function () {
+//     return view('admin.pegawai.index');
+// });
+
+Route::get('/', [PegawaiController::class, 'index'])->name('pegawai.index');
+
 
 
 //Pegawai
