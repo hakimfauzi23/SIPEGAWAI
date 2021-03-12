@@ -2,8 +2,8 @@
 
     <!-- Main -->
     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-    <li><a href="{{ route('pegawai.index') }}"><i class="icon-users4"></i> <span>Data Pegawai</span></a></li>
-    <li><a href="index.html"><i class="icon-user-tie"></i> <span>Data Jabatan</span></a></li>
+    <li><a href="{{ route('pegawai.index') }}"><i class="icon-users"></i><span>Data Pegawai</span></a></li>
+    <li><a href="{{ route('jabatan.index') }}"><i class="icon-user-tie"></i><span>Data Jabatan</span></a></li>
     <li><a href="index.html"><i class="icon-hat"></i> <span>Data Divisi</span></a></li>
     <li><a href="index.html"><i class="icon-notebook"></i> <span>Data Presensi</span></a></li>
     <li><a href="index.html"><i class="icon-furniture"></i> <span>Data Cuti</span></a></li>

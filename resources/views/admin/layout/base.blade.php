@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('name')</title>
-    {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+    <title>@yield('title')</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet"
@@ -56,8 +56,6 @@
     <!-- Theme JS files -->
     <script type="text/javascript"
         src="{{ URL::to('/admin') }}/assets/js/plugins/tables/datatables/datatables.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/forms/selects/select2.min.js">
-    </script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/forms/selects/select2.min.js">
     </script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/forms/styling/uniform.min.js">
@@ -148,22 +146,6 @@
     <!-- /page container -->
 
     @yield('custom_script')
-    {{-- <script>
-        $('.delete-confirm').on('click', function(event) {
-            event.preventDefault();
-            const url = $(this).attr('href');
-            swal({
-                title: 'Are you sure?',
-                text: 'This record and it`s details will be permanantly deleted!',
-                icon: 'warning',
-                buttons: ["Cancel", "Yes!"],
-            }).then(function(value) {
-                if (value) {
-                    window.location.href = url;
-                }
-            });
-        });
-    </script> --}}
 </body>
 
 </html>

@@ -39,14 +39,14 @@
         </div>
 
 
-        <table class="table datatable-basic">
-            <thead>
+        <table class="table datatable-basic table-bordered table-striped table-hover">
+            <thead class="bg-primary-300">
                 <tr>
                     <th>ID</th>
                     <th>Nama</th>
                     <th>Jabatan</th>
                     <th>Divisi</th>
-                    <th>Status</th>
+                    <th hidden>Status</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -58,7 +58,7 @@
                             <td>{{ $p->nama }}</td>
                             <td>{{ $p->jabatan->nm_jabatan }}</td>
                             <td>{{ $p->divisi->nm_divisi }}</td>
-                            <td><span class="label label-success">Active</span></td>
+                            <td hidden><span class="label label-success">Active</span></td>
                             <td class="text-center">
                                 <ul class="icons-list">
                                     <li class="dropdown">
@@ -71,7 +71,7 @@
                                             <li><a href="{{ route('hrdPegawai.show', $encyrpt) }}"><i
                                                         class="icon-file-eye"></i> Detail </a>
                                             </li>
-                                            <li><a href="{{ route('pegawai.destroy', $p->id) }}" class="delete-confirm"><i
+                                            <li><a href="{{ route('pegawai.destroy', $encyrpt) }}"><i
                                                         class=" icon-trash"></i> Hapus</a>
                                             </li>
                                             <li><a href="{{ route('pegawai.edit', $encyrpt) }}"><i
@@ -85,31 +85,6 @@
                     @endforeach
                 @endif
 
-                {{-- <tr>
-                    <td>Marth</td>
-                    <td><a href="#">Enright</a></td>
-                    <td>Traffic Court Referee</td>
-                    <td>22 Jun 1972</td>
-                    <td><span class="label label-success">Active</span></td>
-                    <td class="text-center">
-                        <ul class="icons-list">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-menu9"></i>
-                                </a>
-
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a>
-                                    </li>
-                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a>
-                                    </li>
-                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </td>
-                </tr> --}}
             </tbody>
         </table>
     </div>

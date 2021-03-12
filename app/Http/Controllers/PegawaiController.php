@@ -377,8 +377,8 @@ class PegawaiController extends Controller
     public function destroy($data)
     {
         //
-        // $id = Crypt::decryptString($data);
-        Pegawai::where('id', $data)->delete();
+        $id = Crypt::decryptString($data);
+        Pegawai::where('id', $id)->delete();
         // dd($pegawai);
 
         Alert::success('success', ' Berhasil Hapus Data !');
