@@ -36,71 +36,53 @@ Route::get('/', [PegawaiController::class, 'index'])->name('pegawai.index');
 
 
 
+
+// !!!!!DI SINI ADALAH ROUTES UNTUK MENU ADMIN!!!!! //
+
 //Pegawai
-Route::get('/pegawai', [PegawaiController::class, 'index'])->name('pegawai.index');
-Route::get('/pegawai/detail/{data}', [PegawaiController::class, 'show'])->name('pegawai.show');
-Route::get('/pegawai/create', [PegawaiController::class, 'create'])->name('pegawai.create');
-Route::post('/pegawai/store', [PegawaiController::class, 'store'])->name('pegawai.store');
-Route::get('/pegawai/edit/{data}', [PegawaiController::class, 'edit'])->name('pegawai.edit');
-Route::put('/pegawai/update/{data}', [PegawaiController::class, 'update'])->name('pegawai.update');
+Route::resource('pegawai', PegawaiController::class);
 Route::get('/pegawai/destroy/{data}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
 
 
-//Jabatan 
-Route::get('/jabatan', [JabatanController::class, 'index'])->name('jabatan.index');
-Route::get('/jabatan/create', [JabatanController::class, 'create'])->name('jabatan.create');
-Route::post('/jabatan/store', [JabatanController::class, 'store'])->name('jabatan.store');
-Route::get('/jabatan/edit/{data}', [JabatanController::class, 'edit'])->name('jabatan.edit');
-Route::put('/jabatan/update/{data}', [JabatanController::class, 'update'])->name('jabatan.update');
+
+//Jabatan
+Route::resource('jabatan', JabatanController::class);
 Route::get('/jabatan/destroy/{data}', [JabatanController::class, 'destroy'])->name('jabatan.destroy');
 
 //Divisi
-Route::get('/divisi', [DivisiController::class, 'index'])->name('divisi.index');
-Route::get('/divisi/create', [DivisiController::class, 'create'])->name('divisi.create');
-Route::post('/divisi/store', [DivisiController::class, 'store'])->name('divisi.store');
-Route::get('/divisi/edit/{data}', [DivisiController::class, 'edit'])->name('divisi.edit');
-Route::put('/divisi/update/{data}', [DivisiController::class, 'update'])->name('divisi.update');
+Route::resource('divisi', DivisiController::class);
 Route::get('/divisi/destroy/{data}', [DivisiController::class, 'destroy'])->name('divisi.destroy');
 
 
-//Presensi 
+//Presensi
 Route::get('/presensi/tanggal/', [PresensiHarianController::class, 'tglPresensi'])->name('presensi.search');
-Route::get('/presensi', [PresensiHarianController::class, 'index'])->name('presensi.index');
-Route::get('/presensi/create', [PresensiHarianController::class, 'create'])->name('presensi.create');
-Route::post('/presensi/store', [PresensiHarianController::class, 'store'])->name('presensi.store');
-Route::get('/presensi/edit/{data}', [PresensiHarianController::class, 'edit'])->name('presensi.edit');
-Route::put('/presensi/update/{data}', [PresensiHarianController::class, 'update'])->name('presensi.update');
+Route::resource('presensi', PresensiHarianController::class);
 Route::get('/presensi/destroy/{data}', [PresensiHarianController::class, 'destroy'])->name('presensi.destroy');
 Route::post('/presensi/import_excel', [PresensiHarianController::class, 'import'])->name('presensi.import');
 Route::get('/presensi/template_download', [PresensiHarianController::class, 'download'])->name('presensi.template');
 
 
 //Cuti 
-Route::get('/cuti', [CutiController::class, 'index'])->name('cuti.index');
-Route::get('/cuti/detail/{data}', [CutiController::class, 'show'])->name('cuti.show');
-Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create');
-Route::post('/cuti/store', [CutiController::class, 'store'])->name('cuti.store');
-Route::get('/cuti/edit/{data}', [CutiController::class, 'edit'])->name('cuti.edit');
-Route::put('/cuti/update/{data}', [CutiController::class, 'update'])->name('cuti.update');
+Route::get('/cuti/tanggal/', [CutiController::class, 'tglPresensi'])->name('cuti.search');
+Route::resource('cuti', CutiController::class);
 Route::get('/cuti/destroy/{data}', [CutiController::class, 'destroy'])->name('cuti.destroy');
 
 
 //RiwayatJabatan
-Route::get('/riwayat_jabatan/show/{data}', [RiwayatJabatanController::class, 'show'])->name('riwayatJabatan.show');
-Route::get('/riwayat_jabatan/edit/{data}', [RiwayatJabatanController::class, 'edit'])->name('riwayatJabatan.edit');
-Route::put('/riwayat_jabatan/update/{data}', [RiwayatJabatanController::class, 'update'])->name('riwayatJabatan.update');
+Route::resource('riwayat_jabatan', RiwayatJabatanController::class);
 Route::get('/riwayat_jabatan/destroy/{data}', [RiwayatJabatanController::class, 'destroy'])->name('riwayatJabatan.destroy');
 
 
 //RiwayatDivisi
-Route::get('/riwayat_divisi/show/{data}', [RiwayatDivisiController::class, 'show'])->name('riwayatDivisi.show');
-Route::get('/riwayat_divisi/edit/{data}', [RiwayatDivisiController::class, 'edit'])->name('riwayatDivisi.edit');
-Route::put('/riwayat_divisi/update/{data}', [RiwayatDivisiController::class, 'update'])->name('riwayatDivisi.update');
+Route::resource('riwayat_divisi', RiwayatDivisiController::class);
 Route::get('/riwayat_divisi/destroy/{data}', [RiwayatDivisiController::class, 'destroy'])->name('riwayatDivisi.destroy');
 
 
-//RekapKinerja
-Route::get('/kinerja/show/{data}', [RekapKinerjaController::class, 'show'])->name('rekapKinerja.show');
+
+
+
+
+
 
 
 
