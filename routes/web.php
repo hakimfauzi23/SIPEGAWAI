@@ -37,7 +37,6 @@ Route::get('/', [PegawaiController::class, 'index'])->name('pegawai.index');
 
 
 //Pegawai
-Route::get('/pegawai/search', [PegawaiController::class, 'search'])->name('pegawai.search');
 Route::get('/pegawai', [PegawaiController::class, 'index'])->name('pegawai.index');
 Route::get('/pegawai/detail/{data}', [PegawaiController::class, 'show'])->name('pegawai.show');
 Route::get('/pegawai/create', [PegawaiController::class, 'create'])->name('pegawai.create');
@@ -48,7 +47,6 @@ Route::get('/pegawai/destroy/{data}', [PegawaiController::class, 'destroy'])->na
 
 
 //Jabatan 
-Route::get('/jabatan/search', [JabatanController::class, 'search'])->name('jabatan.search');
 Route::get('/jabatan', [JabatanController::class, 'index'])->name('jabatan.index');
 Route::get('/jabatan/create', [JabatanController::class, 'create'])->name('jabatan.create');
 Route::post('/jabatan/store', [JabatanController::class, 'store'])->name('jabatan.store');
@@ -57,7 +55,6 @@ Route::put('/jabatan/update/{data}', [JabatanController::class, 'update'])->name
 Route::get('/jabatan/destroy/{data}', [JabatanController::class, 'destroy'])->name('jabatan.destroy');
 
 //Divisi
-Route::get('/divisi/search', [DivisiController::class, 'search'])->name('divisi.search');
 Route::get('/divisi', [DivisiController::class, 'index'])->name('divisi.index');
 Route::get('/divisi/create', [DivisiController::class, 'create'])->name('divisi.create');
 Route::post('/divisi/store', [DivisiController::class, 'store'])->name('divisi.store');
@@ -79,7 +76,6 @@ Route::get('/presensi/template_download', [PresensiHarianController::class, 'dow
 
 
 //Cuti 
-Route::get('/cuti/tanggal', [CutiController::class, 'tglPresensi'])->name('cuti.search');
 Route::get('/cuti', [CutiController::class, 'index'])->name('cuti.index');
 Route::get('/cuti/detail/{data}', [CutiController::class, 'show'])->name('cuti.show');
 Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create');
