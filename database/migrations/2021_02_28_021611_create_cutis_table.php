@@ -21,9 +21,11 @@ class CreateCutisTable extends Migration
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
             $table->text('ket');
-            $table->enum('status', ['Disetujui', 'Ditolak', 'Diproses']);
-            $table->date('tgl_disetujui')->nullable();
-            $table->date('tgl_ditolak')->nullable();
+            $table->enum('status', ['Disetujui HRD', 'Ditolak HRD', 'Disetujui Atasan', 'Ditolak Atasan', 'Diproses']);
+            $table->date('tgl_disetujui_atasan')->nullable();
+            $table->date('tgl_disetujui_hrd')->nullable();
+            $table->date('tgl_ditolak_atasan')->nullable();
+            $table->date('tgl_ditolak_hrd')->nullable();
             $table->timestamps();
 
             $table->index('id_pegawai');

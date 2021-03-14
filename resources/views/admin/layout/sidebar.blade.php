@@ -6,7 +6,7 @@
     <li><a href="{{ route('jabatan.index') }}"><i class="icon-user-tie"></i><span>Data Jabatan</span></a></li>
     <li><a href="{{ route('divisi.index') }}"><i class="icon-hat"></i> <span>Data Divisi</span></a></li>
     <li><a href="{{ route('presensi.index') }}"><i class="icon-notebook"></i> <span>Data Presensi</span></a></li>
-    <li><a href="index.html"><i class="icon-furniture"></i> <span>Data Cuti</span></a></li>
+    <li><a href="{{ route('cuti.index') }}"><i class="icon-furniture"></i> <span>Data Cuti</span></a></li>
     {{-- <li>
         <a href="#"><i class="icon-stack2"></i> <span>Page layouts</span></a>
         <ul>

@@ -79,7 +79,7 @@ Route::get('/presensi/template_download', [PresensiHarianController::class, 'dow
 
 
 //Cuti 
-Route::get('/cuti/search', [CutiController::class, 'search'])->name('cuti.search');
+Route::get('/cuti/tanggal', [CutiController::class, 'tglPresensi'])->name('cuti.search');
 Route::get('/cuti', [CutiController::class, 'index'])->name('cuti.index');
 Route::get('/cuti/detail/{data}', [CutiController::class, 'show'])->name('cuti.details');
 Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create');

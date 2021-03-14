@@ -21,11 +21,31 @@ class CutiController extends Controller
     public function index()
     {
         //
-        $cuti = Cuti::sortable()->paginate(10);
+        $dari = date("Y-m-d");
+        $ke = date("Y-m-d");
+        $cuti = Cuti::where('tgl_pengajuan', date("Y-m-d"))->get();
         return view('admin.cuti.index', [
-            'cuti' => $cuti
+            'cuti' => $cuti,
+            'dari' => $dari,
+            'ke' => $ke,
+
         ]);
     }
+
+    public function tglPresensi(Request $request)
+    {
+        $dari = $request->dari;
+        $ke = $request->ke;
+        // dd($ke);
+        $cuti = Cuti::whereBetween('tgl_pengajuan', [$dari, $ke])->get();
+        return view('admin.cuti.index', [
+            'cuti' => $cuti,
+            'dari' => $dari,
+            'ke' => $ke,
+
+        ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -66,8 +86,10 @@ class CutiController extends Controller
             'tgl_selesai' => $request->tgl_selesai,
             'ket' => $request->ket,
             'status' => "Diproses",
-            'tgl_disetujui' => NULL,
-            'tgl_ditolak' => NULL,
+            'tgl_disetujui_atasan' => NULL,
+            'tgl_disetujui_hrd' => NULL,
+            'tgl_ditolak_atasan' => NULL,
+            'tgl_ditolak_hrd' => NULL,
         ]);
 
         Alert::success('success', ' Berhasil Input Data !');
@@ -147,61 +169,74 @@ class CutiController extends Controller
 
         $cuti = Cuti::find($id);
 
-        if ($request->status == "Disetujui") {
+        $cuti->id_pegawai = $request->id_pegawai;
+        $cuti->tipe_cuti = $request->tipe_cuti;
+        $cuti->tgl_pengajuan = $request->tgl_pengajuan;
+        $cuti->tgl_mulai = $request->tgl_mulai;
+        $cuti->tgl_selesai = $request->tgl_selesai;
+        $cuti->ket = $request->ket;
+        $cuti->status = $request->status;
+        $cuti->tgl_disetujui_atasan = $request->tgl_disetujui_atasan;
+        $cuti->tgl_disetujui_hrd = $request->tgl_disetujui_hrd;
+        $cuti->tgl_ditolak_atasan = $request->tgl_ditolak_atasan;
+        $cuti->tgl_ditolak_hrd = $request->tgl_ditolak_hrd;
+        $cuti->save();
 
-            $cuti->id_pegawai = $request->id_pegawai;
-            $cuti->tipe_cuti = $request->tipe_cuti;
-            $cuti->tgl_pengajuan = $request->tgl_pengajuan;
-            $cuti->tgl_mulai = $request->tgl_mulai;
-            $cuti->tgl_selesai = $request->tgl_selesai;
-            $cuti->ket = $request->ket;
-            $cuti->status = $request->status;
-            $cuti->tgl_disetujui = date("Y-m-d");
-            $cuti->tgl_ditolak = NULL;
-            $cuti->save();
+        // if ($request->status == "Disetujui") {
 
-            $date1 = new DateTime($request->tgl_mulai);
-            $date2 = new DateTime($request->tgl_selesai);
+        //     $cuti->id_pegawai = $request->id_pegawai;
+        //     $cuti->tipe_cuti = $request->tipe_cuti;
+        //     $cuti->tgl_pengajuan = $request->tgl_pengajuan;
+        //     $cuti->tgl_mulai = $request->tgl_mulai;
+        //     $cuti->tgl_selesai = $request->tgl_selesai;
+        //     $cuti->ket = $request->ket;
+        //     $cuti->status = $request->status;
+        //     $cuti->tgl_disetujui = date("Y-m-d");
+        //     $cuti->tgl_ditolak = NULL;
+        //     $cuti->save();
 
-            $interval = $date1->diff($date2);
-            $dt = $request->tgl_mulai;
-            // $gg = date("Y-m-d", strtotime($dt . ' + 40 days'));
-            // dd($gg);
-            for ($i = 0; $i < $interval->d; $i++) {
-                Presensi_harian::create([
-                    'id_pegawai' => $request->id_pegawai,
-                    'tanggal' => date("Y-m-d", strtotime($dt . ' + ' . $i . 'days')),
-                    'ket' => 'Cuti',
-                    'jam_dtg' => NULL,
-                    'jam_plg' => NULL,
-                ]);
-            }
-        } else if ($request->status == "Ditolak") {
-            $cuti->id_pegawai = $request->id_pegawai;
-            $cuti->tipe_cuti = $request->tipe_cuti;
-            $cuti->tgl_pengajuan = $request->tgl_pengajuan;
-            $cuti->tgl_mulai = $request->tgl_mulai;
-            $cuti->tgl_selesai = $request->tgl_selesai;
-            $cuti->ket = $request->ket;
-            $cuti->status = $request->status;
-            $cuti->tgl_disetujui = NULL;
-            $cuti->tgl_ditolak = date("Y-m-d");
-            $cuti->save();
-        } else if ($request->status == "Diproses") {
-            $cuti->id_pegawai = $request->id_pegawai;
-            $cuti->tipe_cuti = $request->tipe_cuti;
-            $cuti->tgl_pengajuan = $request->tgl_pengajuan;
-            $cuti->tgl_mulai = $request->tgl_mulai;
-            $cuti->tgl_selesai = $request->tgl_selesai;
-            $cuti->ket = $request->ket;
-            $cuti->status = $request->status;
-            $cuti->tgl_disetujui = NULL;
-            $cuti->tgl_ditolak = NULL;
-            $cuti->save();
-        }
+        //     $date1 = new DateTime($request->tgl_mulai);
+        //     $date2 = new DateTime($request->tgl_selesai);
+
+        //     $interval = $date1->diff($date2);
+        //     $dt = $request->tgl_mulai;
+        //     // $gg = date("Y-m-d", strtotime($dt . ' + 40 days'));
+        //     // dd($gg);
+        //     for ($i = 0; $i < $interval->d; $i++) {
+        //         Presensi_harian::create([
+        //             'id_pegawai' => $request->id_pegawai,
+        //             'tanggal' => date("Y-m-d", strtotime($dt . ' + ' . $i . 'days')),
+        //             'ket' => 'Cuti',
+        //             'jam_dtg' => NULL,
+        //             'jam_plg' => NULL,
+        //         ]);
+        //     }
+        // } else if ($request->status == "Ditolak") {
+        //     $cuti->id_pegawai = $request->id_pegawai;
+        //     $cuti->tipe_cuti = $request->tipe_cuti;
+        //     $cuti->tgl_pengajuan = $request->tgl_pengajuan;
+        //     $cuti->tgl_mulai = $request->tgl_mulai;
+        //     $cuti->tgl_selesai = $request->tgl_selesai;
+        //     $cuti->ket = $request->ket;
+        //     $cuti->status = $request->status;
+        //     $cuti->tgl_disetujui = NULL;
+        //     $cuti->tgl_ditolak = date("Y-m-d");
+        //     $cuti->save();
+        // } else if ($request->status == "Diproses") {
+        //     $cuti->id_pegawai = $request->id_pegawai;
+        //     $cuti->tipe_cuti = $request->tipe_cuti;
+        //     $cuti->tgl_pengajuan = $request->tgl_pengajuan;
+        //     $cuti->tgl_mulai = $request->tgl_mulai;
+        //     $cuti->tgl_selesai = $request->tgl_selesai;
+        //     $cuti->ket = $request->ket;
+        //     $cuti->status = $request->status;
+        //     $cuti->tgl_disetujui = NULL;
+        //     $cuti->tgl_ditolak = NULL;
+        //     $cuti->save();
+        // }
 
         Alert::success('success', ' Berhasil Update Data !');
-        return redirect(route('cuti.details', $data));
+        return redirect(route('cuti.index'));
     }
 
     /**

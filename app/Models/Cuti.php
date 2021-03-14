@@ -21,7 +21,11 @@ class Cuti extends Model
         'tgl_mulai',
         'tgl_selesai',
         'ket',
-        'status'
+        'status',
+        'tgl_disetujui_atasan',
+        'tgl_disetujui_hrd',
+        'tgl_ditolak_atasan',
+        'tgl_ditolak_atasan',
     ];
 
     public $sortable = [
@@ -37,6 +41,6 @@ class Cuti extends Model
 
     public function pegawai()
     {
-        return $this->belongsTo('App\Models\Pegawai','id_pegawai','id');
+        return $this->belongsTo('App\Models\Pegawai', 'id_pegawai', 'id');
     }
 }
