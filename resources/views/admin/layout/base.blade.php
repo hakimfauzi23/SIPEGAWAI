@@ -60,14 +60,20 @@
     </script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/forms/styling/uniform.min.js">
     </script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/notifications/jgrowl.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/notifications/jgrowl.min.js">
+    </script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/ui/moment/moment.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/daterangepicker.js">
+    </script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/anytime.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.date.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.time.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/legacy.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.js">
+    </script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.date.js">
+    </script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.time.js">
+    </script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/legacy.js">
+    </script>
 
 
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/app.js"></script>
@@ -83,7 +89,7 @@
 
 </head>
 
-<body class="navbar-top">
+<body class="navbar-top sidebar-xs">
 
     <!-- Main navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">

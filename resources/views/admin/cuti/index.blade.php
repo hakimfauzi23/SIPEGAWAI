@@ -123,6 +123,9 @@
 
                                                 <ul class="dropdown-menu dropdown-menu-right">
                                                     <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                                    <li><a href="{{ route('cuti.show', $encyrpt) }}"><i
+                                                                class="icon-file-eye"></i> Detail </a>
+                                                    </li>
                                                     <li><a href="{{ route('cuti.destroy', $encyrpt) }}"><i
                                                                 class=" icon-trash"></i> Hapus</a>
                                                     </li>

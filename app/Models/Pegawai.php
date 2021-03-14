@@ -106,8 +106,8 @@ class Pegawai extends Model
         return $this->belongsTo('App\Models\Role', 'id_role', 'id');
     }
 
-    // public function atasan()
-    // {
-    //     return $this->belongsTo(self::class, 'id_atasan', 'id');
-    // }
+    public function bawahan()
+    {
+        return $this->belongsTo(self::class, 'id_atasan', 'id');
+    }
 }

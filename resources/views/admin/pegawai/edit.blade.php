@@ -1,7 +1,7 @@
 @extends('admin.layout.base')
 
 
-@section('title', 'Tambah Data Pegawai')
+@section('title', 'Edit Data Pegawai')
 
 
 @section('content_header')

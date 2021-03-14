@@ -68,7 +68,7 @@
 
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                            <li><a href="{{ route('hrdPegawai.show', $encyrpt) }}"><i
+                                            <li><a href="{{ route('pegawai.show', $encyrpt) }}"><i
                                                         class="icon-file-eye"></i> Detail </a>
                                             </li>
                                             <li><a href="{{ route('pegawai.destroy', $encyrpt) }}"><i

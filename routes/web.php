@@ -39,7 +39,7 @@ Route::get('/', [PegawaiController::class, 'index'])->name('pegawai.index');
 //Pegawai
 Route::get('/pegawai/search', [PegawaiController::class, 'search'])->name('pegawai.search');
 Route::get('/pegawai', [PegawaiController::class, 'index'])->name('pegawai.index');
-Route::get('/pegawai/detail/{data}', [PegawaiController::class, 'show'])->name('pegawai.details');
+Route::get('/pegawai/detail/{data}', [PegawaiController::class, 'show'])->name('pegawai.show');
 Route::get('/pegawai/create', [PegawaiController::class, 'create'])->name('pegawai.create');
 Route::post('/pegawai/store', [PegawaiController::class, 'store'])->name('pegawai.store');
 Route::get('/pegawai/edit/{data}', [PegawaiController::class, 'edit'])->name('pegawai.edit');
@@ -81,7 +81,7 @@ Route::get('/presensi/template_download', [PresensiHarianController::class, 'dow
 //Cuti 
 Route::get('/cuti/tanggal', [CutiController::class, 'tglPresensi'])->name('cuti.search');
 Route::get('/cuti', [CutiController::class, 'index'])->name('cuti.index');
-Route::get('/cuti/detail/{data}', [CutiController::class, 'show'])->name('cuti.details');
+Route::get('/cuti/detail/{data}', [CutiController::class, 'show'])->name('cuti.show');
 Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create');
 Route::post('/cuti/store', [CutiController::class, 'store'])->name('cuti.store');
 Route::get('/cuti/edit/{data}', [CutiController::class, 'edit'])->name('cuti.edit');

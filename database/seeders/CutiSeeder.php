@@ -29,7 +29,7 @@ class CutiSeeder extends Seeder
 
             DB::table('cuti')->insert([
 
-                'id_pegawai' => date("ym") . "0001",
+                'id_pegawai' => date("ym") . "0005",
                 'tipe_cuti' => $tp_cuti[$faker->numberBetween(0, 4)],
                 // 'tgl_pengajuan' => $faker->date,
                 'tgl_pengajuan' => date("Y-m-d"),

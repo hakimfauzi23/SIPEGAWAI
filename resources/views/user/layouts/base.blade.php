@@ -29,7 +29,6 @@
     <link rel="stylesheet" href="{{ URL::to('/arclabs') }}/css/magnific-popup.css">
     {{-- <link rel="stylesheet" href="{{ URL::to('/arclabs') }}/css/nice-select.css"> --}}
     <link rel="stylesheet" href="{{ URL::to('/arclabs') }}/css/main.css">
-    <link href="{{ URL::to('/admin') }}/css/sb-admin-2.min.css" rel="stylesheet">
 
 
 
