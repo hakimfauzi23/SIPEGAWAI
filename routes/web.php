@@ -64,6 +64,8 @@ Route::get('/presensi/template_download', [PresensiHarianController::class, 'dow
 
 //Cuti 
 Route::get('/cuti/tanggal/', [CutiController::class, 'tglPresensi'])->name('cuti.search');
+Route::get('/cuti/cutiBersama', [CutiController::class, 'cutiBersama'])->name('cuti.cutiBersama');
+Route::post('/cutiBersama/store', [CutiController::class, 'storeCutiBersama'])->name('cuti.storeCutiBersama');
 Route::resource('cuti', CutiController::class);
 Route::get('/cuti/destroy/{data}', [CutiController::class, 'destroy'])->name('cuti.destroy');
 

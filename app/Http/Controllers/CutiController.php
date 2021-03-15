@@ -257,15 +257,44 @@ class CutiController extends Controller
         return redirect('cuti');
     }
 
-    public function search(Request $request)
+    public function cutiBersama()
     {
-        $cari = $request->cari;
-
-        $cuti = Cuti::where('id', $cari)
-            ->paginate(10);
-
-        return view('admin.cuti.search', [
-            'cuti' => $cuti,
+        $pegawai = Pegawai::pluck('nama', 'id');
+        return view('admin.cuti.cutiBersama', [
+            'pegawai' => $pegawai
         ]);
+    }
+
+
+    public function storeCutiBersama(Request $request)
+    {
+        $this->validate($request, [
+            'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required',
+            'ket' => 'required',
+        ]);
+
+        $pegawai = Pegawai::all();
+
+        foreach ($pegawai as $key => $p) {
+            // dd($p->id);
+            Cuti::create([
+                'id_pegawai' => $p->id,
+                'tipe_cuti' => "Bersama",
+                'tgl_pengajuan' => date("Y-m-d"),
+                'tgl_mulai' => $request->tgl_mulai,
+                'tgl_selesai' => $request->tgl_selesai,
+                'ket' => $request->ket,
+                'status' => "Diproses",
+                'tgl_disetujui_atasan' => NULL,
+                'tgl_disetujui_hrd' => NULL,
+                'tgl_ditolak_atasan' => NULL,
+                'tgl_ditolak_hrd' => NULL,
+
+            ]);
+        }
+
+        Alert::success('success', ' Berhasil Atur  Cuti Bersama !');
+        return redirect('cuti');
     }
 }
