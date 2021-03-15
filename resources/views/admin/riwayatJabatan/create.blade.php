@@ -1,7 +1,7 @@
 @extends('admin.layout.base')
 
 
-@section('title', 'Edit Data Riwayat Jabatan')
+@section('title', 'Tambah Data Riwayat Jabatan')
 
 
 @section('content_header')
@@ -9,7 +9,7 @@
         <div class="page-header-content">
             <div class="page-title">
                 <h4><i class="icon-user-tie"></i> <span class="text-semibold">Jabatan</span>
-                    - Edit Data Riwayat Jabatan</h4>
+                    - Tambah Data Riwayat Jabatan</h4>
             </div>
 
         </div>
@@ -21,10 +21,10 @@
                         Jabatan
                     </a>
                 </li>
-                <li> <a href="{{ route('riwayatJabatan.show', $id_pegawai) }}"> Data Riwayat Jabatan
+                <li> <a href="{{ route('riwayatJabatan.show', $id) }}"> Data Riwayat Jabatan
                     </a>
                 </li>
-                <li class="active">Edit Data Riwayat Jabatan</li>
+                <li class="active">Tambah Data Riwayat Jabatan</li>
             </ul>
         </div>
     </div>
@@ -32,11 +32,9 @@
 
 @section('content')
     <!-- 2 columns form -->
-    <form method="post" enctype="multipart/form-data" action="{{ route('riwayatJabatan.update', $id) }}">
+    <form method="post" enctype="multipart/form-data" action="{{ route('riwayatJabatan.store') }}">
 
         {{ csrf_field() }}
-        {{ method_field('PUT') }}
-
 
         <div class="panel panel-flat">
             <div class="panel-heading">
@@ -52,7 +50,14 @@
 
             <div class="panel-body">
 
-                <input type="hidden" name="id_pegawai" value="{{ $riwayatJabatan->id_pegawai }}">
+                <input type="hidden" name="id_pegawai" value="{{ $pegawai->id }}">
+                <input type="hidden" name="token" value="{{ $id }}">
+                
+                <div class="row">
+                    <div class="col">
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -60,8 +65,7 @@
                             <select class="select" name="id_jabatan">
                                 <option>Pilih Jabatan</option>
                                 @foreach ($jabatan as $key => $value)
-                                    <option value="{{ $key }}"
-                                        {{ $riwayatJabatan->id_jabatan == $key ? 'selected' : '' }}>
+                                    <option value="{{ $key }}">
                                         {{ $value }}
                                     </option>
                                 @endforeach
@@ -79,7 +83,7 @@
                         <div class="form-group">
                             <label for="">Tanggal Mendapatkan Jabatan</label>
                             <input type="date" name="tgl_mulai" class="form-control" placeholder="Nama Jabatan . . . "
-                                value="{{ $riwayatJabatan->tgl_mulai }}">
+                                value="{{ old('tgl_mulai') }}">
 
                             @if ($errors->has('tgl_mulai'))
                                 <div class="text-danger">

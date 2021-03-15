@@ -1,20 +1,23 @@
 <ul class="navigation navigation-main navigation-accordion">
 
     <!-- Main -->
-    <li class="navigation-header"><span>Menu Super Admin</span> <i class="icon-menu" ></i></li>
-    <li><a href="{{ route('pegawai.index') }}"><i class="icon-users" title="Data Pegawai"></i><span>Data Pegawai</span></a></li>
-    <li><a href="{{ route('jabatan.index') }}"><i class="icon-user-tie"></i><span>Data Jabatan</span></a></li>
-    <li><a href="{{ route('divisi.index') }}"><i class="icon-hat"></i> <span>Data Divisi</span></a></li>
-    <li><a href="{{ route('presensi.index') }}"><i class="icon-notebook"></i> <span>Data Presensi</span></a></li>
-    <li><a href="{{ route('cuti.index') }}"><i class="icon-furniture"></i> <span>Data Cuti</span></a></li>
-    {{-- <li>
-        <a href="#"><i class="icon-stack2"></i> <span>Page layouts</span></a>
+    <li class="navigation-header"><span>Menu Super Admin</span> <i class="icon-menu"></i></li>
+    <li><a href="{{ route('pegawai.index') }}"><i class="icon-users" title="Data Pegawai"></i><span>Data
+                Pegawai</span></a></li>
+    <li>
+        <a href="#"><i class="icon-user-tie"></i> <span>Data Jabatan</span></a>
         <ul>
-            <li><a href="layout_navbar_fixed.html">Fixed navbar</a></li>
-            <li><a href="layout_navbar_sidebar_fixed.html">Fixed navbar &amp; sidebar</a>
+            <li><a href="{{ route('jabatan.index') }}">List Data Jabatan</a>
             </li>
-        </ul>
-    </li> --}}
-    <!-- /main -->
+            <li><a href="{{ route('riwayatJabatan.index') }}">Data Riwayat Jabatan</a></li>
+    </li>
+</ul>
+</li>
+
+{{-- <li><a href="{{ route('jabatan.index') }}"><i class="icon-user-tie"></i><span>Data Jabatan</span></a></li> --}}
+<li><a href="{{ route('divisi.index') }}"><i class="icon-hat"></i> <span>Data Divisi</span></a></li>
+<li><a href="{{ route('presensi.index') }}"><i class="icon-notebook"></i> <span>Data Presensi</span></a></li>
+<li><a href="{{ route('cuti.index') }}"><i class="icon-furniture"></i> <span>Data Cuti</span></a></li>
+<!-- /main -->
 
 </ul>

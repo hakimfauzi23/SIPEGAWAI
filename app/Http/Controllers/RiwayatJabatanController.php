@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use App\Models\Divisi;
 use App\Models\Jabatan;
 use App\Models\Riwayat_jabatan;
 use Illuminate\Http\Request;
@@ -19,6 +20,10 @@ class RiwayatJabatanController extends Controller
     public function index()
     {
         //
+        $pegawai = Pegawai::all();
+        return view('admin.riwayatJabatan.index', [
+            'pegawai' => $pegawai,
+        ]);
     }
 
     /**
@@ -26,9 +31,22 @@ class RiwayatJabatanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($data)
     {
         //
+    }
+
+    public function createData($data)
+    {
+
+        $id = Crypt::decryptString($data);
+        $jabatan = Jabatan::pluck('nm_jabatan', 'id');
+        $pegawai = Pegawai::find($id);
+        return view('admin.riwayatJabatan.create', [
+            'id' => $data,
+            'pegawai' => $pegawai,
+            'jabatan' => $jabatan,
+        ]);
     }
 
     /**
@@ -40,6 +58,21 @@ class RiwayatJabatanController extends Controller
     public function store(Request $request)
     {
         //
+
+
+        $this->validate($request, [
+            'id_jabatan' => 'required',
+            'tgl_mulai' => 'required',
+        ]);
+
+        Riwayat_jabatan::create([
+            'id_pegawai' => $request->id_pegawai,
+            'id_jabatan' => $request->id_jabatan,
+            'tgl_mulai' => $request->tgl_mulai,
+        ]);
+
+        Alert::success('success', ' Berhasil Input Data !');
+        return redirect(route('riwayatJabatan.show', $request->token));
     }
 
     /**
@@ -53,12 +86,12 @@ class RiwayatJabatanController extends Controller
         //
         $id = Crypt::decryptString($data);
         $pegawai = Pegawai::find($id);
-        $riwayat_jabatan = Riwayat_jabatan::where('id_pegawai', $id)->orderBy('tgl_mulai')->paginate(5);
+        $riwayatJabatan = Riwayat_jabatan::where('id_pegawai', $id)->orderBy('tgl_mulai')->paginate(5);
 
         return view('admin.riwayatJabatan.detail', [
             'id' => $data,
             'pegawai' => $pegawai,
-            'riwayat_jabatan' => $riwayat_jabatan
+            'riwayatJabatan' => $riwayatJabatan
         ]);
     }
 
@@ -72,14 +105,16 @@ class RiwayatJabatanController extends Controller
     {
         //
         $id = Crypt::decryptString($data);
-        $riwayat_jabatan = Riwayat_jabatan::find($id);
+        $riwayatJabatan = Riwayat_jabatan::find($id);
         $jabatan = Jabatan::pluck('nm_jabatan', 'id');
 
+        $id_pegawai = Crypt::encryptString($riwayatJabatan->id_pegawai);
 
         return view('admin.riwayatJabatan.edit', [
             'id' => $data,
-            'riwayat_jabatan' => $riwayat_jabatan,
-            'jabatan' => $jabatan
+            'riwayatJabatan' => $riwayatJabatan,
+            'jabatan' => $jabatan,
+            'id_pegawai' => $id_pegawai
         ]);
     }
 
@@ -95,19 +130,19 @@ class RiwayatJabatanController extends Controller
         //
 
         $id = Crypt::decryptString($data);
-
+        
         $this->validate($request, [
             'id_jabatan' => 'required',
             'tgl_mulai' => 'required',
         ]);
+
         $encrypt = Crypt::encryptString($request->id_pegawai);
+        $riwayatJabatan = Riwayat_jabatan::find($id);
 
-        $riwayat_jabatan = Riwayat_jabatan::find($id);
-
-        $riwayat_jabatan->id_pegawai = $request->id_pegawai;
-        $riwayat_jabatan->id_jabatan = $request->id_jabatan;
-        $riwayat_jabatan->tgl_mulai = $request->tgl_mulai;
-        $riwayat_jabatan->save();
+        $riwayatJabatan->id_pegawai = $request->id_pegawai;
+        $riwayatJabatan->id_jabatan = $request->id_jabatan;
+        $riwayatJabatan->tgl_mulai = $request->tgl_mulai;
+        $riwayatJabatan->save();
 
         Alert::success('success', ' Berhasil Update Data !');
         return redirect(route('riwayatJabatan.show', $encrypt));
@@ -123,10 +158,10 @@ class RiwayatJabatanController extends Controller
     {
         //
         $id = Crypt::decryptString($data);
-        $riwayat_jabatan = Riwayat_jabatan::find($id);
-        $riwayat_jabatan->delete();
+        $riwayatJabatan = Riwayat_jabatan::find($id);
+        $riwayatJabatan->delete();
 
-        $encrypt = Crypt::encryptString($riwayat_jabatan->id_pegawai);
+        $encrypt = Crypt::encryptString($riwayatJabatan->id_pegawai);
 
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect(route('riwayatJabatan.show', $encrypt));

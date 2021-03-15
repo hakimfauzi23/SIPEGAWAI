@@ -9,6 +9,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class JabatanController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +19,9 @@ class JabatanController extends Controller
     {
         //
         $jabatan = Jabatan::all();
-        return view('admin.jabatan.index', ['jabatan' => $jabatan]);
+        return view('admin.jabatan.index', [
+            'jabatan' => $jabatan,
+        ]);
     }
 
     /**
@@ -31,6 +34,7 @@ class JabatanController extends Controller
         //
         return view('admin.jabatan.create');
     }
+
 
     /**
      * Store a newly created resource in storage.

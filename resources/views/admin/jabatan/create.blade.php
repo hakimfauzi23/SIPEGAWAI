@@ -47,8 +47,6 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col">
-                    <legend class="text-semibold"><i class="icon-pen-plus"></i> Data Jabatan
-                    </legend>
                 </div>
             </div>
 

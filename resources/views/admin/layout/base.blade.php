@@ -89,7 +89,7 @@
 
 </head>
 
-<body class="navbar-top sidebar-xs">
+<body class="navbar-top">
 
     <!-- Main navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
