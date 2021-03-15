@@ -76,8 +76,10 @@ Route::get('/riwayatJabatan/destroy/{data}', [RiwayatJabatanController::class, '
 
 
 //RiwayatDivisi
-Route::resource('riwayat_divisi', RiwayatDivisiController::class);
-Route::get('/riwayat_divisi/destroy/{data}', [RiwayatDivisiController::class, 'destroy'])->name('riwayatDivisi.destroy');
+Route::resource('riwayatDivisi', RiwayatDivisiController::class);
+Route::post('/riwayatDivisi/store', [RiwayatDivisiController::class, 'store'])->name('riwayatDivisi.store');
+Route::get('/riwayatDivisi/createData/{data}', [RiwayatDivisiController::class, 'createData'])->name('riwayatDivisi.createData');
+Route::get('/riwayatDivisi/destroy/{data}', [RiwayatDivisiController::class, 'destroy'])->name('riwayatDivisi.destroy');
 
 
 

@@ -1,7 +1,7 @@
 @extends('admin.layout.base')
 
 
-@section('title', 'Edit Data Riwayat Divisi')
+@section('title', 'Tambah Data Riwayat Divisi')
 
 
 @section('content_header')
@@ -9,7 +9,7 @@
         <div class="page-header-content">
             <div class="page-title">
                 <h4><i class="icon-hat"></i> <span class="text-semibold">Divisi</span>
-                    - Edit Data Riwayat Divisi</h4>
+                    - Tambah Data Riwayat Divisi</h4>
             </div>
 
         </div>
@@ -21,10 +21,10 @@
                         Divisi
                     </a>
                 </li>
-                <li> <a href="{{ route('riwayatDivisi.show', $id_pegawai) }}"> Data Riwayat Divisi
+                <li> <a href="{{ route('riwayatDivisi.show', $id) }}"> Data Riwayat Divisi
                     </a>
                 </li>
-                <li class="active">Edit Data Riwayat Divisi</li>
+                <li class="active">Tambah Data Riwayat Divisi</li>
             </ul>
         </div>
     </div>
@@ -32,11 +32,9 @@
 
 @section('content')
     <!-- 2 columns form -->
-    <form method="post" enctype="multipart/form-data" action="{{ route('riwayatDivisi.update', $id) }}">
+    <form method="post" enctype="multipart/form-data" action="{{ route('riwayatDivisi.store') }}">
 
         {{ csrf_field() }}
-        {{ method_field('PUT') }}
-
 
         <div class="panel panel-flat">
             <div class="panel-heading">
@@ -52,7 +50,14 @@
 
             <div class="panel-body">
 
-                <input type="hidden" name="id_pegawai" value="{{ $riwayatDivisi->id_pegawai }}">
+                <input type="hidden" name="id_pegawai" value="{{ $pegawai->id }}">
+                <input type="hidden" name="token" value="{{ $id }}">
+
+                <div class="row">
+                    <div class="col">
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -60,8 +65,7 @@
                             <select class="select" name="id_divisi">
                                 <option>Pilih Divisi</option>
                                 @foreach ($divisi as $key => $value)
-                                    <option value="{{ $key }}"
-                                        {{ $riwayatDivisi->id_divisi == $key ? 'selected' : '' }}>
+                                    <option value="{{ $key }}">
                                         {{ $value }}
                                     </option>
                                 @endforeach
@@ -77,9 +81,9 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Tanggal Mendapatkan Divisi</label>
-                            <input type="date" name="tgl_mulai" class="form-control" placeholder="Nama Divisi . . . "
-                                value="{{ $riwayatDivisi->tgl_mulai }}">
+                            <label for="">Tanggal Mendapatkan Jabatan</label>
+                            <input type="date" name="tgl_mulai" class="form-control" placeholder="Nama Jabatan . . . "
+                                value="{{ old('tgl_mulai') }}">
 
                             @if ($errors->has('tgl_mulai'))
                                 <div class="text-danger">

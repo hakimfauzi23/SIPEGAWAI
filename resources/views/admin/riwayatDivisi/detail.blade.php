@@ -1,66 +1,94 @@
-@extends('admin.layouts.base')
+@extends('admin.layout.base')
 
-@section('page_title', 'Riwayat Divisi')
+
+@section('title', 'Data Riwayat Divisi')
+
+
+@section('content_header')
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-hat"></i> <span class="text-semibold">Riwayat Divisi</span>
+                    - Data Riwayat Divisi Pegawai</h4>
+            </div>
+
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="{{ route('riwayatDivisi.index') }}"><i class="active icon-home2 position-left"></i> List
+                        Data
+                        Pegawai</a></li>
+                <li class="active">Data Riwayat Divisi </li>
+            </ul>
+        </div>
+    </div>
+@endsection
 
 @section('content')
-
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="main-breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('pegawai.index') }}">List Pegawai</a></li>
-            <li class="breadcrumb-item"><a
-                    href="{{ route('pegawai.details', $id) }}">{{ $pegawai->id . '-' . $pegawai->nama }} </a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">List Riwayat Divisi</li>
-        </ol>
-    </nav>
-    <!-- /Breadcrumb -->
-
-    <div class="card mt-4">
-        <div class="card-body">
-            @if (session('success_message'))
-                <div class="alert alert success">
-                    {{ session('success_message') }}
-                </div>
-            @endif
-
-            <table style="text-align:center" class="table table-bordered table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>@sortablelink('id_divisi','DIVISI')</th>
-                        <th>@sortablelink('tgl_mulai','TANGGAL MULAI')</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ($riwayat_divisi->count())
-                        @foreach ($riwayat_divisi as $key => $p)
-                            <tr>
-                                <td>{{ $p->divisi->nm_divisi }}</td>
-                                <td>{{ $p->tgl_mulai }}</td>
-                                <td>
-                                    <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                    <a href="{{ route('riwayatDivisi.edit', $encyrpt) }}" class="btn btn-warning">Edit</a>
-                                    <a href="{{ route('riwayatDivisi.destroy', $encyrpt) }}"
-                                        class="btn btn-danger delete-confirm">Delete</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
-                </tbody>
-            </table>
-
-            <br />
-            <div class="pagenation">
-
-                Page : {{ $riwayat_divisi->currentPage() }}
-                || Total Data : {{ $riwayat_divisi->total() }}
-                {{ $riwayat_divisi->links() }}
-
+    <!-- Basic datatable -->
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <?php ?>
+            <a href="{{ route('riwayatDivisi.createData', $id) }}"><i class="icon-file-plus"></i> Tambah Riwayat
+                Divisi</a>
+            {{-- <h5 class="panel-title">List Data Pegawai</h5> --}}
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    <li><a data-action="close"></a></li>
+                </ul>
             </div>
         </div>
 
-    </div>
 
+        <table class="table datatable-basic table-bordered table-striped table-hover">
+            <thead class="bg-primary-300">
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Divisi</th>
+                    <th>Tgl Masuk Divisi</th>
+                    <th hidden>Status</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if ($riwayatDivisi->count())
+                    @foreach ($riwayatDivisi as $key => $p)
+                        <tr>
+                            <td>{{ $p->id }}</td>
+                            <td>{{ $p->pegawai->nama }}</td>
+                            <td>{{ $p->divisi->nm_divisi }}</td>
+                            <td>{{ $p->tgl_mulai }}</td>
+                            <td hidden><span class="label label-success">Active</span></td>
+                            <td class="text-center">
+                                <ul class="icons-list">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="icon-menu9"></i>
+                                        </a>
+
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                            <li><a href="{{ route('riwayatDivisi.destroy', $encyrpt) }}"><i
+                                                        class=" icon-trash"></i> Hapus</a>
+                                            </li>
+                                            <li><a href="{{ route('riwayatDivisi.edit', $encyrpt) }}"><i
+                                                        class=" icon-pencil5"></i> Edit</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /basic datatable -->
 
 @endsection

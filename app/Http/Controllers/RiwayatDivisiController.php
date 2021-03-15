@@ -20,6 +20,10 @@ class RiwayatDivisiController extends Controller
     public function index()
     {
         //
+        $pegawai = Pegawai::all();
+        return view('admin.riwayatDivisi.index', [
+            'pegawai' => $pegawai,
+        ]);
     }
 
     /**
@@ -32,6 +36,19 @@ class RiwayatDivisiController extends Controller
         //
     }
 
+
+    public function createData($data)
+    {
+        $id = Crypt::decryptString($data);
+        $divisi = Divisi::pluck('nm_divisi', 'id');
+        $pegawai = Pegawai::find($id);
+        return view('admin.riwayatDivisi.create', [
+            'id' => $data,
+            'pegawai' => $pegawai,
+            'divisi' => $divisi,
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -41,6 +58,20 @@ class RiwayatDivisiController extends Controller
     public function store(Request $request)
     {
         //
+
+        $this->validate($request, [
+            'id_divisi' => 'required',
+            'tgl_mulai' => 'required',
+        ]);
+
+        Riwayat_divisi::create([
+            'id_pegawai' => $request->id_pegawai,
+            'id_divisi' => $request->id_divisi,
+            'tgl_mulai' => $request->tgl_mulai,
+        ]);
+
+        Alert::success('success', ' Berhasil Input Data !');
+        return redirect(route('riwayatDivisi.show', $request->token));
     }
 
     /**
@@ -54,12 +85,12 @@ class RiwayatDivisiController extends Controller
         //
         $id = Crypt::decryptString($data);
         $pegawai = Pegawai::find($id);
-        $riwayat_divisi = Riwayat_divisi::where('id_pegawai', $id)->orderBy('tgl_mulai')->paginate(5);
+        $riwayatDivisi = Riwayat_divisi::where('id_pegawai', $id)->orderBy('tgl_mulai')->paginate(5);
 
         return view('admin.riwayatDivisi.detail', [
             'id' => $data,
             'pegawai' => $pegawai,
-            'riwayat_divisi' => $riwayat_divisi
+            'riwayatDivisi' => $riwayatDivisi
         ]);
     }
 
@@ -73,13 +104,16 @@ class RiwayatDivisiController extends Controller
     {
         //
         $id = Crypt::decryptString($data);
-        $riwayat_divisi = Riwayat_divisi::find($id);
+        $riwayatDivisi = Riwayat_divisi::find($id);
         $divisi = Divisi::pluck('nm_divisi', 'id');
+
+        $id_pegawai = Crypt::encryptString($riwayatDivisi->id_pegawai);
 
         return view('admin.riwayatDivisi.edit', [
             'id' => $data,
-            'riwayat_divisi' => $riwayat_divisi,
-            'divisi' => $divisi
+            'riwayatDivisi' => $riwayatDivisi,
+            'divisi' => $divisi,
+            'id_pegawai' => $id_pegawai
         ]);
     }
 
@@ -102,12 +136,12 @@ class RiwayatDivisiController extends Controller
         ]);
         $encrypt = Crypt::encryptString($request->id_pegawai);
 
-        $riwayat_divisi = Riwayat_divisi::find($id);
+        $riwayatDivisi = Riwayat_divisi::find($id);
 
-        $riwayat_divisi->id_pegawai = $request->id_pegawai;
-        $riwayat_divisi->id_divisi = $request->id_divisi;
-        $riwayat_divisi->tgl_mulai = $request->tgl_mulai;
-        $riwayat_divisi->save();
+        $riwayatDivisi->id_pegawai = $request->id_pegawai;
+        $riwayatDivisi->id_divisi = $request->id_divisi;
+        $riwayatDivisi->tgl_mulai = $request->tgl_mulai;
+        $riwayatDivisi->save();
 
         Alert::success('success', ' Berhasil Update Data !');
         return redirect(route('riwayatDivisi.show', $encrypt));
@@ -123,13 +157,12 @@ class RiwayatDivisiController extends Controller
     {
         //
         $id = Crypt::decryptString($data);
-        $riwayat_divisi = Riwayat_divisi::find($id);
-        $riwayat_divisi->delete();
+        $riwayatDivisi = Riwayat_divisi::find($id);
+        $riwayatDivisi->delete();
 
-        $encrypt = Crypt::encryptString($riwayat_divisi->id_pegawai);
+        $encrypt = Crypt::encryptString($riwayatDivisi->id_pegawai);
 
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect(route('riwayatDivisi.show', $encrypt));
-
     }
 }

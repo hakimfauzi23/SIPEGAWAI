@@ -116,9 +116,9 @@
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-xs">
-                        @foreach ($riwayat_jabatan as $p)
+                        @foreach ($riwayat_divisi as $p)
                             <tr>
-                                <td>{{ $p->jabatan->nm_jabatan }}</td>
+                                <td>{{ $p->divisi->nm_divisi }}</td>
                                 <td>{{ date('M-Y', strtotime($p->tgl_mulai)) }}</td>
                             </tr>
                         @endforeach
