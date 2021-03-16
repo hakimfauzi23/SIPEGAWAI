@@ -2,6 +2,8 @@
 
     <!-- Main -->
     <li class="navigation-header"><span>Menu Super Admin</span> <i class="icon-menu"></i></li>
+    <li><a href="{{ route('peraturan.index') }}"><i class=" icon-info3"></i> <span>Kebijakan Cuti & Jam
+                Kantor</span></a></li>
     <li><a href="{{ route('pegawai.index') }}"><i class="icon-users" title="Data Pegawai"></i><span>Data
                 Pegawai</span></a></li>
     <li>
