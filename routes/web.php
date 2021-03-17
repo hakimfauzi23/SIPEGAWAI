@@ -7,15 +7,16 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\PresensiHarianController;
 use App\Http\Controllers\RiwayatJabatanController;
+use App\Http\Controllers\PeraturanController;
+use App\Http\Controllers\RiwayatDivisiController;
+use App\Http\Controllers\RekapPresensiController;
 use App\Http\Controllers\DownloadFileController;
 use App\Http\Controllers\HrdPegawaiController;
 use App\Http\Controllers\HrdCutiController;
 use App\Http\Controllers\HrdRiwayatDivisiController;
 use App\Http\Controllers\HrdRiwayatJabatanController;
 use App\Http\Controllers\HrdPresensiHarianController;
-use App\Http\Controllers\PeraturanController;
 use App\Http\Controllers\RekapKinerjaController;
-use App\Http\Controllers\RiwayatDivisiController;
 use PhpOffice\PhpSpreadsheet\Chart\Layout;
 
 /*
@@ -100,6 +101,9 @@ Route::put('/peraturan/editCutiHamil/{data}', [PeraturanController::class, 'cuti
 
 
 
+//RekapDataPresensi
+Route::resource('rekapPresensi', RekapPresensiController::class);
+Route::get('/rekapPresensi/{data}/showMonth/{thisMonth}/{intMonth}', [RekapPresensiController::class, 'showMonth'])->name('rekapPresensi.showMonth');
 
 
 

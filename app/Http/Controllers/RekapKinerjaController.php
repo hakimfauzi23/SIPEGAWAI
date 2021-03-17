@@ -60,8 +60,7 @@ class RekapKinerjaController extends Controller
             ->count();
 
 
-        $presensiTdkHadir = Presensi_harian::sortable()
-            ->where('id_pegawai', $id_pegawai)
+        $presensiTdkHadir = Presensi_harian::where('id_pegawai', $id_pegawai)
             ->where('ket', '!=', 'Hadir')
             ->whereMonth('tanggal', date('m'))
             ->orderBy('tanggal', 'desc')

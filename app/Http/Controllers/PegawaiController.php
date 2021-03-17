@@ -237,7 +237,7 @@ class PegawaiController extends Controller
 
             $extension = $request->file('imgupload')->extension();
             $imgname = $request->nik . '_' . date('dmyHi') . '.' . $extension;
-
+            // dd($imgname);
             $this->validate($request, [
                 'id_role' => 'required',
                 'nik' => 'required',
@@ -303,7 +303,7 @@ class PegawaiController extends Controller
             }
 
             Alert::success('success', ' Berhasil Update Data !');
-            return redirect(route('pegawai.details', $data));
+            return redirect(route('pegawai.show', $data));
         } else {
 
             $this->validate($request, [

@@ -16,8 +16,10 @@
     <link href="{{ URL::to('/admin') }}/assets/css/core.css" rel="stylesheet" type="text/css">
     <link href="{{ URL::to('/admin') }}/assets/css/components.css" rel="stylesheet" type="text/css">
     <link href="{{ URL::to('/admin') }}/assets/css/colors.css" rel="stylesheet" type="text/css">
-    <!-- /global stylesheets -->
+    <!-- Page level plugins -->
+    <script src="{{ URL::to('/chart') }}/Chart.min.js"></script>
 
+    <!-- /global stylesheets -->
 
     <!-- Theme JS files -->
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/visualization/d3/d3.min.js">
@@ -26,24 +28,12 @@
     </script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/forms/styling/switchery.min.js">
     </script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/forms/styling/uniform.min.js">
-    </script>
-    <script type="text/javascript"
-        src="{{ URL::to('/admin') }}/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/ui/moment/moment.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/daterangepicker.js">
-    </script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/ui/headroom/headroom.min.js">
     </script>
     <script type="text/javascript"
         src="{{ URL::to('/admin') }}/assets/js/plugins/ui/headroom/headroom_jquery.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/ui/nicescroll.min.js"></script>
 
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/app.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/dashboard.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/layout_fixed_custom.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/layout_navbar_hideable_sidebar.js">
-    </script>
     <!-- /theme JS files -->
 
     <!-- Core JS files -->
@@ -63,23 +53,11 @@
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/notifications/jgrowl.min.js">
     </script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/ui/moment/moment.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/daterangepicker.js">
-    </script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/anytime.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.js">
-    </script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.date.js">
-    </script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.time.js">
-    </script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/legacy.js">
-    </script>
-
-
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/app.js"></script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/datatables_basic.js"></script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/form_layouts.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/picker_date.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/datatables_extension_fixed_header.js"></script>
 
     <!-- /theme JS files -->
 
@@ -138,14 +116,16 @@
                 <!-- Content area -->
                 <div class="content">
                     @yield('content')
+
+                    <!-- Footer -->
+                    <div class="footer text-muted">&copy; 2015. <a href="#">Limitless Web App Kit</a> by <a
+                            href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
+                    </div>
+                    <!-- /footer -->
+
                 </div>
                 <!-- /dashboard content -->
 
-                <!-- Footer -->
-                <div class="footer text-muted">&copy; 2015. <a href="#">Limitless Web App Kit</a> by <a
-                        href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
-                </div>
-                <!-- /footer -->
 
 
             </div>
@@ -162,6 +142,8 @@
     <!-- /page container -->
 
     @yield('custom_script')
+
+
 </body>
 
 </html>

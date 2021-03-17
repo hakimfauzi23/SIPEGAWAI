@@ -23,7 +23,17 @@
         </ul>
     </li>
 
-    <li><a href="{{ route('presensi.index') }}"><i class="icon-notebook"></i> <span>Data Presensi</span></a></li>
+    {{-- <li><a href="{{ route('presensi.index') }}"><i class="icon-notebook"></i> <span>Data Presensi</span></a></li> --}}
+
+    <li>
+        <a href="#"><i class="icon-notebook"></i> <span>Data Presensi</span></a>
+        <ul>
+            <li><a href="{{ route('presensi.index') }}">List Data Presensi</a>
+            </li>
+            <li><a href="{{ route('rekapPresensi.index') }}">Rekapan Data Presensi Pegawai</a></li>
+        </ul>
+    </li>
+
     <li>
         <a href="#"><i class="icon-furniture"></i> <span>Data Cuti</span></a>
         <ul>

@@ -17,12 +17,12 @@ class PresensiHarianSeeder extends Seeder
     {
         //
         $faker = Faker::create('id_ID');
-        $ket = array('Hadir','Cuti','Alpha');
+        $ket = array('Hadir', 'Cuti', 'Alpha');
 
-        for ($i=1; $i < 3 ; $i++) { 
+        for ($i = 1; $i < 30; $i++) {
             DB::table('presensi_harian')->insert([
                 'id_pegawai' => date("ym") . "0001",
-                'tanggal' => $faker->date,
+                'tanggal' => date("Y-m-d"),
                 'ket' => $ket[$faker->numberBetween(0, 2)],
                 'jam_dtg' => $faker->time('H:i'),
                 'jam_plg' => $faker->time('H:i'),
