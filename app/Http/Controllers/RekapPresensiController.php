@@ -97,10 +97,11 @@ class RekapPresensiController extends Controller
             ->get();
 
         $riwayatTdkDisiplin = Presensi_harian::where('id_pegawai', $id)
-            ->whereMonth('tanggal', date("m"))
-            ->where('jam_dtg', '>', $jam_masuk)
-            ->orWhere('jam_plg', '<', $jam_plg)
-            ->get();
+            ->whereMonth('tanggal', date('m'))
+            ->where(function ($query) use ($jam_masuk, $jam_plg) {
+                $query->where('jam_dtg', '>', $jam_masuk)
+                    ->orWhere('jam_plg', '<', $jam_plg);
+            })->get();
 
         $months = [
             'January', 'Febuary', 'March',
