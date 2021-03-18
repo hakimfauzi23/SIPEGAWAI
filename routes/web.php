@@ -10,6 +10,7 @@ use App\Http\Controllers\RiwayatJabatanController;
 use App\Http\Controllers\PeraturanController;
 use App\Http\Controllers\RiwayatDivisiController;
 use App\Http\Controllers\RekapPresensiController;
+use App\Http\Controllers\RekapCutiController;
 use App\Http\Controllers\DownloadFileController;
 use App\Http\Controllers\HrdPegawaiController;
 use App\Http\Controllers\HrdCutiController;
@@ -106,6 +107,8 @@ Route::resource('rekapPresensi', RekapPresensiController::class);
 Route::get('/rekapPresensi/{data}/showMonth/{thisMonth}/{intMonth}', [RekapPresensiController::class, 'showMonth'])->name('rekapPresensi.showMonth');
 
 
+//RekapCutiPegawai
+Route::resource('rekapCuti', RekapCutiController::class);
 
 
 

@@ -20,7 +20,7 @@ class CutiSeeder extends Seeder
         $faker = Faker::create('id_ID');
         $count = DB::table('pegawai')->count();
 
-        $tp_cuti = array('Tahunan', 'Besar', 'Bersama', 'Hamil', 'Sakit');
+        $tp_cuti = array('Tahunan', 'Besar', 'Bersama', 'Hamil', 'Sakit','Penting');
         $stat = array('Ditolak Atasan', 'Disetujui Atasan', 'Disetujui HRD', 'Ditolak HRD', 'Diproses');
 
 
@@ -30,13 +30,13 @@ class CutiSeeder extends Seeder
             DB::table('cuti')->insert([
 
                 'id_pegawai' => date("ym") . "0005",
-                'tipe_cuti' => $tp_cuti[$faker->numberBetween(0, 4)],
+                'tipe_cuti' => $tp_cuti[$faker->numberBetween(0, 5)],
                 // 'tgl_pengajuan' => $faker->date,
                 'tgl_pengajuan' => date("Y-m-d"),
-                'tgl_mulai' => date("Y-m-d"),
+                'tgl_mulai' => date("Y-12-d"),
                 'tgl_selesai' => $faker->date,
                 'ket' => $faker->sentence(5),
-                'status' => $stat[$faker->numberBetween(0, 3)],
+                'status' => $stat[2],
                 'tgl_disetujui_atasan' => $faker->date,
                 'tgl_ditolak_atasan' => $faker->date,
                 'tgl_disetujui_hrd' => $faker->date,

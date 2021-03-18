@@ -40,6 +40,7 @@
             <li><a href="{{ route('cuti.index') }}">List Data Cuti</a>
             </li>
             <li><a href="{{ route('cuti.cutiBersama') }}">Atur Tanggal Cuti Bersama</a></li>
+            <li><a href="{{ route('rekapCuti.index') }}">Rekapan Data Cuti Pegawai</a></li>
         </ul>
     </li>
     <!-- /main -->
