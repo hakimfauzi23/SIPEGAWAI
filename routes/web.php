@@ -109,6 +109,7 @@ Route::get('/rekapPresensi/{data}/showMonth/{thisMonth}/{intMonth}', [RekapPrese
 
 //RekapCutiPegawai
 Route::resource('rekapCuti', RekapCutiController::class);
+Route::get('/rekapCuti/tahun/{data}', [RekapCutiController::class, 'showYear'])->name('rekapCuti.showYear');
 
 
 

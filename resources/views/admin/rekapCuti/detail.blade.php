@@ -11,7 +11,6 @@
                 <h4><i class="icon-furniture position-left"></i> <span class="text-semibold">Rekap Data Cuti</span>
                     - Rekap Data Cuti </h4>
             </div>
-
         </div>
 
         <div class="breadcrumb-line">
@@ -26,6 +25,7 @@
 @endsection
 
 @section('content')
+
     <div class="row">
         <div class="panel">
             <div class="panel-heading bg-info text-center">
@@ -35,7 +35,20 @@
                         <li><a data-action="collapse"></a></li>
                         <li><a data-action="reload"></a></li>
                         <li><a data-action="close"></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class=" icon-more2"></i>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li>
+                                    <a href="" data-toggle="modal" data-target="#modal_form_tahun"> <i
+                                            class=" icon-pencil7"></i> Ganti Tahun </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
+
                 </div>
 
             </div>
@@ -57,7 +70,7 @@
                     </div>
                 </div>
 
-                <div class="table-responsive pre-scrollable" >
+                <div class="table-responsive pre-scrollable">
                     <table class="table datatable-basic table-xs">
                         <thead>
                             <tr>
@@ -176,6 +189,37 @@
             </div>
         </div>
     </div>
+
+
+    <!-- jamMasuk form modal -->
+    <div id="modal_form_tahun" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Edit Tahun</h5>
+                </div>
+                <form action="{{ route('rekapCuti.showYear', $id_pegawai) }}" method="get">
+
+                    {{ csrf_field() }}
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Tahun </label>
+                            <input name="year" type="text" class="form-control" value="{{ $thisYear }}">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Go!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /vertical form modal -->
+
 @endsection
 
 
@@ -370,7 +414,7 @@
                     },
                     scaleLabel: {
                         display: true,
-                        labelString: 'Stastik Cuti Pegawai',
+                        labelString: {{ $thisYear }},
                         fontSize: 20
                     }
                 }]
