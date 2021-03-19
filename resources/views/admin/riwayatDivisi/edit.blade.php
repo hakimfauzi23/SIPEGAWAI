@@ -1,4 +1,4 @@
-@extends('admin.layout.base')
+@extends('layout.base')
 
 
 @section('title', 'Edit Data Riwayat Divisi')

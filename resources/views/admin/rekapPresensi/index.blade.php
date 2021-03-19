@@ -1,4 +1,4 @@
-@extends('admin.layout.base')
+@extends('layout.base')
 
 
 @section('title', 'Data Rekap Presensi Pegawai')
@@ -38,7 +38,7 @@
         </div>
 
 
-        <table class="table datatable-basic table-bordered table-striped table-hover">
+        <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
             <thead class="bg-primary-300">
                 <tr>
                     <th>ID</th>
