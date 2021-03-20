@@ -16,7 +16,7 @@
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li> <a href="{{ route('pegawai.index') }}"> <i class="active icon-home2 position-left"></i> List Data
+                <li> <a href="{{ route('hrdPegawai.index') }}"> <i class="active icon-home2 position-left"></i> List Data
                         Pegawai
                     </a>
                 </li>
@@ -28,7 +28,7 @@
 
 @section('content')
     <!-- 2 columns form -->
-    <form method="post" enctype="multipart/form-data" action="{{ route('pegawai.update', $id) }}">
+    <form method="post" enctype="multipart/form-data" action="{{ route('hrdPegawai.update', $id) }}">
 
         {{ csrf_field() }}
         {{ method_field('PUT') }}

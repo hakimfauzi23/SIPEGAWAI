@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Hrd;
 
+use App\Http\Controllers\Controller;
 use App\Models\Divisi;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
@@ -16,9 +17,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-
-
-class PegawaiController extends Controller
+class HrdPegawaiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,9 +26,8 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        //
         $pegawai = Pegawai::all();
-        return view('admin.pegawai.index', [
+        return view('hrd.pegawai.index', [
             'pegawai' => $pegawai,
         ]);
     }
@@ -46,7 +44,7 @@ class PegawaiController extends Controller
         $divisi = Divisi::pluck('nm_divisi', 'id');
         $pegawai = Pegawai::pluck('nama', 'id');
         $role = Role::pluck('nm_role', 'id');
-        return view('admin.pegawai.create', [
+        return view('hrd.pegawai.create', [
             'jabatan' => $jabatan,
             'divisi' => $divisi,
             'role' => $role,
@@ -137,7 +135,7 @@ class PegawaiController extends Controller
         }
 
         Alert::success('success', ' Berhasil Input Data !');
-        return redirect('pegawai');
+        return redirect('hrdPegawai');
     }
 
     /**
@@ -172,7 +170,7 @@ class PegawaiController extends Controller
 
 
         // dd([$pegawai,$riwayat_jabatan]);
-        return view('admin.pegawai.details', [
+        return view('hrd.pegawai.details', [
             'id' => $id,
             'pegawai' => $pegawai,
             'riwayat_jabatan' => $riwayat_jabatan,
@@ -199,7 +197,7 @@ class PegawaiController extends Controller
         $divisi = Divisi::pluck('nm_divisi', 'id');
         $role = Role::pluck('nm_role', 'id');
         $atasan = Pegawai::pluck('nama', 'id');
-        return view('admin.pegawai.edit', [
+        return view('hrd.pegawai.edit', [
             'id' => $data,
             'pegawai' => $pegawai,
             'jabatan' => $jabatan,
@@ -364,7 +362,7 @@ class PegawaiController extends Controller
 
 
             Alert::success('success', ' Berhasil Update Data !');
-            return redirect(route('pegawai.index'));
+            return redirect(route('hrdPegawai.index'));
         }
     }
 
@@ -382,7 +380,117 @@ class PegawaiController extends Controller
         // dd($pegawai);
 
         Alert::success('success', ' Berhasil Hapus Data !');
-        return redirect(route('pegawai.index'));
+        return redirect(route('hrdPegawai.index'));
     }
+
+    public function showJabatan($data)
+    {
+        //
+        $id = Crypt::decryptString($data);
+        $pegawai = Pegawai::find($id);
+        $riwayatJabatan = Riwayat_jabatan::where('id_pegawai', $id)->orderBy('tgl_mulai')->get();
+        return view('hrd.pegawai.showJabatan', [
+            'id' => $data,
+            'pegawai' => $pegawai,
+            'riwayatJabatan' => $riwayatJabatan
+        ]);
+    }
+
+    public function editRiwayatJabatan($data)
+    {
+        $id = Crypt::decryptString($data);
+        $riwayatJabatan = Riwayat_jabatan::find($id);
+        $jabatan = Jabatan::pluck('nm_jabatan', 'id');
+
+        $id_pegawai = Crypt::encryptString($riwayatJabatan->id_pegawai);
+
+        return view('hrd.pegawai.editRiwayatJabatan', [
+            'id' => $data,
+            'riwayatJabatan' => $riwayatJabatan,
+            'jabatan' => $jabatan,
+            'id_pegawai' => $id_pegawai
+        ]);
+    }
+
+    public function updateRiwayatJabatan(Request $request, $data)
+    {
+        //
+
+        $id = Crypt::decryptString($data);
+
+        $this->validate($request, [
+            'id_jabatan' => 'required',
+            'tgl_mulai' => 'required',
+        ]);
+
+        $encrypt = Crypt::encryptString($request->id_pegawai);
+        $riwayatJabatan = Riwayat_jabatan::find($id);
+
+        $riwayatJabatan->id_pegawai = $request->id_pegawai;
+        $riwayatJabatan->id_jabatan = $request->id_jabatan;
+        $riwayatJabatan->tgl_mulai = $request->tgl_mulai;
+        $riwayatJabatan->save();
+
+        Alert::success('success', ' Berhasil Update Data !');
+        return redirect(route('hrdPegawai.showJabatan', $encrypt));
+    }
+
+
+
+    public function showDivisi($data)
+    {
+        //
+        $id = Crypt::decryptString($data);
+        $pegawai = Pegawai::find($id);
+        $riwayatDivisi = Riwayat_divisi::where('id_pegawai', $id)->orderBy('tgl_mulai')->paginate(5);
+
+        return view('hrd.pegawai.showDivisi', [
+            'id' => $data,
+            'pegawai' => $pegawai,
+            'riwayatDivisi' => $riwayatDivisi
+        ]);
+    }
+
+
+    public function editRiwayatDivisi($data)
+    {
+        //
+        $id = Crypt::decryptString($data);
+        $riwayatDivisi = Riwayat_divisi::find($id);
+        $divisi = Divisi::pluck('nm_divisi', 'id');
+
+        $id_pegawai = Crypt::encryptString($riwayatDivisi->id_pegawai);
+
+        return view('hrd.pegawai.editRiwayatDivisi', [
+            'id' => $data,
+            'riwayatDivisi' => $riwayatDivisi,
+            'divisi' => $divisi,
+            'id_pegawai' => $id_pegawai
+        ]);
+    }
+
+    public function updateRiwayatDivisi(Request $request, $data)
+    {
+        //
+
+        $id = Crypt::decryptString($data);
+
+        $this->validate($request, [
+            'id_divisi' => 'required',
+            'tgl_mulai' => 'required',
+        ]);
+        $encrypt = Crypt::encryptString($request->id_pegawai);
+
+        $riwayatDivisi = Riwayat_divisi::find($id);
+
+        $riwayatDivisi->id_pegawai = $request->id_pegawai;
+        $riwayatDivisi->id_divisi = $request->id_divisi;
+        $riwayatDivisi->tgl_mulai = $request->tgl_mulai;
+        $riwayatDivisi->save();
+
+        Alert::success('success', ' Berhasil Update Data !');
+        return redirect(route('hrdPegawai.showDivisi', $encrypt));
+    }
+
 
 }

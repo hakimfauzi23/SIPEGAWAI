@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\CutiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PegawaiController;
@@ -11,12 +12,11 @@ use App\Http\Controllers\PeraturanController;
 use App\Http\Controllers\RiwayatDivisiController;
 use App\Http\Controllers\RekapPresensiController;
 use App\Http\Controllers\RekapCutiController;
+
+use App\Http\Controllers\Hrd\HrdPeraturanController;
+use App\Http\Controllers\Hrd\HrdPegawaiController;
+
 use App\Http\Controllers\DownloadFileController;
-use App\Http\Controllers\HrdPegawaiController;
-use App\Http\Controllers\HrdCutiController;
-use App\Http\Controllers\HrdRiwayatDivisiController;
-use App\Http\Controllers\HrdRiwayatJabatanController;
-use App\Http\Controllers\HrdPresensiHarianController;
 use App\Http\Controllers\RekapKinerjaController;
 use PhpOffice\PhpSpreadsheet\Chart\Layout;
 
@@ -35,7 +35,7 @@ use PhpOffice\PhpSpreadsheet\Chart\Layout;
 //     return view('admin.pegawai.index');
 // });
 
-Route::get('/', [PegawaiController::class, 'index'])->name('pegawai.index');
+Route::get('/', [HrdPeraturanController::class, 'index'])->name('hrdPeraturan.index');
 
 
 
@@ -49,10 +49,10 @@ Route::resource('pegawai', PegawaiController::class);
 Route::get('/pegawai/destroy/{data}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
 
 
-
 //Jabatan
 Route::resource('jabatan', JabatanController::class);
 Route::get('/jabatan/destroy/{data}', [JabatanController::class, 'destroy'])->name('jabatan.destroy');
+
 
 //Divisi
 Route::resource('divisi', DivisiController::class);
@@ -101,7 +101,6 @@ Route::put('/peraturan/editCutiBesar/{data}', [PeraturanController::class, 'cuti
 Route::put('/peraturan/editCutiHamil/{data}', [PeraturanController::class, 'cutiHamil'])->name('peraturan.editCutiHamil');
 
 
-
 //RekapDataPresensi
 Route::resource('rekapPresensi', RekapPresensiController::class);
 Route::get('/rekapPresensi/{data}/showMonth/{thisMonth}/{intMonth}', [RekapPresensiController::class, 'showMonth'])->name('rekapPresensi.showMonth');
@@ -118,6 +117,37 @@ Route::get('/rekapCuti/tahun/{data}', [RekapCutiController::class, 'showYear'])-
 
 
 // // HRD MENU!! // 
+
+
+
+// Peraturan 
+Route::resource('hrdPeraturan', HrdPeraturanController::class);
+Route::put('/hrdPeraturan/editJamMasuk/{data}', [HrdPeraturanController::class, 'jamMasuk'])->name('hrdPeraturan.editJamMasuk');
+Route::put('/hrdPeraturan/editJamPulang/{data}', [HrdPeraturanController::class, 'jamPulang'])->name('hrdPeraturan.editJamPulang');
+Route::put('/hrdPeraturan/editCutiTahunan/{data}', [HrdPeraturanController::class, 'cutiTahunan'])->name('hrdPeraturan.editCutiTahunan');
+Route::put('/hrdPeraturan/editCutiBersama/{data}', [HrdPeraturanController::class, 'cutiBersama'])->name('hrdPeraturan.editCutiBersama');
+Route::put('/hrdPeraturan/editCutiPenting/{data}', [HrdPeraturanController::class, 'cutiPenting'])->name('hrdPeraturan.editCutiPenting');
+Route::put('/hrdPeraturan/editCutiSakit/{data}', [HrdPeraturanController::class, 'cutiSakit'])->name('hrdPeraturan.editCutiSakit');
+Route::put('/hrdPeraturan/editCutiBesar/{data}', [HrdPeraturanController::class, 'cutiBesar'])->name('hrdPeraturan.editCutiBesar');
+Route::put('/hrdPeraturan/editCutiHamil/{data}', [HrdPeraturanController::class, 'cutiHamil'])->name('hrdPeraturan.editCutiHamil');
+
+
+//Pegawai
+Route::resource('hrdPegawai', HrdPegawaiController::class);
+Route::get('/hrdPegawai/destroy/{data}', [HrdPegawaiController::class, 'destroy'])->name('hrdPegawai.destroy');
+
+Route::get('/hrdPegawai/showJabatan/{data}', [HrdPegawaiController::class, 'showJabatan'])->name('hrdPegawai.showJabatan');
+Route::get('/hrdPegawai/editRiwayatJabatan/{data}', [HrdPegawaiController::class, 'editRiwayatJabatan'])->name('hrdPegawai.editRiwayatJabatan');
+Route::put('/hrdPegawai/updateRiwayatJabatan/{data}', [HrdPegawaiController::class, 'updateRiwayatJabatan'])->name('hrdPegawai.updateRiwayatJabatan');
+
+Route::get('/hrdPegawai/showDivisi/{data}', [HrdPegawaiController::class, 'showDivisi'])->name('hrdPegawai.showDivisi');
+Route::get('/hrdPegawai/editRiwayatDivisi/{data}', [HrdPegawaiController::class, 'editRiwayatDivisi'])->name('hrdPegawai.editRiwayatDivisi');
+Route::put('/hrdPegawai/updateRiwayatDivisi/{data}', [HrdPegawaiController::class, 'updateRiwayatDivisi'])->name('hrdPegawai.updateRiwayatDivisi');
+
+
+
+
+
 
 // //Pegawai
 // Route::get('/hrdPegawai/search', [HrdPegawaiController::class, 'search'])->name('hrdPegawai.search');
