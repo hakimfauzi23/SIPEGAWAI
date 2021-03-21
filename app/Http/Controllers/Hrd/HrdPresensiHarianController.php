@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Hrd;
 
+use App\Http\Controllers\Controller;
 use App\Imports\PresensiCsvImport;
 use App\Models\Pegawai;
 use App\Models\Presensi_harian;
@@ -9,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
 use Maatwebsite\Excel\Facades\Excel;
-
 
 class HrdPresensiHarianController extends Controller
 {
@@ -21,15 +21,33 @@ class HrdPresensiHarianController extends Controller
     public function index()
     {
         //
-        $currentPage = 'HRD';
-        $presensi = Presensi_harian::sortable()
-            ->orderBy('tanggal', 'desc')
-            ->paginate(15);
-        return view('user.hrd.presensi.index', [
+        $dari = date("Y-m-d");
+        $ke = date("Y-m-d");
+
+        $presensi = Presensi_harian::where('tanggal', date("Y-m-d"))->get();
+        // dd($presensi);
+        return view('hrd.presensi.index', [
             'presensi' => $presensi,
-            'currentPage' => $currentPage
+            'dari' => $dari,
+            'ke' => $ke,
+
         ]);
     }
+
+    public function tglPresensi(Request $request)
+    {
+        $dari = $request->dari;
+        $ke = $request->ke;
+        // dd($ke);
+        $presensi = Presensi_harian::whereBetween('tanggal', [$dari, $ke])->get();
+        return view('hrd.presensi.index', [
+            'presensi' => $presensi,
+            'dari' => $dari,
+            'ke' => $ke,
+
+        ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -39,13 +57,9 @@ class HrdPresensiHarianController extends Controller
     public function create()
     {
         //
-        //
-        $currentPage = 'HRD';
         $pegawai = Pegawai::pluck('nama', 'id');
-        return view('user.hrd.presensi.create', [
-            'pegawai' => $pegawai,
-            'currentPage' => $currentPage
-
+        return view('hrd.presensi.create', [
+            'pegawai' => $pegawai
         ]);
     }
 
@@ -75,7 +89,7 @@ class HrdPresensiHarianController extends Controller
         ]);
 
         Alert::success('success', ' Berhasil Input Data !');
-        return redirect('hrdPresensi');
+        return redirect('hrdPresensiHarian');
     }
 
     /**
@@ -98,16 +112,14 @@ class HrdPresensiHarianController extends Controller
     public function edit($data)
     {
         //
-        $currentPage = 'HRD';
         $id = Crypt::decryptString($data);
         $presensi = Presensi_harian::find($id);
         $pegawai = Pegawai::pluck('nama', 'id');
 
-        return view('user.hrd.presensi.edit', [
+        return view('hrd.presensi.edit', [
             'id' => $data,
             'presensi' => $presensi,
-            'pegawai' => $pegawai,
-            'currentPage' => $currentPage
+            'pegawai' => $pegawai
         ]);
     }
 
@@ -141,7 +153,7 @@ class HrdPresensiHarianController extends Controller
         $presensi->save();
 
         Alert::success('success', ' Berhasil Update Data !');
-        return redirect('hrdPresensi');
+        return redirect('hrdPresensiHarian');
     }
 
     /**
@@ -158,28 +170,22 @@ class HrdPresensiHarianController extends Controller
         $presensi->delete();
 
         Alert::success('success', ' Berhasil Hapus Data !');
-        return redirect('hrdPresensi');
+        return redirect('hrdPresensiHarian');
     }
 
     public function import()
     {
         Excel::import(new PresensiCsvImport, request()->file('file'));
         Alert::success('success', ' Berhasil Import Data !!');
-        return redirect('hrdPresensi');
+        return redirect('hrdPresensiHarian');
     }
 
-    public function search(Request $request)
+    public function download()
     {
-        $cari = $request->cari;
-        $currentPage = 'HRD';
+        $filePath = public_path("/storage/template/TemplatePresensi.csv");
+        $headers = ['Content-Type: application/pdf'];
+        $fileName = 'TemplatePresensi.csv';
 
-        $presensi = Presensi_harian::where('id', $cari)
-            ->paginate(10);
-
-        return view('user.hrd.presensi.search', [
-            'presensi' => $presensi,
-            'currentPage' => $currentPage,
-        ]);
+        return response()->download($filePath, $fileName, $headers);
     }
-
 }

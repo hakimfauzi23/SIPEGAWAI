@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Hrd;
 
+use App\Http\Controllers\Controller;
 use App\Models\Cuti;
 use App\Models\Pegawai;
 use App\Models\Presensi_harian;
@@ -10,8 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
 
-
-class CutiController extends Controller
+class HrdCutiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class CutiController extends Controller
         $dari = date("Y-m-d");
         $ke = date("Y-m-d");
         $cuti = Cuti::where('tgl_pengajuan', date("Y-m-d"))->get();
-        return view('admin.cuti.index', [
+        return view('hrd.cuti.index', [
             'cuti' => $cuti,
             'dari' => $dari,
             'ke' => $ke,
@@ -38,14 +38,13 @@ class CutiController extends Controller
         $ke = $request->ke;
         // dd($ke);
         $cuti = Cuti::whereBetween('tgl_pengajuan', [$dari, $ke])->get();
-        return view('admin.cuti.index', [
+        return view('hrd.cuti.index', [
             'cuti' => $cuti,
             'dari' => $dari,
             'ke' => $ke,
 
         ]);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -56,7 +55,7 @@ class CutiController extends Controller
     {
         //
         $pegawai = Pegawai::pluck('nama', 'id');
-        return view('admin.cuti.create', [
+        return view('hrd.cuti.create', [
             'pegawai' => $pegawai
         ]);
     }
@@ -93,7 +92,7 @@ class CutiController extends Controller
         ]);
 
         Alert::success('success', ' Berhasil Input Data !');
-        return redirect('cuti');
+        return redirect('hrdCuti');
     }
 
     /**
@@ -116,7 +115,7 @@ class CutiController extends Controller
 
         $interval = $date1->diff($date2);
 
-        return view('admin.cuti.details', [
+        return view('hrd.cuti.details', [
             'id' => $id,
             'cuti' => $cuti,
             'interval' => $interval
@@ -137,7 +136,7 @@ class CutiController extends Controller
         $cuti = Cuti::find($id);
         $pegawai = Pegawai::pluck('nama', 'id');
 
-        return view('admin.cuti.edit', [
+        return view('hrd.cuti.edit', [
             'id' => $data,
             'cuti' => $cuti,
             'pegawai' => $pegawai
@@ -154,7 +153,6 @@ class CutiController extends Controller
     public function update(Request $request, $data)
     {
         //
-
         $id = Crypt::decryptString($data);
 
         $this->validate($request, [
@@ -182,61 +180,7 @@ class CutiController extends Controller
         $cuti->tgl_ditolak_hrd = $request->tgl_ditolak_hrd;
         $cuti->save();
         Alert::success('success', ' Berhasil Update Data !');
-        return redirect(route('cuti.index'));
-
-        // if ($request->status == "Disetujui") {
-
-        //     $cuti->id_pegawai = $request->id_pegawai;
-        //     $cuti->tipe_cuti = $request->tipe_cuti;
-        //     $cuti->tgl_pengajuan = $request->tgl_pengajuan;
-        //     $cuti->tgl_mulai = $request->tgl_mulai;
-        //     $cuti->tgl_selesai = $request->tgl_selesai;
-        //     $cuti->ket = $request->ket;
-        //     $cuti->status = $request->status;
-        //     $cuti->tgl_disetujui = date("Y-m-d");
-        //     $cuti->tgl_ditolak = NULL;
-        //     $cuti->save();
-
-        //     $date1 = new DateTime($request->tgl_mulai);
-        //     $date2 = new DateTime($request->tgl_selesai);
-
-        //     $interval = $date1->diff($date2);
-        //     $dt = $request->tgl_mulai;
-        //     // $gg = date("Y-m-d", strtotime($dt . ' + 40 days'));
-        //     // dd($gg);
-        //     for ($i = 0; $i < $interval->d; $i++) {
-        //         Presensi_harian::create([
-        //             'id_pegawai' => $request->id_pegawai,
-        //             'tanggal' => date("Y-m-d", strtotime($dt . ' + ' . $i . 'days')),
-        //             'ket' => 'Cuti',
-        //             'jam_dtg' => NULL,
-        //             'jam_plg' => NULL,
-        //         ]);
-        //     }
-        // } else if ($request->status == "Ditolak") {
-        //     $cuti->id_pegawai = $request->id_pegawai;
-        //     $cuti->tipe_cuti = $request->tipe_cuti;
-        //     $cuti->tgl_pengajuan = $request->tgl_pengajuan;
-        //     $cuti->tgl_mulai = $request->tgl_mulai;
-        //     $cuti->tgl_selesai = $request->tgl_selesai;
-        //     $cuti->ket = $request->ket;
-        //     $cuti->status = $request->status;
-        //     $cuti->tgl_disetujui = NULL;
-        //     $cuti->tgl_ditolak = date("Y-m-d");
-        //     $cuti->save();
-        // } else if ($request->status == "Diproses") {
-        //     $cuti->id_pegawai = $request->id_pegawai;
-        //     $cuti->tipe_cuti = $request->tipe_cuti;
-        //     $cuti->tgl_pengajuan = $request->tgl_pengajuan;
-        //     $cuti->tgl_mulai = $request->tgl_mulai;
-        //     $cuti->tgl_selesai = $request->tgl_selesai;
-        //     $cuti->ket = $request->ket;
-        //     $cuti->status = $request->status;
-        //     $cuti->tgl_disetujui = NULL;
-        //     $cuti->tgl_ditolak = NULL;
-        //     $cuti->save();
-        // }
-
+        return redirect(route('hrdCuti.index'));
     }
 
     /**
@@ -254,17 +198,17 @@ class CutiController extends Controller
         $cuti->delete();
 
         Alert::success('success', ' Berhasil Hapus Data !');
-        return redirect('cuti');
+        return redirect('hrdCuti');
     }
+
 
     public function cutiBersama()
     {
         $pegawai = Pegawai::pluck('nama', 'id');
-        return view('admin.cuti.cutiBersama', [
+        return view('hrd.cuti.cutiBersama', [
             'pegawai' => $pegawai
         ]);
     }
-
 
     public function storeCutiBersama(Request $request)
     {
@@ -295,6 +239,6 @@ class CutiController extends Controller
         }
 
         Alert::success('success', ' Berhasil Atur  Cuti Bersama !');
-        return redirect('cuti');
+        return redirect('hrdCuti');
     }
 }

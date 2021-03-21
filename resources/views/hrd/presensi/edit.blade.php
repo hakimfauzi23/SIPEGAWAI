@@ -16,7 +16,7 @@
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li> <a href="{{ route('presensi.index') }}"> <i class="active icon-home2 position-left"></i> List Data
+                <li> <a href="{{ route('hrdPresensiHarian.index') }}"> <i class="active icon-home2 position-left"></i> List Data
                         Presensi
                     </a>
                 </li>
@@ -43,7 +43,7 @@
         <div class="panel-body">
 
             <div class="row">
-                <form action="{{ route('presensi.update', $id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('hrdPresensiHarian.update',$id) }}" method="POST" enctype="multipart/form-data">
 
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}

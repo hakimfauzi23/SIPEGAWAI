@@ -1,4 +1,4 @@
-<div class="admin"  hidden>
+<div class="admin" hidden>
     <ul class="navigation navigation-main navigation-accordion">
 
 
@@ -77,8 +77,8 @@
         <li>
             <a href="#"><i class="icon-notebook"></i> <span>Data Presensi</span></a>
             <ul>
-                <li class="{{ Request::segment(1) === 'hrdPresensi' ? 'active' : null }}"><a
-                        href="{{ route('hrdPresensi.index') }}">List Data Presensi</a>
+                <li class="{{ Request::segment(1) === 'hrdPresensiHarian' ? 'active' : null }}"><a
+                        href="{{ route('hrdPresensiHarian.index') }}">List Data Presensi</a>
                 </li>
                 <li class="{{ Request::segment(1) === 'rekapPresensi' ? 'active' : null }}"><a
                         href="{{ route('rekapPresensi.index') }}">Rekapan Data Presensi Pegawai</a></li>
@@ -86,15 +86,21 @@
         </li>
 
         <li>
-            <a href="#"><i class="icon-furniture"></i> <span>Data Cuti</span></a>
+            <a href="#"><i class="icon-furniture"></i> <span>Data Cuti</span><span
+                    class="badge bg-warning-400">9</span></a>
             <ul>
-                <li class="{{ Route::is('cuti.index') ? 'active' : null }}"><a
-                        href="{{ route('cuti.index') }}">List Data Cuti</a>
+                <li class="<?php if (Route::is('hrdCuti.index') || Route::is('hrdCuti.search')) {
+                    echo 'active';
+                } ?>"><a href="{{ route('hrdCuti.index') }}">List Data Cuti</a>
                 </li>
-                <li class="{{ Route::is('cuti.cutiBersama') ? 'active' : null }}"><a
-                        href="{{ route('cuti.cutiBersama') }}">Atur Tanggal Cuti Bersama</a></li>
+                <li class="{{ Route::is('hrdCuti.cutiBersama') ? 'active' : null }}"><a
+                        href="{{ route('hrdCuti.cutiBersama') }}">Atur Tanggal Cuti Bersama</a></li>
                 <li class="{{ Request::segment(1) === 'rekapCuti' ? 'active' : null }}"><a
                         href="{{ route('rekapCuti.index') }}">Rekapan Data Cuti Pegawai</a></li>
+                <li class="{{ Request::segment(1) === 'rekapCuti' ? 'active' : null }}"><a
+                        href="{{ route('rekapCuti.index') }}"> <span class="badge bg-warning-400">9</span>
+                        Pengajuan Cuti Pegawai</a>
+                </li>
             </ul>
         </li>
         <!-- /hrd -->

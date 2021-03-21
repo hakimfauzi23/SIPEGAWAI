@@ -15,6 +15,8 @@ use App\Http\Controllers\RekapCutiController;
 
 use App\Http\Controllers\Hrd\HrdPeraturanController;
 use App\Http\Controllers\Hrd\HrdPegawaiController;
+use App\Http\Controllers\Hrd\HrdPresensiHarianController;
+use App\Http\Controllers\Hrd\HrdCutiController;
 
 use App\Http\Controllers\DownloadFileController;
 use App\Http\Controllers\RekapKinerjaController;
@@ -100,6 +102,12 @@ Route::put('/peraturan/editCutiSakit/{data}', [PeraturanController::class, 'cuti
 Route::put('/peraturan/editCutiBesar/{data}', [PeraturanController::class, 'cutiBesar'])->name('peraturan.editCutiBesar');
 Route::put('/peraturan/editCutiHamil/{data}', [PeraturanController::class, 'cutiHamil'])->name('peraturan.editCutiHamil');
 
+/**  End Menu Pegawai **/
+
+
+
+// !!!!!DI SINI ADALAH ROUTES UNTUK MENU REKAP DATA CUTI PRESENSI!!!!! //
+
 
 //RekapDataPresensi
 Route::resource('rekapPresensi', RekapPresensiController::class);
@@ -110,13 +118,14 @@ Route::get('/rekapPresensi/{data}/showMonth/{thisMonth}/{intMonth}', [RekapPrese
 Route::resource('rekapCuti', RekapCutiController::class);
 Route::get('/rekapCuti/tahun/{data}', [RekapCutiController::class, 'showYear'])->name('rekapCuti.showYear');
 
+/**  End Route Rekap Data Cuti Presensi**/
 
 
 
 
 
 
-// // HRD MENU!! // 
+// !!!!!DI SINI ADALAH ROUTES UNTUK MENU HRD!!!!! //
 
 
 
@@ -145,32 +154,22 @@ Route::get('/hrdPegawai/editRiwayatDivisi/{data}', [HrdPegawaiController::class,
 Route::put('/hrdPegawai/updateRiwayatDivisi/{data}', [HrdPegawaiController::class, 'updateRiwayatDivisi'])->name('hrdPegawai.updateRiwayatDivisi');
 
 
+//Presensi Harian//
+Route::get('/hrdPresensiHarian/tanggal/', [HrdPresensiHarianController::class, 'tglPresensi'])->name('hrdPresensiHarian.search');
+Route::resource('hrdPresensiHarian', HrdPresensiHarianController::class);
+Route::get('/hrdPresensiHarian/destroy/{data}', [HrdPresensiHarianController::class, 'destroy'])->name('hrdPresensiHarian.destroy');
+Route::post('/hrdPresensiHarian/import_excel', [HrdPresensiHarianController::class, 'import'])->name('hrdPresensiHarian.import');
+Route::get('/hrdPresensiHarian/template_download', [HrdPresensiHarianController::class, 'download'])->name('hrdPresensiHarian.template');
+
+//Cuti 
+Route::get('/hrdCuti/tanggal/', [HrdCutiController::class, 'tglPresensi'])->name('hrdCuti.search');
+Route::get('/hrdCuti/cutiBersama', [HrdCutiController::class, 'cutiBersama'])->name('hrdCuti.cutiBersama');
+Route::post('/cutiBersama/store', [HrdCutiController::class, 'storeCutiBersama'])->name('hrdCuti.storeCutiBersama');
+Route::resource('hrdCuti', HrdCutiController::class);
+Route::get('/hrdCuti/destroy/{data}', [HrdCutiController::class, 'destroy'])->name('hrdCuti.destroy');
 
 
-
-
-// //Pegawai
-// Route::get('/hrdPegawai/search', [HrdPegawaiController::class, 'search'])->name('hrdPegawai.search');
-// Route::resource('hrdPegawai', HrdPegawaiController::class);
-// Route::get('landingPage', function () {
-//     $currentPage = 'home';
-//     return view('user.layouts.landingPage', ['currentPage' => $currentPage]);
-// });
-// Route::get('/hrdPegawai/destroy/{data}', [HrdPegawaiController::class, 'destroy'])->name('hrdPegawai.destroy');
-// Route::get('/hrdPegawai/rekapKinerja/{data}', [HrdPegawaiController::class, 'rekapKinerja'])->name('hrdRekapKinerja.show');
-
-
-
-// //RiwayatDivisi
-// Route::resource('hrdRiwayatDivisi', HrdRiwayatDivisiController::class);
-// Route::get('/hrdRiwayatDivisi/destroy/{data}', [HrdRiwayatDivisiController::class, 'destroy'])->name('hrdRiwayatDivisi.destroy');
-
-
-
-
-// //RiwayatJabatan
-// Route::resource('hrdRiwayatJabatan', HrdRiwayatJabatanController::class);
-// Route::get('/hrdRiwayatJabatan/destroy/{data}', [HrdRiwayatJabatanController::class, 'destroy'])->name('hrdRiwayatJabatan.destroy');
+/**  End Menu HRD**/
 
 
 
@@ -183,9 +182,6 @@ Route::put('/hrdPegawai/updateRiwayatDivisi/{data}', [HrdPegawaiController::clas
 // Route::get('/hrdCuti/destroy/{data}', [HrdCutiController::class, 'destroy'])->name('hrdCuti.destroy');
 // Route::put('/hrdCuti/keputusan/{data}', [HrdCutiController::class, 'keputusan'])->name('hrdCuti.keputusan');
 // Route::get('/hrdCuti/detail_pengajuan/{data}', [HrdCutiController::class, 'detail_pengajuan'])->name('hrdCuti.detailPengajuan');
-
-
-
 
 
 
