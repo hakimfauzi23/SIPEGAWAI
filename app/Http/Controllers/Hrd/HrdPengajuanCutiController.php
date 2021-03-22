@@ -9,6 +9,7 @@ use App\Models\Presensi_harian;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class HrdPengajuanCutiController extends Controller
@@ -120,7 +121,12 @@ class HrdPengajuanCutiController extends Controller
         $id = Crypt::decryptString($data);
 
         $cuti = Cuti::find($id);
+        $pegawai = Pegawai::find($cuti->id_pegawai);
 
+
+        $nama = $pegawai->nama;
+
+        // dd($nama);
         // dd($id);
         if ($request->keputusan == 'Disetujui HRD') {
             $cuti->status = $request->keputusan;
@@ -145,12 +151,31 @@ class HrdPengajuanCutiController extends Controller
                 ]);
             }
 
+
+            $details = [
+                'title' => 'Notifikasi Konfirmasi Pengajuan Cuti',
+                'body' => "Selamat $nama Pengajuan Cuti Anda telah disetujui Oleh HRD!!",
+                'data' => " Data Cuti : ID :$cuti->id , Tipe :$cuti->tipe_cuti , TGL MULAI : $cuti->tgl_mulai, TGL SELESAI : $cuti->tgl_selesai "
+            ];
+
+            Mail::to($pegawai->email)->send(new \App\Mail\MyTestMail($details));
+
             Alert::success('success', ' Berhasil Menyetujui Pengajuan Cuti !');
             return redirect(route('hrdPengajuanCuti.index'));
         } else {
             $cuti->status = $request->keputusan;
             $cuti->tgl_ditolak_hrd = date("Y-m-d");
             $cuti->save();
+
+
+            $details = [
+                'title' => 'Notifikasi Konfirmasi Pengajuan Cuti',
+                'body' => "Sayang Sekali $nama Pengajuan Cuti Anda telah ditolak Oleh HRD!!",
+                'data' => " Data Cuti : ID :$cuti->id , Tipe :$cuti->tipe_cuti , TGL MULAI : $cuti->tgl_mulai, TGL SELESAI : $cuti->tgl_selesai "
+
+            ];
+
+            Mail::to($pegawai->email)->send(new \App\Mail\MyTestMail($details));
 
             Alert::success('success', ' Berhasil Menolak Pengajuan Cuti !');
             return redirect(route('hrdPengajuanCuti.index'));

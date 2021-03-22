@@ -21,6 +21,7 @@ use App\Http\Controllers\Hrd\HrdCutiController;
 use App\Http\Controllers\DownloadFileController;
 use App\Http\Controllers\Hrd\HrdPengajuanCutiController;
 use App\Http\Controllers\RekapKinerjaController;
+use Illuminate\Support\Facades\Mail;
 use PhpOffice\PhpSpreadsheet\Chart\Layout;
 
 /*
@@ -174,6 +175,17 @@ Route::get('/hrdCuti/destroy/{data}', [HrdCutiController::class, 'destroy'])->na
 Route::resource('hrdPengajuanCuti', HrdPengajuanCutiController::class);
 Route::put('/hrdPengajuanCuti/keputusan/{data}', [HrdPengajuanCutiController::class, 'keputusan'])->name('hrdPengajuanCuti.keputusan');
 
+Route::get('send-mail', function () {
+
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+
+    Mail::to('mr.expendables25@gmail.com')->send(new \App\Mail\MyTestMail($details));
+
+    dd("Email is Sent.");
+});
 
 /**  End Menu HRD**/
 
