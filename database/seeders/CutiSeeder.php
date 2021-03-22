@@ -29,14 +29,14 @@ class CutiSeeder extends Seeder
 
             DB::table('cuti')->insert([
 
-                'id_pegawai' => date("ym") . "0005",
+                'id_pegawai' => date("ym") . "0010",
                 'tipe_cuti' => $tp_cuti[$faker->numberBetween(0, 5)],
                 // 'tgl_pengajuan' => $faker->date,
                 'tgl_pengajuan' => date("2025-m-d"),
                 'tgl_mulai' => date("2025-12-d"),
                 'tgl_selesai' => $faker->date,
                 'ket' => $faker->sentence(5),
-                'status' => $stat[2],
+                'status' => $stat[1],
                 'tgl_disetujui_atasan' => $faker->date,
                 'tgl_ditolak_atasan' => $faker->date,
                 'tgl_disetujui_hrd' => $faker->date,

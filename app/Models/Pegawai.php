@@ -84,7 +84,7 @@ class Pegawai extends Model
 
     public function atasan()
     {
-        return $this->hasMany('App\Models\Pegawai', 'id_atasan', 'id');
+        return $this->hasMany('App\Models\Pegawai');
     }
 
 
@@ -108,6 +108,6 @@ class Pegawai extends Model
 
     public function bawahan()
     {
-        return $this->belongsTo(self::class, 'id_atasan', 'id');
+        return $this->belongsTo('App\Models\Pegawai', 'id_atasan', 'id');
     }
 }

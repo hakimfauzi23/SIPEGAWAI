@@ -87,7 +87,7 @@
 
         <li>
             <a href="#"><i class="icon-furniture"></i> <span>Data Cuti</span><span
-                    class="badge bg-warning-400">9</span></a>
+                    class="badge bg-warning-400">{{ $jml_cuti }}</span></a>
             <ul>
                 <li class="<?php if (Route::is('hrdCuti.index') || Route::is('hrdCuti.search')) {
                     echo 'active';
@@ -95,12 +95,13 @@
                 </li>
                 <li class="{{ Route::is('hrdCuti.cutiBersama') ? 'active' : null }}"><a
                         href="{{ route('hrdCuti.cutiBersama') }}">Atur Tanggal Cuti Bersama</a></li>
-                <li class="{{ Request::segment(1) === 'rekapCuti' ? 'active' : null }}"><a
-                        href="{{ route('rekapCuti.index') }}">Rekapan Data Cuti Pegawai</a></li>
-                <li class="{{ Request::segment(1) === 'rekapCuti' ? 'active' : null }}"><a
-                        href="{{ route('rekapCuti.index') }}"> <span class="badge bg-warning-400">9</span>
+                <li class="{{ Request::segment(1) === 'hrdPengajuanCuti' ? 'active' : null }}"><a
+                        href="{{ route('hrdPengajuanCuti.index') }}"> <span
+                            class="badge bg-warning-400">{{ $jml_cuti }}</span>
                         Pengajuan Cuti Pegawai</a>
                 </li>
+                <li class="{{ Request::segment(1) === 'rekapCuti' ? 'active' : null }}"><a
+                        href="{{ route('rekapCuti.index') }}">Rekapan Data Cuti Pegawai</a></li>
             </ul>
         </li>
         <!-- /hrd -->

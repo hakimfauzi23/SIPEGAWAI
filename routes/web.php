@@ -19,6 +19,7 @@ use App\Http\Controllers\Hrd\HrdPresensiHarianController;
 use App\Http\Controllers\Hrd\HrdCutiController;
 
 use App\Http\Controllers\DownloadFileController;
+use App\Http\Controllers\Hrd\HrdPengajuanCutiController;
 use App\Http\Controllers\RekapKinerjaController;
 use PhpOffice\PhpSpreadsheet\Chart\Layout;
 
@@ -167,6 +168,11 @@ Route::get('/hrdCuti/cutiBersama', [HrdCutiController::class, 'cutiBersama'])->n
 Route::post('/cutiBersama/store', [HrdCutiController::class, 'storeCutiBersama'])->name('hrdCuti.storeCutiBersama');
 Route::resource('hrdCuti', HrdCutiController::class);
 Route::get('/hrdCuti/destroy/{data}', [HrdCutiController::class, 'destroy'])->name('hrdCuti.destroy');
+
+
+//Pengajuan Cuti
+Route::resource('hrdPengajuanCuti', HrdPengajuanCutiController::class);
+Route::put('/hrdPengajuanCuti/keputusan/{data}', [HrdPengajuanCutiController::class, 'keputusan'])->name('hrdPengajuanCuti.keputusan');
 
 
 /**  End Menu HRD**/
