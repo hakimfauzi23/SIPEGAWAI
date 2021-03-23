@@ -87,7 +87,7 @@ class PegawaiController extends Controller
         $imgname = $request->nik . '_' . date('dmyHi') . '.' . $extension;
         $path = Storage::putFileAs('public/images', $request->file('imgupload'), $imgname);
         $id = IdGenerator::generate(['table' => 'pegawai', 'length' => 8, 'prefix' => date('ym')]);
-        $password = Str::random(12);
+        $password = bcrypt("$request->nik");
         $riwayat_jabatan = Riwayat_jabatan::where('id_pegawai', $id)
             ->where('id_jabatan', $request->id_jabatan)
             ->count();
@@ -384,5 +384,4 @@ class PegawaiController extends Controller
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect(route('pegawai.index'));
     }
-
 }

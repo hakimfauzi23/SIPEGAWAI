@@ -1,3 +1,4 @@
+<?php $user = Auth::user(); ?>
 <div class="navbar-header">
     <a class="navbar-brand" href="index.html"><img src="{{ URL::to('/admin') }}/assets/images/logo_light.png"
             alt=""></a>
@@ -20,14 +21,15 @@
 
         <li class="dropdown dropdown-user">
             <a class="dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ URL::to('/admin') }}/assets/images/placeholder.jpg" alt="">
-                <span>Victoria</span>
+                @php $path =Storage::url('images/'.$user->path); @endphp
+                <img src="{{ url($path) }}" alt="">
+                <span>{{ $user->nama }}</span>
                 <i class="caret"></i>
             </a>
 
             <ul class="dropdown-menu dropdown-menu-right">
                 <li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>
-                <li><a href="#"><i class="icon-switch2"></i> Logout</a></li>
+                <li><a href="{{ route('logout') }}"><i class="icon-switch2"></i> Logout</a></li>
             </ul>
         </li>
     </ul>

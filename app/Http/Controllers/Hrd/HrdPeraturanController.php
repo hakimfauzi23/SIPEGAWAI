@@ -22,6 +22,7 @@ class HrdPeraturanController extends Controller
 
         $peraturan = Peraturan::find(1);
         return view('hrd.peraturan.index', [
+
             'peraturan' => $peraturan,
         ]);
     }

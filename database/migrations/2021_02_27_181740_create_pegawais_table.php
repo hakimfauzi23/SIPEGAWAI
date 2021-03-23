@@ -34,6 +34,7 @@ class CreatePegawaisTable extends Migration
             $table->unsignedBigInteger('id_jabatan')->nullable();
             $table->unsignedBigInteger('id_divisi')->nullable();
             $table->string('path');
+            $table->rememberToken();
             $table->timestamps();
 
             $table->index('id_jabatan');

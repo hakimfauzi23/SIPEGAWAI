@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Kyslik\ColumnSortable\Sortable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
-class Pegawai extends Model
+
+class Pegawai extends Authenticatable
 {
     use HasFactory;
-    use Sortable;
+    use Notifiable;
 
     protected $table = 'pegawai';
 
@@ -37,25 +39,6 @@ class Pegawai extends Model
         'path'
     ];
 
-    public $sortable = [
-        'id',
-        'id_role',
-        'nik',
-        'nama',
-        'jk',
-        'agama',
-        'tempat_lahir',
-        'tgl_lahir',
-        'alamat_ktp',
-        'alamat_dom',
-        'status',
-        'jml_anak',
-        'no_hp',
-        'email',
-        'tgl_masuk',
-        'id_jabatan',
-        'id_divisi',
-    ];
 
     public function cuti()
     {
