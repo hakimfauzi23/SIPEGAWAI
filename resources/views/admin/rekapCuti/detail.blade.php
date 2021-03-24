@@ -148,7 +148,7 @@
                 <div class="col-md-6">
                     <div class="panel bg-orange-400">
                         <div class="panel-heading">
-                            <p class="panel-title">Batas Cuti Sakit</p>
+                            <p class="panel-title">Sisa Cuti Sakit</p>
                             <div class="heading-elements">
                             </div>
 
@@ -163,7 +163,7 @@
                 <div class="col-md-6">
                     <div class="panel bg-success">
                         <div class="panel-heading">
-                            <p class="panel-title">Batas Cuti Besar</p>
+                            <p class="panel-title">Sisa Cuti Besar</p>
                             <div class="heading-elements">
                             </div>
 
@@ -176,7 +176,7 @@
                 <div class="col-md-6">
                     <div class="panel bg-indigo">
                         <div class="panel-heading">
-                            <p class="panel-title">Batas Cuti Hamil</p>
+                            <p class="panel-title">Sisa Cuti Hamil</p>
                             <div class="heading-elements">
                             </div>
 

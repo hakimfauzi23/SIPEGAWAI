@@ -57,7 +57,8 @@
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/app.js"></script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/datatables_basic.js"></script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/form_layouts.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/pages/datatables_extension_fixed_header.js"></script>
+    <script type="text/javascript"
+        src="{{ URL::to('/admin') }}/assets/js/pages/datatables_extension_fixed_header.js"></script>
 
     <!-- /theme JS files -->
 
@@ -67,7 +68,9 @@
 
 </head>
 
-<body class="navbar-top">
+<body class="navbar-top  <?php if (Request::segment(1) === 'superAdmin' || Request::segment(1) === 'staff' || Request::segment(1) === 'hrd') {
+    echo 'sidebar-xs';
+} ?> ">
 
     <!-- Main navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">

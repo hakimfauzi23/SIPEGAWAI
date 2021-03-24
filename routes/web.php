@@ -42,7 +42,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 */
 
 // Route::get('/', function () {
-//     return view('welcome');
+//     return view('content');
 // });
 
 // Route::get('/', [HrdPeraturanController::class, 'index'])->name('hrdPeraturan.index');
@@ -58,8 +58,9 @@ Route::group(['middleware' => ['auth']], function () {
         /*
     		Route Khusus untuk role superAdmin
     	*/
+
         Route::get('/superAdmin', function () {
-            return view('content');
+            return view('admin.dashboard');
         });
 
         // !!!!!DI SINI ADALAH ROUTES UNTUK MENU ADMIN!!!!! //
@@ -130,7 +131,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route Khusus untuk role HRD
     	*/
         Route::get('/hrd', function () {
-            return view('content');
+            return view('hrd.dashboard');
         });
 
         // Peraturan 
@@ -197,11 +198,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route Khusus untuk role Staff
     	*/
         Route::get('/staff', function () {
-            return view('content');
+            return view('staff.dashboard');
         });
 
         //Cuti
         Route::resource('staffCuti', StaffCutiController::class);
+        Route::post('/staffCuti/tahun/', [StaffCutiController::class, 'tahunCuti'])->name('staffCuti.search');
+
 
 
         //Pengajuan Cuti
@@ -209,7 +212,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/staffPengajuanCuti/keputusan/{data}', [StaffPengajuanCutiController::class, 'keputusan'])->name('staffPengajuanCuti.keputusan');
     });
     /**  End Menu Staff**/
-
 });
 
 

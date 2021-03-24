@@ -3,7 +3,6 @@
 <div class="admin" @if ($user->id_role != 1) {{ 'hidden' }} @endif>
     <ul class="navigation navigation-main navigation-accordion">
 
-
         <!-- Main -->
         <li class="navigation-header"><span>Menu Super Admin</span> <i class="icon-menu"></i></li>
         <li class="{{ Request::segment(1) === 'peraturan' ? 'active' : null }}"><a
@@ -116,7 +115,7 @@
         <li class="navigation-header"><span>Menu Staff</span> <i class="icon-menu"></i></li>
         <li class="<?php if (Route::is('staffCuti.index') || Route::is('staffCuti.show')) {
             echo 'active';
-        } ?>"><a href="{{ route('staffCuti.index') }}"><i class=" icon-furniture"></i> <span>Riwayat
+        } ?>"><a href="{{ route('staffCuti.index') }}"><i class="icon-history"></i> <span>Riwayat
                     Pengajuan Cuti
                 </span>
             </a>
