@@ -26,6 +26,7 @@ use PhpOffice\PhpSpreadsheet\Chart\Layout;
 
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\Staff\StaffCutiController;
 use App\Http\Controllers\Staff\StaffPengajuanCutiController;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -49,15 +50,33 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 
 
+
+// !!!!!DI SINI ADALAH ROUTES UNTUK MENU LOGIN!!!!! //
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('/proses_login', [AuthController::class, 'proses_login'])->name('proses_login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+/**  End Route Login**/
 
+
+// !!!!!DI SINI ADALAH ROUTES UNTUK MENU REKAP DATA CUTI PRESENSI!!!!! //
+//RekapDataPresensi
+Route::resource('rekapPresensi', RekapPresensiController::class);
+Route::get('/rekapPresensi/{data}/showMonth/{thisMonth}/{intMonth}', [RekapPresensiController::class, 'showMonth'])->name('rekapPresensi.showMonth');
+
+//RekapCutiPegawai
+Route::resource('rekapCuti', RekapCutiController::class);
+Route::get('/rekapCuti/tahun/{data}', [RekapCutiController::class, 'showYear'])->name('rekapCuti.showYear');
+/**  End Route Rekap Data Cuti Presensi**/
+
+
+//Profil
+Route::resource('profil', ProfilController::class);
+
+
+
+// !!!!!DI SINI ADALAH ROUTES UNTUK MENU ADMIN!!!!! //
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['cek_login:superAdmin']], function () {
-        /*
-    		Route Khusus untuk role superAdmin
-    	*/
 
         Route::get('/superAdmin', function () {
             return view('admin.dashboard');
@@ -177,22 +196,13 @@ Route::group(['middleware' => ['auth']], function () {
         //Pengajuan Cuti
         Route::resource('hrdPengajuanCuti', HrdPengajuanCutiController::class);
         Route::put('/hrdPengajuanCuti/keputusan/{data}', [HrdPengajuanCutiController::class, 'keputusan'])->name('hrdPengajuanCuti.keputusan');
-
-        // Route::get('send-mail', function () {
-
-        //     $details = [
-        //         'title' => 'Mail from ItSolutionStuff.com',
-        //         'body' => 'This is for testing email using smtp'
-        //     ];
-
-        //     Mail::to('mr.expendables25@gmail.com')->send(new \App\Mail\MyTestMail($details));
-
-        //     dd("Email is Sent.");
-        // });
     });
     /**  End Menu HRD**/
 
 
+
+
+    // !!!!!DI SINI ADALAH ROUTES UNTUK MENU STAFF!!!!! //
     Route::group(['middleware' => ['cek_login:staff']], function () {
         /*
         Route Khusus untuk role Staff
@@ -214,24 +224,6 @@ Route::group(['middleware' => ['auth']], function () {
     /**  End Menu Staff**/
 });
 
-
-
-// !!!!!DI SINI ADALAH ROUTES UNTUK MENU REKAP DATA CUTI PRESENSI!!!!! //
-
-
-//RekapDataPresensi
-Route::resource('rekapPresensi', RekapPresensiController::class);
-Route::get('/rekapPresensi/{data}/showMonth/{thisMonth}/{intMonth}', [RekapPresensiController::class, 'showMonth'])->name('rekapPresensi.showMonth');
-
-
-//RekapCutiPegawai
-Route::resource('rekapCuti', RekapCutiController::class);
-Route::get('/rekapCuti/tahun/{data}', [RekapCutiController::class, 'showYear'])->name('rekapCuti.showYear');
-
-/**  End Route Rekap Data Cuti Presensi**/
-
-
-    // !!!!!DI SINI ADALAH ROUTES UNTUK MENU STAFF!!!!! //
 
 
 

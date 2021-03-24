@@ -68,7 +68,7 @@
 
 </head>
 
-<body class="navbar-top  <?php if (Request::segment(1) === 'superAdmin' || Request::segment(1) === 'staff' || Request::segment(1) === 'hrd') {
+<body class="navbar-top  <?php if (Request::segment(1) === 'superAdmin' || Request::segment(1) === 'staff' || Request::segment(1) === 'hrd' || Request::segment(1) === 'profil') {
     echo 'sidebar-xs';
 } ?> ">
 

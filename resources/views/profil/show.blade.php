@@ -8,19 +8,17 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-users4"></i> <span class="text-semibold">Pegawai</span>
-                    - Details Data Pegawai</h4>
+                <h4><i class="icon-user"></i> <span class="text-semibold">Profil Saya</span>
+                    - Details</h4>
             </div>
 
         </div>
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li> <a href="{{ route('pegawai.index') }}"> <i class="active icon-home2 position-left"></i> List Data
-                        Pegawai
-                    </a>
+                <li> <i class="active icon-home2 position-left"></i> Profil
+                    Saya
                 </li>
-                <li class="active">Details Data Pegawai {{ 'ID : ' . $pegawai->id }}</li>
             </ul>
         </div>
     </div>
@@ -30,6 +28,20 @@
 
     <div class="col-md-4">
         <div class="panel panel-flat">
+            <div class="panel-heading">
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li class="dropdown">
+                            <a href="{{ route('profil.edit', $data) }}">
+                                <i class=" icon-pencil7"></i> Edit Biodata
+                            </a>
+
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
             <div class="panel-body">
                 <div class="text-center">
                     @php $path =Storage::url('images/'.$pegawai->path); @endphp
@@ -63,12 +75,10 @@
                             <td>:</td>
                             <td>{{ $pegawai->email }}</td>
                         </tr>
-
                     </table>
                 </div>
             </div>
         </div>
-
 
         <div class="panel">
             <div class="panel-heading bg-info">

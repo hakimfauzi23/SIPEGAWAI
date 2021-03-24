@@ -49,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('jml_pengajuan_cuti_bawahan', $jml_pengajuan_cuti_bawahan);
             } else {
                 $view->with('jml_bawahan', null);
+                $view->with('jml_pengajuan_cuti_bawahan', null);
             }
         });
     }
