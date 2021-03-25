@@ -26,6 +26,7 @@ use PhpOffice\PhpSpreadsheet\Chart\Layout;
 
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\Staff\StaffCutiController;
 use App\Http\Controllers\Staff\StaffPengajuanCutiController;
@@ -46,10 +47,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 //     return view('content');
 // });
 
-// Route::get('/', [HrdPeraturanController::class, 'index'])->name('hrdPeraturan.index');
-
-
-
 
 // !!!!!DI SINI ADALAH ROUTES UNTUK MENU LOGIN!!!!! //
 Route::get('/', [AuthController::class, 'index'])->name('login');
@@ -68,10 +65,14 @@ Route::resource('rekapCuti', RekapCutiController::class);
 Route::get('/rekapCuti/tahun/{data}', [RekapCutiController::class, 'showYear'])->name('rekapCuti.showYear');
 /**  End Route Rekap Data Cuti Presensi**/
 
-
+// !!!!!DI SINI ADALAH ROUTES UNTUK KEPERLUAN PROFIL DAN PASSWORD!!!!! //
 //Profil
-Route::resource('profil', ProfilController::class);
+Route::resource('/profil', ProfilController::class);
 
+
+//Password
+Route::resource('/pass', PasswordController::class);
+/**  End Route Profil dan Password**/
 
 
 // !!!!!DI SINI ADALAH ROUTES UNTUK MENU ADMIN!!!!! //
@@ -152,7 +153,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/hrd', function () {
             return view('hrd.dashboard');
         });
-
+        
         // Peraturan 
         Route::resource('hrdPeraturan', HrdPeraturanController::class);
         Route::put('/hrdPeraturan/editJamMasuk/{data}', [HrdPeraturanController::class, 'jamMasuk'])->name('hrdPeraturan.editJamMasuk');
@@ -223,6 +224,17 @@ Route::group(['middleware' => ['auth']], function () {
     });
     /**  End Menu Staff**/
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 

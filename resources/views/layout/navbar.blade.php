@@ -29,7 +29,8 @@
 
             <ul class="dropdown-menu dropdown-menu-right">
                 <?php $encrypt = Crypt::encrypt(Auth::user()->id); ?>
-                <li><a href="{{ route('profil.show', $encrypt) }}"><i class="icon-user"></i> My profile</a></li>
+                <li><a href="{{ route('profil.show', $encrypt) }}"><i class="icon-user"></i> Profil Saya</a></li>
+                <li><a href="{{ route('pass.index') }}"><i class=" icon-unlocked"></i> Ganti Password</a></li>
                 <li><a href="{{ route('logout') }}"><i class="icon-switch2"></i> Logout</a></li>
             </ul>
         </li>

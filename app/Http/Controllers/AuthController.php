@@ -12,7 +12,7 @@ class AuthController extends Controller
     //
     public function index()
     {
-        return view('login');
+        return view('login.index');
     }
     public function proses_login(Request $request)
     {
