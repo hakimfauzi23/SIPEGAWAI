@@ -27,6 +27,8 @@ use PhpOffice\PhpSpreadsheet\Chart\Layout;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\Staff\StaffCutiController;
 use App\Http\Controllers\Staff\StaffPengajuanCutiController;
@@ -44,7 +46,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 */
 
 // Route::get('/', function () {
-//     return view('content');
+//     return view('password.email');
 // });
 
 
@@ -72,6 +74,10 @@ Route::resource('/profil', ProfilController::class);
 
 //Password
 Route::resource('/pass', PasswordController::class);
+Route::get('/forget-password', [ForgotPasswordController::class,'getEmail'])->name('forget-password.getEmail');
+Route::post('/forget-password/postEmail', [ForgotPasswordController::class,'postEmail'])->name('forget-password.postEmail');
+Route::get('/reset-password/{token}', [ResetPasswordController::class,'getPassword'])->name('reset-password.getPassword');
+Route::post('/reset-password', [ResetPasswordController::class,'updatePassword'])->name('reset-password.updatePassword');
 /**  End Route Profil dan Password**/
 
 
@@ -153,7 +159,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/hrd', function () {
             return view('hrd.dashboard');
         });
-        
+
         // Peraturan 
         Route::resource('hrdPeraturan', HrdPeraturanController::class);
         Route::put('/hrdPeraturan/editJamMasuk/{data}', [HrdPeraturanController::class, 'jamMasuk'])->name('hrdPeraturan.editJamMasuk');
