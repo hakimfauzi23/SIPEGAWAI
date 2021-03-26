@@ -38,55 +38,57 @@
             </div>
         </div>
 
+        <div class="panel-body">
 
-        <table class="table datatable-basic table-bordered table-striped table-hover">
-            <thead class="bg-primary-300">
-                <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Divisi</th>
-                    <th hidden>Status</th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if ($pegawai->count())
-                    @foreach ($pegawai as $key => $p)
-                        <tr>
-                            <td>{{ $p->id }}</td>
-                            <td>{{ $p->nama }}</td>
-                            <td>{{ $p->jabatan->nm_jabatan }}</td>
-                            <td>{{ $p->divisi->nm_divisi }}</td>
-                            <td hidden><span class="label label-success">Active</span></td>
-                            <td class="text-center">
-                                <ul class="icons-list">
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="icon-menu9"></i>
-                                        </a>
+            <table class="table datatable-basic table-bordered table-striped table-hover">
+                <thead class="bg-primary-300">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Jabatan</th>
+                        <th>Divisi</th>
+                        <th hidden>Status</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($pegawai->count())
+                        @foreach ($pegawai as $key => $p)
+                            <tr>
+                                <td>{{ $p->id }}</td>
+                                <td>{{ $p->nama }}</td>
+                                <td>{{ $p->jabatan->nm_jabatan }}</td>
+                                <td>{{ $p->divisi->nm_divisi }}</td>
+                                <td hidden><span class="label label-success">Active</span></td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="icon-menu9"></i>
+                                            </a>
 
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                            <li><a href="{{ route('pegawai.show', $encyrpt) }}"><i
-                                                        class="icon-file-eye"></i> Detail </a>
-                                            </li>
-                                            <li><a href="{{ route('pegawai.destroy', $encyrpt) }}"><i
-                                                        class=" icon-trash"></i> Hapus</a>
-                                            </li>
-                                            <li><a href="{{ route('pegawai.edit', $encyrpt) }}"><i
-                                                        class=" icon-pencil5"></i> Edit</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                                <li><a href="{{ route('pegawai.show', $encyrpt) }}"><i
+                                                            class="icon-file-eye"></i> Detail </a>
+                                                </li>
+                                                <li><a href="{{ route('pegawai.destroy', $encyrpt) }}"><i
+                                                            class=" icon-trash"></i> Hapus</a>
+                                                </li>
+                                                <li><a href="{{ route('pegawai.edit', $encyrpt) }}"><i
+                                                            class=" icon-pencil5"></i> Edit</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
     <!-- /basic datatable -->
 

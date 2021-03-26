@@ -38,51 +38,54 @@
         </div>
 
 
-        <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
-            <thead class="bg-primary-300">
-                <tr>
-                    <th>ID</th>
-                    <th>Nama Divisi</th>
-                    <th hidden></th>
-                    <th hidden></th>
-                    <th hidden></th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if ($divisi->count())
-                    @foreach ($divisi as $key => $p)
-                        <tr>
-                            <td>{{ $p->id }}</td>
-                            <td>{{ $p->nm_divisi }}</td>
-                            <td hidden></td>
-                            <td hidden></td>
-                            <td hidden><span class="label label-success">Active</span></td>
-                            <td class="text-center">
-                                <ul class="icons-list">
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="icon-menu9"></i>
-                                        </a>
+        <div class="panel-body">
 
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                            <li><a href="{{ route('divisi.destroy', $encyrpt) }}"><i
-                                                        class=" icon-trash"></i> Hapus</a>
-                                            </li>
-                                            <li><a href="{{ route('divisi.edit', $encyrpt) }}"><i
-                                                        class=" icon-pencil5"></i> Edit</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
+            <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
+                <thead class="bg-primary-300">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama Divisi</th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($divisi->count())
+                        @foreach ($divisi as $key => $p)
+                            <tr>
+                                <td>{{ $p->id }}</td>
+                                <td>{{ $p->nm_divisi }}</td>
+                                <td hidden></td>
+                                <td hidden></td>
+                                <td hidden><span class="label label-success">Active</span></td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="icon-menu9"></i>
+                                            </a>
 
-            </tbody>
-        </table>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                                <li><a href="{{ route('divisi.destroy', $encyrpt) }}"><i
+                                                            class=" icon-trash"></i> Hapus</a>
+                                                </li>
+                                                <li><a href="{{ route('divisi.edit', $encyrpt) }}"><i
+                                                            class=" icon-pencil5"></i> Edit</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+
+                </tbody>
+            </table>
+        </div>
     </div>
     <!-- /basic datatable -->
 

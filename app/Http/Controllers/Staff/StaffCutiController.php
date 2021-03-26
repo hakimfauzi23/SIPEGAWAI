@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cuti;
 use App\Models\Pegawai;
 use App\Models\Peraturan;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -1245,7 +1246,22 @@ class StaffCutiController extends Controller
     public function create()
     {
         //
-        return view('staff.cuti.create');
+        $tgl_masuk = Auth::user()->tgl_masuk;
+        $tgl_now = date("Y-m-d");
+
+        $date1 = new DateTime($tgl_masuk);
+        $date2 = new DateTime($tgl_now);
+
+        $interval = $date1->diff($date2);
+
+        $months = $interval->m;
+        $years = $interval->y;
+
+        // dd($months);
+        return view('staff.cuti.create', [
+            'months' => $months,
+            'years' => $years,
+        ]);
     }
 
     /**

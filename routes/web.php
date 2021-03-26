@@ -49,6 +49,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 //     return view('password.email');
 // });
 
+### MENU UNTUK SEMUA ROLES!! ###
 
 // !!!!!DI SINI ADALAH ROUTES UNTUK MENU LOGIN!!!!! //
 Route::get('/', [AuthController::class, 'index'])->name('login');
@@ -71,15 +72,26 @@ Route::get('/rekapCuti/tahun/{data}', [RekapCutiController::class, 'showYear'])-
 //Profil
 Route::resource('/profil', ProfilController::class);
 
-
 //Password
 Route::resource('/pass', PasswordController::class);
-Route::get('/forget-password', [ForgotPasswordController::class,'getEmail'])->name('forget-password.getEmail');
-Route::post('/forget-password/postEmail', [ForgotPasswordController::class,'postEmail'])->name('forget-password.postEmail');
-Route::get('/reset-password/{token}', [ResetPasswordController::class,'getPassword'])->name('reset-password.getPassword');
-Route::post('/reset-password', [ResetPasswordController::class,'updatePassword'])->name('reset-password.updatePassword');
+Route::get('/forget-password', [ForgotPasswordController::class, 'getEmail'])->name('forget-password.getEmail');
+Route::post('/forget-password/postEmail', [ForgotPasswordController::class, 'postEmail'])->name('forget-password.postEmail');
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'getPassword'])->name('reset-password.getPassword');
+Route::post('/reset-password', [ResetPasswordController::class, 'updatePassword'])->name('reset-password.updatePassword');
 /**  End Route Profil dan Password**/
 
+// !!!!!DI SINI ADALAH ROUTES UNTUK MENU KARYAWAN/STAFF!!!!! //
+//Cuti
+Route::resource('staffCuti', StaffCutiController::class);
+Route::post('/staffCuti/tahun/', [StaffCutiController::class, 'tahunCuti'])->name('staffCuti.search');
+
+//Pengajuan Cuti
+Route::resource('staffPengajuanCuti', StaffPengajuanCutiController::class);
+Route::put('/staffPengajuanCuti/keputusan/{data}', [StaffPengajuanCutiController::class, 'keputusan'])->name('staffPengajuanCuti.keputusan');
+/**  End Route Karyawan**/
+
+
+### END MENU UNTUK SEMUA ROLE ###
 
 // !!!!!DI SINI ADALAH ROUTES UNTUK MENU ADMIN!!!!! //
 Route::group(['middleware' => ['auth']], function () {
@@ -217,16 +229,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/staff', function () {
             return view('staff.dashboard');
         });
-
-        //Cuti
-        Route::resource('staffCuti', StaffCutiController::class);
-        Route::post('/staffCuti/tahun/', [StaffCutiController::class, 'tahunCuti'])->name('staffCuti.search');
-
-
-
-        //Pengajuan Cuti
-        Route::resource('staffPengajuanCuti', StaffPengajuanCutiController::class);
-        Route::put('/staffPengajuanCuti/keputusan/{data}', [StaffPengajuanCutiController::class, 'keputusan'])->name('staffPengajuanCuti.keputusan');
     });
     /**  End Menu Staff**/
 });

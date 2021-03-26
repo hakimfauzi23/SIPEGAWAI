@@ -38,49 +38,51 @@
                     </div>
                 </div>
 
+                <div class="panel-body">
 
-                <table class="table datatable-basic table-bordered table-striped table-hover">
-                    <thead class="bg-primary-300">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama</th>
-                            <th>Tipe Cuti</th>
-                            <th>Tgl Pengajuan</th>
-                            <th>Keterangan</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if ($pengajuan->count())
-                            @foreach ($pengajuan as $key => $p)
-                                <tr>
-                                    <td>{{ $p->id }}</td>
-                                    <td>{{ $p->pegawai->nama }}</td>
-                                    <td>{{ $p->tipe_cuti }}</td>
-                                    <td>{{ $p->tgl_pengajuan }}</td>
-                                    <td>{{ $p->ket }}</td>
-                                    <td class="text-center">
-                                        <ul class="icons-list">
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="icon-menu9"></i>
-                                                </a>
+                    <table class="table datatable-basic table-bordered table-striped table-hover">
+                        <thead class="bg-primary-300">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Tipe Cuti</th>
+                                <th>Tgl Pengajuan</th>
+                                <th>Keterangan</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ($pengajuan->count())
+                                @foreach ($pengajuan as $key => $p)
+                                    <tr>
+                                        <td>{{ $p->id }}</td>
+                                        <td>{{ $p->pegawai->nama }}</td>
+                                        <td>{{ $p->tipe_cuti }}</td>
+                                        <td>{{ $p->tgl_pengajuan }}</td>
+                                        <td>{{ $p->ket }}</td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
 
-                                                <ul class="dropdown-menu dropdown-menu-right">
-                                                    <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                                    <li><a href="{{ route('hrdPengajuanCuti.show', $encyrpt) }}"><i
-                                                                class="icon-file-eye"></i> Detail </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endif
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                                        <li><a href="{{ route('hrdPengajuanCuti.show', $encyrpt) }}"><i
+                                                                    class="icon-file-eye"></i> Detail </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

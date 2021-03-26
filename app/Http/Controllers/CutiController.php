@@ -115,7 +115,7 @@ class CutiController extends Controller
         $date2 = new DateTime($tgl_now);
 
         $interval = $date1->diff($date2);
-
+        
         return view('admin.cuti.details', [
             'id' => $id,
             'cuti' => $cuti,

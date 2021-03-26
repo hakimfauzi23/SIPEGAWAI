@@ -21,10 +21,11 @@ class DatabaseSeeder extends Seeder
             GroupMenuSeeder::class,
             RoleSeeder::class,
             PegawaiSeeder::class,
-            CutiSeeder::class,
-            PresensiHarianSeeder::class,
-            RiwayatJabatanSeeder::class,
-            RiwayatDivisiSeeder::class,
+            // CutiSeeder::class,
+            // PresensiHarianSeeder::class,
+            // RiwayatJabatanSeeder::class,
+            // RiwayatDivisiSeeder::class,
+            PeraturanSeeder::class,
         ]);
 
     }

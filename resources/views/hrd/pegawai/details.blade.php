@@ -63,12 +63,6 @@
                             <td>:</td>
                             <td>{{ $pegawai->email }}</td>
                         </tr>
-                        <tr>
-                            <td>Password</td>
-                            <td>:</td>
-                            <td>{{ $pegawai->password }}</td>
-                        </tr>
-
                     </table>
                 </div>
             </div>

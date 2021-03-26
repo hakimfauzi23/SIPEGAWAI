@@ -37,39 +37,41 @@
             </div>
         </div>
 
+        <div class="panel-body">
 
-        <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
-            <thead class="bg-primary-300">
-                <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Divisi</th>
-                    <th hidden>Status</th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if ($pegawai->count())
-                    @foreach ($pegawai as $key => $p)
-                        <tr>
-                            <td>{{ $p->id }}</td>
-                            <td>{{ $p->nama }}</td>
-                            <td>{{ $p->jabatan->nm_jabatan }}</td>
-                            <td>{{ $p->divisi->nm_divisi }}</td>
-                            <td hidden><span class="label label-success">Active</span></td>
-                            <td> <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                <a href="{{ route('riwayatDivisi.show', $encyrpt) }}" class="btn btn bg-info-300"><i
-                                        class=" icon-eye"></i> Lihat
-                                </a>
+            <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
+                <thead class="bg-primary-300">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Jabatan</th>
+                        <th>Divisi</th>
+                        <th hidden>Status</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($pegawai->count())
+                        @foreach ($pegawai as $key => $p)
+                            <tr>
+                                <td>{{ $p->id }}</td>
+                                <td>{{ $p->nama }}</td>
+                                <td>{{ $p->jabatan->nm_jabatan }}</td>
+                                <td>{{ $p->divisi->nm_divisi }}</td>
+                                <td hidden><span class="label label-success">Active</span></td>
+                                <td> <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                    <a href="{{ route('riwayatDivisi.show', $encyrpt) }}" class="btn btn bg-info-300"><i
+                                            class=" icon-eye"></i> Lihat
+                                    </a>
 
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
     <!-- /basic datatable -->
 

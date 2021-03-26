@@ -251,7 +251,7 @@
 
                 <div class="row">
                     <div class="col text-right">
-                        <legend class="text-semibold"> Data Pegawai <i class="icon-reading position-left"></i>
+                        <legend class="text-semibold"> Data Kepegawaian <i class=" icon-briefcase3 position-right"></i>
                         </legend>
                     </div>
                 </div>
@@ -290,7 +290,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Role</label>
                                         <select class="select" data-live-search="true" searchable="Search here.."
@@ -310,22 +309,6 @@
                                             </div>
                                         @endif
                                     </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Password</label>
-                                        <input type="text" name="password" class="form-control"
-                                            value="{{ $pegawai->password }}">
-
-                                        @if ($errors->has('password'))
-                                            <div class="text-danger">
-                                                {{ $errors->first('password') }}
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                </div>
                             </div>
 
                             <div class="form-group">

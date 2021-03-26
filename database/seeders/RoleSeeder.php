@@ -23,15 +23,15 @@ class RoleSeeder extends Seeder
 
             DB::table('role')->insert([
                 [
-                    'nm_role' => 'Super-Admin',
+                    'nm_role' => 'superAdmin',
                     'url' => '/admin',
                 ],
                 [
-                    'nm_role' => 'HRD',
+                    'nm_role' => 'hrd',
                     'url' => '/hrd',
                 ],
                 [
-                    'nm_role' => 'Staff',
+                    'nm_role' => 'staff',
                     'url' => '/staff',
                 ],
             ]);

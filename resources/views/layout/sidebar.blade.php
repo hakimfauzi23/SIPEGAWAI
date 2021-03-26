@@ -1,8 +1,42 @@
 <?php $user = Auth::user(); ?>
 
+
+<div class="staff">
+    <ul class="navigation navigation-main navigation-accordion">
+        <li class="navigation-header"><span>Menu Staff</span> <i class="icon-menu"></i></li>
+        <li class="<?php if (Route::is('staffCuti.index') || Route::is('staffCuti.show')) {
+            echo 'active';
+        } ?>"><a href="{{ route('staffCuti.index') }}"><i class="icon-history"></i> <span>Riwayat
+                    Pengajuan Cuti
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#"><i class="icon-furniture"></i> <span>Pengajuan Cuti</span>
+                @if ($jml_bawahan != 0)
+                    <span class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
+                @endif
+            </a>
+            <ul>
+                <li class="<?php if (Route::is('staffCuti.create')) {
+                    echo 'active';
+                } ?>"><a href="{{ route('staffCuti.create') }}">Buat Pengajuan Cuti</a>
+                </li>
+                @if ($jml_bawahan != 0)
+                    <li class="{{ Request::segment(1) === 'staffPengajuanCuti' ? 'active' : null }}"><a
+                            href="{{ route('staffPengajuanCuti.index') }}"> <span
+                                class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
+                            Pengajuan Cuti Pegawai</a>
+                    </li>
+                @endif
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
 <div class="admin" @if ($user->id_role != 1) {{ 'hidden' }} @endif>
     <ul class="navigation navigation-main navigation-accordion">
-
         <!-- Main -->
         <li class="navigation-header"><span>Menu Super Admin</span> <i class="icon-menu"></i></li>
         <li class="{{ Request::segment(1) === 'peraturan' ? 'active' : null }}"><a
@@ -106,40 +140,6 @@
             </ul>
         </li>
         <!-- /hrd -->
-
-    </ul>
-</div>
-
-<div class="hrd" @if ($user->id_role != 3) {{ 'hidden' }} @endif>
-    <ul class="navigation navigation-main navigation-accordion">
-        <li class="navigation-header"><span>Menu Staff</span> <i class="icon-menu"></i></li>
-        <li class="<?php if (Route::is('staffCuti.index') || Route::is('staffCuti.show')) {
-            echo 'active';
-        } ?>"><a href="{{ route('staffCuti.index') }}"><i class="icon-history"></i> <span>Riwayat
-                    Pengajuan Cuti
-                </span>
-            </a>
-        </li>
-        <li>
-            <a href="#"><i class="icon-furniture"></i> <span>Pengajuan Cuti</span>
-                @if ($jml_bawahan != 0)
-                    <span class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
-                @endif
-            </a>
-            <ul>
-                <li class="<?php if (Route::is('staffCuti.create')) {
-                    echo 'active';
-                } ?>"><a href="{{ route('staffCuti.create') }}">Buat Pengajuan Cuti</a>
-                </li>
-                @if ($jml_bawahan != 0)
-                    <li class="{{ Request::segment(1) === 'staffPengajuanCuti' ? 'active' : null }}"><a
-                            href="{{ route('staffPengajuanCuti.index') }}"> <span
-                                class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
-                            Pengajuan Cuti Pegawai</a>
-                    </li>
-                @endif
-            </ul>
-        </li>
 
     </ul>
 </div>

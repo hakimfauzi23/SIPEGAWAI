@@ -24,18 +24,19 @@ class PegawaiSeeder extends Seeder
         $agama = array('Islam', 'Kristen', 'Katholik', 'Buddha', 'Hindu', 'Protestan');
         $atasan = array('21030001', '21030002', '21030003');
 
-        for ($i = 1; $i <= 1; $i++) {
+        for ($i = 0; $i <= 2; $i++) {
             $id = IdGenerator::generate(['table' => 'pegawai', 'length' => 8, 'prefix' => date('ym')]);
             $jkp = $faker->numberBetween(0, 1);
             $jbtn = $faker->numberBetween(1, 9);
             $relg = $faker->numberBetween(0, 5);
-            $role = $faker->numberBetween(1, 1);
+            $role = [1, 2, 3];
+            $email = ['admin@gmail.com', 'hrd@gmail.com', 'staff@gmail.com'];
             $numAtasan = $faker->numberBetween(0, 2);
             $dvs = $faker->numberBetween(1, 11);
 
             DB::table('pegawai')->insert([
                 'id' => $id,
-                'id_role' => $role,
+                'id_role' => $role[$i],
                 'nik' => $faker->nik(),
                 'nama' => $faker->name,
                 'jk' => $jk[$jkp],
@@ -47,7 +48,7 @@ class PegawaiSeeder extends Seeder
                 'status' => $status[$jkp],
                 'jml_anak' => $relg,
                 'no_hp' => $faker->phoneNumber,
-                'email' => 'haniffauzi@gmail.com',
+                'email' => $email[$i],
                 'password' => bcrypt('123456'),
                 'tgl_masuk' => $faker->date,
                 'id_atasan' => NULL,

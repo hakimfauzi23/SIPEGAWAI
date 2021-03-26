@@ -72,7 +72,8 @@
         <div class="col">
             <div class="panel panel-flat">
                 <div class="panel-heading">
-                    <a href="{{ route('hrdPresensiHarian.create') }}"><i class="icon-file-plus"></i> Tambah Data Presensi Baru</a>
+                    <a href="{{ route('hrdPresensiHarian.create') }}"><i class="icon-file-plus"></i> Tambah Data Presensi
+                        Baru</a>
                     {{-- <h5 class="panel-title">List Data Presensi</h5> --}}
                     <div class="heading-elements">
                         <ul class="icons-list">
@@ -83,61 +84,62 @@
                     </div>
                 </div>
 
+                <div class="panel-body">
+                    <table class="table datatable-basic table-bordered table-striped table-hover">
+                        <thead class="bg-primary-300">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
+                                <th>Waktu Kerja</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ($presensi->count())
+                                @foreach ($presensi as $key => $p)
+                                    <tr>
+                                        <td>{{ $p->id }}</td>
+                                        <td>{{ $p->pegawai->nama }}</td>
+                                        <td>{{ $p->tanggal }}</td>
+                                        <td class="text-center"><span <?php if ($p->ket == 'Hadir') {
+                                                echo 'class="label bg-success"';
+                                                }
+                                                if ($p->ket == 'Alpha') {
+                                                echo 'class="label bg-danger"';
+                                                }
+                                                if ($p->ket == 'Cuti') {
+                                                echo 'class="label bg-info"';
+                                                }
+                                                ?>>{{ $p->ket }}</span></td>
+                                        <td>{{ $p->jam_dtg . ' - ' . $p->jam_plg }}</td>
+                                        <td class="text-center">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
 
-                <table class="table datatable-basic table-bordered table-striped table-hover">
-                    <thead class="bg-primary-300">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama</th>
-                            <th>Tanggal</th>
-                            <th>Keterangan</th>
-                            <th>Waktu Kerja</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if ($presensi->count())
-                            @foreach ($presensi as $key => $p)
-                                <tr>
-                                    <td>{{ $p->id }}</td>
-                                    <td>{{ $p->pegawai->nama }}</td>
-                                    <td>{{ $p->tanggal }}</td>
-                                    <td class="text-center"><span <?php if ($p->ket == 'Hadir') {
-                                            echo 'class="label bg-success"';
-                                            }
-                                            if ($p->ket == 'Alpha') {
-                                            echo 'class="label bg-danger"';
-                                            }
-                                            if ($p->ket == 'Cuti') {
-                                            echo 'class="label bg-info"';
-                                            }
-                                            ?>>{{ $p->ket }}</span></td>
-                                    <td>{{ $p->jam_dtg . ' - ' . $p->jam_plg }}</td>
-                                    <td class="text-center">
-                                        <ul class="icons-list">
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="icon-menu9"></i>
-                                                </a>
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                                        <li><a href="{{ route('hrdPresensiHarian.destroy', $encyrpt) }}"><i
+                                                                    class=" icon-trash"></i> Hapus</a>
+                                                        </li>
+                                                        <li><a href="{{ route('hrdPresensiHarian.edit', $encyrpt) }}"><i
+                                                                    class=" icon-pencil5"></i> Edit</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
 
-                                                <ul class="dropdown-menu dropdown-menu-right">
-                                                    <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                                    <li><a href="{{ route('hrdPresensiHarian.destroy', $encyrpt) }}"><i
-                                                                class=" icon-trash"></i> Hapus</a>
-                                                    </li>
-                                                    <li><a href="{{ route('hrdPresensiHarian.edit', $encyrpt) }}"><i
-                                                                class=" icon-pencil5"></i> Edit</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endif
-
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

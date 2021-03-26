@@ -37,52 +37,54 @@
             </div>
         </div>
 
+        <div class="panel-body">
 
-        <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
-            <thead class="bg-primary-300">
-                <tr>
-                    <th>ID</th>
-                    <th>Nama Jabatan</th>
-                    <th>Gaji</th>
-                    <th hidden></th>
-                    <th hidden></th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if ($jabatan->count())
-                    @foreach ($jabatan as $key => $p)
-                        <tr>
-                            <td>{{ $p->id }}</td>
-                            <td>{{ $p->nm_jabatan }}</td>
-                            <td>{{ $p->gaji_pokok }}</td>
-                            <td hidden></td>
-                            <td hidden><span class="label label-success">Active</span></td>
-                            <td class="text-center">
-                                <ul class="icons-list">
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="icon-menu9"></i>
-                                        </a>
+            <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
+                <thead class="bg-primary-300">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama Jabatan</th>
+                        <th>Gaji</th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($jabatan->count())
+                        @foreach ($jabatan as $key => $p)
+                            <tr>
+                                <td>{{ $p->id }}</td>
+                                <td>{{ $p->nm_jabatan }}</td>
+                                <td>{{ $p->gaji_pokok }}</td>
+                                <td hidden></td>
+                                <td hidden><span class="label label-success">Active</span></td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="icon-menu9"></i>
+                                            </a>
 
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                            <li><a href="{{ route('jabatan.destroy', $encyrpt) }}"><i
-                                                        class=" icon-trash"></i> Hapus</a>
-                                            </li>
-                                            <li><a href="{{ route('jabatan.edit', $encyrpt) }}"><i
-                                                        class=" icon-pencil5"></i> Edit</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                                <li><a href="{{ route('jabatan.destroy', $encyrpt) }}"><i
+                                                            class=" icon-trash"></i> Hapus</a>
+                                                </li>
+                                                <li><a href="{{ route('jabatan.edit', $encyrpt) }}"><i
+                                                            class=" icon-pencil5"></i> Edit</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
     <!-- /basic datatable -->
 

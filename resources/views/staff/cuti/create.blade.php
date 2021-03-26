@@ -17,7 +17,7 @@
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
                 <li> <i class="active icon-home2 position-left"></i> Pengajuan
-                        Cuti
+                    Cuti
                 </li>
             </ul>
         </div>
@@ -54,9 +54,8 @@
                         <label for="inputState">Tipe Cuti</label>
                         <select class=" select" name="tipe_cuti">
                             <option>Pilih Tipe Cuti</option>
-                            <option value="Tahunan"> Tahunan </option>
-                            <option value="Besar"> Besar </option>
-                            <option value="Bersama"> Bersama </option>
+                            <option value="Tahunan" @if ($years < 1 && $months < 12) {{ 'disabled' }} @endif> Tahunan </option>
+                            <option value="Besar" @if ($years < 6) {{ 'disabled' }} @endif> Besar </option>
                             <option value="Hamil"> Hamil </option>
                             <option value="Sakit"> Sakit </option>
                             <option value="Penting"> Penting </option>
