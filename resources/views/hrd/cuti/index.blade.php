@@ -65,7 +65,6 @@
             <div class="panel panel-flat">
                 <div class="panel-heading">
                     <a href="{{ route('hrdCuti.create') }}"><i class="icon-file-plus"></i> Tambah Data Cuti Baru</a>
-                    {{-- <h5 class="panel-title">List Data Cuti</h5> --}}
                     <div class="heading-elements">
                         <ul class="icons-list">
                             <li><a data-action="collapse"></a></li>
@@ -77,8 +76,8 @@
 
                 <div class="panel-body">
 
-                    <table class="table datatable-basic table-bordered table-striped table-hover">
-                        <thead class="bg-primary-300">
+                    <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
+                        <thead class="bg-primary">
                             <tr>
                                 <th>ID</th>
                                 <th>Nama</th>

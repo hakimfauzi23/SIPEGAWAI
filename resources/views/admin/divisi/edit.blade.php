@@ -46,12 +46,6 @@
             </div>
 
             <div class="panel-body">
-                <div class="row">
-                    <div class="col">
-                        <legend class="text-semibold"><i class="icon-pen-plus"></i> Data Divisi
-                        </legend>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label for="">Divisi</label>
                     <input type="text" name="nm_divisi" class="form-control" placeholder="Nama Divisi . . . "

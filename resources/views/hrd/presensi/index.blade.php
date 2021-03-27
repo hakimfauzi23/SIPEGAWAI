@@ -66,7 +66,6 @@
                 <div class="panel-heading">
                     <a href="{{ route('hrdPresensiHarian.create') }}"><i class="icon-file-plus"></i> Tambah Data Presensi
                         Baru</a>
-                    {{-- <h5 class="panel-title">List Data Presensi</h5> --}}
                     <div class="heading-elements">
                         <ul class="icons-list">
                             <li><a data-action="collapse"></a></li>
@@ -77,8 +76,8 @@
                 </div>
 
                 <div class="panel-body">
-                    <table class="table datatable-basic table-bordered table-striped table-hover">
-                        <thead class="bg-primary-300">
+                    <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
+                        <thead class="bg-primary">
                             <tr>
                                 <th>ID</th>
                                 <th>Nama</th>

@@ -40,7 +40,7 @@
         <div class="panel-body">
 
             <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
-                <thead class="bg-primary-300">
+                <thead class="bg-primary">
                     <tr>
                         <th>ID</th>
                         <th>Nama Jabatan</th>

@@ -40,7 +40,7 @@
 
 
                 <table class="table datatable-basic table-bordered table-striped table-hover">
-                    <thead class="bg-primary-300">
+                    <thead class="bg-primary">
                         <tr>
                             <th>ID</th>
                             <th>Nama</th>

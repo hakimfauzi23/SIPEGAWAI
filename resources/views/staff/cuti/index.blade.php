@@ -49,7 +49,7 @@
 
                 <div class="panel-body table-responsive">
                     <table class="table datatable-basic table-bordered table-striped table-hover ">
-                        <thead class="bg-primary-300">
+                        <thead class="bg-primary">
                             <tr>
                                 <th>Tipe Cuti</th>
                                 <th>Tgl Pengajuan</th>

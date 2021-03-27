@@ -40,8 +40,8 @@
 
                 <div class="panel-body">
 
-                    <table class="table datatable-basic table-bordered table-striped table-hover">
-                        <thead class="bg-primary-300">
+                    <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
+                        <thead class="bg-primary">
                             <tr>
                                 <th>ID</th>
                                 <th>Nama</th>

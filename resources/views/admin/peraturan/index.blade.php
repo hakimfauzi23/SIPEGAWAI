@@ -14,11 +14,6 @@
 
         </div>
 
-        <div class="breadcrumb-line">
-            <ul class="breadcrumb">
-                <li><i class="icon-home2 position-left"></i> Kebijakan Kantor</li>
-            </ul>
-        </div>
     </div>
 @endsection
 
