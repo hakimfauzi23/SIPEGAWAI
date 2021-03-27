@@ -55,91 +55,8 @@ class RekapPresensiController extends Controller
     {
         //
         $id = Crypt::decryptString($data);
-        $hari = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
-        $peraturan = Peraturan::find(1);
-        $jam_masuk = $peraturan->jam_masuk;
-        $jam_plg = $peraturan->jam_plg;
-
-
-
-        $telat = Presensi_harian::where('id_pegawai', $id)
-            ->whereMonth('tanggal', date("m"))
-            ->where('jam_dtg', '>', $jam_masuk)
-            ->count();
-
-        $tepatWaktu = Presensi_harian::where('id_pegawai', $id)
-            ->whereMonth('tanggal', date("m"))
-            ->where('jam_dtg', '<', $jam_masuk)
-            ->where('jam_plg', '>', $jam_plg)
-            ->count();
-
-        $pulangAwal = Presensi_harian::where('id_pegawai', $id)
-            ->whereMonth('tanggal', date("m"))
-            ->where('jam_plg', '<', $jam_plg)
-            ->count();
-
-        $alpha = Presensi_harian::where('id_pegawai', $id)
-            ->whereMonth('tanggal', date("m"))
-            ->where('ket', "Alpha")
-            ->count();
-
-
-        $pegawai = Pegawai::find($id);
-        $hadir = ($hari - $alpha) / $hari * 100;
-        $persentaseHadir = number_format($hadir, 2);
-        $TdkHadir = 100 - $persentaseHadir;
-        $persentaseTdkHadir = number_format($TdkHadir, 2);
-
-        $riwayatTdkHadir = Presensi_harian::where('id_pegawai', $id)
-            ->where('ket', '!=', 'Hadir')
-            ->whereMonth('tanggal', date('m'))
-            ->orderBy('tanggal', 'desc')
-            ->get();
-
-        $riwayatTdkDisiplin = Presensi_harian::where('id_pegawai', $id)
-            ->whereMonth('tanggal', date('m'))
-            ->where(function ($query) use ($jam_masuk, $jam_plg) {
-                $query->where('jam_dtg', '>', $jam_masuk)
-                    ->orWhere('jam_plg', '<', $jam_plg);
-            })->get();
-
-        $months = [
-            'January', 'Febuary', 'March',
-            'April', 'May', 'June',
-            'July', 'August', 'September',
-            'October', 'November', 'December'
-        ];
-
-        $bulanIni = date("F");
-
-        return view('admin.rekapPresensi.detail', [
-            'pegawai' => $pegawai,
-
-            'persentaseHadir' => $persentaseHadir,
-            'persentaseTdkHadir' => $persentaseTdkHadir,
-            'riwayatTdkHadir' => $riwayatTdkHadir,
-
-
-            'telat' => $telat,
-            'tepatWaktu' => $tepatWaktu,
-            'pulangAwal' => $pulangAwal,
-            'riwayatTdkDisiplin' => $riwayatTdkDisiplin,
-
-
-            'jam_masuk' => $jam_masuk,
-            'jam_plg' => $jam_plg,
-
-
-            'months' => $months,
-            'bulanIni' => $bulanIni,
-
-        ]);
-    }
-
-    public function showMonth($data, $thisMonth, $intMonth)
-    {
-        //
-        $id = Crypt::decryptString($data);
+        $intMonth = date('m');
+        $year = date('Y');
         $hari = cal_days_in_month(CAL_GREGORIAN, $intMonth, date('Y'));
         $peraturan = Peraturan::find(1);
         $jam_masuk = $peraturan->jam_masuk;
@@ -148,22 +65,26 @@ class RekapPresensiController extends Controller
 
         $telat = Presensi_harian::where('id_pegawai', $id)
             ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
             ->where('jam_dtg', '>', $jam_masuk)
             ->count();
 
         $tepatWaktu = Presensi_harian::where('id_pegawai', $id)
             ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
             ->where('jam_dtg', '<', $jam_masuk)
             ->where('jam_plg', '>', $jam_plg)
             ->count();
 
         $pulangAwal = Presensi_harian::where('id_pegawai', $id)
             ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
             ->where('jam_plg', '<', $jam_plg)
             ->count();
 
         $alpha = Presensi_harian::where('id_pegawai', $id)
             ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
             ->where('ket', "Alpha")
             ->count();
 
@@ -177,24 +98,26 @@ class RekapPresensiController extends Controller
         $riwayatTdkHadir = Presensi_harian::where('id_pegawai', $id)
             ->where('ket', '!=', 'Hadir')
             ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
             ->orderBy('tanggal', 'desc')
             ->get();
 
         $riwayatTdkDisiplin = Presensi_harian::where('id_pegawai', $id)
             ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
             ->where(function ($query) use ($jam_masuk, $jam_plg) {
                 $query->where('jam_dtg', '>', $jam_masuk)
                     ->orWhere('jam_plg', '<', $jam_plg);
             })->get();
 
         $months = [
-            'January', 'Febuary', 'March',
-            'April', 'May', 'June',
-            'July', 'August', 'September',
-            'October', 'November', 'December'
+            'January' => 1, 'Febuary' => 2, 'March' => 3,
+            'April' => 4, 'May' => 5, 'June' => 6,
+            'July' => 7, 'August' => 8, 'September' => 9,
+            'October' => 10, 'November' => 11, 'December' => 12
         ];
 
-        $bulanIni = $thisMonth;
+        $bulanIni = $intMonth;
 
         return view('admin.rekapPresensi.detail', [
             'pegawai' => $pegawai,
@@ -216,6 +139,100 @@ class RekapPresensiController extends Controller
 
             'months' => $months,
             'bulanIni' => $bulanIni,
+            'tahunIni' => $year,
+
+        ]);
+    }
+
+    public function search(Request $request, $data)
+    {
+        //
+        $id = Crypt::decryptString($data);
+        $intMonth = $request->month;
+        $year = $request->year;
+        $hari = cal_days_in_month(CAL_GREGORIAN, $intMonth, $year);
+        $peraturan = Peraturan::find(1);
+        $jam_masuk = $peraturan->jam_masuk;
+        $jam_plg = $peraturan->jam_plg;
+
+
+        $telat = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
+            ->where('jam_dtg', '>', $jam_masuk)
+            ->count();
+
+        $tepatWaktu = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
+            ->where('jam_dtg', '<', $jam_masuk)
+            ->where('jam_plg', '>', $jam_plg)
+            ->count();
+
+        $pulangAwal = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
+            ->where('jam_plg', '<', $jam_plg)
+            ->count();
+
+        $alpha = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
+            ->where('ket', "Alpha")
+            ->count();
+
+
+        $pegawai = Pegawai::find($id);
+        $hadir = ($hari - $alpha) / $hari * 100;
+        $persentaseHadir = number_format($hadir, 2);
+        $TdkHadir = 100 - $persentaseHadir;
+        $persentaseTdkHadir = number_format($TdkHadir, 2);
+
+        $riwayatTdkHadir = Presensi_harian::where('id_pegawai', $id)
+            ->where('ket', '!=', 'Hadir')
+            ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
+            ->orderBy('tanggal', 'desc')
+            ->get();
+
+        $riwayatTdkDisiplin = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
+            ->where(function ($query) use ($jam_masuk, $jam_plg) {
+                $query->where('jam_dtg', '>', $jam_masuk)
+                    ->orWhere('jam_plg', '<', $jam_plg);
+            })->get();
+
+        $months = [
+            'January' => 1, 'Febuary' => 2, 'March' => 3,
+            'April' => 4, 'May' => 5, 'June' => 6,
+            'July' => 7, 'August' => 8, 'September' => 9,
+            'October' => 10, 'November' => 11, 'December' => 12
+        ];
+
+        $bulanIni = $intMonth;
+
+        return view('admin.rekapPresensi.detail', [
+            'pegawai' => $pegawai,
+
+            'persentaseHadir' => $persentaseHadir,
+            'persentaseTdkHadir' => $persentaseTdkHadir,
+            'riwayatTdkHadir' => $riwayatTdkHadir,
+
+
+            'telat' => $telat,
+            'tepatWaktu' => $tepatWaktu,
+            'pulangAwal' => $pulangAwal,
+            'riwayatTdkDisiplin' => $riwayatTdkDisiplin,
+
+
+            'jam_masuk' => $jam_masuk,
+            'jam_plg' => $jam_plg,
+
+
+            'months' => $months,
+            'bulanIni' => $bulanIni,
+            'tahunIni' => $year,
 
         ]);
     }

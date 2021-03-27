@@ -60,8 +60,11 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // !!!!!DI SINI ADALAH ROUTES UNTUK MENU REKAP DATA CUTI PRESENSI!!!!! //
 //RekapDataPresensi
+// Route::post('/rekapPresensi/{data}/search', [RekapPresensiController::class, 'search'])->name('rekapPresensi.search');
 Route::resource('rekapPresensi', RekapPresensiController::class);
-Route::get('/rekapPresensi/{data}/showMonth/{thisMonth}/{intMonth}', [RekapPresensiController::class, 'showMonth'])->name('rekapPresensi.showMonth');
+// Route::get('/rekapPresensi/{data}/showMonth/{thisMonth}/{intMonth}', [RekapPresensiController::class, 'showMonth'])->name('rekapPresensi.showMonth');
+Route::get('/rekapPresensi/tahun/{data}', [RekapPresensiController::class, 'search'])->name('rekapPresensi.search');
+
 
 //RekapCutiPegawai
 Route::resource('rekapCuti', RekapCutiController::class);

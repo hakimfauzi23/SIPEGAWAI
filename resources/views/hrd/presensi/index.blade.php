@@ -28,14 +28,6 @@
     <div class="row">
         <div class="col">
             <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h5 class="panel-title">Tanggal</h5>
-                    <div class="heading-elements">
-                        <ul class="icons-list">
-                            <li><a data-action="collapse"></a></li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="panel-body">
 
                     <form method="get" action="{{ route('hrdPresensiHarian.search') }}">
@@ -58,7 +50,7 @@
                         </div>
                         <div class="mt-3"></div>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Submit form <i
+                            <button type="submit" class="btn btn-primary">Browse <i
                                     class="icon-arrow-right14 position-right"></i></button>
                         </div>
                     </form>

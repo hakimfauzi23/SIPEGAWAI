@@ -32,9 +32,6 @@
                 <h5 class="panel-title"> Statistik Cuti Per Bulan</h5>
                 <div class="heading-elements">
                     <ul class="icons-list">
-                        <li><a data-action="collapse"></a></li>
-                        <li><a data-action="reload"></a></li>
-                        <li><a data-action="close"></a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class=" icon-more2"></i>

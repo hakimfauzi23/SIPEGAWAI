@@ -251,7 +251,7 @@
 
                 <div class="row">
                     <div class="col text-right">
-                        <legend class="text-semibold"> Data Pegawai <i class="icon-reading position-left"></i>
+                        <legend class="text-semibold"> Data Pegawai <i class="icon-briefcase3 position-right"></i>
                         </legend>
                     </div>
                 </div>

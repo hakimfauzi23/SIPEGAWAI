@@ -32,11 +32,43 @@
         $encyrpt = Crypt::encryptString($pegawai->id);
         $i = 1;
         ?>
-        @foreach ($months as $item)
-            <a href="{{ route('rekapPresensi.showMonth', ['data' => $encyrpt, 'thisMonth' => $item, 'intMonth' => $i++]) }}"
-                @if ($bulanIni == $item) class="btn btn-success mr-3"
-            @else class="btn btn-info mr-3" @endif>{{ $item }}</a>
-        @endforeach
+    </div>
+    <div class="panel">
+        <div class="panel-body">
+            <div class="col-mt-3"></div>
+            <form method="get" action="{{ route('rekapPresensi.search', $encyrpt) }}">
+
+                {{ csrf_field() }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Tahun</label>
+                            <input class="form-control" type="text" id="datepicker" name="year" value="{{ $tahunIni }}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Bulan</label>
+                            <select class="select" data-live-search="true" searchable="Search here.." name="month">
+                                <option>Pilih Bulan</option>
+                                @foreach ($months as $value => $key)
+                                    <option value="{{ $key }}" {{ $bulanIni == $key ? 'selected' : '' }}>
+                                        {{ $value }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3"></div>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Browse <i
+                            class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </form>
+
+        </div>
     </div>
 
     <div class="row">
@@ -192,12 +224,20 @@
 
 
     @section('custom_script')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+        <script>
+            $("#datepicker").datepicker({
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years"
+            });
 
+        </script>
         <script>
             var oilCanvas = document.getElementById("chartPersentase");
 
-            Chart.defaults.global.defaultFontFamily = "Lato";
-            Chart.defaults.global.defaultFontSize = 18;
+            Chart.defaults.global.defaultFontColor = 'black';
+            Chart.defaults.global.defaultFontSize = 13;
 
             var oilData = {
                 labels: [
