@@ -54,8 +54,8 @@
                         <label for="inputState">Tipe Cuti</label>
                         <select class=" select" name="tipe_cuti">
                             <option>Pilih Tipe Cuti</option>
-                            <option value="Tahunan" @if ($years < 1 && $months < 12) {{ 'disabled' }} @endif> Tahunan </option>
-                            <option value="Besar" @if ($years < 6) {{ 'disabled' }} @endif> Besar </option>
+                            <option value="Tahunan" @if ($months < $syarat_bulan_cuti_tahunan) {{ 'disabled' }} @endif> Tahunan </option>
+                            <option value="Besar" @if ($months < $syarat_bulan_cuti_besar) {{ 'disabled' }} @endif> Besar </option>
                             <option value="Hamil"> Hamil </option>
                             <option value="Sakit"> Sakit </option>
                             <option value="Penting"> Penting </option>

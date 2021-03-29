@@ -191,6 +191,34 @@ class PeraturanController extends Controller
         return redirect(route('peraturan.index'));
     }
 
+    public function syarTahunan(Request $request, $data)
+    {
+        $id = Crypt::decrypt($data);
+
+        $peraturan = Peraturan::find($id);
+
+        $peraturan->syarat_bulan_cuti_tahunan = $request->syarat_bulan_cuti_tahunan;
+        $peraturan->save();
+
+        Alert::success('success', ' Berhasil Update Data !');
+        return redirect(route('peraturan.index'));
+    }
+
+
+    public function syarBesar(Request $request, $data)
+    {
+        $id = Crypt::decrypt($data);
+
+        $peraturan = Peraturan::find($id);
+
+        $peraturan->syarat_bulan_cuti_besar = $request->syarat_bulan_cuti_besar;
+        $peraturan->save();
+
+        Alert::success('success', ' Berhasil Update Data !');
+        return redirect(route('peraturan.index'));
+    }
+
+
 
     /**
      * Remove the specified resource from storage.

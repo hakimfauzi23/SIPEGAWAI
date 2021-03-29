@@ -29,6 +29,9 @@ class PeraturanSeeder extends Seeder
                 'jml_cuti_hamil' => 30,
                 'jml_cuti_sakit' => 30,
                 'jml_cuti_penting' => 15,
+                'syarat_bulan_cuti_tahunan' => 12,
+                'syarat_bulan_cuti_besar' => 60,
+
             ]);
         }
     }

@@ -237,7 +237,6 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
                 <div class="panel-body text-center">
                     <h3> {{ $peraturan->jml_cuti_hamil }} Hari</h3>
@@ -246,8 +245,64 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel bg-warning">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Syarat Lama Kerja Untuk Cuti Tahunan</h5>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class=" icon-more2"></i>
+                                </a>
 
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a href="" data-toggle="modal" data-target="#modal_form_syarTahunan"> <i
+                                                class=" icon-pencil7"></i> Edit </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body text-center">
+                    <h3> {{ $peraturan->syarat_bulan_cuti_tahunan }}
+                        Bulan </h3>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-md-6">
+            <div class="panel bg-success">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Syarat Lama Kerja Untuk Cuti Besar</h5>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class=" icon-more2"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a href="" data-toggle="modal" data-target="#modal_form_syarBesar"> <i
+                                                class=" icon-pencil7"></i> Edit </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body text-center">
+                    <h3> {{ $peraturan->syarat_bulan_cuti_besar }}
+                        Bulan </h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     {{-- MODAL SECTION --}}
 
@@ -499,6 +554,76 @@
                             <label>Batas Cuti Hamil </label>
                             <input name="jml_cuti_hamil" type="number" class="form-control"
                                 value="{{ $peraturan->jml_cuti_hamil }}">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /vertical form modal -->
+
+    <!-- SyaratCutiTahunan form modal -->
+    <div id="modal_form_syarTahunan" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Edit Syarat Cuti Tahunan </h5>
+                </div>
+                <?php $id = Crypt::encrypt($peraturan->id); ?>
+                <form action="{{ route('peraturan.editSyarTahunan', $id) }}" method="POST">
+
+                    {{ csrf_field() }}
+                    {{ method_field('PUT') }}
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Bulan </label>
+                                <input name="syarat_bulan_cuti_tahunan" type="number" class="form-control"
+                                    value="{{ $peraturan->syarat_bulan_cuti_tahunan }}"
+                                    placeholder="Kosongi Apabila 0 bulan">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /vertical form modal -->
+
+
+    <!-- SyaratCutiBesar form modal -->
+    <div id="modal_form_syarBesar" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Edit Syarat Cuti Besar </h5>
+                </div>
+                <?php $id = Crypt::encrypt($peraturan->id); ?>
+                <form action="{{ route('peraturan.editSyarBesar', $id) }}" method="POST">
+
+                    {{ csrf_field() }}
+                    {{ method_field('PUT') }}
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Bulan </label>
+                                <input name="syarat_bulan_cuti_besar" type="number" class="form-control"
+                                    value="{{ $peraturan->syarat_bulan_cuti_besar }}"
+                                    placeholder="Kosongi Apabila 0 bulan">
+                            </div>
                         </div>
                     </div>
 

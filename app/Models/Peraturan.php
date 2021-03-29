@@ -20,5 +20,7 @@ class Peraturan extends Model
         'jml_cuti_hamil',
         'jml_cuti_sakit',
         'jml_cuti_penting',
+        'syarat_bulan_cuti_tahunan',
+        'syarat_bulan_cuti_besar',
     ];
 }

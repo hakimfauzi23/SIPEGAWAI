@@ -23,6 +23,9 @@ class CreatePeraturansTable extends Migration
             $table->integer('jml_cuti_hamil')->unsigned()->nullable()->default(12);
             $table->integer('jml_cuti_sakit')->unsigned()->nullable()->default(12);
             $table->integer('jml_cuti_penting')->unsigned()->nullable()->default(12);
+            $table->integer('syarat_bulan_cuti_tahunan')->unsigned()->nullable()->default(0);
+            $table->integer('syarat_bulan_cuti_besar')->unsigned()->nullable()->default(0);
+            $table->timestamps();
         });
     }
 

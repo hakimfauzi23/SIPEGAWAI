@@ -161,6 +161,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/peraturan/editCutiSakit/{data}', [PeraturanController::class, 'cutiSakit'])->name('peraturan.editCutiSakit');
         Route::put('/peraturan/editCutiBesar/{data}', [PeraturanController::class, 'cutiBesar'])->name('peraturan.editCutiBesar');
         Route::put('/peraturan/editCutiHamil/{data}', [PeraturanController::class, 'cutiHamil'])->name('peraturan.editCutiHamil');
+        Route::put('/peraturan/editSyarTahunan/{data}', [PeraturanController::class, 'syarTahunan'])->name('peraturan.editSyarTahunan');
+        Route::put('/peraturan/editSyarBesar/{data}', [PeraturanController::class, 'syarBesar'])->name('peraturan.editSyarBesar');
     });
     /**  End Menu Admin **/
 
@@ -185,6 +187,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/hrdPeraturan/editCutiSakit/{data}', [HrdPeraturanController::class, 'cutiSakit'])->name('hrdPeraturan.editCutiSakit');
         Route::put('/hrdPeraturan/editCutiBesar/{data}', [HrdPeraturanController::class, 'cutiBesar'])->name('hrdPeraturan.editCutiBesar');
         Route::put('/hrdPeraturan/editCutiHamil/{data}', [HrdPeraturanController::class, 'cutiHamil'])->name('hrdPeraturan.editCutiHamil');
+        Route::put('/hrdPeraturan/editSyarTahunan/{data}', [HrdPeraturanController::class, 'syarTahunan'])->name('hrdPeraturan.editSyarTahunan');
+        Route::put('/hrdPeraturan/editSyarBesar/{data}', [HrdPeraturanController::class, 'syarBesar'])->name('hrdPeraturan.editSyarBesar');
 
 
         //Pegawai

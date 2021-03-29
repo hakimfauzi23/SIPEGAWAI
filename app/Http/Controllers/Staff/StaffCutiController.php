@@ -1246,21 +1246,40 @@ class StaffCutiController extends Controller
     public function create()
     {
         //
+        $peraturan = Peraturan::find(1);
+
         $tgl_masuk = Auth::user()->tgl_masuk;
         $tgl_now = date("Y-m-d");
 
-        $date1 = new DateTime($tgl_masuk);
-        $date2 = new DateTime($tgl_now);
+        $ts1 = strtotime($tgl_masuk);
+        $ts2 = strtotime($tgl_now);
 
-        $interval = $date1->diff($date2);
+        $year1 = date('Y', $ts1);
+        $year2 = date('Y', $ts2);
 
-        $months = $interval->m;
-        $years = $interval->y;
+        $month1 = date('m', $ts1);
+        $month2 = date('m', $ts2);
 
-        // dd($months);
+        $months = (($year2 - $year1) * 12) + ($month2 - $month1);
+
+        // $date1 = new DateTime($tgl_masuk);
+        // $date2 = new DateTime($tgl_now);
+
+        // $interval = $date1->diff($date2);
+
+        // $months = $interval->m;
+        // $years = $interval->y;
+
+        $syarat_bulan_cuti_tahunan = $peraturan->syarat_bulan_cuti_tahunan;
+
+        $syarat_bulan_cuti_besar = $peraturan->syarat_bulan_cuti_besar;
+
         return view('staff.cuti.create', [
             'months' => $months,
-            'years' => $years,
+
+            'syarat_bulan_cuti_tahunan' => $syarat_bulan_cuti_tahunan,
+
+            'syarat_bulan_cuti_besar' => $syarat_bulan_cuti_besar,
         ]);
     }
 
