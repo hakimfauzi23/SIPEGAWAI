@@ -14,7 +14,7 @@
                                 {{ __('A fresh verification link has been sent to your email address.') }}
                             </div>
                         @endif
-                        <a href="http://127.0.0.1:8000/reset-password/{{ $token }}">Klik Disini</a>.
+                        <a href="{{ URL::to('/') }}/reset-password/{{ $token }}">Klik Disini</a>.
                     </div>
                 </div>
             </div>

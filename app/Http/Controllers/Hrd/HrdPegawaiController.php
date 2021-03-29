@@ -278,7 +278,6 @@ class HrdPegawaiController extends Controller
             $pegawai->id_jabatan = $request->id_jabatan;
             $pegawai->id_divisi = $request->id_divisi;
             $pegawai->tgl_masuk = $request->tgl_masuk;
-            $pegawai->password = $request->password;
             $pegawai->path = $imgname;
             $pegawai->save();
 
@@ -340,7 +339,6 @@ class HrdPegawaiController extends Controller
             $pegawai->id_jabatan = $request->id_jabatan;
             $pegawai->id_divisi = $request->id_divisi;
             $pegawai->tgl_masuk = $request->tgl_masuk;
-            $pegawai->password = $request->password;
             $pegawai->save();
 
 
