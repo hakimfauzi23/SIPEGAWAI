@@ -39,12 +39,17 @@
     <ul class="navigation navigation-main navigation-accordion">
         <!-- Main -->
         <li class="navigation-header"><span>Menu Super Admin</span> <i class="icon-menu"></i></li>
+        <li class="{{ Request::segment(1) === 'superAdmin' ? 'active' : null }}"><a
+                href="{{ route('superAdmin.index') }}"><i class="icon-rocket"></i> <span>Dashboard</span></a>
+        </li>
         <li class="{{ Request::segment(1) === 'peraturan' ? 'active' : null }}"><a
                 href="{{ route('peraturan.index') }}"><i class=" icon-info3"></i> <span>Kebijakan Cuti & Jam
-                    Kantor</span></a></li>
+                    Kantor</span></a>
+        </li>
         <li class="{{ Request::segment(1) === 'pegawai' ? 'active' : null }}"><a
                 href="{{ route('pegawai.index') }}"><i class="icon-users" title="Data Pegawai"></i><span>Data
-                    Pegawai</span></a></li>
+                    Pegawai</span></a>
+        </li>
         <li>
             <a href="#"><i class="icon-user-tie"></i> <span>Data Jabatan</span></a>
             <ul>
@@ -52,7 +57,8 @@
                         href="{{ route('jabatan.index') }}">List Data Jabatan</a>
                 </li>
                 <li class="{{ Request::segment(1) === 'riwayatJabatan' ? 'active' : null }}"><a
-                        href="{{ route('riwayatJabatan.index') }}">Data Riwayat Jabatan</a></li>
+                        href="{{ route('riwayatJabatan.index') }}">Data Riwayat Jabatan</a>
+                </li>
             </ul>
         </li>
         <li>
@@ -62,7 +68,8 @@
                         href="{{ route('divisi.index') }}">List Data Divisi</a>
                 </li>
                 <li class="{{ Request::segment(1) === 'riwayatDivisi' ? 'active' : null }}"><a
-                        href="{{ route('riwayatDivisi.index') }}">Data Riwayat Divisi</a></li>
+                        href="{{ route('riwayatDivisi.index') }}">Data Riwayat Divisi</a>
+                </li>
             </ul>
         </li>
 

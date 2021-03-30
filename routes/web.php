@@ -26,6 +26,7 @@ use PhpOffice\PhpSpreadsheet\Chart\Layout;
 
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
@@ -100,9 +101,7 @@ Route::put('/staffPengajuanCuti/keputusan/{data}', [StaffPengajuanCutiController
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['cek_login:superAdmin']], function () {
 
-        Route::get('/superAdmin', function () {
-            return view('admin.dashboard');
-        });
+        Route::resource('superAdmin', Dashboard::class);
 
         // !!!!!DI SINI ADALAH ROUTES UNTUK MENU ADMIN!!!!! //
 

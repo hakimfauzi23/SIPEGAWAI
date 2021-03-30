@@ -40,7 +40,6 @@
 
 
         <div class="panel-body">
-
             <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
                 <thead class="bg-primary">
                     <tr>
@@ -86,7 +85,6 @@
                             </tr>
                         @endforeach
                     @endif
-
                 </tbody>
             </table>
         </div>
