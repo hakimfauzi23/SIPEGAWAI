@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminHrdDashboardController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CutiController;
 use Illuminate\Support\Facades\Route;
@@ -96,6 +97,9 @@ Route::resource('staffPengajuanCuti', StaffPengajuanCutiController::class);
 Route::put('/staffPengajuanCuti/keputusan/{data}', [StaffPengajuanCutiController::class, 'keputusan'])->name('staffPengajuanCuti.keputusan');
 /**  End Route Karyawan**/
 
+// !!!!!DI SINI ADALAH ROUTES UNTUK DASHBOARD STAFF Untuk HRD & ADMIN!!!!! //
+Route::resource('PegawaiDashboard', AdminHrdDashboardController::class);
+Route::post('/PegawaiDashboard/pres/', [AdminHrdDashboardController::class, 'presensi'])->name('PegawaiDashboard.presensi');
 
 ### END MENU UNTUK SEMUA ROLE ###
 
@@ -240,29 +244,3 @@ Route::group(['middleware' => ['auth']], function () {
     });
     /**  End Menu Staff**/
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Route::get('send-mail', function () {
-
-    //     $details = [
-    //         'title' => 'Mail from ItSolutionStuff.com',
-    //         'body' => 'This is for testing email using smtp'
-    //     ];
-
-    //     Mail::to('mr.expendables25@gmail.com')->send(new \App\Mail\MyTestMail($details));
-
-    //     dd("Email is Sent.");
-    // });

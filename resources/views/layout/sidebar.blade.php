@@ -4,9 +4,17 @@
 <div class="staff">
     <ul class="navigation navigation-main navigation-accordion">
         <li class="navigation-header"><span>Menu Staff</span> <i class="icon-menu"></i></li>
-        <li class="{{ Request::segment(1) === 'staff' ? 'active' : null }}"><a href="{{ route('staff.index') }}"><i
-                    class="icon-rocket"></i> <span>Dashboard</span></a>
-        </li>
+        @if ($user->id_role != 3)
+            <li class="{{ Request::segment(1) === 'PegawaiDashboard' ? 'active' : null }}"><a
+                    href="{{ route('PegawaiDashboard.index') }}"><i class="icon-rocket"></i>
+                    <span>Dashboard</span></a>
+            </li>
+        @else
+            <li class="{{ Request::segment(1) === 'staff' ? 'active' : null }}"><a
+                    href="{{ route('staff.index') }}"><i class="icon-rocket"></i>
+                    <span>Dashboard</span></a>
+            </li>
+        @endif
         <li class="<?php if (Route::is('staffCuti.index') || Route::is('staffCuti.show')) {
             echo 'active';
         } ?>"><a href="{{ route('staffCuti.index') }}"><i class="icon-history"></i> <span>Riwayat

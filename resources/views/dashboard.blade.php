@@ -23,7 +23,7 @@
             <div class="panel-heading">
                 <h5 class="panel-title">Persentase Kehadiran </h5>
                 <div class="heading-elements">
-                    <form class="heading-form" method="post" action="{{ route('staff.presensi') }}">
+                    <form class="heading-form" method="post" action="{{ route('PegawaiDashboard.presensi') }}">
                         @csrf
                         <div class="form-group">
                             <select class="select" name="month" onchange="this.form.submit();">
