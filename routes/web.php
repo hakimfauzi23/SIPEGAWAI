@@ -32,6 +32,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\Staff\StaffCutiController;
+use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\Staff\StaffPengajuanCutiController;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -232,9 +233,9 @@ Route::group(['middleware' => ['auth']], function () {
         /*
         Route Khusus untuk role Staff
     	*/
-        Route::get('/staff', function () {
-            return view('staff.dashboard');
-        });
+
+        Route::resource('staff', StaffDashboardController::class);
+        Route::post('/staff/pres/', [StaffDashboardController::class, 'presensi'])->name('staff.presensi');
     });
     /**  End Menu Staff**/
 });

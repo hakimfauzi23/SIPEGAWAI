@@ -4,6 +4,9 @@
 <div class="staff">
     <ul class="navigation navigation-main navigation-accordion">
         <li class="navigation-header"><span>Menu Staff</span> <i class="icon-menu"></i></li>
+        <li class="{{ Request::segment(1) === 'staff' ? 'active' : null }}"><a href="{{ route('staff.index') }}"><i
+                    class="icon-rocket"></i> <span>Dashboard</span></a>
+        </li>
         <li class="<?php if (Route::is('staffCuti.index') || Route::is('staffCuti.show')) {
             echo 'active';
         } ?>"><a href="{{ route('staffCuti.index') }}"><i class="icon-history"></i> <span>Riwayat

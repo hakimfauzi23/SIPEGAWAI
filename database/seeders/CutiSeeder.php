@@ -24,16 +24,16 @@ class CutiSeeder extends Seeder
         $stat = array('Ditolak Atasan', 'Disetujui Atasan', 'Disetujui HRD', 'Ditolak HRD', 'Diproses');
 
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             // $id = DB::table('pegawai')->select('id')->where('id', '==', '21020001');
 
             DB::table('cuti')->insert([
 
-                'id_pegawai' => date("ym") . "0001",
-                'tipe_cuti' => $tp_cuti[$faker->numberBetween(2, 3)],
+                'id_pegawai' => date("ym") . "0003",
+                'tipe_cuti' => $tp_cuti[$faker->numberBetween(0, 5)],
                 // 'tgl_pengajuan' => $faker->date,
-                'tgl_pengajuan' => date("2022-5-d"),
-                'tgl_mulai' => date("2022-5-d"),
+                'tgl_pengajuan' => date("2021-m-03"),
+                'tgl_mulai' => date("2021-m-02"),
                 'tgl_selesai' => $faker->date,
                 'ket' => $faker->sentence(5),
                 'status' => $stat[2],
