@@ -112,6 +112,9 @@
     <ul class="navigation navigation-main navigation-accordion">
         <!-- hrd -->
         <li class="navigation-header"><span>Menu HRD</span> <i class="icon-menu"></i></li>
+        <li class="{{ Request::segment(1) === 'hrd' ? 'active' : null }}"><a href="{{ route('hrd.index') }}"><i
+                    class="icon-rocket"></i> <span>Dashboard</span></a>
+        </li>
         <li class="{{ Request::segment(1) === 'hrdPeraturan' ? 'active' : null }}"><a
                 href="{{ route('hrdPeraturan.index') }}"><i class=" icon-info3"></i> <span>Kebijakan Cuti & Jam
                     Kantor</span></a></li>

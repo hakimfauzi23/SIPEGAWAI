@@ -29,6 +29,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\Hrd\HrdDashboardController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\Staff\StaffCutiController;
@@ -173,9 +174,9 @@ Route::group(['middleware' => ['auth']], function () {
         /*
         Route Khusus untuk role HRD
     	*/
-        Route::get('/hrd', function () {
-            return view('hrd.dashboard');
-        });
+
+        Route::resource('hrd', HrdDashboardController::class);
+        Route::post('/hrd/grafKehadiran/', [HrdDashboardController::class, 'kehadiran'])->name('hrd.grafKehadiran');
 
         // Peraturan 
         Route::resource('hrdPeraturan', HrdPeraturanController::class);
