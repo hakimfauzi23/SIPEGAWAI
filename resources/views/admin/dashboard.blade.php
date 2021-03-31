@@ -160,7 +160,7 @@
             </div>
 
             <div class="panel-body">
-                <div class="text-right" style="height:250px">
+                <div class="text-right">
                     <canvas id="chartData"></canvas>
                 </div>
             </div>

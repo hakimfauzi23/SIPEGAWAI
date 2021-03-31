@@ -21,6 +21,13 @@
     <script src="{{ URL::to('/chart') }}/Chart.min.js"></script>
     <!-- /global stylesheets -->
 
+    <!-- Core JS files -->
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+
     <!-- Theme JS files -->
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/visualization/d3/d3.min.js">
     </script>
@@ -33,17 +40,6 @@
     </script>
     <script type="text/javascript"
         src="{{ URL::to('/admin') }}/assets/js/plugins/ui/headroom/headroom_jquery.min.js"></script>
-
-    <!-- /theme JS files -->
-
-    <!-- Core JS files -->
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/loaders/pace.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/libraries/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/core/libraries/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/loaders/blockui.min.js"></script>
-    <!-- /core JS files -->
-
-    <!-- Theme JS files -->
     <script type="text/javascript"
         src="{{ URL::to('/admin') }}/assets/js/plugins/tables/datatables/datatables.min.js"></script>
     <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/forms/selects/select2.min.js">
@@ -72,10 +68,6 @@
 </head>
 
 <body class="navbar-top">
-    {{-- <?php if (Request::segment(1) === 'superAdmin' || Request::segment(1) === 'staff' || Request::segment(1) === 'hrd' || Request::segment(1) === 'profil') {
-        echo 'sidebar-xs';
-    } ?> --}}
-
     <!-- Main navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
         @include('layout.navbar')

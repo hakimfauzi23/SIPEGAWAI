@@ -115,14 +115,6 @@ class ProfilController extends Controller
     {
         //
         $id = Crypt::decrypt($data);
-        $riwayat_jabatan = Riwayat_jabatan::where('id_pegawai', $id)
-            ->where('id_jabatan', $request->id_jabatan)
-            ->count();
-
-        $riwayat_divisi = Riwayat_divisi::where('id_pegawai', $id)
-            ->where('id_divisi', $request->id_divisi)
-            ->count();
-
 
         if ($request->hasFile('imgupload')) {
 
@@ -132,7 +124,6 @@ class ProfilController extends Controller
             $imgname = $request->nik . '_' . date('dmyHi') . '.' . $extension;
             // dd($imgname);
             $this->validate($request, [
-                'id_role' => 'required',
                 'nik' => 'required',
                 'nama' => 'required',
                 'jk' => 'required',
@@ -145,9 +136,6 @@ class ProfilController extends Controller
                 'jml_anak' => 'required',
                 'no_hp' => 'required',
                 'email' => 'required',
-                'id_jabatan' => 'required',
-                'id_divisi' => 'required',
-                'tgl_masuk' => 'required',
                 'imgupload' => 'required|mimes:jpeg,png,jpg,gif,svg|file|max:5000'
             ]);
 
@@ -157,7 +145,6 @@ class ProfilController extends Controller
             $path = Storage::putFileAs('public/images', $request->file('imgupload'), $imgname);
 
 
-            $pegawai->id_role = $request->id_role;
             $pegawai->nik = $request->nik;
             $pegawai->nama = $request->nama;
             $pegawai->jk = $request->jk;
@@ -170,35 +157,14 @@ class ProfilController extends Controller
             $pegawai->jml_anak = $request->jml_anak;
             $pegawai->no_hp = $request->no_hp;
             $pegawai->email = $request->email;
-            $pegawai->id_atasan = $request->id_atasan;
-            $pegawai->id_jabatan = $request->id_jabatan;
-            $pegawai->id_divisi = $request->id_divisi;
-            $pegawai->tgl_masuk = $request->tgl_masuk;
             $pegawai->path = $imgname;
             $pegawai->save();
-
-            if ($riwayat_jabatan == 0) {
-
-                Riwayat_jabatan::create([
-                    'id_pegawai' => $id,
-                    'id_jabatan' => $request->id_jabatan,
-                    'tgl_mulai' => date("Y-m-d"),
-                ]);
-            }
-            if ($riwayat_divisi == 0) {
-                Riwayat_divisi::create([
-                    'id_pegawai' => $id,
-                    'id_divisi' => $request->id_divisi,
-                    'tgl_mulai' => date("Y-m-d"),
-                ]);
-            }
 
             Alert::success('success', ' Berhasil Update Profile !');
             return redirect(route('profil.show', $data));
         } else {
 
             $this->validate($request, [
-                'id_role' => 'required',
                 'nik' => 'required',
                 'nama' => 'required',
                 'jk' => 'required',
@@ -211,14 +177,10 @@ class ProfilController extends Controller
                 'jml_anak' => 'required',
                 'no_hp' => 'required',
                 'email' => 'required',
-                'id_jabatan' => 'required',
-                'id_divisi' => 'required',
-                'tgl_masuk' => 'required',
             ]);
 
             $pegawai = Pegawai::find($id);
 
-            $pegawai->id_role = $request->id_role;
             $pegawai->nik = $request->nik;
             $pegawai->nama = $request->nama;
             $pegawai->jk = $request->jk;
@@ -231,28 +193,8 @@ class ProfilController extends Controller
             $pegawai->jml_anak = $request->jml_anak;
             $pegawai->no_hp = $request->no_hp;
             $pegawai->email = $request->email;
-            $pegawai->id_atasan = $request->id_atasan;
-            $pegawai->id_jabatan = $request->id_jabatan;
-            $pegawai->id_divisi = $request->id_divisi;
-            $pegawai->tgl_masuk = $request->tgl_masuk;
             $pegawai->save();
 
-
-            if ($riwayat_jabatan == 0) {
-
-                Riwayat_jabatan::create([
-                    'id_pegawai' => $id,
-                    'id_jabatan' => $request->id_jabatan,
-                    'tgl_mulai' => date("Y-m-d"),
-                ]);
-            }
-            if ($riwayat_divisi == 0) {
-                Riwayat_divisi::create([
-                    'id_pegawai' => $id,
-                    'id_divisi' => $request->id_divisi,
-                    'tgl_mulai' => date("Y-m-d"),
-                ]);
-            }
 
 
             Alert::success('success', ' Berhasil Update Profile !');

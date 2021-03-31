@@ -289,10 +289,10 @@
 
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label>Role</label>
-                                <select class="select" data-live-search="true" searchable="Search here.." name="id_role">
+                                <select class="select" data-live-search="true" searchable="Search here.." name="id_role" disabled>
                                     <option>Pilih Role Pegawai</option>
                                     @foreach ($role as $key => $value)
                                         <option value="{{ $key }}"
@@ -310,12 +310,20 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Tanggal Diterima </label>
-                                <input type="date" name="tgl_masuk" class="form-control"
-                                    value="{{ $pegawai->tgl_masuk }}">
-                                @if ($errors->has('tgl_masuk'))
+                                <label>Jabatan</label>
+                                <select class="select" name="id_jabatan" disabled>
+                                    <option>Pilih Jabatan</option>
+                                    @foreach ($jabatan as $key => $value)
+                                        <option value="{{ $key }}"
+                                            {{ $pegawai->id_jabatan == $key ? 'selected' : '' }}>
+                                            {{ $value }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('id_jabatan'))
                                     <div class="text-danger">
-                                        {{ $errors->first('tgl_masuk') }}
+                                        {{ $errors->first('id_jabatan') }}
                                     </div>
                                 @endif
                             </div>
@@ -326,54 +334,30 @@
 
                     <div class="col-md-6">
                         <fieldset>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Jabatan</label>
-                                        <select class="select" name="id_jabatan">
-                                            <option>Pilih Jabatan</option>
-                                            @foreach ($jabatan as $key => $value)
-                                                <option value="{{ $key }}"
-                                                    {{ $pegawai->id_jabatan == $key ? 'selected' : '' }}>
-                                                    {{ $value }}
-                                                </option>
-                                            @endforeach
-                                        </select>
 
-                                        @if ($errors->has('id_jabatan'))
-                                            <div class="text-danger">
-                                                {{ $errors->first('id_jabatan') }}
-                                            </div>
-                                        @endif
+                            <div class="form-group">
+                                <label>Divisi</label>
+                                <select class="select" name="id_divisi" disabled>
+                                    <option>Pilih Divisi</option>
+                                    @foreach ($divisi as $key => $value)
+                                        <option value="{{ $key }}"
+                                            {{ $pegawai->id_divisi == $key ? 'selected' : '' }}>
+                                            {{ $value }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('id_divisi'))
+                                    <div class="text-danger">
+                                        {{ $errors->first('id_divisi') }}
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Divisi</label>
-                                        <select class="select" name="id_divisi">
-                                            <option>Pilih Divisi</option>
-                                            @foreach ($divisi as $key => $value)
-                                                <option value="{{ $key }}"
-                                                    {{ $pegawai->id_divisi == $key ? 'selected' : '' }}>
-                                                    {{ $value }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                @endif
 
-                                        @if ($errors->has('id_divisi'))
-                                            <div class="text-danger">
-                                                {{ $errors->first('id_divisi') }}
-                                            </div>
-                                        @endif
-
-                                    </div>
-
-                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Atasan</label>
-                                <select class="select" name="id_atasan">
+                                <select class="select" name="id_atasan" disabled>
                                     <option>Pilih Atasan</option>
                                     <option value="" {{ $pegawai->id_atasan == null ? 'selected' : '' }}>Tidak Ada
                                     </option>
