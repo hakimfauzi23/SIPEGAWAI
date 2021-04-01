@@ -31,12 +31,13 @@ class AppServiceProvider extends ServiceProvider
         //
         Paginator::useBootstrap();
 
-        $jml_cuti = Cuti::where('status', 'Disetujui Atasan')->count();
-        View::share('jml_cuti', $jml_cuti);
 
         view()->composer('*', function ($view) {
 
             if (Auth::check()) {
+
+                $jml_cuti = Cuti::where('status', 'Disetujui Atasan')->count();
+                View::share('jml_cuti', $jml_cuti);        
                 $bawahan = Pegawai::where('id_atasan', Auth::user()->id)->get();
                 $id_bawahan = $bawahan->pluck('id');
 

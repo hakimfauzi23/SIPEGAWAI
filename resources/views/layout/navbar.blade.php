@@ -1,6 +1,6 @@
 <?php $user = Auth::user(); ?>
 <div class="navbar-header">
-    <a class="navbar-brand" href="index.html"><img src="{{ URL::to('/admin') }}/assets/images/logo_light.png"
+    <a class="navbar-brand" href="index.html"><img src="{{ URL::to('/admin') }}/assets/images/logo_sipegawai.png"
             alt=""></a>
 
     <ul class="nav navbar-nav visible-xs-block">
