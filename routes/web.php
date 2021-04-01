@@ -112,8 +112,11 @@ Route::group(['middleware' => ['auth']], function () {
         // !!!!!DI SINI ADALAH ROUTES UNTUK MENU ADMIN!!!!! //
 
         //Pegawai
+        Route::get('/pegawai/restore/{data}', [PegawaiController::class, 'restore'])->name('pegawai.restore');
+        Route::get('/pegawai/trash/', [PegawaiController::class, 'trash'])->name('pegawai.trash');
         Route::resource('pegawai', PegawaiController::class);
         Route::get('/pegawai/destroy/{data}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
+        Route::get('/pegawai/destroyPermanent/{data}', [PegawaiController::class, 'destroyPermanent'])->name('pegawai.destroyPermanent');
 
 
         //Jabatan
@@ -197,8 +200,12 @@ Route::group(['middleware' => ['auth']], function () {
 
 
         //Pegawai
+        Route::get('/hrdPegawai/restore/{data}', [HrdPegawaiController::class, 'restore'])->name('hrdPegawai.restore');
+        Route::get('/hrdPegawai/trash/', [HrdPegawaiController::class, 'trash'])->name('hrdPegawai.trash');
+
         Route::resource('hrdPegawai', HrdPegawaiController::class);
         Route::get('/hrdPegawai/destroy/{data}', [HrdPegawaiController::class, 'destroy'])->name('hrdPegawai.destroy');
+        Route::get('/hrdPegawai/destroyPermanent/{data}', [HrdPegawaiController::class, 'destroyPermanent'])->name('hrdPegawai.destroyPermanent');
 
         Route::get('/hrdPegawai/showJabatan/{data}', [HrdPegawaiController::class, 'showJabatan'])->name('hrdPegawai.showJabatan');
         Route::get('/hrdPegawai/editRiwayatJabatan/{data}', [HrdPegawaiController::class, 'editRiwayatJabatan'])->name('hrdPegawai.editRiwayatJabatan');

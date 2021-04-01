@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -13,6 +14,7 @@ class Pegawai extends Authenticatable
 {
     use HasFactory;
     use Notifiable;
+    use SoftDeletes;
 
     protected $table = 'pegawai';
 
@@ -39,6 +41,7 @@ class Pegawai extends Authenticatable
         'path'
     ];
 
+    protected $dates = ['deleted_at'];
 
     public function cuti()
     {

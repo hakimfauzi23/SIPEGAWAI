@@ -36,6 +36,7 @@ class CreatePegawaisTable extends Migration
             $table->string('path');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index('id_jabatan');
             $table->index('id_divisi');

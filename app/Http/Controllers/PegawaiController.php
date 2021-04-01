@@ -382,4 +382,34 @@ class PegawaiController extends Controller
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect(route('pegawai.index'));
     }
+
+
+    public function trash()
+    {
+        $pegawai = Pegawai::onlyTrashed()->get();
+        return view('admin.pegawai.resigned', [
+            'pegawai' => $pegawai,
+        ]);
+    }
+
+    public function restore($data)
+    {
+        $id = Crypt::decryptString($data);
+        $pegawai = Pegawai::onlyTrashed()->where('id', $id);
+        $pegawai->restore();
+
+
+        Alert::success('success', ' Berhasil Restore Data Pegawai !');
+        return redirect('/pegawai/trash');
+    }
+
+    public function destroyPermanent($data)
+    {
+        $id = Crypt::decryptString($data);
+        $pegawai = Pegawai::onlyTrashed()->where('id', $id);
+        $pegawai->forceDelete();
+
+        Alert::success('success', ' Berhasil Menghapus Permanen Data !');
+        return redirect('/pegawai/trash');
+    }
 }

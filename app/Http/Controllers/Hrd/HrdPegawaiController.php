@@ -490,5 +490,32 @@ class HrdPegawaiController extends Controller
         return redirect(route('hrdPegawai.showDivisi', $encrypt));
     }
 
+    public function trash()
+    {
+        $pegawai = Pegawai::onlyTrashed()->get();
+        return view('hrd.pegawai.resigned', [
+            'pegawai' => $pegawai,
+        ]);
+    }
 
+    public function restore($data)
+    {
+        $id = Crypt::decryptString($data);
+        $pegawai = Pegawai::onlyTrashed()->where('id', $id);
+        $pegawai->restore();
+
+
+        Alert::success('success', ' Berhasil Restore Data Pegawai !');
+        return redirect('/hrdPegawai/trash');
+    }
+
+    public function destroyPermanent($data)
+    {
+        $id = Crypt::decryptString($data);
+        $pegawai = Pegawai::onlyTrashed()->where('id', $id);
+        $pegawai->forceDelete();
+
+        Alert::success('success', ' Berhasil Menghapus Permanen Data !');
+        return redirect('/hrdPegawai/trash');
+    }
 }

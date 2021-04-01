@@ -9,15 +9,18 @@
         <div class="page-header-content">
             <div class="page-title">
                 <h4><i class="icon-users4"></i> <span class="text-semibold">Pegawai</span>
-                    - List Data Pegawai</h4>
+                    - Data Pegawai Resign</h4>
             </div>
 
         </div>
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li><i class="active icon-home2 position-left"></i> List Data Pegawai</li>
-                {{-- <li class="active">Dashboard</li> --}}
+                <li> <a href="{{ route('hrdPegawai.index') }}"> <i class="active icon-home2 position-left"></i> List Data
+                        Pegawai
+                    </a>
+                </li>
+                <li class="active">Data Pegawai Resign</li>
             </ul>
         </div>
     </div>
@@ -27,26 +30,17 @@
     <!-- Basic datatable -->
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <a href="{{ route('hrdPegawai.create') }}"><i class="icon-file-plus"></i> Tambah Pegawai Baru ||</a>
-            <a href="{{ route('hrdPegawai.trash') }}"><i class=" icon-folder-search"></i> Data Pegawai Resign</a>
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>
-                </ul>
-            </div>
         </div>
 
-
         <div class="panel-body">
+
             <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
                 <thead class="bg-primary">
                     <tr>
                         <th>ID</th>
                         <th>Nama</th>
-                        <th>Jabatan</th>
-                        <th>Divisi</th>
+                        <th>Jabatan Terakhir</th>
+                        <th>Divisi Terakhir</th>
                         <th hidden>Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -69,14 +63,11 @@
 
                                             <ul class="dropdown-menu dropdown-menu-right">
                                                 <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                                <li><a href="{{ route('hrdPegawai.show', $encyrpt) }}"><i
-                                                            class="icon-file-eye"></i> Detail </a>
+                                                <li><a href="{{ route('hrdPegawai.restore', $encyrpt) }}"><i
+                                                            class="fa fa-rotate-left "></i>Restore Data</a>
                                                 </li>
-                                                <li><a href="{{ route('hrdPegawai.destroy', $encyrpt) }}"><i
-                                                            class=" icon-trash"></i> Hapus</a>
-                                                </li>
-                                                <li><a href="{{ route('hrdPegawai.edit', $encyrpt) }}"><i
-                                                            class=" icon-pencil5"></i> Edit</a>
+                                                <li><a href="{{ route('hrdPegawai.destroyPermanent', $encyrpt) }}"><i
+                                                            class=" icon-trash"></i> Hapus Permanen</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -85,6 +76,7 @@
                             </tr>
                         @endforeach
                     @endif
+
                 </tbody>
             </table>
         </div>

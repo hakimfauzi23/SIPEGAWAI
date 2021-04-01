@@ -27,8 +27,8 @@
     <!-- Basic datatable -->
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <a href="{{ route('pegawai.create') }}"><i class="icon-file-plus"></i> Tambah Pegawai Baru</a>
-            {{-- <h5 class="panel-title">List Data Pegawai</h5> --}}
+            <a href="{{ route('pegawai.create') }}"><i class="icon-file-plus"></i> Tambah Pegawai Baru || </a>
+            <a href="{{ route('pegawai.trash') }}"><i class=" icon-folder-search"></i> Data Pegawai Resign</a>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-action="collapse"></a></li>
