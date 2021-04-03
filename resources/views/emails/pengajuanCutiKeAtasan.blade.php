@@ -358,7 +358,7 @@
 </head>
 
 <body class="">
-    <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+    <span class="preheader">Pengajuan Cuti Pegawai di SIPEGAWAI!!</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
         <tr>
             <td>&nbsp;</td>
@@ -374,32 +374,50 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td>
-                                            <h3> Reset Password Akun SIPEGAWAI </h3>
-                                            <h4>Link Untuk Reset Password Akun SIPEGAWAI Kamu Ada Di Bawah Sini.</h4>
-                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0"
-                                                class="btn btn-primary">
+                                            <h3> Permohonan Cuti Pegawai </h3>
+                                            <h4>Bapak/Ibu , Karyawan Yang merupakan tanggung jawab Bapak/Ibu telah
+                                                melakukan pengajuan cuti.</h4>
+                                            <table role="presentation" border="0" cellpadding="2px" cellspacing="2px">
                                                 <tbody>
                                                     <tr>
-                                                        <td align="left">
-                                                            <table role="presentation" border="0" cellpadding="0"
-                                                                cellspacing="0">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td> <a
-                                                                                href="{{ URL::to('/') }}/reset-password/{{ $token }}">Klik
-                                                                                Disini</a>.
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
+                                                        <td>ID Pegawai</td>
+                                                        <td>: {{ $details['id_pegawai'] }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nama Pegawai</td>
+                                                        <td>: {{ $details['nama_pegawai'] }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tipe Cuti</td>
+                                                        <td>: {{ $details['tipe_cuti'] }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tanggal Pengajuan</td>
+                                                        <td>:
+                                                            {{ date('d M Y', strtotime($details['tgl_pengajuan'])) }}
                                                         </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tanggal Mulai Cuti</td>
+                                                        <td>: {{ date('d M Y', strtotime($details['tgl_mulai'])) }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tanggal Selesai Cuti</td>
+                                                        <td>: {{ date('d M Y', strtotime($details['tgl_selesai'])) }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Keterangan</td>
+                                                        <td>: {{ $details['ket'] }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <i>
-                                                <p>
-                                                    Token Reset Password Berlaku Selama 12 Jam!
-                                                </p>
-                                            </i>
+                                            <br>
+                                            <p>
+                                                Pengajuan tersebut bisa ditindaklanjuti di Menu Staff lalu di Bagian
+                                                Pengajuan Cuti.
+                                            </p>
                                         </td>
                                     </tr>
                                 </table>

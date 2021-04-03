@@ -8,6 +8,7 @@ use App\Models\Pegawai;
 use App\Models\Presensi_harian;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,7 +23,13 @@ class HrdPengajuanCutiController extends Controller
     public function index()
     {
         //
-        $pengajuan = Cuti::where('status', 'Disetujui Atasan')->get();
+        /* CARI ID PEGAWAI YANG BELUM ADA ATASAN */
+        $id_pegawai = Pegawai::where('id_atasan', null)->pluck('id');
+
+        $pengajuan = Cuti::where('status', 'Disetujui Atasan')
+            ->orWhere(function ($query) use ($id_pegawai) {
+                $query->whereIn('id_pegawai', $id_pegawai);
+            })->get();
 
         // dd($jml_pengajuan);
 
@@ -124,10 +131,6 @@ class HrdPengajuanCutiController extends Controller
         $pegawai = Pegawai::find($cuti->id_pegawai);
 
 
-        $nama = $pegawai->nama;
-
-        // dd($nama);
-        // dd($id);
         if ($request->keputusan == 'Disetujui HRD') {
             $cuti->status = $request->keputusan;
             $cuti->tgl_disetujui_hrd = date("Y-m-d");
@@ -153,12 +156,18 @@ class HrdPengajuanCutiController extends Controller
 
 
             $details = [
-                'title' => 'Notifikasi Konfirmasi Pengajuan Cuti',
-                'body' => "Selamat $nama Pengajuan Cuti Anda telah disetujui Oleh HRD!!",
-                'data' => " Data Cuti : ID :$cuti->id , Tipe :$cuti->tipe_cuti , TGL MULAI : $cuti->tgl_mulai, TGL SELESAI : $cuti->tgl_selesai "
+                'id_pegawai' => $cuti->id_pegawai,
+                'nama_pegawai' => $cuti->pegawai->nama,
+                'tipe_cuti' => $cuti->tipe_cuti,
+                'tgl_pengajuan' => $cuti->tgl_pengajuan,
+                'tgl_mulai' => $cuti->tgl_mulai,
+                'tgl_selesai' => $cuti->tgl_selesai,
+                'ket' => $cuti->ket,
+                'atasan' => Auth::user()->nama,
+                'keputusan' => 'Disetujui',
             ];
 
-            Mail::to($pegawai->email)->send(new \App\Mail\MyTestMail($details));
+            Mail::to($pegawai->email)->send(new \App\Mail\KeputusanHrdMail($details));
 
             Alert::success('success', ' Berhasil Menyetujui Pengajuan Cuti !');
             return redirect(route('hrdPengajuanCuti.index'));
@@ -169,13 +178,18 @@ class HrdPengajuanCutiController extends Controller
 
 
             $details = [
-                'title' => 'Notifikasi Konfirmasi Pengajuan Cuti',
-                'body' => "Sayang Sekali $nama Pengajuan Cuti Anda telah ditolak Oleh HRD!!",
-                'data' => " Data Cuti : ID :$cuti->id , Tipe :$cuti->tipe_cuti , TGL MULAI : $cuti->tgl_mulai, TGL SELESAI : $cuti->tgl_selesai "
-
+                'id_pegawai' => $cuti->id_pegawai,
+                'nama_pegawai' => $cuti->pegawai->nama,
+                'tipe_cuti' => $cuti->tipe_cuti,
+                'tgl_pengajuan' => $cuti->tgl_pengajuan,
+                'tgl_mulai' => $cuti->tgl_mulai,
+                'tgl_selesai' => $cuti->tgl_selesai,
+                'ket' => $cuti->ket,
+                'atasan' => Auth::user()->nama,
+                'keputusan' => 'Ditolak',
             ];
 
-            Mail::to($pegawai->email)->send(new \App\Mail\MyTestMail($details));
+            Mail::to($pegawai->email)->send(new \App\Mail\KeputusanHrdMail($details));
 
             Alert::success('success', ' Berhasil Menolak Pengajuan Cuti !');
             return redirect(route('hrdPengajuanCuti.index'));

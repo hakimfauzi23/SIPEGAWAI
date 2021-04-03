@@ -132,24 +132,23 @@ class StaffPengajuanCutiController extends Controller
             $cuti->save();
 
             $details = [
-                'title' => 'Notifikasi Konfirmasi Pengajuan Cuti',
-                'body' => "Selamat $nama Pengajuan Cuti Anda telah disetujui oleh Atasan anda!!",
-                'data' => " Data Cuti : ID :$cuti->id , Tipe :$cuti->tipe_cuti , TGL MULAI : $cuti->tgl_mulai, TGL SELESAI : $cuti->tgl_selesai "
-            ];
-
-            Mail::to($pegawai->email)->send(new \App\Mail\MyTestMail($details));
-
-
-            $details2 = [
-                'title' => 'Pengajuan Cuti Baru',
-                'body' => "Hallo!! Pengajuan Cuti Baru dari $pegawai->nama sudah ada di SIPEGAWAI Nih!!",
-                'data' => " Apabila Bapak/Ibu HRD Berkenan, silakan di cek lalu bisa ditolak atau disetujui ya!!"
+                'id_pegawai' => $cuti->id_pegawai,
+                'nama_pegawai' => $cuti->pegawai->nama,
+                'tipe_cuti' => $cuti->tipe_cuti,
+                'tgl_pengajuan' => $cuti->tgl_pengajuan,
+                'tgl_mulai' => $cuti->tgl_mulai,
+                'tgl_selesai' => $cuti->tgl_selesai,
+                'ket' => $cuti->ket,
+                'atasan' => Auth::user()->nama,
+                'keputusan' => 'Disetujui',
 
             ];
+
+            Mail::to($pegawai->email)->send(new \App\Mail\KeputusanAtasanMail($details));
 
             foreach ($hrd as $key => $p) {
 
-                Mail::to($p->email)->send(new \App\Mail\PengajuanCutiMail($details2));
+                Mail::to($p->email)->send(new \App\Mail\PengajuanCutiMail($details));
             }
 
 
@@ -162,13 +161,18 @@ class StaffPengajuanCutiController extends Controller
 
 
             $details = [
-                'title' => 'Notifikasi Konfirmasi Pengajuan Cuti',
-                'body' => "Sayang Sekali $nama Pengajuan Cuti Anda telah ditolak oleh Atasan anda!!",
-                'data' => " Data Cuti : ID :$cuti->id , Tipe :$cuti->tipe_cuti , TGL MULAI : $cuti->tgl_mulai, TGL SELESAI : $cuti->tgl_selesai "
-
+                'id_pegawai' => $cuti->id_pegawai,
+                'nama_pegawai' => $cuti->pegawai->nama,
+                'tipe_cuti' => $cuti->tipe_cuti,
+                'tgl_pengajuan' => $cuti->tgl_pengajuan,
+                'tgl_mulai' => $cuti->tgl_mulai,
+                'tgl_selesai' => $cuti->tgl_selesai,
+                'ket' => $cuti->ket,
+                'atasan' => Auth::user()->nama,
+                'keputusan' => 'Ditolak',
             ];
 
-            Mail::to($pegawai->email)->send(new \App\Mail\MyTestMail($details));
+            Mail::to($pegawai->email)->send(new \App\Mail\KeputusanAtasanMail($details));
 
             Alert::success('success', ' Berhasil Menolak Pengajuan Cuti !');
             return redirect(route('staffPengajuanCuti.index'));

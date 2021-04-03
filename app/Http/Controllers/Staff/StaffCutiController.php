@@ -133,7 +133,7 @@ class StaffCutiController extends Controller
                 'tgl_mulai' => $request->tgl_mulai,
                 'tgl_selesai' => $request->tgl_selesai,
                 'ket' => $request->ket,
-                'status' => "Disetujui Atasan",
+                'status' => "Diproses",
                 'tgl_disetujui_atasan' => date("Y-m-d"),
                 'tgl_disetujui_hrd' => NULL,
                 'tgl_ditolak_atasan' => NULL,
@@ -141,10 +141,13 @@ class StaffCutiController extends Controller
             ]);
 
             $details = [
-                'title' => 'Pengajuan Cuti Baru',
-                'body' => "Hallo!! Pengajuan Cuti Baru dari $nama_pegawai sudah ada di SIPEGAWAI Nih!!",
-                'data' => " Apabila Bapak/Ibu HRD Berkenan, silakan di cek lalu bisa ditolak atau disetujui ya!!"
-
+                'id_pegawai' => $id_pegawai,
+                'nama_pegawai' => $nama_pegawai,
+                'tipe_cuti' => $request->tipe_cuti,
+                'tgl_pengajuan' => date("Y-m-d"),
+                'tgl_mulai' => $request->tgl_mulai,
+                'tgl_selesai' => $request->tgl_selesai,
+                'ket' => $request->ket,
             ];
 
             foreach ($hrd as $key => $p) {
@@ -180,14 +183,17 @@ class StaffCutiController extends Controller
             ]);
 
             $details = [
-                'title' => 'Pengajuan Cuti Baru',
-                'body' => "Hallo!! Pengajuan Cuti Baru dari $nama_pegawai yang merupakan subordinate anda sudah ada di SIPEGAWAI Nih!!",
-                'data' => " Apabila Bapak/Ibu Berkenan, silakan di cek lalu bisa ditolak atau disetujui ya!!"
-
+                'id_pegawai' => $id_pegawai,
+                'nama_pegawai' => $nama_pegawai,
+                'tipe_cuti' => $request->tipe_cuti,
+                'tgl_pengajuan' => date("Y-m-d"),
+                'tgl_mulai' => $request->tgl_mulai,
+                'tgl_selesai' => $request->tgl_selesai,
+                'ket' => $request->ket,
             ];
 
 
-            Mail::to($email_atasan)->send(new \App\Mail\PengajuanCutiMail($details));
+            Mail::to($email_atasan)->send(new \App\Mail\PengajuanCuti2Atasan($details));
 
 
             Alert::success('success', ' Pengajuan Kamu Sedang Diproses!!');

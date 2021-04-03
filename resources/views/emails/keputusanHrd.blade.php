@@ -358,7 +358,7 @@
 </head>
 
 <body class="">
-    <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+    <span class="preheader">Notifikasi Pesetujuan Pengajuan Cuti</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
         <tr>
             <td>&nbsp;</td>
@@ -374,32 +374,60 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td>
-                                            <h3> Reset Password Akun SIPEGAWAI </h3>
-                                            <h4>Link Untuk Reset Password Akun SIPEGAWAI Kamu Ada Di Bawah Sini.</h4>
-                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0"
-                                                class="btn btn-primary">
+                                            <h3> Notifikasi Pesetujuan Pengajuan Cuti </h3>
+                                            <h4>Pengajuan Cuti Bapak/Ibu dengan kelengkapan data dibawah ini</h4>
+                                            <table role="presentation" border="0" cellpadding="2px" cellspacing="2px">
                                                 <tbody>
                                                     <tr>
-                                                        <td align="left">
-                                                            <table role="presentation" border="0" cellpadding="0"
-                                                                cellspacing="0">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td> <a
-                                                                                href="{{ URL::to('/') }}/reset-password/{{ $token }}">Klik
-                                                                                Disini</a>.
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
+                                                        <td>ID Pegawai</td>
+                                                        <td>: {{ $details['id_pegawai'] }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nama Pegawai</td>
+                                                        <td>: {{ $details['nama_pegawai'] }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tipe Cuti</td>
+                                                        <td>: {{ $details['tipe_cuti'] }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tanggal Pengajuan</td>
+                                                        <td>:
+                                                            {{ date('d M Y', strtotime($details['tgl_pengajuan'])) }}
                                                         </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tanggal Mulai Cuti</td>
+                                                        <td>: {{ date('d M Y', strtotime($details['tgl_mulai'])) }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tanggal Selesai Cuti</td>
+                                                        <td>: {{ date('d M Y', strtotime($details['tgl_selesai'])) }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Keterangan</td>
+                                                        <td>: {{ $details['ket'] }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <i>
-                                                <p>
-                                                    Token Reset Password Berlaku Selama 12 Jam!
-                                                </p>
-                                            </i>
+                                            <br>
+                                            <p>
+                                                Pengajuan Cuti Tersebut telah <b>{{ $details['keputusan'] }}</b> oleh
+                                                Bapak/Ibu
+                                                {{ $details['atasan'] }} yang
+                                                merupakan HRD di Perusahaan ini pada
+                                                {{ date('d-M-Y H:i ') }}
+                                            </p>
+                                            <br>
+                                            @if ($details['keputusan'] == 'Disetujui')
+                                                <p><em>Simpan E-mail Ini sebagai tanda bukti pengajuan cuti yang telah
+                                                        Disetujui</em></p>
+                                            @else
+                                                <p><em>Untuk keterangan lebih lanjut silahkan hubungi HRD/Atasan yang
+                                                        berkaitan dengan pengajuan cuti ini.</em></p>
+                                            @endif
                                         </td>
                                     </tr>
                                 </table>

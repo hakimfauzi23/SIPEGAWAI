@@ -35,10 +35,14 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
 
             if (Auth::check()) {
+                $id_peg_non_bawahan = Pegawai::where('id_atasan', null)->pluck('id');
+                $jml_cuti = Cuti::where('status', 'Disetujui Atasan')
+                    ->orWhere(function ($query) use ($id_peg_non_bawahan) {
+                        $query->whereIn('id_pegawai', $id_peg_non_bawahan);
+                    })->count();
 
-                $jml_cuti = Cuti::where('status', 'Disetujui Atasan')->count();
-                View::share('jml_cuti', $jml_cuti);        
-                $bawahan = Pegawai::where('id_atasan', Auth::user()->id)->get();
+                View::share('jml_cuti', $jml_cuti);
+                $bawahan = Pegawai  ::where('id_atasan', Auth::user()->id)->get();
                 $id_bawahan = $bawahan->pluck('id');
 
                 $pengajuan_cuti_bawahan = Cuti::whereIn('id_pegawai', $id_bawahan)
