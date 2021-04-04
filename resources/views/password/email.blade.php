@@ -37,7 +37,7 @@
             </div>
             <div class="mt-3"></div>
             <div class="text-center">
-                <a href="/" class="txt2 hov1">
+                <a href="/login" class="txt2 hov1">
                     Login Di sini
                 </a>
             </div>

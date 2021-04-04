@@ -49,14 +49,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 |
 */
 
-// Route::get('/', function () {
-//     return view('password.email');
-// });
+Route::get('/', function () {
+    return view('landingPage.index');
+});
 
 ### MENU UNTUK SEMUA ROLES!! ###
 
 // !!!!!DI SINI ADALAH ROUTES UNTUK MENU LOGIN!!!!! //
-Route::get('/', [AuthController::class, 'index'])->name('login');
+Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/proses_login', [AuthController::class, 'proses_login'])->name('proses_login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 /**  End Route Login**/

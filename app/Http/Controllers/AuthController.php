@@ -33,13 +33,13 @@ class AuthController extends Controller
             }
         } else {
             Alert::error('error', 'Ups!! Password / Username Kamu Salah!!');
-            return redirect('/');
+            return redirect('/login');
         }
     }
     public function logout(Request $request)
     {
         $request->session()->flush();
         Auth::logout();
-        return redirect('/');
+        return redirect('/login');
     }
 }

@@ -20,7 +20,7 @@ class Cek_login
     {
 
         if (!Auth::check()) {
-            return redirect('login');
+            return redirect('/login');
         }
         $user = Auth::user();
 
@@ -28,6 +28,6 @@ class Cek_login
             return $next($request);
 
         Alert::error('error', 'Ups!! Kamu tidak Punya Akses!!');
-        return redirect('/');
+        return redirect('/login');
     }
 }
