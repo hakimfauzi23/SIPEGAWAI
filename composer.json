@@ -19,7 +19,8 @@
         "maatwebsite/excel": "^3.1",
         "realrashid/sweet-alert": "^3.2",
         "snapappointments/bootstrap-select": "^1.13",
-        "fzaninotto/faker": "^1.9.1"
+        "fakerphp/faker": "^1.9.1"
+
     },
     "require-dev": {
         "facade/ignition": "^2.5",
