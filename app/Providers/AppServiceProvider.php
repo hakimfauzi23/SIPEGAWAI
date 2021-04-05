@@ -6,6 +6,7 @@ use App\Models\Cuti;
 use App\Models\Pegawai;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,7 +31,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrap();
-
+        if (env('APP_ENV') !== 'local') {
+            URL::forceScheme('https');
+        }
 
         view()->composer('*', function ($view) {
 
@@ -42,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
                     })->count();
 
                 View::share('jml_cuti', $jml_cuti);
-                $bawahan = Pegawai  ::where('id_atasan', Auth::user()->id)->get();
+                $bawahan = Pegawai::where('id_atasan', Auth::user()->id)->get();
                 $id_bawahan = $bawahan->pluck('id');
 
                 $pengajuan_cuti_bawahan = Cuti::whereIn('id_pegawai', $id_bawahan)
