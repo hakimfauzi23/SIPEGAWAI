@@ -1,0 +1,166 @@
+/* css animation */
+.mypath1, .mypath2, .mypath3, .mypath4 {
+  stroke-dashoffset: 700;
+  stroke-dasharray: 700;
+  -webkit-animation-name: padda;
+          animation-name: padda;
+  -webkit-animation-duration: 5s;
+          animation-duration: 5s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+/* .mypath1 */
+@-webkit-keyframes padda {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes padda {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* .mypath2 */
+@keyframes padda {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* .mypath3 */
+@keyframes padda {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* .mypath4 */
+@keyframes padda {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-1 {
+  -webkit-animation: pulse 3s ease infinite alternate, nudge 5s linear infinite alternate;
+          animation: pulse 3s ease infinite alternate, nudge 5s linear infinite alternate;
+}
+
+.animate-2 {
+  -webkit-animation: bounce 3s ease infinite alternate, nudge 5s linear infinite alternate;
+          animation: bounce 3s ease infinite alternate, nudge 5s linear infinite alternate;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    transform: scale(0.3);
+    opacity: .8;
+  }
+  70% {
+    transform: translateX(10px);
+    opacity: .9;
+  }
+  100% {
+    transform: translateX(20px);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.3);
+    opacity: .8;
+  }
+  70% {
+    transform: translateX(10px);
+    opacity: .9;
+  }
+  100% {
+    transform: translateX(20px);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes nudge {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, 0) scale(1);
+  }
+  80% {
+    transform: translate(-20px, 0) scale(1);
+  }
+}
+
+@keyframes nudge {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, 0) scale(1);
+  }
+  80% {
+    transform: translate(-20px, 0) scale(1);
+  }
+}
+
+@-webkit-keyframes pulse1 {
+  0% {
+    transform: scale(0.3);
+    opacity: .8;
+  }
+  70% {
+    transform: translateX(10px);
+    opacity: .9;
+  }
+  100% {
+    transform: translateX(20px);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse1 {
+  0% {
+    transform: scale(0.3);
+    opacity: .8;
+  }
+  70% {
+    transform: translateX(10px);
+    opacity: .9;
+  }
+  100% {
+    transform: translateX(20px);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes nudge1 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, 0) scale(1);
+  }
+  80% {
+    transform: translate(-20px, 0) scale(1);
+  }
+}
+
+@keyframes nudge1 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, 0) scale(1);
+  }
+  80% {
+    transform: translate(-20px, 0) scale(1);
+  }
+}
+
+/*# sourceMappingURL=../maps/theme-utilities/icon-animation.css.map */
