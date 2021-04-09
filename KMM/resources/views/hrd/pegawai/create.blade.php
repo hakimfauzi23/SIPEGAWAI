@@ -358,7 +358,8 @@
                             <div class="form-group">
                                 <label>Atasan</label>
                                 <select class="select" name="id_atasan">
-                                    <option>Pilih Atasan</option>
+                                    <option value="">Pilih Atasan</option>
+                                    <option value="">Tidak Ada</option>
                                     @foreach ($pegawai as $key => $value)
                                         <option value="{{ $key }}">
                                             {{ $key . ' - ' . $value }}
