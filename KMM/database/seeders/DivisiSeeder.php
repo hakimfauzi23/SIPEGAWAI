@@ -23,39 +23,17 @@ class DivisiSeeder extends Seeder
 
             DB::table('divisi')->insert([
                 [
-                    'nm_divisi' => 'Eksekutif',
+                    'nm_divisi' => 'Non-Divisi',
                 ],
                 [
-                    'nm_divisi' => 'Human Resource',
+                    'nm_divisi' => 'Business Development',
                 ],
                 [
-                    'nm_divisi' => 'General Affairs',
+                    'nm_divisi' => 'Finance',
                 ],
                 [
-                    'nm_divisi' => 'Environment',
+                    'nm_divisi' => 'Technology Officer',
                 ],
-                [
-                    'nm_divisi' => 'Safety',
-                ],
-                [
-                    'nm_divisi' => 'Produksi',
-                ],
-                [
-                    'nm_divisi' => 'Work Technical',
-                ],
-                [
-                    'nm_divisi' => 'Quality Assurance ',
-                ],
-                [
-                    'nm_divisi' => 'Engineering',
-                ],
-                [
-                    'nm_divisi' => 'Accounting',
-                ],
-                [
-                    'nm_divisi' => 'Information Technology',
-                ]
-
             ]);
         }
     }

@@ -22,7 +22,6 @@ class PegawaiSeeder extends Seeder
         $jk = array('Pria', 'Wanita');
         $status = array('Menikah', 'Lajang');
         $agama = array('Islam', 'Kristen', 'Katholik', 'Buddha', 'Hindu', 'Protestan');
-        $atasan = array('21030001', '21030002', '21030003');
 
         for ($i = 0; $i <= 2; $i++) {
             $id = IdGenerator::generate(['table' => 'pegawai', 'length' => 8, 'prefix' => date('ym')]);
@@ -31,8 +30,7 @@ class PegawaiSeeder extends Seeder
             $relg = $faker->numberBetween(0, 5);
             $role = [1, 2, 3];
             $email = ['admin@gmail.com', 'hrd@gmail.com', 'staff@gmail.com'];
-            $numAtasan = $faker->numberBetween(0, 2);
-            $dvs = $faker->numberBetween(1, 11);
+            $dvs = $faker->numberBetween(2,4);
 
             DB::table('pegawai')->insert([
                 'id' => $id,
