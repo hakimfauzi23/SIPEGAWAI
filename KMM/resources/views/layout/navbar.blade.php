@@ -21,8 +21,6 @@
 
         <li class="dropdown dropdown-user">
             <a class="dropdown-toggle" data-toggle="dropdown">
-                @php $path =Storage::url('images/'.$user->path); @endphp
-                <img src="{{ url($path) }}" alt="">
                 <span>{{ $user->nama }}</span>
                 <i class="caret"></i>
             </a>

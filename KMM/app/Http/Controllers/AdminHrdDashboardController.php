@@ -250,6 +250,11 @@ class AdminHrdDashboardController extends Controller
             ->where('ket', "Alpha")
             ->count();
 
+        $checkData = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
+            ->count();
+
         $pegawai = Pegawai::find($id);
         $hadir = ($hari - $alpha) / $hari * 100;
         $persentaseHadir = number_format($hadir, 2);
@@ -297,6 +302,7 @@ class AdminHrdDashboardController extends Controller
 
             'persentaseHadir' => $persentaseHadir,
             'persentaseTdkHadir' => $persentaseTdkHadir,
+            'checkData' => $checkData,
             'kehadiran' => $kehadiran,
             'cuti' => $cuti,
 
@@ -560,6 +566,11 @@ class AdminHrdDashboardController extends Controller
             ->where('ket', "Alpha")
             ->count();
 
+        $checkData = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
+            ->count();
+
         $pegawai = Pegawai::find($id);
         $hadir = ($hari - $alpha) / $hari * 100;
         $persentaseHadir = number_format($hadir, 2);
@@ -607,6 +618,8 @@ class AdminHrdDashboardController extends Controller
 
             'persentaseHadir' => $persentaseHadir,
             'persentaseTdkHadir' => $persentaseTdkHadir,
+            'checkData' => $checkData,
+
             'kehadiran' => $kehadiran,
             'cuti' => $cuti,
 

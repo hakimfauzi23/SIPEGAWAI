@@ -39,8 +39,12 @@
             </div>
 
             <div class="panel-body">
-                <div class="text-right">
-                    <canvas id="chartData"></canvas>
+                <div class="text-center">
+                    @if ($checkData != 0)
+                        <canvas id="chartData"></canvas>
+                    @else
+                        Belum Ada Data!!
+                    @endif
                 </div>
             </div>
         </div>

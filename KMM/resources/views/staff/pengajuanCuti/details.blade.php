@@ -14,7 +14,8 @@
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li> <a href="{{ route('staffPengajuanCuti.index') }}"> <i class="active icon-home2 position-left"></i> List
+                <li> <a href="{{ route('staffPengajuanCuti.index') }}"> <i class="active icon-home2 position-left"></i>
+                        List
                         Pengajuan Cuti Pegawai
                     </a>
                 </li>
@@ -34,7 +35,9 @@
             <div class="panel-body">
                 <div class="text-center">
                     @php $path =Storage::url('images/'.$cuti->pegawai->path); @endphp
-                    <img src="{{ url($path) }}" alt="Foto Profil" width="160">
+                    <img src="{{ url($path) }}"
+                        onerror="this.onerror=null; this.src='{{ URL::to('/admin/assets/images/brands/user.jpeg') }}'"
+                        alt="Foto Profil" width="160">
                 </div>
                 <div class="mb-3"></div>
                 <div class="table-responsive">

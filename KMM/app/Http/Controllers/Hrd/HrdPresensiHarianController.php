@@ -182,7 +182,7 @@ class HrdPresensiHarianController extends Controller
 
     public function download()
     {
-        $filePath = public_path("/storage/template/TemplatePresensi.csv");
+        $filePath = public_path("/template_presensi/TemplatePresensi.csv");
         $headers = ['Content-Type: application/pdf'];
         $fileName = 'TemplatePresensi.csv';
 

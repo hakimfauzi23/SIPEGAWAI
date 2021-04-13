@@ -28,7 +28,8 @@ class HrdPengajuanCutiController extends Controller
 
         $pengajuan = Cuti::where('status', 'Disetujui Atasan')
             ->orWhere(function ($query) use ($id_pegawai) {
-                $query->whereIn('id_pegawai', $id_pegawai);
+                $query->whereIn('id_pegawai', $id_pegawai)
+                    ->where('status', 'Diproses');
             })->get();
 
         // dd($jml_pengajuan);

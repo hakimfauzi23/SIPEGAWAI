@@ -85,7 +85,7 @@
                     </div>
                 </div>
 
-                <div class="table-responsive pre-scrollable" style="height:290px">
+                <div class="table-responsive pre-scrollable">
                     <table class="table datatable-basic">
                         <thead>
                             <tr>
@@ -136,10 +136,15 @@
                 </div>
 
                 <div class="panel-body">
-                    <div class="text-right" style="height:250px">
-                        <canvas id="chartPersentase"></canvas>
+                    <div class="text-center">
+                        @if ($checkData != 0)
+                            <canvas id="chartPersentase"></canvas>
+                        @else
+                            Belum Ada Data!!
+                        @endif
                     </div>
                 </div>
+
             </div>
             <!-- /bacis pie chart -->
         </div>
@@ -160,7 +165,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <div class="text-right" style="height:250px">
+                    <div class="text-right">
                         <canvas id="myChart"></canvas>
                     </div>
                 </div>

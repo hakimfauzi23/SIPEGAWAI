@@ -33,7 +33,9 @@
             <div class="panel-body">
                 <div class="text-center">
                     @php $path =Storage::url('images/'.$pegawai->path); @endphp
-                    <img src="{{ url($path) }}" alt="Foto Profil" width="160">
+                    <img src="{{ url($path) }}"
+                        onerror="this.onerror=null; this.src='{{ URL::to('/admin/assets/images/brands/user.jpeg') }}'"
+                        alt="Foto Profil" width="160">
                 </div>
             </div>
         </div>
@@ -85,7 +87,8 @@
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li>
                                     <?php $encrypt = Crypt::encryptString($pegawai->id); ?>
-                                    <a href="{{ route('hrdPegawai.showJabatan', $encrypt) }}"> <i class=" icon-pencil7"></i>
+                                    <a href="{{ route('hrdPegawai.showJabatan', $encrypt) }}"> <i
+                                            class=" icon-pencil7"></i>
                                         Edit </a>
                                 </li>
                             </ul>
@@ -125,7 +128,8 @@
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li>
                                     <?php $encrypt = Crypt::encryptString($pegawai->id); ?>
-                                    <a href="{{ route('hrdPegawai.showDivisi', $encrypt) }}"> <i class=" icon-pencil7"></i>
+                                    <a href="{{ route('hrdPegawai.showDivisi', $encrypt) }}"> <i
+                                            class=" icon-pencil7"></i>
                                         Edit </a>
                                 </li>
                             </ul>

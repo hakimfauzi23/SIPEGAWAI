@@ -49,7 +49,7 @@
                 </div>
 
             </div>
-            <canvas id="barChart"></canvas>
+            <canvas id="speedChart"></canvas>
         </div>
     </div>
 
@@ -222,7 +222,7 @@
 
 @section('custom_script')
 
-    <script>
+    {{-- <script>
         var canvas = document.getElementById("barChart");
         var ctx = canvas.getContext('2d');
 
@@ -425,5 +425,113 @@
             options: options
         });
 
+    </script> --}}
+
+    <script>
+        var speedCanvas = document.getElementById("speedChart");
+
+        Chart.defaults.global.defaultFontSize = 13;
+
+        var speedData = {
+            labels: [
+                "Jan", "Feb", "Mar", "Apr",
+                "May", "Jun", "Jul", "Aug",
+                "Sep", "Oct", "Nov", "Dec"
+            ],
+            datasets: [{
+                label: "Tahunan",
+                borderColor: 'rgb(78, 154, 247)', // The main line color
+                backgroundColor: 'rgba(78, 154, 247, 0.503)',
+                data: [
+                    {{ $JanTahunan }}, {{ $FebTahunan }}, {{ $MarTahunan }},
+                    {{ $AprTahunan }}, {{ $MayTahunan }}, {{ $JunTahunan }},
+                    {{ $JulTahunan }}, {{ $AugTahunan }}, {{ $SepTahunan }},
+                    {{ $OctTahunan }}, {{ $NovTahunan }}, {{ $DecTahunan }}
+                ],
+            }, {
+                label: "Bersama",
+                borderColor: 'rgb(239, 41, 41)', // The main line color
+                backgroundColor: 'rgba(239, 41, 41, 0.55)',
+                data: [
+                    {{ $JanBersama }}, {{ $FebBersama }}, {{ $MarBersama }},
+                    {{ $AprBersama }}, {{ $MayBersama }}, {{ $JunBersama }},
+                    {{ $JulBersama }}, {{ $AugBersama }}, {{ $SepBersama }},
+                    {{ $OctBersama }}, {{ $NovBersama }}, {{ $DecBersama }}
+                ],
+            }, {
+                label: "Penting",
+                borderColor: 'rgb(247, 151, 78)', // The main line color
+                backgroundColor: 'rgba(247, 151, 78, 0.701)',
+                data: [
+                    {{ $JanPenting }}, {{ $FebPenting }}, {{ $MarPenting }},
+                    {{ $AprPenting }}, {{ $MayPenting }}, {{ $JunPenting }},
+                    {{ $JulPenting }}, {{ $AugPenting }}, {{ $SepPenting }},
+                    {{ $OctPenting }}, {{ $NovPenting }}, {{ $DecPenting }}
+                ],
+            }, {
+                label: "Besar",
+                borderColor: 'rgb(127, 242, 110)', // The main line color
+                backgroundColor: 'rgba(128, 242, 110, 0.441)',
+                data: [
+                    {{ $JanBesar }}, {{ $FebBesar }}, {{ $MarBesar }},
+                    {{ $AprBesar }}, {{ $MayBesar }}, {{ $JunBesar }},
+                    {{ $JulBesar }}, {{ $AugBesar }}, {{ $SepBesar }},
+                    {{ $OctBesar }}, {{ $NovBesar }}, {{ $DecBesar }}
+                ],
+            }, {
+                label: "Sakit",
+                borderColor: 'rgb(255, 255, 5)', // The main line color
+                backgroundColor: 'rgba(255, 255, 5, 0.496)',
+                data: [
+                    {{ $JanSakit }}, {{ $FebSakit }}, {{ $MarSakit }},
+                    {{ $AprSakit }}, {{ $MaySakit }}, {{ $JunSakit }},
+                    {{ $JulSakit }}, {{ $AugSakit }}, {{ $SepSakit }},
+                    {{ $OctSakit }}, {{ $NovSakit }}, {{ $DecSakit }}
+                ],
+            }, {
+                label: "Hamil",
+                borderColor: 'rgb(255, 0, 153)', // The main line color
+                backgroundColor: 'rgba(255, 0, 153, 0.722)',
+                data: [
+                    {{ $JanHamil }}, {{ $FebHamil }}, {{ $MarHamil }},
+                    {{ $AprHamil }}, {{ $MayHamil }}, {{ $JunHamil }},
+                    {{ $JulHamil }}, {{ $AugHamil }}, {{ $SepHamil }},
+                    {{ $OctHamil }}, {{ $NovHamil }}, {{ $DecHamil }}
+                ],
+            }]
+        };
+
+        var chartOptions = {
+
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    boxWidth: 80,
+                    fontColor: 'black'
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: {{ $thisYear }},
+                        fontSize: 20
+                    }
+                }]
+            }
+
+        };
+
+        var lineChart = new Chart(speedCanvas, {
+            type: 'line',
+            data: speedData,
+            options: chartOptions
+        });
+
     </script>
+
 @endsection

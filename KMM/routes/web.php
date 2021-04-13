@@ -131,10 +131,10 @@ Route::group(['middleware' => ['auth']], function () {
 
         //Presensi
         Route::get('/presensi/tanggal/', [PresensiHarianController::class, 'tglPresensi'])->name('presensi.search');
-        Route::resource('presensi', PresensiHarianController::class);
+        Route::get('/presensi/template_download', [PresensiHarianController::class, 'download'])->name('presensi.template');
+        Route::resource('/presensi', PresensiHarianController::class);
         Route::get('/presensi/destroy/{data}', [PresensiHarianController::class, 'destroy'])->name('presensi.destroy');
         Route::post('/presensi/import_excel', [PresensiHarianController::class, 'import'])->name('presensi.import');
-        Route::get('/presensi/template_download', [PresensiHarianController::class, 'download'])->name('presensi.template');
 
 
         //Cuti 
@@ -217,11 +217,11 @@ Route::group(['middleware' => ['auth']], function () {
 
 
         //Presensi Harian//
+        Route::get('/hrdPresensiHarian/template_download', [HrdPresensiHarianController::class, 'download'])->name('hrdPresensiHarian.template');
         Route::get('/hrdPresensiHarian/tanggal/', [HrdPresensiHarianController::class, 'tglPresensi'])->name('hrdPresensiHarian.search');
         Route::resource('hrdPresensiHarian', HrdPresensiHarianController::class);
         Route::get('/hrdPresensiHarian/destroy/{data}', [HrdPresensiHarianController::class, 'destroy'])->name('hrdPresensiHarian.destroy');
         Route::post('/hrdPresensiHarian/import_excel', [HrdPresensiHarianController::class, 'import'])->name('hrdPresensiHarian.import');
-        Route::get('/hrdPresensiHarian/template_download', [HrdPresensiHarianController::class, 'download'])->name('hrdPresensiHarian.template');
 
         //Cuti 
         Route::get('/hrdCuti/tanggal/', [HrdCutiController::class, 'tglPresensi'])->name('hrdCuti.search');

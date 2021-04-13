@@ -45,7 +45,9 @@
             <div class="panel-body">
                 <div class="text-center">
                     @php $path =Storage::url('images/'.$pegawai->path); @endphp
-                    <img src="{{ url($path) }}" alt="Foto Profil" width="160">
+                    <img src="{{ url($path) }}"
+                        onerror="this.onerror=null; this.src='{{ URL::to('/admin/assets/images/brands/user.jpeg') }}'"
+                        alt="Foto Profil" width="160">
                 </div>
             </div>
         </div>

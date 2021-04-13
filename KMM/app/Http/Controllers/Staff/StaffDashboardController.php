@@ -253,6 +253,11 @@ class StaffDashboardController extends Controller
             ->where('ket', "Alpha")
             ->count();
 
+        $checkData = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
+            ->count();
+
         $pegawai = Pegawai::find($id);
         $hadir = ($hari - $alpha) / $hari * 100;
         $persentaseHadir = number_format($hadir, 2);
@@ -301,6 +306,8 @@ class StaffDashboardController extends Controller
             'persentaseHadir' => $persentaseHadir,
             'persentaseTdkHadir' => $persentaseTdkHadir,
             'kehadiran' => $kehadiran,
+            'checkData' => $checkData,
+
             'cuti' => $cuti,
 
             'months' => $months,
@@ -563,6 +570,12 @@ class StaffDashboardController extends Controller
             ->where('ket', "Alpha")
             ->count();
 
+        $checkData = Presensi_harian::where('id_pegawai', $id)
+            ->whereMonth('tanggal', $intMonth)
+            ->whereYear('tanggal', $year)
+            ->count();
+
+
         $pegawai = Pegawai::find($id);
         $hadir = ($hari - $alpha) / $hari * 100;
         $persentaseHadir = number_format($hadir, 2);
@@ -612,6 +625,7 @@ class StaffDashboardController extends Controller
             'persentaseTdkHadir' => $persentaseTdkHadir,
             'kehadiran' => $kehadiran,
             'cuti' => $cuti,
+            'checkData' => $checkData,
 
             'months' => $months,
             'bulanIni' => $bulanIni,

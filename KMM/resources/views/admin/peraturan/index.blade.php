@@ -237,72 +237,74 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
                 <div class="panel-body text-center">
                     <h3> {{ $peraturan->jml_cuti_hamil }} Hari</h3>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel bg-warning">
-                <div class="panel-heading">
-                    <h5 class="panel-title">Syarat Lama Kerja Untuk Cuti Tahunan</h5>
-                    <div class="heading-elements">
-                        <ul class="icons-list">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class=" icon-more2"></i>
-                                </a>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel bg-warning">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">Syarat Lama Kerja Untuk Cuti Tahunan</h5>
+                        <div class="heading-elements">
+                            <ul class="icons-list">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class=" icon-more2"></i>
+                                    </a>
 
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>
-                                        <a href="" data-toggle="modal" data-target="#modal_form_syarTahunan"> <i
-                                                class=" icon-pencil7"></i> Edit </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li>
+                                            <a href="" data-toggle="modal" data-target="#modal_form_syarTahunan"> <i
+                                                    class=" icon-pencil7"></i> Edit </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-body text-center">
+                        <h3> {{ $peraturan->syarat_bulan_cuti_tahunan }}
+                            Bulan </h3>
                     </div>
                 </div>
-                <div class="panel-body text-center">
-                    <h3> {{ $peraturan->syarat_bulan_cuti_tahunan }}
-                        Bulan </h3>
-                </div>
             </div>
-        </div>
 
-        <div class="col-md-6">
-            <div class="panel bg-success">
-                <div class="panel-heading">
-                    <h5 class="panel-title">Syarat Lama Kerja Untuk Cuti Besar</h5>
-                    <div class="heading-elements">
-                        <ul class="icons-list">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class=" icon-more2"></i>
-                                </a>
+            <div class="col-md-6">
+                <div class="panel bg-success">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">Syarat Lama Kerja Untuk Cuti Besar</h5>
+                        <div class="heading-elements">
+                            <ul class="icons-list">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class=" icon-more2"></i>
+                                    </a>
 
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>
-                                        <a href="" data-toggle="modal" data-target="#modal_form_syarBesar"> <i
-                                                class=" icon-pencil7"></i> Edit </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li>
+                                            <a href="" data-toggle="modal" data-target="#modal_form_syarBesar"> <i
+                                                    class=" icon-pencil7"></i> Edit </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-body text-center">
+                        <h3> {{ $peraturan->syarat_bulan_cuti_besar }}
+                            Bulan </h3>
                     </div>
                 </div>
-                <div class="panel-body text-center">
-                    <h3> {{ $peraturan->syarat_bulan_cuti_besar }}
-                        Bulan </h3>
-                </div>
             </div>
-        </div>
 
+        </div>
     </div>
+
 
     {{-- MODAL SECTION --}}
 

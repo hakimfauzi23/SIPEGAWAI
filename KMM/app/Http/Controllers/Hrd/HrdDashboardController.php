@@ -28,11 +28,12 @@ class HrdDashboardController extends Controller
 
         $pegawaiSrgCuti = DB::table('cuti')
             ->whereYear('tgl_mulai', date("Y"))
+            ->where('status', 'Disetujui HRD')
             ->groupBy('id_pegawai')
             ->orderByRaw('count(*) DESC')
             ->pluck('id_pegawai');
 
-
+        // dd($pegawaiSrgCuti);
         /*  Get ID PEGAWAI YANG SERING TERLAMBAT   */
         $pegawaiSrgTelat = DB::table('presensi_harian')
             ->whereYear('tanggal', date("Y"))
@@ -48,8 +49,8 @@ class HrdDashboardController extends Controller
         $JmlAlpha = Presensi_harian::whereMonth('tanggal', $bulanIni)
             ->where('ket', 'Alpha')->count();
 
-        $pegawaiCuti = Pegawai::whereIn('id', $pegawaiSrgCuti)->get();
-        $pegawaiTelat = Pegawai::whereIn('id', $pegawaiSrgTelat)->get();
+        $pegawaiCuti = Pegawai::whereIn('id', $pegawaiSrgCuti)->paginate(3);
+        $pegawaiTelat = Pegawai::whereIn('id', $pegawaiSrgTelat)->paginate(3);
         $cuti = Presensi_harian::whereBetween('tanggal', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
             ->where('ket', '=', 'Cuti')->get();
 
@@ -235,8 +236,8 @@ class HrdDashboardController extends Controller
         $JmlAlpha = Presensi_harian::whereMonth('tanggal', $bulanIni)
             ->where('ket', 'Alpha')->count();
 
-        $pegawaiCuti = Pegawai::whereIn('id', $pegawaiSrgCuti)->get();
-        $pegawaiTelat = Pegawai::whereIn('id', $pegawaiSrgTelat)->get();
+        $pegawaiCuti = Pegawai::whereIn('id', $pegawaiSrgCuti)->paginate(3);
+        $pegawaiTelat = Pegawai::whereIn('id', $pegawaiSrgTelat)->paginate(3);
         $cuti = Presensi_harian::whereBetween('tanggal', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
             ->where('ket', '=', 'Cuti')->get();
 
