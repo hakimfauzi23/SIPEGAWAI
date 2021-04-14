@@ -161,16 +161,6 @@ Route::group(['middleware' => ['auth']], function () {
 
         //Kebijakan Jam Kerja & Cuti
         Route::resource('peraturan', PeraturanController::class);
-        Route::put('/peraturan/editJamMasuk/{data}', [PeraturanController::class, 'jamMasuk'])->name('peraturan.editJamMasuk');
-        Route::put('/peraturan/editJamPulang/{data}', [PeraturanController::class, 'jamPulang'])->name('peraturan.editJamPulang');
-        Route::put('/peraturan/editCutiTahunan/{data}', [PeraturanController::class, 'cutiTahunan'])->name('peraturan.editCutiTahunan');
-        Route::put('/peraturan/editCutiBersama/{data}', [PeraturanController::class, 'cutiBersama'])->name('peraturan.editCutiBersama');
-        Route::put('/peraturan/editCutiPenting/{data}', [PeraturanController::class, 'cutiPenting'])->name('peraturan.editCutiPenting');
-        Route::put('/peraturan/editCutiSakit/{data}', [PeraturanController::class, 'cutiSakit'])->name('peraturan.editCutiSakit');
-        Route::put('/peraturan/editCutiBesar/{data}', [PeraturanController::class, 'cutiBesar'])->name('peraturan.editCutiBesar');
-        Route::put('/peraturan/editCutiHamil/{data}', [PeraturanController::class, 'cutiHamil'])->name('peraturan.editCutiHamil');
-        Route::put('/peraturan/editSyarTahunan/{data}', [PeraturanController::class, 'syarTahunan'])->name('peraturan.editSyarTahunan');
-        Route::put('/peraturan/editSyarBesar/{data}', [PeraturanController::class, 'syarBesar'])->name('peraturan.editSyarBesar');
     });
     /**  End Menu Admin **/
 
@@ -187,17 +177,6 @@ Route::group(['middleware' => ['auth']], function () {
 
         // Peraturan 
         Route::resource('hrdPeraturan', HrdPeraturanController::class);
-        Route::put('/hrdPeraturan/editJamMasuk/{data}', [HrdPeraturanController::class, 'jamMasuk'])->name('hrdPeraturan.editJamMasuk');
-        Route::put('/hrdPeraturan/editJamPulang/{data}', [HrdPeraturanController::class, 'jamPulang'])->name('hrdPeraturan.editJamPulang');
-        Route::put('/hrdPeraturan/editCutiTahunan/{data}', [HrdPeraturanController::class, 'cutiTahunan'])->name('hrdPeraturan.editCutiTahunan');
-        Route::put('/hrdPeraturan/editCutiBersama/{data}', [HrdPeraturanController::class, 'cutiBersama'])->name('hrdPeraturan.editCutiBersama');
-        Route::put('/hrdPeraturan/editCutiPenting/{data}', [HrdPeraturanController::class, 'cutiPenting'])->name('hrdPeraturan.editCutiPenting');
-        Route::put('/hrdPeraturan/editCutiSakit/{data}', [HrdPeraturanController::class, 'cutiSakit'])->name('hrdPeraturan.editCutiSakit');
-        Route::put('/hrdPeraturan/editCutiBesar/{data}', [HrdPeraturanController::class, 'cutiBesar'])->name('hrdPeraturan.editCutiBesar');
-        Route::put('/hrdPeraturan/editCutiHamil/{data}', [HrdPeraturanController::class, 'cutiHamil'])->name('hrdPeraturan.editCutiHamil');
-        Route::put('/hrdPeraturan/editSyarTahunan/{data}', [HrdPeraturanController::class, 'syarTahunan'])->name('hrdPeraturan.editSyarTahunan');
-        Route::put('/hrdPeraturan/editSyarBesar/{data}', [HrdPeraturanController::class, 'syarBesar'])->name('hrdPeraturan.editSyarBesar');
-
 
         //Pegawai
         Route::get('/hrdPegawai/restore/{data}', [HrdPegawaiController::class, 'restore'])->name('hrdPegawai.restore');

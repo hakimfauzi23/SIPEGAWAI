@@ -79,7 +79,7 @@
                     <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
                         <thead class="bg-primary">
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Nama</th>
                                 <th>Tipe Cuti</th>
                                 <th>Tgl Pengajuan</th>
@@ -88,10 +88,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = 1; ?>
                             @if ($cuti->count())
                                 @foreach ($cuti as $key => $p)
                                     <tr>
-                                        <td>{{ $p->id }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ $p->pegawai->nama }}</td>
                                         <td>{{ $p->tipe_cuti }}</td>
                                         <td>{{ $p->tgl_pengajuan }}</td>

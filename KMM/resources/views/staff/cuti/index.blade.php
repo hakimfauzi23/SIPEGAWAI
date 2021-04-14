@@ -50,22 +50,29 @@
                 <table class="table datatable-basic table-bordered table-striped table-hover ">
                     <thead class="bg-primary">
                         <tr>
+                            <th>No</th>
                             <th>Tipe Cuti</th>
                             <th>Tgl Pengajuan</th>
                             <th>Tgl Mulai</th>
                             <th>Tgl Selesai</th>
+                            <th hidden>Status</th>
+                            <th hidden>Status</th>
                             <th>Status</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $i = 1; ?>
                         @if ($cuti->count())
                             @foreach ($cuti as $key => $p)
                                 <tr>
+                                    <td>{{ $i++ }}</td>
                                     <td>{{ $p->tipe_cuti }}</td>
                                     <td>{{ date('d-M-Y', strtotime($p->tgl_pengajuan)) }}</td>
                                     <td>{{ date('d-M-Y', strtotime($p->tgl_mulai)) }}</td>
                                     <td>{{ date('d-M-Y', strtotime($p->tgl_selesai)) }}</td>
+                                    <td hidden>{{ date('d-M-Y', strtotime($p->tgl_selesai)) }}</td>
+                                    <td hidden>{{ date('d-M-Y', strtotime($p->tgl_selesai)) }}</td>
                                     <td class="text-center"><span <?php if ($p->status == 'Disetujui HRD' ||
                                             $p->status == 'Disetujui Atasan') {
                                             echo 'class="label bg-success"';

@@ -20,10 +20,13 @@ class HrdPeraturanController extends Controller
     {
         //
 
-        $peraturan = Peraturan::find(1);
-        return view('hrd.peraturan.index', [
+        $id = Peraturan::latest('id')->pluck('id')->first();
+        $peraturan = Peraturan::find($id);
 
+        $all = Peraturan::orderBy('id', 'desc')->get();
+        return view('hrd.peraturan.index', [
             'peraturan' => $peraturan,
+            'all' => $all,
         ]);
     }
 
@@ -46,6 +49,34 @@ class HrdPeraturanController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'jam_masuk' => 'required',
+            'jam_plg' => 'required',
+            'jml_cuti_tahunan' => 'required',
+            'jml_cuti_bersama' => 'required',
+            'jml_cuti_penting' => 'required',
+            'jml_cuti_sakit' => 'required',
+            'jml_cuti_besar' => 'required',
+            'jml_cuti_hamil' => 'required',
+            'syarat_bulan_cuti_tahunan' => 'required',
+            'syarat_bulan_cuti_besar' => 'required',
+        ]);
+
+        Peraturan::create([
+            'jam_masuk' => $request->jam_masuk,
+            'jam_plg' => $request->jam_plg,
+            'jml_cuti_tahunan' => $request->jml_cuti_tahunan,
+            'jml_cuti_bersama' => $request->jml_cuti_bersama,
+            'jml_cuti_penting' => $request->jml_cuti_penting,
+            'jml_cuti_sakit' => $request->jml_cuti_sakit,
+            'jml_cuti_besar' => $request->jml_cuti_besar,
+            'jml_cuti_hamil' => $request->jml_cuti_hamil,
+            'syarat_bulan_cuti_tahunan' => $request->syarat_bulan_cuti_tahunan,
+            'syarat_bulan_cuti_besar' => $request->syarat_bulan_cuti_besar,
+        ]);
+
+        Alert::success('success', ' Berhasil Update Peraturan !');
+        return redirect('hrdPeraturan');
     }
 
     /**

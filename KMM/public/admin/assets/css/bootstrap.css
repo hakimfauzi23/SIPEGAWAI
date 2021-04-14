@@ -6119,6 +6119,7 @@ button.close {
 .modal-body {
   position: relative;
   padding: 20px;
+  overflow-x: auto;
 }
 
 .modal-footer {

@@ -43,23 +43,24 @@
             <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
                 <thead class="bg-primary">
                     <tr>
+                        <th>No</th>
                         <th>ID</th>
                         <th>Nama</th>
                         <th>Jabatan</th>
                         <th>Divisi</th>
-                        <th hidden>Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $i = 1; ?>
                     @if ($pegawai->count())
                         @foreach ($pegawai as $key => $p)
                             <tr>
+                                <td>{{ $i++ }}</td>
                                 <td>{{ $p->id }}</td>
                                 <td>{{ $p->nama }}</td>
                                 <td>{{ $p->jabatan->nm_jabatan }}</td>
                                 <td>{{ $p->divisi->nm_divisi }}</td>
-                                <td hidden><span class="label label-success">Active</span></td>
                                 <td class="text-center">
                                     <ul class="icons-list">
                                         <li class="dropdown">

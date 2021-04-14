@@ -49,7 +49,12 @@
                 </div>
 
             </div>
-            <canvas id="speedChart"></canvas>
+            @if ($pegawai->jk != 'Wanita')
+                <canvas id="canvas1"></canvas>
+            @else
+                <canvas id="canvas2"></canvas>
+            @endif
+
         </div>
     </div>
 
@@ -98,7 +103,23 @@
 
             </div>
         </div>
-
+        @php
+            
+            $tgl_masuk = $pegawai->tgl_masuk;
+            $tgl_now = date('Y-m-d');
+            
+            $ts1 = strtotime($tgl_masuk);
+            $ts2 = strtotime($tgl_now);
+            
+            $year1 = date('Y', $ts1);
+            $year2 = date('Y', $ts2);
+            
+            $month1 = date('m', $ts1);
+            $month2 = date('m', $ts2);
+            
+            $months = ($year2 - $year1) * 12 + ($month2 - $month1);
+            
+        @endphp
         <div class="col-md-4">
             <div class="row">
                 <div class="col-md-6">
@@ -110,7 +131,11 @@
 
                         </div>
                         <div class="panel-body text-center">
-                            <p> {{ $sisaTahunan }} Hari</p>
+                            @if ($months < $syarat_bulan_cuti_tahunan)
+                                <p> 0 Hari</p>
+                            @else
+                                <p> {{ $sisaTahunan }} Hari</p>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -166,7 +191,11 @@
 
                         </div>
                         <div class="panel-body text-center">
-                            <p> {{ $sisaBesar }} Hari</p>
+                            @if ($months < $syarat_bulan_cuti_besar)
+                                <p> 0 Hari</p>
+                            @else
+                                <p> {{ $sisaBesar }} Hari</p>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -179,7 +208,11 @@
 
                         </div>
                         <div class="panel-body text-center">
-                            <p> {{ $sisaHamil }} Hari</p>
+                            @if ($pegawai->jk != 'Wanita')
+                                <p> 0 Hari</p>
+                            @else
+                                <p> {{ $sisaHamil }} Hari</p>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -223,293 +256,93 @@
 @section('custom_script')
 
     {{-- <script>
-        var canvas = document.getElementById("barChart");
-        var ctx = canvas.getContext('2d');
-
-        // Global Options:
-        Chart.defaults.global.defaultFontColor = 'black';
-        Chart.defaults.global.defaultFontSize = 13;
-
-        var data = {
+        var barChartData = {
             labels: [
-                "Januari", "Febuari", "Maret",
-                "April", "Mei", "Juni",
-                "Juli", "Agustus", "September",
-                "October", "November", "December"
+                "Jan", "Feb", "Mar",
+                "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep",
+                "Oct", "Nov", "Dec",
             ],
             datasets: [{
-                label: "Tahunan",
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: "rgba(225,0,0,0.4)",
-                borderColor: "darkorange", // The main line color
-                borderCapStyle: 'square',
-                borderDash: [], // try [5, 15] for instance
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "black",
-                pointBackgroundColor: "white",
-                pointBorderWidth: 1,
-                pointHoverRadius: 8,
-                pointHoverBackgroundColor: "yellow",
-                pointHoverBorderColor: "brown",
-                pointHoverBorderWidth: 2,
-                pointRadius: 4,
-                pointHitRadius: 10,
-                // notice the gap in the data and the spanGaps: true
-                data: [
-                    {{ $JanTahunan }}, {{ $FebTahunan }}, {{ $MarTahunan }},
-                    {{ $AprTahunan }}, {{ $MayTahunan }}, {{ $JunTahunan }},
-                    {{ $JulTahunan }}, {{ $AugTahunan }}, {{ $SepTahunan }},
-                    {{ $OctTahunan }}, {{ $NovTahunan }}, {{ $DecTahunan }}
-                ],
-                spanGaps: true,
-            }, {
-                label: "Bersama",
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: "rgba(225,0,0,0.4)",
-                borderColor: "red", // The main line color
-                borderCapStyle: 'square',
-                borderDash: [], // try [5, 15] for instance
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "black",
-                pointBackgroundColor: "white",
-                pointBorderWidth: 1,
-                pointHoverRadius: 8,
-                pointHoverBackgroundColor: "yellow",
-                pointHoverBorderColor: "brown",
-                pointHoverBorderWidth: 2,
-                pointRadius: 4,
-                pointHitRadius: 10,
-                // notice the gap in the data and the spanGaps: true
-                data: [
-                    {{ $JanBersama }}, {{ $FebBersama }}, {{ $MarBersama }},
-                    {{ $AprBersama }}, {{ $MayBersama }}, {{ $JunBersama }},
-                    {{ $JulBersama }}, {{ $AugBersama }}, {{ $SepBersama }},
-                    {{ $OctBersama }}, {{ $NovBersama }}, {{ $DecBersama }}
-                ],
-                spanGaps: true,
-            }, {
-                label: "Penting",
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: "rgba(225,0,0,0.4)",
-                borderColor: "aqua", // The main line color
-                borderCapStyle: 'square',
-                borderDash: [], // try [5, 15] for instance
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "black",
-                pointBackgroundColor: "white",
-                pointBorderWidth: 1,
-                pointHoverRadius: 8,
-                pointHoverBackgroundColor: "yellow",
-                pointHoverBorderColor: "brown",
-                pointHoverBorderWidth: 2,
-                pointRadius: 4,
-                pointHitRadius: 10,
-                // notice the gap in the data and the spanGaps: true
-                data: [
-                    {{ $JanPenting }}, {{ $FebPenting }}, {{ $MarPenting }},
-                    {{ $AprPenting }}, {{ $MayPenting }}, {{ $JunPenting }},
-                    {{ $JulPenting }}, {{ $AugPenting }}, {{ $SepPenting }},
-                    {{ $OctPenting }}, {{ $NovPenting }}, {{ $DecPenting }}
-                ],
-                spanGaps: true,
-            }, {
-                label: "Besar",
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: "rgba(225,0,0,0.4)",
-                borderColor: "limegreen", // The main line color
-                borderCapStyle: 'square',
-                borderDash: [], // try [5, 15] for instance
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "black",
-                pointBackgroundColor: "white",
-                pointBorderWidth: 1,
-                pointHoverRadius: 8,
-                pointHoverBackgroundColor: "yellow",
-                pointHoverBorderColor: "brown",
-                pointHoverBorderWidth: 2,
-                pointRadius: 4,
-                pointHitRadius: 10,
-                // notice the gap in the data and the spanGaps: true
-                data: [
-                    {{ $JanBesar }}, {{ $FebBesar }}, {{ $MarBesar }},
-                    {{ $AprBesar }}, {{ $MayBesar }}, {{ $JunBesar }},
-                    {{ $JulBesar }}, {{ $AugBesar }}, {{ $SepBesar }},
-                    {{ $OctBesar }}, {{ $NovBesar }}, {{ $DecBesar }}
-                ],
-                spanGaps: true,
-            }, {
-                label: "Sakit",
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: "rgba(225,0,0,0.4)",
-                borderColor: "yellow", // The main line color
-                borderCapStyle: 'square',
-                borderDash: [], // try [5, 15] for instance
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "black",
-                pointBackgroundColor: "white",
-                pointBorderWidth: 1,
-                pointHoverRadius: 8,
-                pointHoverBackgroundColor: "yellow",
-                pointHoverBorderColor: "brown",
-                pointHoverBorderWidth: 2,
-                pointRadius: 4,
-                pointHitRadius: 10,
-                // notice the gap in the data and the spanGaps: true
-                data: [
-                    {{ $JanSakit }}, {{ $FebSakit }}, {{ $MarSakit }},
-                    {{ $AprSakit }}, {{ $MaySakit }}, {{ $JunSakit }},
-                    {{ $JulSakit }}, {{ $AugSakit }}, {{ $SepSakit }},
-                    {{ $OctSakit }}, {{ $NovSakit }}, {{ $DecSakit }}
-                ],
-                spanGaps: true,
-            }, {
-                label: "Hamil",
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: "rgba(225,0,0,0.4)",
-                borderColor: "indigo", // The main line color
-                borderCapStyle: 'square',
-                borderDash: [], // try [5, 15] for instance
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "black",
-                pointBackgroundColor: "white",
-                pointBorderWidth: 1,
-                pointHoverRadius: 8,
-                pointHoverBackgroundColor: "yellow",
-                pointHoverBorderColor: "brown",
-                pointHoverBorderWidth: 2,
-                pointRadius: 4,
-                pointHitRadius: 10,
-                // notice the gap in the data and the spanGaps: true
-                data: [
-                    {{ $JanHamil }}, {{ $FebHamil }}, {{ $MarHamil }},
-                    {{ $AprHamil }}, {{ $MayHamil }}, {{ $JunHamil }},
-                    {{ $JulHamil }}, {{ $AugHamil }}, {{ $SepHamil }},
-                    {{ $OctHamil }}, {{ $NovHamil }}, {{ $DecHamil }}
-                ],
-                spanGaps: true,
-            }]
-        };
+                    label: "Tahunan",
+                    backgroundColor: "orangered",
+                    borderColor: "maroon",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanTahunan }}, {{ $FebTahunan }}, {{ $MarTahunan }},
+                        {{ $AprTahunan }}, {{ $MayTahunan }}, {{ $JunTahunan }},
+                        {{ $JulTahunan }}, {{ $AugTahunan }}, {{ $SepTahunan }},
+                        {{ $OctTahunan }}, {{ $NovTahunan }}, {{ $DecTahunan }}
+                    ]
+                },
+                {
+                    label: "Bersama",
+                    backgroundColor: "red",
+                    borderColor: "black",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanBersama }}, {{ $FebBersama }}, {{ $MarBersama }},
+                        {{ $AprBersama }}, {{ $MayBersama }}, {{ $JunBersama }},
+                        {{ $JulBersama }}, {{ $AugBersama }}, {{ $SepBersama }},
+                        {{ $OctBersama }}, {{ $NovBersama }}, {{ $DecBersama }}
+                    ]
+                },
+                {
+                    label: "Penting",
+                    backgroundColor: "lightblue",
+                    borderColor: "blue",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanPenting }}, {{ $FebPenting }}, {{ $MarPenting }},
+                        {{ $AprPenting }}, {{ $MayPenting }}, {{ $JunPenting }},
+                        {{ $JulPenting }}, {{ $AugPenting }}, {{ $SepPenting }},
+                        {{ $OctPenting }}, {{ $NovPenting }}, {{ $DecPenting }}
+                    ]
+                },
+                {
+                    label: "Sakit",
+                    backgroundColor: "gold",
+                    borderColor: "orange",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanSakit }}, {{ $FebSakit }}, {{ $MarSakit }},
+                        {{ $AprSakit }}, {{ $MaySakit }}, {{ $JunSakit }},
+                        {{ $JulSakit }}, {{ $AugSakit }}, {{ $SepSakit }},
+                        {{ $OctSakit }}, {{ $NovSakit }}, {{ $DecSakit }}
+                    ]
+                },
+                {
+                    label: "Besar",
+                    backgroundColor: "lightgreen",
+                    borderColor: "green",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanBesar }}, {{ $FebBesar }}, {{ $MarBesar }},
+                        {{ $AprBesar }}, {{ $MayBesar }}, {{ $JunBesar }},
+                        {{ $JulBesar }}, {{ $AugBesar }}, {{ $SepBesar }},
+                        {{ $OctBesar }}, {{ $NovBesar }}, {{ $DecBesar }}
+                    ]
+                },
+                {
+                    label: "Hamil",
+                    backgroundColor: "rebeccapurple",
+                    borderColor: "indigo",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanHamil }}, {{ $FebHamil }}, {{ $MarHamil }},
+                        {{ $AprHamil }}, {{ $MayHamil }}, {{ $JunHamil }},
+                        {{ $JulHamil }}, {{ $AugHamil }}, {{ $SepHamil }},
+                        {{ $OctHamil }}, {{ $NovHamil }}, {{ $DecHamil }}
+                    ]
+                }
 
-        // Notice the scaleLabel at the same level as Ticks
-        var options = {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    },
-                    scaleLabel: {
-                        display: true,
-                        labelString: {{ $thisYear }},
-                        fontSize: 20
-                    }
-                }]
-            }
-        };
-
-        // Chart declaration:
-        var myBarChart = new Chart(ctx, {
-            type: 'line',
-            data: data,
-            options: options
-        });
-
-    </script> --}}
-
-    <script>
-        var speedCanvas = document.getElementById("speedChart");
-
-        Chart.defaults.global.defaultFontSize = 13;
-
-        var speedData = {
-            labels: [
-                "Jan", "Feb", "Mar", "Apr",
-                "May", "Jun", "Jul", "Aug",
-                "Sep", "Oct", "Nov", "Dec"
-            ],
-            datasets: [{
-                label: "Tahunan",
-                borderColor: 'rgb(78, 154, 247)', // The main line color
-                backgroundColor: 'rgba(78, 154, 247, 0.503)',
-                data: [
-                    {{ $JanTahunan }}, {{ $FebTahunan }}, {{ $MarTahunan }},
-                    {{ $AprTahunan }}, {{ $MayTahunan }}, {{ $JunTahunan }},
-                    {{ $JulTahunan }}, {{ $AugTahunan }}, {{ $SepTahunan }},
-                    {{ $OctTahunan }}, {{ $NovTahunan }}, {{ $DecTahunan }}
-                ],
-            }, {
-                label: "Bersama",
-                borderColor: 'rgb(239, 41, 41)', // The main line color
-                backgroundColor: 'rgba(239, 41, 41, 0.55)',
-                data: [
-                    {{ $JanBersama }}, {{ $FebBersama }}, {{ $MarBersama }},
-                    {{ $AprBersama }}, {{ $MayBersama }}, {{ $JunBersama }},
-                    {{ $JulBersama }}, {{ $AugBersama }}, {{ $SepBersama }},
-                    {{ $OctBersama }}, {{ $NovBersama }}, {{ $DecBersama }}
-                ],
-            }, {
-                label: "Penting",
-                borderColor: 'rgb(247, 151, 78)', // The main line color
-                backgroundColor: 'rgba(247, 151, 78, 0.701)',
-                data: [
-                    {{ $JanPenting }}, {{ $FebPenting }}, {{ $MarPenting }},
-                    {{ $AprPenting }}, {{ $MayPenting }}, {{ $JunPenting }},
-                    {{ $JulPenting }}, {{ $AugPenting }}, {{ $SepPenting }},
-                    {{ $OctPenting }}, {{ $NovPenting }}, {{ $DecPenting }}
-                ],
-            }, {
-                label: "Besar",
-                borderColor: 'rgb(127, 242, 110)', // The main line color
-                backgroundColor: 'rgba(128, 242, 110, 0.441)',
-                data: [
-                    {{ $JanBesar }}, {{ $FebBesar }}, {{ $MarBesar }},
-                    {{ $AprBesar }}, {{ $MayBesar }}, {{ $JunBesar }},
-                    {{ $JulBesar }}, {{ $AugBesar }}, {{ $SepBesar }},
-                    {{ $OctBesar }}, {{ $NovBesar }}, {{ $DecBesar }}
-                ],
-            }, {
-                label: "Sakit",
-                borderColor: 'rgb(255, 255, 5)', // The main line color
-                backgroundColor: 'rgba(255, 255, 5, 0.496)',
-                data: [
-                    {{ $JanSakit }}, {{ $FebSakit }}, {{ $MarSakit }},
-                    {{ $AprSakit }}, {{ $MaySakit }}, {{ $JunSakit }},
-                    {{ $JulSakit }}, {{ $AugSakit }}, {{ $SepSakit }},
-                    {{ $OctSakit }}, {{ $NovSakit }}, {{ $DecSakit }}
-                ],
-            }, {
-                label: "Hamil",
-                borderColor: 'rgb(255, 0, 153)', // The main line color
-                backgroundColor: 'rgba(255, 0, 153, 0.722)',
-                data: [
-                    {{ $JanHamil }}, {{ $FebHamil }}, {{ $MarHamil }},
-                    {{ $AprHamil }}, {{ $MayHamil }}, {{ $JunHamil }},
-                    {{ $JulHamil }}, {{ $AugHamil }}, {{ $SepHamil }},
-                    {{ $OctHamil }}, {{ $NovHamil }}, {{ $DecHamil }}
-                ],
-            }]
+            ]
         };
 
         var chartOptions = {
-
+            responsive: true,
             legend: {
-                display: true,
-                position: 'top',
-                labels: {
-                    boxWidth: 80,
-                    fontColor: 'black'
-                }
+                position: "top"
             },
             scales: {
                 yAxes: [{
@@ -521,17 +354,240 @@
                         labelString: {{ $thisYear }},
                         fontSize: 20
                     }
-                }]
+
+                }, ],
             }
 
+        }
+
+        window.onload = function() {
+            var ctx = document.getElementById("chartHamil").getContext("2d");
+            window.myBar = new Chart(ctx, {
+                type: "bar",
+                data: barChartData,
+                options: chartOptions
+            });
         };
 
-        var lineChart = new Chart(speedCanvas, {
-            type: 'line',
-            data: speedData,
+    </script> --}}
+
+    <script>
+        var canvas1 = document.getElementById("canvas1");
+
+        var barChartData = {
+            labels: [
+                "Jan", "Feb", "Mar",
+                "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep",
+                "Oct", "Nov", "Dec",
+            ],
+            datasets: [{
+                    label: "Tahunan",
+                    backgroundColor: "orangered",
+                    borderColor: "maroon",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanTahunan }}, {{ $FebTahunan }}, {{ $MarTahunan }},
+                        {{ $AprTahunan }}, {{ $MayTahunan }}, {{ $JunTahunan }},
+                        {{ $JulTahunan }}, {{ $AugTahunan }}, {{ $SepTahunan }},
+                        {{ $OctTahunan }}, {{ $NovTahunan }}, {{ $DecTahunan }}
+                    ]
+                },
+                {
+                    label: "Bersama",
+                    backgroundColor: "red",
+                    borderColor: "black",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanBersama }}, {{ $FebBersama }}, {{ $MarBersama }},
+                        {{ $AprBersama }}, {{ $MayBersama }}, {{ $JunBersama }},
+                        {{ $JulBersama }}, {{ $AugBersama }}, {{ $SepBersama }},
+                        {{ $OctBersama }}, {{ $NovBersama }}, {{ $DecBersama }}
+                    ]
+                },
+                {
+                    label: "Penting",
+                    backgroundColor: "lightblue",
+                    borderColor: "blue",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanPenting }}, {{ $FebPenting }}, {{ $MarPenting }},
+                        {{ $AprPenting }}, {{ $MayPenting }}, {{ $JunPenting }},
+                        {{ $JulPenting }}, {{ $AugPenting }}, {{ $SepPenting }},
+                        {{ $OctPenting }}, {{ $NovPenting }}, {{ $DecPenting }}
+                    ]
+                },
+                {
+                    label: "Sakit",
+                    backgroundColor: "gold",
+                    borderColor: "orange",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanSakit }}, {{ $FebSakit }}, {{ $MarSakit }},
+                        {{ $AprSakit }}, {{ $MaySakit }}, {{ $JunSakit }},
+                        {{ $JulSakit }}, {{ $AugSakit }}, {{ $SepSakit }},
+                        {{ $OctSakit }}, {{ $NovSakit }}, {{ $DecSakit }}
+                    ]
+                },
+                {
+                    label: "Besar",
+                    backgroundColor: "lightgreen",
+                    borderColor: "green",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanBesar }}, {{ $FebBesar }}, {{ $MarBesar }},
+                        {{ $AprBesar }}, {{ $MayBesar }}, {{ $JunBesar }},
+                        {{ $JulBesar }}, {{ $AugBesar }}, {{ $SepBesar }},
+                        {{ $OctBesar }}, {{ $NovBesar }}, {{ $DecBesar }}
+                    ]
+                },
+            ]
+        };
+
+        var chartOptions = {
+            responsive: true,
+            legend: {
+                position: "top"
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: {{ $thisYear }},
+                        fontSize: 20
+                    }
+
+                }, ],
+            }
+
+        }
+
+        var barChart = new Chart(canvas1, {
+            type: "bar",
+            data: barChartData,
             options: chartOptions
         });
 
     </script>
+
+
+    <script>
+        var canvas2 = document.getElementById("canvas2");
+
+        var barChartData = {
+            labels: [
+                "Jan", "Feb", "Mar",
+                "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep",
+                "Oct", "Nov", "Dec",
+            ],
+            datasets: [{
+                    label: "Tahunan",
+                    backgroundColor: "orangered",
+                    borderColor: "maroon",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanTahunan }}, {{ $FebTahunan }}, {{ $MarTahunan }},
+                        {{ $AprTahunan }}, {{ $MayTahunan }}, {{ $JunTahunan }},
+                        {{ $JulTahunan }}, {{ $AugTahunan }}, {{ $SepTahunan }},
+                        {{ $OctTahunan }}, {{ $NovTahunan }}, {{ $DecTahunan }}
+                    ]
+                },
+                {
+                    label: "Bersama",
+                    backgroundColor: "red",
+                    borderColor: "black",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanBersama }}, {{ $FebBersama }}, {{ $MarBersama }},
+                        {{ $AprBersama }}, {{ $MayBersama }}, {{ $JunBersama }},
+                        {{ $JulBersama }}, {{ $AugBersama }}, {{ $SepBersama }},
+                        {{ $OctBersama }}, {{ $NovBersama }}, {{ $DecBersama }}
+                    ]
+                },
+                {
+                    label: "Penting",
+                    backgroundColor: "lightblue",
+                    borderColor: "blue",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanPenting }}, {{ $FebPenting }}, {{ $MarPenting }},
+                        {{ $AprPenting }}, {{ $MayPenting }}, {{ $JunPenting }},
+                        {{ $JulPenting }}, {{ $AugPenting }}, {{ $SepPenting }},
+                        {{ $OctPenting }}, {{ $NovPenting }}, {{ $DecPenting }}
+                    ]
+                },
+                {
+                    label: "Sakit",
+                    backgroundColor: "gold",
+                    borderColor: "orange",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanSakit }}, {{ $FebSakit }}, {{ $MarSakit }},
+                        {{ $AprSakit }}, {{ $MaySakit }}, {{ $JunSakit }},
+                        {{ $JulSakit }}, {{ $AugSakit }}, {{ $SepSakit }},
+                        {{ $OctSakit }}, {{ $NovSakit }}, {{ $DecSakit }}
+                    ]
+                },
+                {
+                    label: "Besar",
+                    backgroundColor: "lightgreen",
+                    borderColor: "green",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanBesar }}, {{ $FebBesar }}, {{ $MarBesar }},
+                        {{ $AprBesar }}, {{ $MayBesar }}, {{ $JunBesar }},
+                        {{ $JulBesar }}, {{ $AugBesar }}, {{ $SepBesar }},
+                        {{ $OctBesar }}, {{ $NovBesar }}, {{ $DecBesar }}
+                    ]
+                },
+                {
+                    label: "Hamil",
+                    backgroundColor: "rebeccapurple",
+                    borderColor: "indigo",
+                    borderWidth: 1,
+                    data: [
+                        {{ $JanHamil }}, {{ $FebHamil }}, {{ $MarHamil }},
+                        {{ $AprHamil }}, {{ $MayHamil }}, {{ $JunHamil }},
+                        {{ $JulHamil }}, {{ $AugHamil }}, {{ $SepHamil }},
+                        {{ $OctHamil }}, {{ $NovHamil }}, {{ $DecHamil }}
+                    ]
+                }
+
+            ]
+        };
+
+        var chartOptions = {
+            responsive: true,
+            legend: {
+                position: "top"
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: {{ $thisYear }},
+                        fontSize: 20
+                    }
+
+                }, ],
+            }
+
+        }
+
+        var barChart = new Chart(canvas2, {
+            type: "bar",
+            data: barChartData,
+            options: chartOptions
+        });
+
+    </script>
+
 
 @endsection

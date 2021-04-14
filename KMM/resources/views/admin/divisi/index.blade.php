@@ -43,7 +43,7 @@
             <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
                 <thead class="bg-primary">
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Nama Divisi</th>
                         <th hidden></th>
                         <th hidden></th>
@@ -52,10 +52,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $i = 1; ?>
                     @if ($divisi->count())
                         @foreach ($divisi as $key => $p)
                             <tr>
-                                <td>{{ $p->id }}</td>
+                                <td>{{ $i++ }}</td>
                                 <td>{{ $p->nm_divisi }}</td>
                                 <td hidden></td>
                                 <td hidden></td>

@@ -77,21 +77,22 @@
                     <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
                         <thead class="bg-primary">
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Nama</th>
-                                <th>Tanggal</th>
-                                <th>Keterangan</th>
-                                <th>Waktu Kerja</th>
+                                <th class="text-center">Tanggal</th>
+                                <th class="text-center">Keterangan</th>
+                                <th class="text-center">Waktu Kerja</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = 1; ?>
                             @if ($presensi->count())
                                 @foreach ($presensi as $key => $p)
                                     <tr>
-                                        <td>{{ $p->id }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ $p->pegawai->nama }}</td>
-                                        <td>{{ $p->tanggal }}</td>
+                                        <td class="text-center">{{ date('d F Y', strtotime($p->tanggal)) }}</td>
                                         <td class="text-center"><span <?php if ($p->ket == 'Hadir') {
                                                 echo 'class="label bg-success"';
                                                 }
@@ -102,7 +103,13 @@
                                                 echo 'class="label bg-info"';
                                                 }
                                                 ?>>{{ $p->ket }}</span></td>
-                                        <td>{{ $p->jam_dtg . ' - ' . $p->jam_plg }}</td>
+                                        <td class="text-center">
+                                            @if ($p->ket == 'Hadir')
+                                                {{ date('H:i', strtotime($p->jam_dtg)) . ' - ' . date('H:i', strtotime($p->jam_plg)) }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             <ul class="icons-list">
                                                 <li class="dropdown">

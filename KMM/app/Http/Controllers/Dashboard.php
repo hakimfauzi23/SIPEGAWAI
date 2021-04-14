@@ -32,8 +32,9 @@ class Dashboard extends Controller
         $pegawai_bulan = Pegawai::whereMonth('created_at', $bulanIni)->get();
         $cuti_bulan = Cuti::whereMonth('created_at', $bulanIni)->get();
         $presensi_bulan = Presensi_harian::whereMonth('created_at', $bulanIni)->get();
+        $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
 
-        $peraturan = Peraturan::find(1);
+        $peraturan = Peraturan::find($id_peraturan);
 
         $months = [
             'January' => 1, 'Febuary' => 2, 'March' => 3,
@@ -95,7 +96,9 @@ class Dashboard extends Controller
         $cuti_bulan = Cuti::whereMonth('created_at', $bulanIni)->get();
         $presensi_bulan = Presensi_harian::whereMonth('created_at', $bulanIni)->get();
 
-        $peraturan = Peraturan::find(1);
+        $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
+
+        $peraturan = Peraturan::find($id_peraturan);
 
         $months = [
             'January' => 1, 'Febuary' => 2, 'March' => 3,

@@ -4,6 +4,21 @@
 @section('title', 'Pengajuan Cuti')
 
 
+@section('script_tanggal')
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/notifications/jgrowl.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/anytime.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.js"></script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.date.js">
+    </script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/picker.time.js">
+    </script>
+    <script type="text/javascript" src="{{ URL::to('/admin') }}/assets/js/plugins/pickers/pickadate/legacy.js"></script>
+
+@endsection
+
+
 @section('content_header')
     <div class="page-header page-header-default">
         <div class="page-header-content">
@@ -56,7 +71,7 @@
                             <option>Pilih Tipe Cuti</option>
                             <option value="Tahunan" @if ($months < $syarat_bulan_cuti_tahunan) {{ 'disabled' }} @endif> Tahunan </option>
                             <option value="Besar" @if ($months < $syarat_bulan_cuti_besar) {{ 'disabled' }} @endif> Besar </option>
-                            <option value="Hamil"> Hamil </option>
+                            <option value="Hamil" @if (Auth::user()->jk != 'Wanita') {{ 'disabled' }} @endif> Hamil </option>
                             <option value="Sakit"> Sakit </option>
                             <option value="Penting"> Penting </option>
                         </select>
@@ -72,7 +87,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Tanggal Mulai</label>
-                                <input type="date" name="tgl_mulai" class="form-control" value="{{ old('tanggal') }}">
+                                <input type="date" name="tgl_mulai" class="form-control " min="{{ date('Y-m-d') }}"
+                                    value="{{ old('tanggal') }}">
                                 @if ($errors->has('tgl_mulai'))
                                     <div class="text-danger">
                                         {{ $errors->first('tgl_mulai') }}
@@ -84,7 +100,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Tanggal Selesai</label>
-                                <input type="date" name="tgl_selesai" class="form-control" value="{{ old('tanggal') }}">
+                                <input type="date" name="tgl_selesai" class="form-control" min="{{ date('Y-m-d') }}"
+                                    value="{{ old('tanggal') }}">
                                 @if ($errors->has('tgl_selesai'))
                                     <div class="text-danger">
                                         {{ $errors->first('tgl_selesai') }}

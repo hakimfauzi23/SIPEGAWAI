@@ -46,7 +46,7 @@
         <table class="table datatable-basic table-bordered table-striped table-hover">
             <thead class="bg-primary">
                 <tr>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Nama</th>
                     <th>Jabatan</th>
                     <th>Tgl Mendapatkan Jabatan</th>
@@ -55,10 +55,11 @@
                 </tr>
             </thead>
             <tbody>
+                <?php $i = 1; ?>
                 @if ($riwayatJabatan->count())
                     @foreach ($riwayatJabatan as $key => $p)
                         <tr>
-                            <td>{{ $p->id }}</td>
+                            <td>{{ $i++ }}</td>
                             <td>{{ $p->pegawai->nama }}</td>
                             <td>{{ $p->jabatan->nm_jabatan }}</td>
                             <td>{{ $p->tgl_mulai }}</td>

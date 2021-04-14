@@ -57,7 +57,9 @@ class RekapCutiController extends Controller
     {
         //
         $id = Crypt::decryptString($data);
-        $peraturan = Peraturan::find(1);
+        $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
+
+        $peraturan = Peraturan::find($id_peraturan);
         $pegawai = Pegawai::find($id);
         $batasTahunan = $peraturan->jml_cuti_tahunan;
         $batasBersama = $peraturan->jml_cuti_bersama;
@@ -65,6 +67,10 @@ class RekapCutiController extends Controller
         $batasBesar = $peraturan->jml_cuti_besar;
         $batasSakit = $peraturan->jml_cuti_sakit;
         $batasHamil = $peraturan->jml_cuti_hamil;
+
+        $syarat_bulan_cuti_tahunan = $peraturan->syarat_bulan_cuti_tahunan;
+
+        $syarat_bulan_cuti_besar = $peraturan->syarat_bulan_cuti_besar;
 
         $thisYear = date("Y");
 
@@ -656,6 +662,10 @@ class RekapCutiController extends Controller
             'sisaSakit' => $sisaSakit,
             'sisaHamil' => $sisaHamil,
 
+            'syarat_bulan_cuti_tahunan' => $syarat_bulan_cuti_tahunan,
+
+            'syarat_bulan_cuti_besar' => $syarat_bulan_cuti_besar,
+
             'thisYear' => $thisYear,
 
 
@@ -808,7 +818,10 @@ class RekapCutiController extends Controller
     {
         //
         $id = Crypt::decryptString($data);
-        $peraturan = Peraturan::find(1);
+
+        $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
+
+        $peraturan = Peraturan::find($id_peraturan);
         $pegawai = Pegawai::find($id);
         $batasTahunan = $peraturan->jml_cuti_tahunan;
         $batasBersama = $peraturan->jml_cuti_bersama;
@@ -817,6 +830,9 @@ class RekapCutiController extends Controller
         $batasSakit = $peraturan->jml_cuti_sakit;
         $batasHamil = $peraturan->jml_cuti_hamil;
 
+        $syarat_bulan_cuti_tahunan = $peraturan->syarat_bulan_cuti_tahunan;
+
+        $syarat_bulan_cuti_besar = $peraturan->syarat_bulan_cuti_besar;
 
         $thisYear = $request->year;
 
@@ -1409,6 +1425,11 @@ class RekapCutiController extends Controller
             'sisaBesar' => $sisaBesar,
             'sisaSakit' => $sisaSakit,
             'sisaHamil' => $sisaHamil,
+
+            'syarat_bulan_cuti_tahunan' => $syarat_bulan_cuti_tahunan,
+
+            'syarat_bulan_cuti_besar' => $syarat_bulan_cuti_besar,
+
 
             'thisYear' => $thisYear,
 

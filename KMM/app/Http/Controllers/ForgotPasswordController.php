@@ -43,7 +43,7 @@ class ForgotPasswordController extends Controller
       });
 
       Alert::success('success', 'Link Reset Password Terkirim Di Email Anda !');
-      return redirect('/');
+      return redirect('/login');
     }
   }
 }

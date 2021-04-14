@@ -32,7 +32,7 @@ class ResetPasswordController extends Controller
     // dd($token);
     if ($token == null) {
       Alert::error('error', 'Token Invalid / Kadaluarsa!');
-      return redirect('/');
+      return redirect('/login');
     } else {
       $request->validate([
         'email' => 'required|email|exists:pegawai',
@@ -47,7 +47,7 @@ class ResetPasswordController extends Controller
       DB::table('password_resets')->where(['email' => $request->email])->delete();
 
       Alert::success('success', 'Password Anda Berhasil Di Reset!');
-      return redirect('/');
+      return redirect('/login');
     }
   }
 }

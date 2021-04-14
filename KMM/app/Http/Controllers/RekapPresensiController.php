@@ -58,7 +58,9 @@ class RekapPresensiController extends Controller
         $intMonth = date('m');
         $year = date('Y');
         $hari = cal_days_in_month(CAL_GREGORIAN, $intMonth, date('Y'));
-        $peraturan = Peraturan::find(1);
+        $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
+
+        $peraturan = Peraturan::find($id_peraturan);
         $jam_masuk = $peraturan->jam_masuk;
         $jam_plg = $peraturan->jam_plg;
 
@@ -158,7 +160,10 @@ class RekapPresensiController extends Controller
         $intMonth = $request->month;
         $year = $request->year;
         $hari = cal_days_in_month(CAL_GREGORIAN, $intMonth, $year);
-        $peraturan = Peraturan::find(1);
+
+        $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
+
+        $peraturan = Peraturan::find($id_peraturan);
         $jam_masuk = $peraturan->jam_masuk;
         $jam_plg = $peraturan->jam_plg;
 
@@ -192,7 +197,7 @@ class RekapPresensiController extends Controller
             ->whereMonth('tanggal', $intMonth)
             ->whereYear('tanggal', $year)
             ->count();
-        
+
         $pegawai = Pegawai::find($id);
         $hadir = ($hari - $alpha) / $hari * 100;
         $persentaseHadir = number_format($hadir, 2);

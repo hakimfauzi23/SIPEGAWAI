@@ -21,7 +21,9 @@ class HrdDashboardController extends Controller
     public function index()
     {
         // 
-        $peraturan = Peraturan::find(1);
+        $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
+
+        $peraturan = Peraturan::find($id_peraturan);
         $bulanIni = date('m');
 
         /*  Get ID PEGAWAI YANG SERING CUTI   */
@@ -209,7 +211,9 @@ class HrdDashboardController extends Controller
     public function kehadiran(Request $request)
     {
         //
-        $peraturan = Peraturan::find(1);
+        $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
+
+        $peraturan = Peraturan::find($id_peraturan);
         $bulanIni = $request->month;
 
         /*  Get ID PEGAWAI YANG SERING CUTI   */

@@ -204,72 +204,136 @@
                 <h5 class="panel-title">Sisa Cuti Tahun Ini </h5>
             </div>
             <div class="container-fluid">
-                <div class="row text-center">
-                    <div class="col-md-2">
-                        <div class="content-group">
-                            <h5 class="text-semibold no-margin"><i
-                                    class="fa fa-calendar-check-o position-left text-slate"></i>
-                                @if ($lamaKerja < $syarat_bulan_cuti_tahunan)
-                                    0
-                                @else
-                                    {{ $sisaTahunan }}
-                                @endif
-                            </h5>
-                            <span class="text-muted text-size-small">Tahunan</span>
+                @if (Auth::user()->jk == 'Wanita')
+                    <div class="row text-center">
+                        <div class="col-md-2">
+                            <div class="content-group">
+                                <h5 class="text-semibold no-margin"><i
+                                        class="fa fa-calendar-check-o position-left text-slate"></i>
+                                    @if ($lamaKerja < $syarat_bulan_cuti_tahunan)
+                                        0
+                                    @else
+                                        {{ $sisaTahunan }}
+                                    @endif
+                                </h5>
+                                <span class="text-muted text-size-small">Tahunan</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="content-group">
+                                <h5 class="text-semibold no-margin"><i
+                                        class="fa fa-calendar-check-o position-left text-slate"></i>
+                                    {{ $sisaBersama }}
+                                </h5>
+                                <span class="text-muted text-size-small">Bersama</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="content-group">
+                                <h5 class="text-semibold no-margin"><i
+                                        class="fa fa-calendar-check-o position-left text-slate"></i>
+                                    {{ $sisaPenting }}
+                                </h5>
+                                <span class="text-muted text-size-small">Penting</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="content-group">
+                                <h5 class="text-semibold no-margin"><i
+                                        class="fa fa-calendar-check-o position-left text-slate"></i>
+                                    @if ($lamaKerja < $syarat_bulan_cuti_besar)
+                                        0
+                                    @else
+                                        {{ $sisaTahunan }}
+                                    @endif
+                                </h5>
+                                <span class="text-muted text-size-small">Besar</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="content-group">
+                                <h5 class="text-semibold no-margin"><i
+                                        class="fa fa-calendar-check-o position-left text-slate"></i>
+                                    {{ $sisaSakit }}
+                                </h5>
+                                <span class="text-muted text-size-small">Sakit</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="content-group">
+                                <h5 class="text-semibold no-margin"><i
+                                        class="fa fa-calendar-check-o position-left text-slate"></i>
+                                    {{ $sisaHamil }}
+                                </h5>
+                                <span class="text-muted text-size-small">Hamil</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-md-2">
-                        <div class="content-group">
-                            <h5 class="text-semibold no-margin"><i
-                                    class="fa fa-calendar-check-o position-left text-slate"></i>
-                                {{ $sisaBersama }}
-                            </h5>
-                            <span class="text-muted text-size-small">Bersama</span>
+                @else
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <div class="content-group">
+                                <h5 class="text-semibold no-margin"><i
+                                        class="fa fa-calendar-check-o position-left text-slate"></i>
+                                    @if ($lamaKerja < $syarat_bulan_cuti_tahunan)
+                                        0
+                                    @else
+                                        {{ $sisaTahunan }}
+                                    @endif
+                                </h5>
+                                <span class="text-muted text-size-small">Tahunan</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="content-group">
+                                <h5 class="text-semibold no-margin"><i
+                                        class="fa fa-calendar-check-o position-left text-slate"></i>
+                                    {{ $sisaBersama }}
+                                </h5>
+                                <span class="text-muted text-size-small">Bersama</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="content-group">
+                                <h5 class="text-semibold no-margin"><i
+                                        class="fa fa-calendar-check-o position-left text-slate"></i>
+                                    {{ $sisaPenting }}
+                                </h5>
+                                <span class="text-muted text-size-small">Penting</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-6">
+                            <div class="content-group">
+                                <h5 class="text-semibold no-margin"><i
+                                        class="fa fa-calendar-check-o position-left text-slate"></i>
+                                    @if ($lamaKerja < $syarat_bulan_cuti_besar)
+                                        0
+                                    @else
+                                        {{ $sisaTahunan }}
+                                    @endif
+                                </h5>
+                                <span class="text-muted text-size-small">Besar</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="content-group">
+                                <h5 class="text-semibold no-margin"><i
+                                        class="fa fa-calendar-check-o position-left text-slate"></i>
+                                    {{ $sisaSakit }}
+                                </h5>
+                                <span class="text-muted text-size-small">Sakit</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-md-2">
-                        <div class="content-group">
-                            <h5 class="text-semibold no-margin"><i
-                                    class="fa fa-calendar-check-o position-left text-slate"></i>
-                                {{ $sisaPenting }}
-                            </h5>
-                            <span class="text-muted text-size-small">Penting</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="content-group">
-                            <h5 class="text-semibold no-margin"><i
-                                    class="fa fa-calendar-check-o position-left text-slate"></i>
-                                @if ($lamaKerja < $syarat_bulan_cuti_besar)
-                                    0
-                                @else
-                                    {{ $sisaTahunan }}
-                                @endif
-                            </h5>
-                            <span class="text-muted text-size-small">Besar</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="content-group">
-                            <h5 class="text-semibold no-margin"><i
-                                    class="fa fa-calendar-check-o position-left text-slate"></i>
-                                {{ $sisaSakit }}
-                            </h5>
-                            <span class="text-muted text-size-small">Sakit</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="content-group">
-                            <h5 class="text-semibold no-margin"><i
-                                    class="fa fa-calendar-check-o position-left text-slate"></i>
-                                {{ $sisaHamil }}
-                            </h5>
-                            <span class="text-muted text-size-small">Hamil</span>
-                        </div>
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
 

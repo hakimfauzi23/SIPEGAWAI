@@ -27,7 +27,10 @@ class StaffDashboardController extends Controller
         $intMonth = date('m');
         $year = date('Y');
         $hari = cal_days_in_month(CAL_GREGORIAN, $intMonth, date('Y'));
-        $peraturan = Peraturan::find(1);
+
+        $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
+
+        $peraturan = Peraturan::find($id_peraturan);
         $batasTahunan = $peraturan->jml_cuti_tahunan;
         $batasBersama = $peraturan->jml_cuti_bersama;
         $batasPenting = $peraturan->jml_cuti_penting;
@@ -344,7 +347,10 @@ class StaffDashboardController extends Controller
         $intMonth = $request->month;
         $year = date('Y');
         $hari = cal_days_in_month(CAL_GREGORIAN, $intMonth, date('Y'));
-        $peraturan = Peraturan::find(1);
+
+        $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
+
+        $peraturan = Peraturan::find($id_peraturan);
         $batasTahunan = $peraturan->jml_cuti_tahunan;
         $batasBersama = $peraturan->jml_cuti_bersama;
         $batasPenting = $peraturan->jml_cuti_penting;

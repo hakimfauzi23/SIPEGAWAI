@@ -42,7 +42,7 @@
             <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
                 <thead class="bg-primary">
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Nama Jabatan</th>
                         <th>Gaji</th>
                         <th hidden></th>
@@ -52,11 +52,12 @@
                 </thead>
                 <tbody>
                     @if ($jabatan->count())
+                        <?php $i = 1; ?>
                         @foreach ($jabatan as $key => $p)
                             <tr>
-                                <td>{{ $p->id }}</td>
+                                <td>{{ $i++ }}</td>
                                 <td>{{ $p->nm_jabatan }}</td>
-                                <td>{{ $p->gaji_pokok }}</td>
+                                <td>@currency($p->gaji_pokok)</td>
                                 <td hidden></td>
                                 <td hidden><span class="label label-success">Active</span></td>
                                 <td class="text-center">

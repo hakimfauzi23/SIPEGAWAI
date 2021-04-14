@@ -42,7 +42,7 @@
             <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
                 <thead class="bg-primary">
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Nama</th>
                         <th>Jabatan</th>
                         <th>Divisi</th>
@@ -51,10 +51,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $i = 1; ?>
                     @if ($pegawai->count())
                         @foreach ($pegawai as $key => $p)
                             <tr>
-                                <td>{{ $p->id }}</td>
+                            <td>{{ $i++ }}</td>
                                 <td>{{ $p->nama }}</td>
                                 <td>{{ $p->jabatan->nm_jabatan }}</td>
                                 <td>{{ $p->divisi->nm_divisi }}</td>

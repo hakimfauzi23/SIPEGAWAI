@@ -66,11 +66,13 @@ class StaffCutiController extends Controller
     public function create()
     {
         //
-        $peraturan = Peraturan::find(1);
+        $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
+
+        $peraturan = Peraturan::find($id_peraturan);
 
         $tgl_masuk = Auth::user()->tgl_masuk;
         $tgl_now = date("Y-m-d");
-
+        
         $ts1 = strtotime($tgl_masuk);
         $ts2 = strtotime($tgl_now);
 

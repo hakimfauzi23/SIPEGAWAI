@@ -79,7 +79,7 @@
                     <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
                         <thead class="bg-primary">
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Nama</th>
                                 <th>Tanggal</th>
                                 <th>Keterangan</th>
@@ -88,10 +88,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = 1; ?>
                             @if ($presensi->count())
                                 @foreach ($presensi as $key => $p)
                                     <tr>
-                                        <td>{{ $p->id }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ $p->pegawai->nama }}</td>
                                         <td>{{ $p->tanggal }}</td>
                                         <td class="text-center"><span <?php if ($p->ket == 'Hadir') {
