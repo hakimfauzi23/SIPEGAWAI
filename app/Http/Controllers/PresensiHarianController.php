@@ -75,8 +75,6 @@ class PresensiHarianController extends Controller
             'id_pegawai' => 'required',
             'tanggal' => 'required',
             'ket' => 'required',
-            'jam_dtg' => 'required',
-            'jam_plg' => 'required',
         ]);
 
         Presensi_harian::create([
@@ -139,8 +137,6 @@ class PresensiHarianController extends Controller
             'id_pegawai' => 'required',
             'tanggal' => 'required',
             'ket' => 'required',
-            'jam_dtg' => 'required',
-            'jam_plg' => 'required',
         ]);
 
         $presensi = Presensi_harian::find($id);
@@ -183,9 +179,9 @@ class PresensiHarianController extends Controller
 
     public function download()
     {
-        $filePath = public_path("/template_presensi/TemplatePresensi.csv");
+        $filePath = public_path("/template_presensi/Presensi.xlsx");
         $headers = ['Content-Type: application/pdf'];
-        $fileName = 'TemplatePresensi.csv';
+        $fileName = 'Presensi.xlsx';
 
         return response()->download($filePath, $fileName, $headers);
     }
