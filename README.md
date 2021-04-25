@@ -2,8 +2,8 @@
  
  **Hal Yang Dibutuhkan Yang harus ada sebelum masuk ke step-step menjalankan aplikasi :**
 1. Database = phpmyadmin 
-    nama database = laravel_sipegawai
-    password = null/kosong
+    * nama database = laravel_sipegawai
+    * password = null/kosong
 2. Web Server / pake Xampp juga bisa (Harus dinyalakan terlebih dahulu)
 3. Composer (Ver. 2.0 Recommended)
 4. Git 
