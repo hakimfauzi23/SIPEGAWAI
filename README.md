@@ -1,37 +1,36 @@
-!HOW TO RUN PROJECT KMM!!
-
-//Hal Yang Dibutuhkan (Yang harus ada sebelum masuk ke step-step menjalankan aplikasi)//
-1.Database = phpmyadmin 
+## Cara Menjalankan Project!
+ 
+ **Hal Yang Dibutuhkan Yang harus ada sebelum masuk ke step-step menjalankan aplikasi :**
+1. Database = phpmyadmin 
     nama database = laravel_sipegawai
     password = null/kosong
 2. Web Server / pake Xampp juga bisa (Harus dinyalakan terlebih dahulu)
 3. Composer (Ver. 2.0 Recommended)
+4. Git 
 
 
 
-//Step Step Menjalankan Aplikasi//
-1. Clone Repository ini Ke dalam Localhost.
-2. Buka cmd, lalu change directory "cd KMM"
-3. Setelah Itu pastikan Composer sudah terinstal di pc/laptop
-4. Ketikan "composer update" lalu tunggu beberapa saat
-5. Lalu selanjutnya buat file dengan nama ".env"  di folder root (untuk mengatur environment aplikasi, untuk isi dari .env lihat di bawah)
-6. Copas teks yg berada di file "file env.txt" ke dalam file ".env"  
-7. Setelah selesai langkah selanjutnya adalah ketikan "php artisan key:generate" (untuk membuat app key baru) 
-8. Lalu selanjutnya ketikan "php artisan migrate:fresh" (untuk membuat migration database baru)
-9. Lalu selanjutnya ketikan "php artisan db:seed" (Untuk membuat seeder/data dummy  baru di database)
-10. Lalu langkah selanjutnya ketikan "php artisan serve" (Untuk Menjalankan Aplikasi)
+**Step Step Menjalankan Aplikasi**
+1. Buka Git anda.
+2. Lalu **jalankan** git clone https://github.com/hakimfauzi23/SIPEGAWAI.git di terminal/git bash.
+3. Ganti direktori ke direktori *SIPEGAWAI*
+4. Setelah itu **jalankan** composer install.
+5. Lalu untuk membuat .env dengan cara **jalankan** cp .env.example .env
+6. Selanjutnya salin teks yang berada di dalam **file env.txt** ke dalam file **.env**
+7. Setelah itu buka **.env** lalu pada bagian "MAIL_USERNAME" & "MAIL_PASSWORD" masukan alamat dan password email yang nantinya berfungsi sebagai email pengirim notifikasi.
+8. Lalu selanjutnya adalah **jalankan** php artisan key:generate di terminal/git bash.
+9. Langkah Selanjutnya adalah **jalankan** php artisan migrate.
+10. Lalu **jalankan** php artisan db:seed.
+11. Setelah itu **jalankan** php artisan serve.
+12. Ketikan localhost:8000 di dalam *browser*.
 
 
-Untuk Testing AKun
 
-1. Akun Admin 
-    email   : admin@gmail.com
-    pass    : 123456
+**Akun *default* Sistem**
 
-2. Akun HRD
-    email   : hrd@gmail.com   
-    pass    :123456
+| Akun  | Email | Pass |
+| ----- | ----- | ---------|
+| Admin   | admin@gmail.com  | 123456|
+| HRD | hrd@gmail.com | 123456|
+| Staff | staff@gmail.com | 123456|
 
-3. Akun Staff
-    email   :staff@gmail.com    
-    pass    :123456
