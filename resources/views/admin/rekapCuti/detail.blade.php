@@ -25,7 +25,23 @@
 @endsection
 
 @section('content')
+    <div class="row">
+        <div class="panel bg-info">
+            <div class="panel-heading">
+                <em>
+                    <h6>Halaman ini berisi mengenai rekap data cuti pegawai yang telah dipilih pada halaman sebelumnya.
+                        <br>Di halaman ada beberapa informasi seperti Statistik Cuti Perbulan, Riwayat Cuti Pegawai dan lain-lain.
+                    </h6>
+                </em>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
 
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="panel">
             <div class="panel-heading bg-info text-center">

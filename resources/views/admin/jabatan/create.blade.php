@@ -27,7 +27,22 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
+
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6> Halaman ini berguna apabila anda ingin menambah data jabatan baru, selalu <b>cross-check</b> dengan HRD
+                    megenai daftar jabatan.</h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
     <form method="post" enctype="multipart/form-data" action="{{ route('jabatan.store') }}">
 
         {{ csrf_field() }}

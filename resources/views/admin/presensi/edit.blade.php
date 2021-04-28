@@ -27,19 +27,23 @@
 @endsection
 
 @section('content')
-
-    <div class="panel panel-flat">
+    <div class="panel bg-info">
         <div class="panel-heading">
-            <h5 class="panel-title">Edit Data Presensi</h5>
+            <em>
+                <h6>Anda sedang berada di halaman edit data presensi, di dalam menu ini dapat mengedit semua data presensi
+                    kecuali id presensi.
+                </h6>
+            </em>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
                     <li><a data-action="close"></a></li>
                 </ul>
             </div>
-        </div>
 
+        </div>
+    </div>
+
+    <div class="panel panel-flat">
         <div class="panel-body">
 
             <div class="row">

@@ -27,21 +27,27 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+            <em>
+                <h6> Pada halaman ini terdapat fitur untuk mengatur cuti bersama pegawai jadi pegawai tidak usah mengajukan
+                    sendiri untuk cuti bersama.
+                    <br><b>Setelah berhasil melakukan pengaturan cuti pegawai di sini, sistem akan membuat data pengajuan
+                        cuti ke semua pegawai dengan status "Diproses"</b>
+                </h6>
+            </em>
 
-
-    <!-- /2 columns form -->
+        </div>
+    </div>
 
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h5 class="panel-title">Atur Cuti Bersama</h5>
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>
-                </ul>
-            </div>
         </div>
 
         <div class="panel-body">
@@ -82,7 +88,7 @@
 
                         <label for="inputAddress">Keterangan</label>
                         <textarea name="ket" class="form-control" cols="30" rows="5"
-                            placeholder="Contoh : Mengantarkan Anak Khitanan/Baptis , Menikah , Menikahkan Anak, dan lain-lain . . ">{{ old('ket') }}</textarea>
+                            placeholder="Ex: Cuti Bersama Bulan Ramadhan/Cuti Bersama Natal/Cuti Bersama Tahun Baru">{{ old('ket') }}</textarea>
 
                         @if ($errors->has('ket'))
                             <div class="text-danger">

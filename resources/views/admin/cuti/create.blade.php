@@ -27,21 +27,26 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+            <em>
+                <h6> Halaman ini digunakan untuk menginput data cuti pegawai.
+                    <br><b>Fitur ini digunakan apabila terdapat riwayat cuti yang belum terdaftar di dalam sistem, contohnya
+                        adalah sebelum aplikasi dijalankan sudah terdapat <br> data riwayat cuti.</b>
+                </h6>
+            </em>
 
-
-    <!-- /2 columns form -->
+        </div>
+    </div>
 
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h5 class="panel-title">Tambah Data</h5>
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>
-                </ul>
-            </div>
         </div>
 
         <div class="panel-body">

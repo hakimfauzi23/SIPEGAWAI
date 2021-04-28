@@ -17,78 +17,107 @@
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
                 <li><i class="active icon-home2 position-left"></i> List Data Pegawai</li>
-                {{-- <li class="active">Dashboard</li> --}}
             </ul>
         </div>
     </div>
 @endsection
 
 @section('content')
-    <!-- Basic datatable -->
-    <div class="panel panel-flat">
-        <div class="panel-heading">
-            <a href="{{ route('pegawai.create') }}"><i class="icon-file-plus"></i> Tambah Pegawai Baru || </a>
-            <a href="{{ route('pegawai.trash') }}"><i class=" icon-folder-search"></i> Data Pegawai Resign</a>
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>
-                </ul>
+    <div class="col-md-12">
+        <div class="panel bg-info">
+            <div class="panel-heading">
+                <em>
+                    <h6>Ini adalah halaman yang menampilkan semua data pegawai yang aktif bekerja di dalam perusahaan ini.
+                        <br>Data pegawai bisa dilihat detailnya, dihapus, maupun diedit
+                    </h6>
+                </em>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+
             </div>
         </div>
+    </div>
 
-        <div class="panel-body">
+    <div class="col-md-12">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <a href="{{ route('pegawai.create') }}"><i class="icon-file-plus"></i> Tambah Pegawai Baru || </a>
+                <a href="{{ route('pegawai.trash') }}"><i class=" icon-folder-search"></i> Data Pegawai Resign</a>
+            </div>
 
-            <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
-                <thead class="bg-primary">
-                    <tr>
-                        <th>No</th>
-                        <th>ID</th>
-                        <th>Nama</th>
-                        <th>Jabatan</th>
-                        <th>Divisi</th>
-                        <th class="text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i = 1; ?>
-                    @if ($pegawai->count())
-                        @foreach ($pegawai as $key => $p)
-                            <tr>
-                                <td>{{ $i++ }}</td>
-                                <td>{{ $p->id }}</td>
-                                <td>{{ $p->nama }}</td>
-                                <td>{{ $p->jabatan->nm_jabatan }}</td>
-                                <td>{{ $p->divisi->nm_divisi }}</td>
-                                <td class="text-center">
-                                    <ul class="icons-list">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                <i class="icon-menu9"></i>
-                                            </a>
+            <div class="panel-body">
 
-                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                                <li><a href="{{ route('pegawai.show', $encyrpt) }}"><i
-                                                            class="icon-file-eye"></i> Detail </a>
-                                                </li>
-                                                <li><a href="{{ route('pegawai.destroy', $encyrpt) }}"><i
-                                                            class=" icon-trash"></i> Hapus</a>
-                                                </li>
-                                                <li><a href="{{ route('pegawai.edit', $encyrpt) }}"><i
-                                                            class=" icon-pencil5"></i> Edit</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
+                <table class="table datatable-basic table-bordered table-striped table-hover ">
+                    <thead class="bg-primary">
+                        <tr>
+                            <th>No</th>
+                            <th>Pegawai</th>
+                            <th hidden>Nama</th>
+                            <th hidden>Jabatan</th>
+                            <th hidden>Divisi</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1; ?>
+                        @if ($pegawai->count())
+                            @foreach ($pegawai as $key => $p)
+                                <tr>
+                                    <td class="text-center">{{ $i++ }}</td>
+                                    <td><b>{{ $p->id }}</b></span>
+                                        <br>
+                                        <span class="label bg-danger">{{ $p->role->nm_role }}</span>
+                                        <br>
+                                        {{ $p->nama }}
+                                        <br>
+                                        <span class="label bg-warning">{{ $p->divisi->nm_divisi }}</span>
+                                        <span class="label bg-teal">
 
-                </tbody>
-            </table>
+                                            @if ($p->id_jabatan == null)
+                                                <b>Belum Ada Jabatan</b>
+                                            @else
+                                                {{ $p->jabatan->nm_jabatan }}
+                                            @endif
+
+                                        </span>
+                                        <br>
+                                        {{ $p->email . ' / ' . $p->no_hp }}
+                                    </td>
+                                    <td hidden>{{ $p->nama }}</td>
+                                    <td hidden></td>
+                                    <td hidden></td>
+                                    <td class="text-center">
+                                        <ul class="icons-list">
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="icon-menu9"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                                    <li><a href="{{ route('pegawai.show', $encyrpt) }}"><i
+                                                                class="icon-file-eye"></i> Detail </a>
+                                                    </li>
+                                                    <li><a href="{{ route('pegawai.destroy', $encyrpt) }}"><i
+                                                                class=" icon-trash"></i> Hapus</a>
+                                                    </li>
+                                                    <li><a href="{{ route('pegawai.edit', $encyrpt) }}"><i
+                                                                class=" icon-pencil5"></i> Edit</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <!-- /basic datatable -->

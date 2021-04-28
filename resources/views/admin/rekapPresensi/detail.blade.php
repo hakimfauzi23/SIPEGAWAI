@@ -26,6 +26,22 @@
 @endsection
 
 @section('content')
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Halaman ini berisi mengenai rekap data presensi pegawai yang telah dipilih pada halaman sebelumnya.
+                    <br>Di halaman ada beberapa informasi seperti Riwayat tidak hadir pegawai, Grafik yang menunjukan
+                    Persentase Kehadiran, dan lain-lain.
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
 
     <div class="row mb-4 text-center">
         <?php

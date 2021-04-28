@@ -27,30 +27,27 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6> Halaman ini berguna apabila anda ingin menambah data divisi baru, selalu <b>cross-check</b> dengan HRD
+                    megenai daftar divisi di dalam perusahaan.</h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
     <form method="post" enctype="multipart/form-data" action="{{ route('divisi.store') }}">
 
         {{ csrf_field() }}
 
         <div class="panel panel-flat">
-            <div class="panel-heading">
-                {{-- <h5 class="panel-title">Multiple columns</h5> --}}
-                <div class="heading-elements">
-                    <ul class="icons-list">
-                        <li><a data-action="collapse"></a></li>
-                        <li><a data-action="reload"></a></li>
-                        <li><a data-action="close"></a></li>
-                    </ul>
-                </div>
-            </div>
-
             <div class="panel-body">
-                <div class="row">
-                    <div class="col">
-                        <legend class="text-semibold"><i class="icon-pen-plus"></i> Data Divisi
-                        </legend>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label for="">Divisi</label>
                     <input type="text" name="nm_divisi" class="form-control" placeholder="Nama Divisi . . . "

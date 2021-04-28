@@ -27,7 +27,24 @@
 @endsection
 
 @section('content')
-    <!-- Basic datatable -->
+
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Ini adalah halaman yang menampilkan data pegawai yang datanya sudah dihapus dikarenakan sudah resign
+                    dari perusahaan.
+                    <br>Data sewaktu-waktu bisa di restore kembali.
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
     <div class="panel panel-flat">
         <div class="panel-heading">
         </div>
@@ -37,22 +54,36 @@
             <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
                 <thead class="bg-primary">
                     <tr>
-                        <th>ID</th>
-                        <th>Nama</th>
-                        <th>Jabatan Terakhir</th>
-                        <th>Divisi Terakhir</th>
+                        <th>No</th>
+                        <th>Pegawai</th>
+                        <th hidden>Jabatan Terakhir</th>
+                        <th hidden>Divisi Terakhir</th>
                         <th hidden>Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if ($pegawai->count())
+                        <?php $i = 1; ?>
                         @foreach ($pegawai as $key => $p)
                             <tr>
-                                <td>{{ $p->id }}</td>
-                                <td>{{ $p->nama }}</td>
-                                <td>{{ $p->jabatan->nm_jabatan }}</td>
-                                <td>{{ $p->divisi->nm_divisi }}</td>
+                                <td class="text-center">{{ $i++ }}</td>
+                                <td><b>{{ $p->id }}</b></span>
+                                    <br>
+                                    <span class="label bg-danger">{{ $p->role->nm_role }}</span>
+                                    <br>
+                                    {{ $p->nama }}
+                                    <br>
+                                    <span class="label bg-warning">{{ $p->divisi->nm_divisi }}</span>
+                                    <span class="label bg-teal">{{ $p->jabatan->nm_jabatan }}</span>
+                                    <br>
+                                    {{ $p->email . ' / ' . $p->no_hp }}
+                                    <br>
+                                    Data Dihapus <span
+                                        class="label bg-info">{{ date('d-M-Y', strtotime($p->deleted_at)) }}</span>
+                                </td>
+                                <td hidden>{{ $p->jabatan->nm_jabatan }}</td>
+                                <td hidden>{{ $p->divisi->nm_divisi }}</td>
                                 <td hidden><span class="label label-success">Active</span></td>
                                 <td class="text-center">
                                     <ul class="icons-list">

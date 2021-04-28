@@ -26,20 +26,27 @@
 @endsection
 
 @section('content')
-    <!-- Basic datatable -->
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Pada halaman merupakan daftar list riwayat jabatan yang dimiliki oleh pegawai yang baru saja anda pilih
+                    pada halaman sebelumnya.
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
     <div class="panel panel-flat">
         <div class="panel-heading">
             <?php ?>
             <a href="{{ route('riwayatJabatan.createData', $id) }}"><i class="icon-file-plus"></i> Tambah Riwayat
                 Jabatan</a>
-            {{-- <h5 class="panel-title">List Data Pegawai</h5> --}}
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>
-                </ul>
-            </div>
         </div>
 
 

@@ -27,7 +27,21 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Anda sedang berada di halaman edit data pegawai, di dalam menu ini dapat mengedit semua data pegawai,
+                    termasuk data divisi,data jabatan dan atasan.
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
     <form method="post" enctype="multipart/form-data" action="{{ route('pegawai.update', $id) }}">
 
         {{ csrf_field() }}
@@ -37,13 +51,6 @@
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h5 class="panel-title">Edit Data Pegawai</h5>
-                <div class="heading-elements">
-                    <ul class="icons-list">
-                        <li><a data-action="collapse"></a></li>
-                        <li><a data-action="reload"></a></li>
-                        <li><a data-action="close"></a></li>
-                    </ul>
-                </div>
             </div>
 
             <div class="panel-body">
@@ -290,25 +297,25 @@
                                 </div>
                             </div>
                             <div class="row">
-                                    <div class="form-group">
-                                        <label>Role</label>
-                                        <select class="select" data-live-search="true" searchable="Search here.."
-                                            name="id_role">
-                                            <option>Pilih Role Pegawai</option>
-                                            @foreach ($role as $key => $value)
-                                                <option value="{{ $key }}"
-                                                    {{ $pegawai->id_role == $key ? 'selected' : '' }}>
-                                                    {{ $value }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select class="select" data-live-search="true" searchable="Search here.."
+                                        name="id_role">
+                                        <option>Pilih Role Pegawai</option>
+                                        @foreach ($role as $key => $value)
+                                            <option value="{{ $key }}"
+                                                {{ $pegawai->id_role == $key ? 'selected' : '' }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
 
-                                        @if ($errors->has('id_role'))
-                                            <div class="text-danger">
-                                                {{ $errors->first('id_role') }}
-                                            </div>
-                                        @endif
-                                    </div>
+                                    @if ($errors->has('id_role'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('id_role') }}
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
 
                             <div class="form-group">

@@ -31,7 +31,24 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Anda sedang berada di halaman edit data riwayat divisi, di dalam menu ini dapat mengedit data riwayat
+                    divisi.
+                    <br><b>Apabila ada update riwayat divisi baru tetapi belum tercantum di dalam sistem, tambah baru
+                        riwayat divisi, bukan edit. </b>
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
     <form method="post" enctype="multipart/form-data" action="{{ route('riwayatDivisi.update', $id) }}">
 
         {{ csrf_field() }}

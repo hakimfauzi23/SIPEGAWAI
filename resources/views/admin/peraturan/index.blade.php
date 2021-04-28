@@ -19,150 +19,170 @@
 
 @section('content')
     <div class="row">
-        <div class="panel">
-            <div class="panel-heading">
-                <h5 class="panel-title">List Peraturan </h5>
-                <div class="heading-elements">
-                    <ul class="icons-list">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class=" icon-more2"></i>
-                            </a>
+        <div class="col-md-12">
+            <div class="panel bg-info">
+                <div class="panel-heading">
+                    <em>
+                        <h6>Halaman ini berfungsi untuk mengubah/mengupdate peraturan kantor seperti jam masuk & jam pulang
+                            kantor, syarat cuti tahunan, batas cuti.</h6>
+                    </em>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li><a data-action="close"></a></li>
+                        </ul>
+                    </div>
 
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li>
-                                    <a href="" data-toggle="modal" data-target="#modal_form_edit_peraturan"> <i
-                                            class=" icon-pencil7"></i> Edit </a>
-                                    <a href="" data-toggle="modal" data-target="#modal_riwayat"> <i
-                                            class=" icon-history"></i> Riwayat Update </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
-
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h5 class="panel-title">List Peraturan </h5>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class=" icon-more2"></i>
+                                </a>
 
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="panel bg-primary">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">Jam Masuk Kantor</h5>
-                            </div>
-                            <div class="panel-body text-center">
-                                <h3> {{ date('H:i', strtotime($peraturan->jam_masuk)) }}</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="panel bg-teal">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">Jam Pulang Kantor</h5>
-                            </div>
-                            <div class="panel-body text-center">
-                                <h3> {{ date('H:i', strtotime($peraturan->jam_plg)) }}</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="panel bg-warning">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">Batas Cuti Tahunan</h5>
-                            </div>
-                            <div class="panel-body text-center">
-                                <h3> {{ $peraturan->jml_cuti_tahunan }} Hari</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="panel bg-danger">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">Batas Cuti Bersama</h5>
-                            </div>
-                            <div class="panel-body text-center">
-                                <h3> {{ $peraturan->jml_cuti_bersama }} Hari</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="panel bg-info">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">Batas Cuti Penting</h5>
-                            </div>
-                            <div class="panel-body text-center">
-                                <h3> {{ $peraturan->jml_cuti_penting }} Hari</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="panel bg-orange-400">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">Batas Cuti &nbsp; Sakit</h5>
-                            </div>
-                            <div class="panel-body text-center">
-                                <h3> {{ $peraturan->jml_cuti_sakit }} Hari</h3>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-2">
-                        <div class="panel bg-success">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">Batas Cuti Besar</h5>
-                            </div>
-                            <div class="panel-body text-center">
-                                <h3> {{ $peraturan->jml_cuti_besar }} Hari</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="panel bg-indigo">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">Batas Cuti Hamil</h5>
-                            </div>
-                            <div class="panel-body text-center">
-                                <h3> {{ $peraturan->jml_cuti_hamil }} Hari</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="panel bg-warning">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">Syarat Lama Kerja Untuk Cuti Tahunan</h5>
-                            </div>
-                            <div class="panel-body text-center">
-                                <h3> {{ $peraturan->syarat_bulan_cuti_tahunan }}
-                                    Bulan </h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="panel bg-success">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">Syarat Lama Kerja Untuk Cuti Besar</h5>
-                            </div>
-                            <div class="panel-body text-center">
-                                <h3> {{ $peraturan->syarat_bulan_cuti_besar }}
-                                    Bulan </h3>
-                            </div>
-                        </div>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a href="" data-toggle="modal" data-target="#modal_form_edit_peraturan"> <i
+                                                class=" icon-pencil7"></i> Edit </a>
+                                        <a href="" data-toggle="modal" data-target="#modal_riwayat"> <i
+                                                class=" icon-history"></i> Riwayat Update </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
 
                 </div>
 
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel bg-primary">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">Jam Masuk Kantor</h5>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3> {{ date('H:i', strtotime($peraturan->jam_masuk)) }}</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="panel bg-teal">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">Jam Pulang Kantor</h5>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3> {{ date('H:i', strtotime($peraturan->jam_plg)) }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="panel bg-warning">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">Batas Cuti Tahunan</h5>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3> {{ $peraturan->jml_cuti_tahunan }} Hari</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="panel bg-danger">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">Batas Cuti Bersama</h5>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3> {{ $peraturan->jml_cuti_bersama }} Hari</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="panel bg-info">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">Batas Cuti Penting</h5>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3> {{ $peraturan->jml_cuti_penting }} Hari</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="panel bg-orange-400">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">Batas Cuti &nbsp; Sakit</h5>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3> {{ $peraturan->jml_cuti_sakit }} Hari</h3>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2">
+                            <div class="panel bg-success">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">Batas Cuti Besar</h5>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3> {{ $peraturan->jml_cuti_besar }} Hari</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel bg-indigo">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">Batas Cuti Hamil</h5>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3> {{ $peraturan->jml_cuti_hamil }} Hari</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel bg-warning">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">Syarat Lama Kerja Untuk Cuti Tahunan</h5>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3> {{ $peraturan->syarat_bulan_cuti_tahunan }}
+                                        Bulan </h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="panel bg-success">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">Syarat Lama Kerja Untuk Cuti Besar</h5>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <h3> {{ $peraturan->syarat_bulan_cuti_besar }}
+                                        Bulan </h3>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -350,7 +370,7 @@
                                         <td> {{ $p->jml_cuti_besar }} Hari</td>
                                         <td> {{ $p->jml_cuti_hamil }} Hari</td>
                                         <td> {{ $p->syarat_bulan_cuti_tahunan }} Bln</td>
-                                        <td> {{ $p->syarat_bulan_cuti_besar }}  Bln</td>
+                                        <td> {{ $p->syarat_bulan_cuti_besar }} Bln</td>
                                         <td> {{ date('M-Y', strtotime($p->created_at)) }} </td>
                                     </tr>
                                 @endforeach

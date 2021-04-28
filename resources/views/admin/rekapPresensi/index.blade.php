@@ -24,18 +24,24 @@
 @endsection
 
 @section('content')
-    <!-- Basic datatable -->
-    <div class="panel panel-flat">
+    <div class="panel bg-info">
         <div class="panel-heading">
-            {{-- <h5 class="panel-title">List Data Pegawai</h5> --}}
+            <em>
+                <h6>Pada halaman merupakan daftar list pegawai yang bisa dipilih untuk dilihat rekap data presensinya. klik
+                    saja
+                    tombol "Lihat" maka rekap data pegawai tersebut akan muncul.
+                </h6>
+            </em>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
                     <li><a data-action="close"></a></li>
                 </ul>
             </div>
+
         </div>
+    </div>
+
+    <div class="panel panel-flat">
 
         <div class="panel-body">
 
@@ -43,10 +49,10 @@
                 <thead class="bg-primary">
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Jabatan</th>
-                        <th>Divisi</th>
-                        <th hidden>Status</th>
+                        <th>Pegawai</th>
+                        <th hidden>Nama</th>
+                        <th hidden>Jabatan</th>
+                        <th hidden>Divisi</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -55,10 +61,34 @@
                     @if ($pegawai->count())
                         @foreach ($pegawai as $key => $p)
                             <tr>
-                                <td>{{ $i++ }}</td>
-                                <td>{{ $p->nama }}</td>
-                                <td>{{ $p->jabatan->nm_jabatan }}</td>
-                                <td>{{ $p->divisi->nm_divisi }}</td>
+                                <td class="text-center">{{ $i++ }}</td>
+                                <td><b>{{ $p->id }}</b></span>
+                                    <br>
+                                    <span class="label bg-danger">{{ $p->role->nm_role }}</span>
+                                    <br>
+                                    {{ $p->nama }}
+                                    <br>
+                                    <span class="label bg-warning">
+                                        @if ($p->id_divisi == null)
+                                            <b>Belum Ada Divisi</b>
+                                        @else
+                                            {{ $p->divisi->nm_divisi }}
+                                        @endif
+                                    </span>
+                                    <span class="label bg-teal">
+
+                                        @if ($p->id_jabatan == null)
+                                            <b>Belum Ada Jabatan</b>
+                                        @else
+                                            {{ $p->jabatan->nm_jabatan }}
+                                        @endif
+
+                                    </span>
+                                    <br>
+                                    {{ $p->email . ' / ' . $p->no_hp }}
+                                </td>
+                                <td hidden></td>
+                                <td hidden></td>
                                 <td hidden><span class="label label-success">Active</span></td>
                                 <td> <?php $encyrpt = Crypt::encryptString($p->id); ?>
                                     <a href="{{ route('rekapPresensi.show', $encyrpt) }}" class="btn btn bg-info-300"><i

@@ -27,7 +27,21 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6> Halaman ini berguna apabila anda ingin menambah data pegawai baru, pastikan data yang akan ditambahkan
+                    belum ada di dalam database.</h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
     <form method="post" enctype="multipart/form-data" action="{{ route('pegawai.store') }}">
 
         {{ csrf_field() }}
@@ -35,13 +49,6 @@
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h5 class="panel-title">Tambah Data Pegawai</h5>
-                <div class="heading-elements">
-                    <ul class="icons-list">
-                        <li><a data-action="collapse"></a></li>
-                        <li><a data-action="reload"></a></li>
-                        <li><a data-action="close"></a></li>
-                    </ul>
-                </div>
             </div>
 
             <div class="panel-body">

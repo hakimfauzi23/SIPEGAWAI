@@ -31,7 +31,24 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Anda sedang berada di halaman edit data riwayat jabatan, di dalam menu ini dapat mengedit data riwayat
+                    jabatan.
+                    <br><b>Apabila ada update riwayat jabatan baru tetapi belum tercantum di dalam sistem, tambah baru
+                        riwayat jabatan, bukan edit. </b>
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
     <form method="post" enctype="multipart/form-data" action="{{ route('riwayatJabatan.update', $id) }}">
 
         {{ csrf_field() }}
@@ -39,17 +56,6 @@
 
 
         <div class="panel panel-flat">
-            <div class="panel-heading">
-                {{-- <h5 class="panel-title">Multiple columns</h5> --}}
-                <div class="heading-elements">
-                    <ul class="icons-list">
-                        <li><a data-action="collapse"></a></li>
-                        <li><a data-action="reload"></a></li>
-                        <li><a data-action="close"></a></li>
-                    </ul>
-                </div>
-            </div>
-
             <div class="panel-body">
 
                 <input type="hidden" name="id_pegawai" value="{{ $riwayatJabatan->id_pegawai }}">

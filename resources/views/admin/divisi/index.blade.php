@@ -23,20 +23,26 @@
 @endsection
 
 @section('content')
-    <!-- Basic datatable -->
-    <div class="panel panel-flat">
+    <div class="panel bg-info">
         <div class="panel-heading">
-            <a href="{{ route('divisi.create') }}"><i class="icon-file-plus"></i> Tambah Data Divisi </a>
-            {{-- <h5 class="panel-title">List Data Pegawai</h5> --}}
+            <em>
+                <h6>Pada halaman ini terdapat daftar divisi yang ada di dalam perusahaan ini. masing-masing divisi bisa
+                    dihapus dan diedit.
+                </h6>
+            </em>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
                     <li><a data-action="close"></a></li>
                 </ul>
             </div>
-        </div>
 
+        </div>
+    </div>
+
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <a href="{{ route('divisi.create') }}"><i class="icon-file-plus"></i> Tambah Data Divisi </a>
+        </div>
 
         <div class="panel-body">
 
