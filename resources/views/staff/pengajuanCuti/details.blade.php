@@ -26,6 +26,25 @@
 @endsection
 
 @section('content')
+    <div class="col-md-12">
+
+        <div class="panel bg-info">
+            <div class="panel-heading">
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+                <em>
+                    <h6> Halaman ini menampilakan details data cuti, dan data pemohon cuti, setelah cuti Disetujui/Ditolak
+                        sistem akan mengirimkan notifikasi berupa email ke alamat email pegawai
+                        yang terdaftar dan mengirimkan email pemberitahuan juga ke <b> HRD </b> perusahaan.
+                    </h6>
+                </em>
+            </div>
+        </div>
+    </div>
+
     <div class="col-md-5">
         <div class="panel ">
             <div class="panel-heading bg-info">

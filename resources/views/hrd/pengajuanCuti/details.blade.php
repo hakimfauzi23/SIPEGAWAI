@@ -36,7 +36,7 @@
                 </div>
                 <em>
                     <h6> Halaman ini menampilakan details data cuti, dan data pemohon cuti, setelah cuti Disetujui/Ditolak
-                        akan mengirimkan notifikasi berupa email ke alamat email pegawai
+                        sistem akan mengirimkan notifikasi berupa email ke alamat email pegawai
                         yang terdaftar.
                     </h6>
                 </em>
@@ -138,7 +138,7 @@
                             @if ($cuti->pegawai->id_atasan == null)
                                 <td> - </td>
                             @else
-                            <td>{{ $cuti->tgl_disetujui_atasan }}</td>
+                                <td>{{ $cuti->tgl_disetujui_atasan }}</td>
                             @endif
 
                         </tr>

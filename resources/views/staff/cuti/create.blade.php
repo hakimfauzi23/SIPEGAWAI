@@ -40,21 +40,30 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
 
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Di halaman ini anda dapat mengajukan cuti seperti cuti besar, cuti tahunan, dan lainya. Setelah berhasil
+                    mengajukan cuti sistem akan mengirimkan pemberitahuan ke atasan (langsung HRD apabila tidak ada atasan)
+                    berupa email ke masing-masing alamat email atasan pegawai.
+                    <br> <b>Apabila pilihan tidak bisa dipilih itu berarti anda belum memenuhi persyaratan untuk mengambil
+                        cuti
+                        tersebut.</b>
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
 
-    <!-- /2 columns form -->
+        </div>
+    </div>
 
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h5 class="panel-title">Buat Pengajuan Cuti</h5>
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>
-                </ul>
-            </div>
         </div>
 
         <div class="panel-body">

@@ -60,7 +60,7 @@
                     @if ($pegawai->count())
                         @foreach ($pegawai as $key => $p)
                             <tr>
-                                <td>{{ $i++ }}</td>
+                                <td class="text-center">{{ $i++ }}</td>
                                 <td><b>{{ $p->id }}</b></span>
                                     <br>
                                     <span class="label bg-danger">{{ $p->role->nm_role }}</span>

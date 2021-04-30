@@ -24,21 +24,27 @@
 @endsection
 
 @section('content')
-    <!-- Basic datatable -->
+    <div class="row">
+        <div class="panel bg-info">
+            <div class="panel-heading">
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+                <em>
+                    <h6> Halaman ini menampilkan daftar pengajuan cuti pegawai yang diajukan oleh pegawai,
+                        dan langkah selanjutnya harus disetujui/ditolak oleh anda sebagai atasan pegawai yang mengajukan
+                        cuti tersebut. Untuk <b>Menyetujui</b> atau <b>Menolak</b> pengajuan cuti silahkan klik tombol
+                        "lihat".
+                    </h6>
+                </em>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <div class="panel panel-flat">
-                <div class="panel-heading">
-                    <div class="heading-elements">
-                        <ul class="icons-list">
-                            <li><a data-action="collapse"></a></li>
-                            <li><a data-action="reload"></a></li>
-                            <li><a data-action="close"></a></li>
-                        </ul>
-                    </div>
-                </div>
-
-
                 <table class="table datatable-basic table-bordered table-striped table-hover">
                     <thead class="bg-primary">
                         <tr>
@@ -60,20 +66,11 @@
                                     <td>{{ $p->tgl_pengajuan }}</td>
                                     <td>{{ $p->ket }}</td>
                                     <td class="text-center">
-                                        <ul class="icons-list">
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="icon-menu9"></i>
-                                                </a>
+                                        <?php $encyrpt = Crypt::encryptString($p->id); ?>
 
-                                                <ul class="dropdown-menu dropdown-menu-right">
-                                                    <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                                    <li><a href="{{ route('staffPengajuanCuti.show', $encyrpt) }}"><i
-                                                                class="icon-file-eye"></i> Detail </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+                                        <a href="{{ route('staffPengajuanCuti.show', $encyrpt) }}"
+                                            class="btn btn bg-info-300"><i class=" icon-eye"></i> Lihat
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

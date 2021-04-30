@@ -23,7 +23,26 @@
 @endsection
 
 @section('content')
-    <!-- Basic datatable -->
+    <div class="row">
+        <div class="panel bg-info">
+            <div class="panel-heading">
+                <em>
+                    <h6>Pada halaman ini terdapat riwayat pengajuan cuti anda tahun ini. semua riwayat pengajuan cuti dari
+                        yang manual
+                        hingga yang diajukan oleh HRD seperti cuti bersama akan tampil di sini.
+                        <b> Bisa dirubah untuk tahun riwayat cuti dengan mengklik icon </b> <i class=" icon-more2"></i>
+                    </h6>
+                </em>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="panel panel-flat">
             <div class="panel-heading">

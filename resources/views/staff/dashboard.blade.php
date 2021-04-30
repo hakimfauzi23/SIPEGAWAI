@@ -18,6 +18,24 @@
 @endsection
 
 @section('content')
+    <div class="col-md-12">
+        <div class="panel bg-info">
+            <div class="panel-heading">
+                <em>
+                    <h6>Berikut adalah dashboard untuk <b>Staff</b> yang berisi informasi mengenai kegiatan anda yang
+                        terekam di dalam sistem seperti Persentase Kehadiran, Data Kehadiran, Pengajuan Cuti Terakhir, dan
+                        lainya.</h6>
+                </em>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="col-md-6">
         <div class="panel">
             <div class="panel-heading">
