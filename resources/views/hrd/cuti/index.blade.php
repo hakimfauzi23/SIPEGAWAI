@@ -24,7 +24,25 @@
 @endsection
 
 @section('content')
-    <!-- Basic datatable -->
+    <div class="row">
+        <div class="panel bg-info">
+            <div class="panel-heading">
+                <em>
+                    <h6>Ini adalah halaman yang menampilkan semua data cuti pegawai yang berada di dalam sistem.
+                        <br> Untuk pencarian data cuti pada waktu tertentu bisa mengubah range dari formuir tanggal
+                        <b>Dari</b> & <b>Ke</b>.
+                    </h6>
+                </em>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="col">
             <div class="panel panel-info">

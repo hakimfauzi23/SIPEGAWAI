@@ -25,6 +25,25 @@
 @endsection
 
 @section('content')
+    <div class="col-md-12">
+
+        <div class="panel bg-info">
+            <div class="panel-heading">
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+                <em>
+                    <h6> Halaman ini menampilakan details data cuti, dan data pemohon cuti, setelah cuti Disetujui/Ditolak
+                        akan mengirimkan notifikasi berupa email ke alamat email pegawai
+                        yang terdaftar.
+                    </h6>
+                </em>
+            </div>
+        </div>
+    </div>
+
     <div class="col-md-5">
         <div class="panel ">
             <div class="panel-heading bg-info">
@@ -116,7 +135,12 @@
                         <tr>
                             <td>Disetujui Atasan</td>
                             <td>:</td>
+                            @if ($cuti->pegawai->id_atasan == null)
+                                <td> - </td>
+                            @else
                             <td>{{ $cuti->tgl_disetujui_atasan }}</td>
+                            @endif
+
                         </tr>
 
                     </table>

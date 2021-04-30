@@ -24,18 +24,26 @@
 @endsection
 
 @section('content')
-    <!-- Basic datatable -->
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Ini adalah halaman yang menampilkan semua data pegawai yang aktif bekerja di dalam perusahaan ini.
+                    <br>Data pegawai bisa dilihat detailnya, dihapus, maupun diedit
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
     <div class="panel panel-flat">
         <div class="panel-heading">
             <a href="{{ route('hrdPegawai.create') }}"><i class="icon-file-plus"></i> Tambah Pegawai Baru ||</a>
             <a href="{{ route('hrdPegawai.trash') }}"><i class=" icon-folder-search"></i> Data Pegawai Resign</a>
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>
-                </ul>
-            </div>
         </div>
 
 
@@ -44,10 +52,10 @@
                 <thead class="bg-primary">
                     <tr>
                         <th>No</th>
-                        <th>ID</th>
-                        <th>Nama</th>
-                        <th>Jabatan</th>
-                        <th>Divisi</th>
+                        <th>Pegawai</th>
+                        <th hidden>Nama</th>
+                        <th hidden>Jabatan</th>
+                        <th hidden>Divisi</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -56,11 +64,29 @@
                     @if ($pegawai->count())
                         @foreach ($pegawai as $key => $p)
                             <tr>
-                                <td>{{ $i++ }}</td>
-                                <td>{{ $p->id }}</td>
-                                <td>{{ $p->nama }}</td>
-                                <td>{{ $p->jabatan->nm_jabatan }}</td>
-                                <td>{{ $p->divisi->nm_divisi }}</td>
+                                <td class="text-center">{{ $i++ }}</td>
+                                <td><b>{{ $p->id }}</b></span>
+                                    <br>
+                                    <span class="label bg-danger">{{ $p->role->nm_role }}</span>
+                                    <br>
+                                    {{ $p->nama }}
+                                    <br>
+                                    <span class="label bg-warning">{{ $p->divisi->nm_divisi }}</span>
+                                    <span class="label bg-teal">
+
+                                        @if ($p->id_jabatan == null)
+                                            <b>Belum Ada Jabatan</b>
+                                        @else
+                                            {{ $p->jabatan->nm_jabatan }}
+                                        @endif
+
+                                    </span>
+                                    <br>
+                                    {{ $p->email . ' / ' . $p->no_hp }}
+                                </td>
+                                <td hidden>{{ $p->nama }}</td>
+                                <td hidden></td>
+                                <td hidden></td>
                                 <td class="text-center">
                                     <ul class="icons-list">
                                         <li class="dropdown">

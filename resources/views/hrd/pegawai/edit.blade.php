@@ -27,7 +27,22 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Anda sedang berada di halaman edit data pegawai, di dalam menu ini dapat mengedit semua data pegawai,
+                    termasuk data divisi,data jabatan dan atasan.
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
     <form method="post" enctype="multipart/form-data" action="{{ route('hrdPegawai.update', $id) }}">
 
         {{ csrf_field() }}

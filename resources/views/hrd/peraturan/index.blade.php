@@ -19,6 +19,23 @@
 
 @section('content')
     <div class="row">
+        <div class="panel bg-info">
+            <div class="panel-heading">
+                <em>
+                    <h6>Halaman ini berfungsi untuk mengubah/mengupdate peraturan kantor seperti jam masuk & jam pulang
+                        kantor, syarat cuti tahunan, batas cuti.</h6>
+                </em>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
         <div class="panel">
             <div class="panel-heading">
                 <h5 class="panel-title">List Peraturan </h5>

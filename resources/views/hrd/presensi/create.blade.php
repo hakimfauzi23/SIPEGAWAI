@@ -5,6 +5,13 @@
 
 
 @section('content_header')
+    <style>
+        #list_item li {
+            margin: 12px 0;
+        }
+
+    </style>
+
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
@@ -16,7 +23,8 @@
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li> <a href="{{ route('hrdPresensiHarian.index') }}"> <i class="active icon-home2 position-left"></i> List Data
+                <li> <a href="{{ route('hrdPresensiHarian.index') }}"> <i class="active icon-home2 position-left"></i>
+                        List Data
                         Presensi
                     </a>
                 </li>
@@ -27,19 +35,30 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
+
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6> Halaman ini digunakan untuk menginput data presensi, ada dua cara menginput data presensi yaitu dengan
+                    <b>Multiple Data Input</b> atau <b>Single Data Input </b>.
+                    <br> Untuk panduan Multiple Data Input klik Icon <i class="icon-info22"></i>
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
 
 
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h5 class="panel-title">Multiple Data Input</h5>
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>
-                </ul>
-            </div>
+            <h5 class="panel-title">Multiple Data Input <a href="" data-toggle="modal" data-target="#modal_iconified">
+                    <i class="icon-info22"></i></a>
+            </h5>
         </div>
 
         <div class="panel-body">
@@ -69,13 +88,6 @@
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h5 class="panel-title">Single Data Input</h5>
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>
-                </ul>
-            </div>
         </div>
 
         <div class="panel-body">
@@ -173,5 +185,74 @@
             </div>
         </div>
     </div>
+
+    <!-- Iconified modal -->
+    <div id="modal_iconified" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title"><i class="icon-info3"></i> &nbsp;Panduan Multiple Input Data Presensi Harian
+                    </h5>
+                </div>
+                <div class="modal-body" id="list_item">
+                    {{-- <div class="alert alert-info alert-styled-left text-blue-800 content-group">
+                        <span class="text-semibold">Here we go!</span> Example of an alert inside modal.
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                    </div> --}}
+                    <ol type="1">
+                        <li>Download template presensi dengan link yang sudah disediakan di atas formulir upload.</li>
+                        <li>Buka template tersebut di dalam <a href="https://docs.google.com/spreadsheets/u/0/"><b>Google
+                                    Spreadsheet</b></a>.</li>
+                        <li>
+                            Isi template tersebut dengan contoh format pengisian di bawah ini.
+                            <table border="0">
+                                <tr>
+                                    <td>a. &nbsp;</td>
+                                    <td>id_pegawai&nbsp; </td>
+                                    <td> : </td>
+                                    <td>&nbsp;21040XXX</td>
+                                </tr>
+                                <tr>
+                                    <td>b. &nbsp;</td>
+                                    <td>tanggal&nbsp; </td>
+                                    <td> : </td>
+                                    <td>&nbsp;2021-12-31 (yyyy-mm-dd)</td>
+                                </tr>
+                                <tr>
+                                    <td>c. &nbsp;</td>
+                                    <td>ket&nbsp; </td>
+                                    <td> : </td>
+                                    <td>&nbsp;Alpha/Cuti/Hadir</td>
+                                </tr>
+                                <tr>
+                                    <td>d. &nbsp;</td>
+                                    <td>jam_dtg&nbsp; </td>
+                                    <td> : </td>
+                                    <td>&nbsp;07:00 (hh:mm)</td>
+                                </tr>
+                                <tr>
+                                    <td>e. &nbsp;</td>
+                                    <td>jam_plg&nbsp; </td>
+                                    <td> : </td>
+                                    <td>&nbsp;16:00 (hh:mm)</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>Setelah selesai mengisi template, simpan terlebih dahulu lalu download file template tersebut
+                            dengan format
+                            <b><em>.csv</b></em>
+                        </li>
+                        <li>Upload file template berbentuk <b><em>.csv</b></em> tadi ke form upload di halaman ini.</li>
+                    </ol>
+                </div>
+
+                {{-- <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross"></i> Tutup</button>
+                </div> --}}
+            </div>
+        </div>
+    </div>
+    <!-- /iconified modal -->
 
 @endsection

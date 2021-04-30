@@ -27,10 +27,22 @@
 @endsection
 
 @section('content')
-    <!-- 2 columns form -->
 
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Anda sedang berada di halaman edit data cuti, di dalam menu ini dapat mengedit semua data cuti
+                    kecuali id cuti.
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
 
-    <!-- /2 columns form -->
+        </div>
+    </div>
 
     <form action="{{ route('hrdCuti.update', $id) }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -39,13 +51,6 @@
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h5 class="panel-title">Edit Data</h5>
-                <div class="heading-elements">
-                    <ul class="icons-list">
-                        <li><a data-action="collapse"></a></li>
-                        <li><a data-action="reload"></a></li>
-                        <li><a data-action="close"></a></li>
-                    </ul>
-                </div>
             </div>
 
             <div class="panel-body">

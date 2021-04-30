@@ -17,6 +17,20 @@
 @endsection
 
 @section('content')
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Berikut adalah dashboard untuk <b>HRD</b> yang berisi informasi aktivitas pegawai seperti yang Pegawai yang Cuti Minggu Ini, Grafik kehadiran 
+                    <br>pegawai perbulan, Pegawai yang Sering terlambat, dan lain-lain.</h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-7">
             <div class="panel">

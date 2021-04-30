@@ -27,7 +27,23 @@
 @endsection
 
 @section('content')
-    <!-- Basic datatable -->
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Ini adalah halaman yang menampilkan data pegawai yang datanya sudah dihapus dikarenakan sudah resign
+                    dari perusahaan.
+                    <br>Data sewaktu-waktu bisa di restore kembali.
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
     <div class="panel panel-flat">
         <div class="panel-heading">
         </div>

@@ -16,7 +16,8 @@
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li> <a href="{{ route('hrdPresensiHarian.index') }}"> <i class="active icon-home2 position-left"></i> List Data
+                <li> <a href="{{ route('hrdPresensiHarian.index') }}"> <i class="active icon-home2 position-left"></i>
+                        List Data
                         Presensi
                     </a>
                 </li>
@@ -28,22 +29,31 @@
 
 @section('content')
 
-    <div class="panel panel-flat">
+    <div class="panel bg-info">
         <div class="panel-heading">
-            <h5 class="panel-title">Edit Data Presensi</h5>
+            <em>
+                <h6>Anda sedang berada di halaman edit data presensi, di dalam menu ini dapat mengedit semua data presensi
+                    kecuali id presensi.
+                </h6>
+            </em>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
                     <li><a data-action="close"></a></li>
                 </ul>
             </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Edit Data Presensi</h5>
         </div>
 
         <div class="panel-body">
 
             <div class="row">
-                <form action="{{ route('hrdPresensiHarian.update',$id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('hrdPresensiHarian.update', $id) }}" method="POST" enctype="multipart/form-data">
 
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
