@@ -175,7 +175,7 @@
                                             <td> {{ $p->nama }}</td>
                                             <td> {{ $p->divisi->nm_divisi }}</td>
                                         </tr>
-                                    @endforeach
+                                    @endforeach 
                                 </tbody>
                             @else
                                 <tbody>

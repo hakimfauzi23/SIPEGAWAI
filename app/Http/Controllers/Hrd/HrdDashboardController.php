@@ -152,57 +152,67 @@ class HrdDashboardController extends Controller
         }
         /*End Jml Awal Semua Pegawai*/
 
+        for ($i = 1; $i <= 12; $i++) {
+            $JmlData[$i] = Presensi_harian::whereYear('tanggal', date('Y'))
+                ->whereMonth('tanggal', $i)
+                ->count();
+        }
+
+        $JmlDataBulanIni =Presensi_harian::whereYear('tanggal', date('Y'))
+        ->whereMonth('tanggal', $bulanIni)
+        ->count();
+        
         return view('hrd.dashboard', [
             'cuti' => $cuti,
             'pegawaiCuti' => $pegawaiCuti,
             'pegawaiTelat' => $pegawaiTelat,
 
-            'JmlCuti' => $JmlCuti,
-            'JmlAlpha' => $JmlAlpha,
-            'JmlHadir' => $JmlHadir,
+            'JmlCuti' => number_format(($JmlDataBulanIni!=0?(($JmlCuti/$JmlDataBulanIni)*100):0),2),
+            'JmlAlpha' => number_format(($JmlDataBulanIni!=0?(($JmlAlpha/$JmlDataBulanIni)*100):0),2),
+            'JmlHadir' => number_format(($JmlDataBulanIni!=0?(($JmlHadir/$JmlDataBulanIni)*100):0),2),
 
             'months' => $months,
             'bulanIni' => $bulanIni,
 
 
-            'JanTelat' => $Telat[1],
-            'FebTelat' => $Telat[2],
-            'MarTelat' => $Telat[3],
-            'AprTelat' => $Telat[4],
-            'MayTelat' => $Telat[5],
-            'JunTelat' => $Telat[6],
-            'JulTelat' => $Telat[7],
-            'AugTelat' => $Telat[8],
-            'SepTelat' => $Telat[9],
-            'OctTelat' => $Telat[10],
-            'NovTelat' => $Telat[11],
-            'DecTelat' => $Telat[12],
+            'JanTelat' => number_format( ($JmlData[1] != 0 ?($Telat[1]/$JmlData[1]*100):0),2) ,
+            'FebTelat' =>  number_format( ($JmlData[2] != 0 ?($Telat[2]/$JmlData[2]*100):0),2) ,
+            'MarTelat' =>  number_format( ($JmlData[3] != 0 ? ($Telat[3]/$JmlData[3]*100):0),2) ,
+            'AprTelat' =>  number_format( ($JmlData[4] != 0 ? ($Telat[4]/$JmlData[4]*100):0),2) ,
+            'MayTelat' =>  number_format( ($JmlData[5] != 0 ?($Telat[5]/$JmlData[5]*100):0),2) ,
+            'JunTelat' =>  number_format( ($JmlData[6] != 0 ?($Telat[6]/$JmlData[6]*100):0),2) ,
+            'JulTelat' =>  number_format( ($JmlData[7] != 0 ?($Telat[8]/$JmlData[8]*100):0),2) ,
+            'AugTelat' =>  number_format( ($JmlData[8] != 0 ?($Telat[8]/$JmlData[8]*100):0),2) ,
+            'SepTelat' =>  number_format( ($JmlData[9] != 0 ?($Telat[9]/$JmlData[9]*100):0),2) ,
+            'OctTelat' =>  number_format( ($JmlData[10] != 0 ?($Telat[10]/$JmlData[10]*100):0),2) ,
+            'NovTelat' =>  number_format( ($JmlData[11] != 0 ?($Telat[11]/$JmlData[11]*100):0),2) ,
+            'DecTelat' =>  number_format( ($JmlData[12] != 0 ?($Telat[12]/$JmlData[12]*100):0),2) ,
 
-            'JanTepat' => $Tepat[1],
-            'FebTepat' => $Tepat[2],
-            'MarTepat' => $Tepat[3],
-            'AprTepat' => $Tepat[4],
-            'MayTepat' => $Tepat[5],
-            'JunTepat' => $Tepat[6],
-            'JulTepat' => $Tepat[7],
-            'AugTepat' => $Tepat[8],
-            'SepTepat' => $Tepat[9],
-            'OctTepat' => $Tepat[10],
-            'NovTepat' => $Tepat[11],
-            'DecTepat' => $Tepat[12],
+            'JanTepat' => number_format( ($JmlData[1] != 0 ?($Tepat[1]/$JmlData[1])*100:0),2) ,
+            'FebTepat' =>  number_format( ($JmlData[2] != 0 ?($Tepat[2]/$JmlData[2]*100):0),2) ,
+            'MarTepat' =>  number_format( ($JmlData[3] != 0 ? ($Tepat[3]/$JmlData[3]*100):0),2) ,
+            'AprTepat' =>  number_format( ($JmlData[4] != 0 ? ($Tepat[4]/$JmlData[4]*100):0),2) ,
+            'MayTepat' =>  number_format( ($JmlData[5] != 0 ?($Tepat[5]/$JmlData[5]*100):0),2) ,
+            'JunTepat' =>  number_format( ($JmlData[6] != 0 ?($Tepat[6]/$JmlData[6]*100):0),2) ,
+            'JulTepat' =>  number_format( ($JmlData[7] != 0 ?($Tepat[8]/$JmlData[8]*100):0),2) ,
+            'AugTepat' =>  number_format( ($JmlData[8] != 0 ?($Tepat[8]/$JmlData[8]*100):0),2) ,
+            'SepTepat' =>  number_format( ($JmlData[9] != 0 ?($Tepat[9]/$JmlData[9]*100):0),2) ,
+            'OctTepat' =>  number_format( ($JmlData[10] != 0 ?($Tepat[10]/$JmlData[10]*100):0),2) ,
+            'NovTepat' =>  number_format( ($JmlData[11] != 0 ?($Tepat[11]/$JmlData[11]*100):0),2) ,
+            'DecTepat' =>  number_format( ($JmlData[12] != 0 ?($Tepat[12]/$JmlData[12]*100):0),2) ,
 
-            'JanAwal' => $Awal[1],
-            'FebAwal' => $Awal[2],
-            'MarAwal' => $Awal[3],
-            'AprAwal' => $Awal[4],
-            'MayAwal' => $Awal[5],
-            'JunAwal' => $Awal[6],
-            'JulAwal' => $Awal[7],
-            'AugAwal' => $Awal[8],
-            'SepAwal' => $Awal[9],
-            'OctAwal' => $Awal[10],
-            'NovAwal' => $Awal[11],
-            'DecAwal' => $Awal[12],
+            'JanAwal' => number_format( ($JmlData[1] != 0 ?($Awal[1]/$JmlData[1]*100):0),2) ,
+            'FebAwal' =>  number_format( ($JmlData[2] != 0 ?($Awal[2]/$JmlData[2]*100):0),2) ,
+            'MarAwal' =>  number_format( ($JmlData[3] != 0 ? ($Awal[3]/$JmlData[3]*100):0),2) ,
+            'AprAwal' =>  number_format( ($JmlData[4] != 0 ? ($Awal[4]/$JmlData[4]*100):0),2) ,
+            'MayAwal' =>  number_format( ($JmlData[5] != 0 ?($Awal[5]/$JmlData[5]*100):0),2) ,
+            'JunAwal' =>  number_format( ($JmlData[6] != 0 ?($Awal[6]/$JmlData[6]*100):0),2) ,
+            'JulAwal' =>  number_format( ($JmlData[7] != 0 ?($Awal[8]/$JmlData[8]*100):0),2) ,
+            'AugAwal' =>  number_format( ($JmlData[8] != 0 ?($Awal[8]/$JmlData[8]*100):0),2) ,
+            'SepAwal' =>  number_format( ($JmlData[9] != 0 ?($Awal[9]/$JmlData[9]*100):0),2) ,
+            'OctAwal' =>  number_format( ($JmlData[10] != 0 ?($Awal[10]/$JmlData[10]*100):0),2) ,
+            'NovAwal' =>  number_format( ($JmlData[11] != 0 ?($Awal[11]/$JmlData[11]*100):0),2) ,
+            'DecAwal' =>  number_format( ($JmlData[12] != 0 ?($Awal[12]/$JmlData[12]*100):0),2) ,
 
 
         ]);
@@ -341,58 +351,66 @@ class HrdDashboardController extends Controller
         }
         /*End Jml Awal Semua Pegawai*/
 
+        for ($i = 1; $i <= 12; $i++) {
+            $JmlData[$i] = Presensi_harian::whereYear('tanggal', date('Y'))
+                ->whereMonth('tanggal', $i)
+                ->count();
+        }
+        $JmlDataBulanIni =Presensi_harian::whereYear('tanggal', date('Y'))
+        ->whereMonth('tanggal', $bulanIni)
+        ->count();
+
         return view('hrd.dashboard', [
             'cuti' => $cuti,
             'pegawaiCuti' => $pegawaiCuti,
             'pegawaiTelat' => $pegawaiTelat,
 
-            'JmlCuti' => $JmlCuti,
-            'JmlAlpha' => $JmlAlpha,
-            'JmlHadir' => $JmlHadir,
+            'JmlCuti' => number_format(($JmlDataBulanIni!=0?(($JmlCuti/$JmlDataBulanIni)*100):0),2),
+            'JmlAlpha' => number_format(($JmlDataBulanIni!=0?(($JmlAlpha/$JmlDataBulanIni)*100):0),2),
+            'JmlHadir' => number_format(($JmlDataBulanIni!=0?(($JmlHadir/$JmlDataBulanIni)*100):0),2),
 
             'months' => $months,
             'bulanIni' => $bulanIni,
 
 
-            'JanTelat' => $Telat[1],
-            'FebTelat' => $Telat[2],
-            'MarTelat' => $Telat[3],
-            'AprTelat' => $Telat[4],
-            'MayTelat' => $Telat[5],
-            'JunTelat' => $Telat[6],
-            'JulTelat' => $Telat[7],
-            'AugTelat' => $Telat[8],
-            'SepTelat' => $Telat[9],
-            'OctTelat' => $Telat[10],
-            'NovTelat' => $Telat[11],
-            'DecTelat' => $Telat[12],
+            'JanTelat' => number_format( ($JmlData[1] != 0 ?($Telat[1]/$JmlData[1]*100):0),2) ,
+            'FebTelat' =>  number_format( ($JmlData[2] != 0 ?($Telat[2]/$JmlData[2]*100):0),2) ,
+            'MarTelat' =>  number_format( ($JmlData[3] != 0 ? ($Telat[3]/$JmlData[3]*100):0),2) ,
+            'AprTelat' =>  number_format( ($JmlData[4] != 0 ? ($Telat[4]/$JmlData[4]*100):0),2) ,
+            'MayTelat' =>  number_format( ($JmlData[5] != 0 ?($Telat[5]/$JmlData[5]*100):0),2) ,
+            'JunTelat' =>  number_format( ($JmlData[6] != 0 ?($Telat[6]/$JmlData[6]*100):0),2) ,
+            'JulTelat' =>  number_format( ($JmlData[7] != 0 ?($Telat[8]/$JmlData[8]*100):0),2) ,
+            'AugTelat' =>  number_format( ($JmlData[8] != 0 ?($Telat[8]/$JmlData[8]*100):0),2) ,
+            'SepTelat' =>  number_format( ($JmlData[9] != 0 ?($Telat[9]/$JmlData[9]*100):0),2) ,
+            'OctTelat' =>  number_format( ($JmlData[10] != 0 ?($Telat[10]/$JmlData[10]*100):0),2) ,
+            'NovTelat' =>  number_format( ($JmlData[11] != 0 ?($Telat[11]/$JmlData[11]*100):0),2) ,
+            'DecTelat' =>  number_format( ($JmlData[12] != 0 ?($Telat[12]/$JmlData[12]*100):0),2) ,
 
-            'JanTepat' => $Tepat[1],
-            'FebTepat' => $Tepat[2],
-            'MarTepat' => $Tepat[3],
-            'AprTepat' => $Tepat[4],
-            'MayTepat' => $Tepat[5],
-            'JunTepat' => $Tepat[6],
-            'JulTepat' => $Tepat[7],
-            'AugTepat' => $Tepat[8],
-            'SepTepat' => $Tepat[9],
-            'OctTepat' => $Tepat[10],
-            'NovTepat' => $Tepat[11],
-            'DecTepat' => $Tepat[12],
+            'JanTepat' => number_format( ($JmlData[1] != 0 ?($Tepat[1]/$JmlData[1]*100):0),2) ,
+            'FebTepat' =>  number_format( ($JmlData[2] != 0 ?($Tepat[2]/$JmlData[2]*100):0),2) ,
+            'MarTepat' =>  number_format( ($JmlData[3] != 0 ? ($Tepat[3]/$JmlData[3]*100):0),2) ,
+            'AprTepat' =>  number_format( ($JmlData[4] != 0 ? ($Tepat[4]/$JmlData[4]*100):0),2) ,
+            'MayTepat' =>  number_format( ($JmlData[5] != 0 ?($Tepat[5]/$JmlData[5]*100):0),2) ,
+            'JunTepat' =>  number_format( ($JmlData[6] != 0 ?($Tepat[6]/$JmlData[6]*100):0),2) ,
+            'JulTepat' =>  number_format( ($JmlData[7] != 0 ?($Tepat[8]/$JmlData[8]*100):0),2) ,
+            'AugTepat' =>  number_format( ($JmlData[8] != 0 ?($Tepat[8]/$JmlData[8]*100):0),2) ,
+            'SepTepat' =>  number_format( ($JmlData[9] != 0 ?($Tepat[9]/$JmlData[9]*100):0),2) ,
+            'OctTepat' =>  number_format( ($JmlData[10] != 0 ?($Tepat[10]/$JmlData[10]*100):0),2) ,
+            'NovTepat' =>  number_format( ($JmlData[11] != 0 ?($Tepat[11]/$JmlData[11]*100):0),2) ,
+            'DecTepat' =>  number_format( ($JmlData[12] != 0 ?($Tepat[12]/$JmlData[12]*100):0),2) ,
 
-            'JanAwal' => $Awal[1],
-            'FebAwal' => $Awal[2],
-            'MarAwal' => $Awal[3],
-            'AprAwal' => $Awal[4],
-            'MayAwal' => $Awal[5],
-            'JunAwal' => $Awal[6],
-            'JulAwal' => $Awal[7],
-            'AugAwal' => $Awal[8],
-            'SepAwal' => $Awal[9],
-            'OctAwal' => $Awal[10],
-            'NovAwal' => $Awal[11],
-            'DecAwal' => $Awal[12],
-
+            'JanAwal' => number_format( ($JmlData[1] != 0 ?($Awal[1]/$JmlData[1]*100):0),2) ,
+            'FebAwal' =>  number_format( ($JmlData[2] != 0 ?($Awal[2]/$JmlData[2]*100):0),2) ,
+            'MarAwal' =>  number_format( ($JmlData[3] != 0 ? ($Awal[3]/$JmlData[3]*100):0),2) ,
+            'AprAwal' =>  number_format( ($JmlData[4] != 0 ? ($Awal[4]/$JmlData[4]*100):0),2) ,
+            'MayAwal' =>  number_format( ($JmlData[5] != 0 ?($Awal[5]/$JmlData[5]*100):0),2) ,
+            'JunAwal' =>  number_format( ($JmlData[6] != 0 ?($Awal[6]/$JmlData[6]*100):0),2) ,
+            'JulAwal' =>  number_format( ($JmlData[7] != 0 ?($Awal[8]/$JmlData[8]*100):0),2) ,
+            'AugAwal' =>  number_format( ($JmlData[8] != 0 ?($Awal[8]/$JmlData[8]*100):0),2) ,
+            'SepAwal' =>  number_format( ($JmlData[9] != 0 ?($Awal[9]/$JmlData[9]*100):0),2) ,
+            'OctAwal' =>  number_format( ($JmlData[10] != 0 ?($Awal[10]/$JmlData[10]*100):0),2) ,
+            'NovAwal' =>  number_format( ($JmlData[11] != 0 ?($Awal[11]/$JmlData[11]*100):0),2) ,
+            'DecAwal' =>  number_format( ($JmlData[12] != 0 ?($Awal[12]/$JmlData[12]*100):0),2) ,
 
         ]);
     }
