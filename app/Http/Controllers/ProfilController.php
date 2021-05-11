@@ -92,7 +92,7 @@ class ProfilController extends Controller
         $pegawai = Pegawai::find($id);
         $jabatan = Jabatan::pluck('nm_jabatan', 'id');
         $divisi = Divisi::pluck('nm_divisi', 'id');
-        $role = Role::pluck('nm_role', 'id');
+        $role = Role::pluck('name', 'id');
         $atasan = Pegawai::pluck('nama', 'id');
         return view('profil.edit', [
             'id' => $data,

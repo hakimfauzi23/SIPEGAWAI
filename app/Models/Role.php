@@ -9,11 +9,11 @@ class Role extends Model
 {
     use HasFactory;
 
-    protected $table = 'role';
+    protected $table = 'roles';
 
     protected $fillable = [
-        'nm_role',
-        'url'
+        'name',
+        'guard_name'
     ];
 
 
@@ -22,9 +22,4 @@ class Role extends Model
         return $this->hasMany('App\Models\Pegawai');
     }
 
-
-    public function menu()
-    {
-        return $this->belongsToMany('App\Models\Menu');
-    }
 }

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Permission\Models\Permission;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -49,6 +50,9 @@ class AppServiceProvider extends ServiceProvider
                         $query->whereIn('id_pegawai', $id_peg_non_bawahan)->where('status', 'Diproses');
                     })->count();
 
+                $hak_akses = Permission::where('name', '!=', 'menu-staff')->pluck('name');
+                $role_hak_akses = Pegawai::where('id', Auth::user()->id)->permission($hak_akses)->get();
+
                 View::share('jml_cuti', $jml_cuti);
                 $bawahan = Pegawai::where('id_atasan', Auth::user()->id)->get();
                 $id_bawahan = $bawahan->pluck('id');
@@ -60,9 +64,11 @@ class AppServiceProvider extends ServiceProvider
                 $jml_bawahan = $bawahan->count();
                 $view->with('jml_bawahan', $jml_bawahan);
                 $view->with('jml_pengajuan_cuti_bawahan', $jml_pengajuan_cuti_bawahan);
+                $view->with('role_hak_akses', $role_hak_akses);
             } else {
                 $view->with('jml_bawahan', null);
                 $view->with('jml_pengajuan_cuti_bawahan', null);
+                $view->with('role_hak_akses', null);
             }
         });
     }

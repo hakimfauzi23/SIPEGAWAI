@@ -6,9 +6,18 @@ use App\Models\Jabatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 
 class JabatanController extends Controller
 {
+
+
+    function __construct()
+    {
+        $this->middleware('permission:menu-jabatan', ['only' => ['index', 'destroy']]);
+    }
 
     /**
      * Display a listing of the resource.

@@ -57,7 +57,7 @@ class CreatePegawaisTable extends Migration
 
             $table->foreign('id_role')
                 ->references('id')
-                ->on('role')
+                ->on('roles')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('set null');

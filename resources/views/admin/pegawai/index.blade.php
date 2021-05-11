@@ -69,7 +69,7 @@
                                     <td class="text-center">{{ $i++ }}</td>
                                     <td><b>{{ $p->id }}</b></span>
                                         <br>
-                                        <span class="label bg-danger">{{ $p->role->nm_role }}</span>
+                                        <span class="label bg-danger">{{ $p->role->name }}</span>
                                         <br>
                                         {{ $p->nama }}
                                         <br>

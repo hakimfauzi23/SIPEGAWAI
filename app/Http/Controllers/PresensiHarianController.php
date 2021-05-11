@@ -17,6 +17,12 @@ class PresensiHarianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:menu-presensi', ['only' => ['index', 'destroy']]);
+    }
+
     public function index()
     {
         //

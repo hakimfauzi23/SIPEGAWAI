@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
+use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -16,25 +16,14 @@ class RoleSeeder extends Seeder
     public function run()
     {
         //
-
-        $count = DB::table('role')->count();
-
-        if ($count == 0) {
-
-            DB::table('role')->insert([
-                [
-                    'nm_role' => 'superAdmin',
-                    'url' => '/admin',
-                ],
-                [
-                    'nm_role' => 'hrd',
-                    'url' => '/hrd',
-                ],
-                [
-                    'nm_role' => 'staff',
-                    'url' => '/staff',
-                ],
-            ]);
-        }
+        Role::create([
+            'name' => 'admin',
+            'guard_name' => 'web'
+        ]);
+        Role::create([
+            'name' => 'user',
+            'guard_name' => 'web'
+        ]);
+        
     }
 }

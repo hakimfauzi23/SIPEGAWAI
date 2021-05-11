@@ -4,8 +4,8 @@
 
 @section('content')
     <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
-        <form action="{{ url('proses_login') }}" method="POST" class="login100-form validate-form">
-            {{ csrf_field() }}
+        <form action="{{ route('login') }}" method="POST" class="login100-form validate-form">
+            @csrf
 
             <span class="login100-form-title p-b-37">
                 SIPEGAWAI

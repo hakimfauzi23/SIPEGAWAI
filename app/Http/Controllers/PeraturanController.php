@@ -14,6 +14,12 @@ class PeraturanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:menu-kebijakan-kantor', ['only' => ['index', 'destroy']]);
+    }
+
     public function index()
     {
         //

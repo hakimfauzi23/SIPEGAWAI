@@ -10,7 +10,7 @@
 
                 <span class="media-heading text-semibold"> {{ $user->nama }}</span>
                 <div class="text-size-mini text-muted text-uppercase">
-                    <i class="icon-key text-size-small "></i> <em>&nbsp;{{ $user->role->nm_role }}</em>
+                    <i class="icon-key text-size-small "></i> <em>&nbsp;{{ $user->role->name }}</em>
                 </div>
             </div>
 

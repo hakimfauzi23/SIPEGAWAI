@@ -70,7 +70,7 @@
                         <tr>
                             <td>Role</td>
                             <td>:</td>
-                            <td>{{ $pegawai->role->nm_role }}</td>
+                            <td>{{ $pegawai->role->name }}</td>
                         </tr>
                         <tr>
                             <td>Email</td>

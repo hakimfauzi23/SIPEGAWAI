@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -25,6 +26,12 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:menu-pegawai', ['only' => ['index', 'destroy']]);
+    }
+
     public function index()
     {
         //
@@ -45,7 +52,7 @@ class PegawaiController extends Controller
         $jabatan = Jabatan::pluck('nm_jabatan', 'id');
         $divisi = Divisi::pluck('nm_divisi', 'id');
         $pegawai = Pegawai::pluck('nama', 'id');
-        $role = Role::pluck('nm_role', 'id');
+        $role = Role::pluck('name', 'id');
         return view('admin.pegawai.create', [
             'jabatan' => $jabatan,
             'divisi' => $divisi,
@@ -95,8 +102,7 @@ class PegawaiController extends Controller
         $riwayat_divisi = Riwayat_divisi::where('id_pegawai', $id)
             ->where('id_divisi', $request->id_divisi)
             ->count();
-
-        Pegawai::create([
+        $user = Pegawai::create([
             'id' => $id,
             'id_role' => $request->id_role,
             'nik' => $request->nik,
@@ -135,6 +141,9 @@ class PegawaiController extends Controller
                 'tgl_mulai' => $request->tgl_masuk,
             ]);
         }
+
+        $int = (int)$request->id_role;
+        $user->assignRole($int);
 
         Alert::success('success', ' Berhasil Input Data !');
         return redirect('pegawai');
@@ -197,7 +206,7 @@ class PegawaiController extends Controller
         $pegawai = Pegawai::find($id);
         $jabatan = Jabatan::pluck('nm_jabatan', 'id');
         $divisi = Divisi::pluck('nm_divisi', 'id');
-        $role = Role::pluck('nm_role', 'id');
+        $role = Role::pluck('name', 'id');
         $atasan = Pegawai::pluck('nama', 'id');
         return view('admin.pegawai.edit', [
             'id' => $data,
@@ -262,26 +271,33 @@ class PegawaiController extends Controller
             $pegawai = Pegawai::find($id);
             $path = Storage::putFileAs('public/images', $request->file('imgupload'), $imgname);
 
+            $input = $request->all();
+            $pegawai = Pegawai::find($id);
+            $pegawai->update($input);
 
-            $pegawai->id_role = $request->id_role;
-            $pegawai->nik = $request->nik;
-            $pegawai->nama = $request->nama;
-            $pegawai->jk = $request->jk;
-            $pegawai->agama = $request->agama;
-            $pegawai->tempat_lahir = $request->tempat_lahir;
-            $pegawai->tgl_lahir = $request->tgl_lahir;
-            $pegawai->alamat_ktp = $request->alamat_ktp;
-            $pegawai->alamat_dom = $request->alamat_dom;
-            $pegawai->status = $request->status;
-            $pegawai->jml_anak = $request->jml_anak;
-            $pegawai->no_hp = $request->no_hp;
-            $pegawai->email = $request->email;
-            $pegawai->id_atasan = $request->id_atasan;
-            $pegawai->id_jabatan = $request->id_jabatan;
-            $pegawai->id_divisi = $request->id_divisi;
-            $pegawai->tgl_masuk = $request->tgl_masuk;
-            $pegawai->path = $imgname;
-            $pegawai->save();
+            DB::table('model_has_roles')->where('model_id', $id)->delete();
+            $int = (int)$request->id_role;
+            $pegawai->assignRole($int);
+
+            // $pegawai->id_role = $request->id_role;
+            // $pegawai->nik = $request->nik;
+            // $pegawai->nama = $request->nama;
+            // $pegawai->jk = $request->jk;
+            // $pegawai->agama = $request->agama;
+            // $pegawai->tempat_lahir = $request->tempat_lahir;
+            // $pegawai->tgl_lahir = $request->tgl_lahir;
+            // $pegawai->alamat_ktp = $request->alamat_ktp;
+            // $pegawai->alamat_dom = $request->alamat_dom;
+            // $pegawai->status = $request->status;
+            // $pegawai->jml_anak = $request->jml_anak;
+            // $pegawai->no_hp = $request->no_hp;
+            // $pegawai->email = $request->email;
+            // $pegawai->id_atasan = $request->id_atasan;
+            // $pegawai->id_jabatan = $request->id_jabatan;
+            // $pegawai->id_divisi = $request->id_divisi;
+            // $pegawai->tgl_masuk = $request->tgl_masuk;
+            // $pegawai->path = $imgname;
+            // $pegawai->save();
 
             if ($riwayat_jabatan == 0) {
 
@@ -322,26 +338,32 @@ class PegawaiController extends Controller
                 'tgl_masuk' => 'required',
             ]);
 
+            $input = $request->all();
             $pegawai = Pegawai::find($id);
+            $pegawai->update($input);
 
-            $pegawai->id_role = $request->id_role;
-            $pegawai->nik = $request->nik;
-            $pegawai->nama = $request->nama;
-            $pegawai->jk = $request->jk;
-            $pegawai->agama = $request->agama;
-            $pegawai->tempat_lahir = $request->tempat_lahir;
-            $pegawai->tgl_lahir = $request->tgl_lahir;
-            $pegawai->alamat_ktp = $request->alamat_ktp;
-            $pegawai->alamat_dom = $request->alamat_dom;
-            $pegawai->status = $request->status;
-            $pegawai->jml_anak = $request->jml_anak;
-            $pegawai->no_hp = $request->no_hp;
-            $pegawai->email = $request->email;
-            $pegawai->id_atasan = $request->id_atasan;
-            $pegawai->id_jabatan = $request->id_jabatan;
-            $pegawai->id_divisi = $request->id_divisi;
-            $pegawai->tgl_masuk = $request->tgl_masuk;
-            $pegawai->save();
+            DB::table('model_has_roles')->where('model_id', $id)->delete();
+            $int = (int)$request->id_role;
+            $pegawai->assignRole($int);
+
+            // $pegawai->id_role = $request->id_role;
+            // $pegawai->nik = $request->nik;
+            // $pegawai->nama = $request->nama;
+            // $pegawai->jk = $request->jk;
+            // $pegawai->agama = $request->agama;
+            // $pegawai->tempat_lahir = $request->tempat_lahir;
+            // $pegawai->tgl_lahir = $request->tgl_lahir;
+            // $pegawai->alamat_ktp = $request->alamat_ktp;
+            // $pegawai->alamat_dom = $request->alamat_dom;
+            // $pegawai->status = $request->status;
+            // $pegawai->jml_anak = $request->jml_anak;
+            // $pegawai->no_hp = $request->no_hp;
+            // $pegawai->email = $request->email;
+            // $pegawai->id_atasan = $request->id_atasan;
+            // $pegawai->id_jabatan = $request->id_jabatan;
+            // $pegawai->id_divisi = $request->id_divisi;
+            // $pegawai->tgl_masuk = $request->tgl_masuk;
+            // $pegawai->save();
 
 
             if ($riwayat_jabatan == 0) {
@@ -359,7 +381,6 @@ class PegawaiController extends Controller
                     'tgl_mulai' => date("Y-m-d"),
                 ]);
             }
-
 
             Alert::success('success', ' Berhasil Update Data !');
             return redirect(route('pegawai.index'));

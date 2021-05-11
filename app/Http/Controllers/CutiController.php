@@ -18,6 +18,12 @@ class CutiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:menu-cuti', ['only' => ['index', 'cutiBersama']]);
+    }
+
     public function index()
     {
         //
@@ -115,7 +121,7 @@ class CutiController extends Controller
         $date2 = new DateTime($tgl_now);
 
         $interval = $date1->diff($date2);
-        
+
         return view('admin.cuti.details', [
             'id' => $id,
             'cuti' => $cuti,

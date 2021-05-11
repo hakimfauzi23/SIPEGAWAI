@@ -24,6 +24,7 @@ class Cek_login
         }
         $user = Auth::user();
 
+        dd('im here');
         if ($user->role->nm_role == $roles)
             return $next($request);
 
