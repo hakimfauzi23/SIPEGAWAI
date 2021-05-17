@@ -15,18 +15,18 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'manajemen-role',
-            'menu-staff',
-            'menu-divisi',
-            'menu-jabatan',
-            'menu-kebijakan-kantor',
-            'menu-pegawai',
-            'menu-presensi',
-            'menu-cuti',
             'dashboard-admin',
             'dashboard-hrd',
-            'menu-surat-peringatan',
+            'menu-staff',
+            'manajemen-role',
+            'menu-kebijakan-kantor',
+            'menu-pegawai',
+            'menu-jabatan',
+            'menu-divisi',
+            'menu-presensi',
+            'menu-cuti',
             'menu-gaji',
+            'menu-surat-peringatan',
         ];
 
         foreach ($permissions as $permission) {
