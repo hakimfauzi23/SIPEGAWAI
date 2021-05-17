@@ -31,6 +31,7 @@ use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Hrd\HrdDashboardController;
+use App\Http\Controllers\ManajemenRoleMenuController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RoleController;
@@ -165,10 +166,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/staff/pres/', [StaffDashboardController::class, 'presensi'])->name('staff.presensi');
 
 
-    //Menu Role
+    //Menu Manajemen Role & Menu Dinamis
     Route::resource('role', RoleController::class);
     Route::get('/role/destroy/{data}', [RoleController::class, 'destroy'])->name('role.destroy');
     Route::patch('/role/update/{data}', [RoleController::class, 'update'])->name('role.update');
+
+    Route::get('/manajemen', [ManajemenRoleMenuController::class, 'index'])->name('manajemen.index');
+
+    Route::get('/manajemen/createMenu', [ManajemenRoleMenuController::class, 'createMenu'])->name('manajemen.createMenu');
+    Route::post('/manajemen/storeMenu', [ManajemenRoleMenuController::class, 'storeMenu'])->name('manajemen.storeMenu');
+    Route::get('/manajemen/{data}/editMenu', [ManajemenRoleMenuController::class, 'editMenu'])->name('manajemen.editMenu');
+    Route::patch('/manajemen/{data}/updateMenu', [ManajemenRoleMenuController::class, 'updateMenu'])->name('manajemen.updateMenu');
+    Route::get('/manajemen/{data}/destroyMenu', [ManajemenRoleMenuController::class, 'destroyMenu'])->name('manajemen.destroyMenu');
+
+    Route::get('/manajemen/createHakAkses', [ManajemenRoleMenuController::class, 'createHakAkses'])->name('manajemen.createHakAkses');
+    Route::post('/manajemen/storeHakAkses', [ManajemenRoleMenuController::class, 'storeHakAkses'])->name('manajemen.storeHakAkses');
+
 });
 
 Auth::routes();

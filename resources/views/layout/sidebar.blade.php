@@ -2,20 +2,90 @@
 
 
 <ul class="navigation navigation-main navigation-accordion">
+    <li class="navigation-header"><span>Main Menu</span> <i class="icon-menu"></i></li>
 
-    @can('menu-staff')
+    @foreach (App\Models\Menu::orderBy('order', 'asc')->get() as $menuItem)
+
+        @if ($menuItem->id_parent == null)
+            @if ($menuItem->url != null)
+                @can($menuItem->hak_akses->name)
+                    <li class="{{ Request::is($menuItem->url) ? 'active' : null }}"><a
+                            href="{{ '/' . $menuItem->url }}"><i class="{{ $menuItem->icon }}"></i>
+                            <span>{{ $menuItem->judul }}</span>
+                        </a>
+                    </li>
+                @endcan
+            @else
+                @can($menuItem->hak_akses->name)
+                    <li>
+                        <a href="#"><i class="{{ $menuItem->icon }}"></i> <span>{{ $menuItem->judul }}</span></a>
+                        <ul>
+                            @foreach ($menuItem->children as $subMenuItem)
+
+                                @if ($subMenuItem->url == 'staffPengajuanCuti')
+                                    @if ($jml_bawahan != 0)
+
+                                        <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}">
+                                            <a href="{{ '/' . $subMenuItem->url }}"> <span
+                                                    class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
+                                                {{ $subMenuItem->judul }}</a>
+                                        </li>
+                                    @endif
+
+                                @elseif ($subMenuItem->url != null)
+                                    <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}"><a
+                                            href="{{ '/' . $subMenuItem->url }}">
+                                            {{ $subMenuItem->judul }}
+                                        </a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="#"><span>{{ $subMenuItem->judul }}</span></a>
+                                        <ul>
+                                            @foreach ($subMenuItem->children as $thirdMenuItem)
+                                                @if ($thirdMenuItem->url == 'staffPengajuanCuti')
+                                                    @if ($jml_bawahan != 0)
+
+                                                        <li
+                                                            class="{{ Request::is($thirdMenuItem->url) ? 'active' : null }}">
+                                                            <a href="{{ '/' . $thirdMenuItem->url }}"> <span
+                                                                    class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
+                                                                {{ $thirdMenuItem->judul }}</a>
+                                                        </li>
+                                                    @endif
+                                                @else
+                                                    <li class="{{ Request::is($thirdMenuItem->url) ? 'active' : null }}">
+                                                        <a href="{{ '/' . $thirdMenuItem->url }}">
+                                                            {{ $thirdMenuItem->judul }}
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </li>
+                @endcan
+            @endif
+        @endif
+
+    @endforeach
+
+    {{-- @can('menu-staff')
         <li class="navigation-header"><span>Menu Staff</span> <i class="icon-menu"></i></li>
     @endcan
     @can('menu-staff')
-        <li class="{{ Request::segment(1) === 'staff' ? 'active' : null }}"><a href="{{ route('staff.index') }}"><i
+        <li class="{{ Request::segment(1) === 'staff' ? 'active' : null }}"><a href="staff"><i
                     class="icon-rocket"></i>
                 <span>Dashboard Staff</span></a>
         </li>
     @endcan
     @can('menu-staff')
         <li class="<?php if (Route::is('staffCuti.index') || Route::is('staffCuti.show')) {
-                echo 'active';
-            } ?>"><a href="{{ route('staffCuti.index') }}"><i class="icon-history"></i> <span>Riwayat
+            echo 'active';
+        } ?>"><a href="staffCuti"><i class="icon-history"></i> <span>Riwayat
                     Pengajuan Cuti
                 </span>
             </a>
@@ -30,8 +100,8 @@
             </a>
             <ul>
                 <li class="<?php if (Route::is('staffCuti.create')) {
-                        echo 'active';
-                    } ?>"><a href="{{ route('staffCuti.create') }}">Buat Pengajuan Cuti</a>
+                    echo 'active';
+                } ?>"><a href="{{ route('staffCuti.create') }}">Buat Pengajuan Cuti</a>
                 </li>
                 @if ($jml_bawahan != 0)
                     <li class="{{ Request::segment(1) === 'staffPengajuanCuti' ? 'active' : null }}"><a
@@ -133,7 +203,7 @@
                         href="{{ route('rekapCuti.index') }}">Rekapan Data Cuti Pegawai</a></li>
             </ul>
         </li>
-    @endcan
+    @endcan --}}
 
 </ul>
 

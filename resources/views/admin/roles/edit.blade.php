@@ -8,7 +8,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-key"></i> <span class="text-semibold">Manajemen Role</span>
+                <h4><i class="icon-key"></i> <span class="text-semibold">Manajemen Role dan Menu</span>
                     - Edit Data Role</h4>
             </div>
 
@@ -16,8 +16,8 @@
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li> <a href="{{ route('role.index') }}"> <i class="active icon-home2 position-left"></i> Edit Data
-                        Role
+                <li> <a href="{{ route('manajemen.index') }}"> <i class="active icon-home2 position-left"></i> Manajemen
+                        Role dan Menu
                     </a>
                 </li>
                 <li class="active">Edit Data Role</li>

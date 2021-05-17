@@ -19,14 +19,14 @@ class DatabaseSeeder extends Seeder
             JabatanSeeder::class,
             DivisiSeeder::class,
             PermissionTableSeeder::class,
-            // RoleSeeder::class,
+            RoleSeeder::class,
             PegawaiSeeder::class,
+            MenuSeeder::class,
             // CutiSeeder::class,
             // PresensiHarianSeeder::class,
             // RiwayatJabatanSeeder::class,
             // RiwayatDivisiSeeder::class,
             PeraturanSeeder::class,
         ]);
-
     }
 }

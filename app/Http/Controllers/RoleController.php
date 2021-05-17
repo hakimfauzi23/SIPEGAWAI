@@ -71,8 +71,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
         Alert::success('success', ' Berhasil Menambahkan Role !!');
-        return redirect()->route('role.index')
-            ->with('success', 'Role created successfully');
+        return redirect()->route('manajemen.index');
     }
     /**
      * Display the specified resource.
@@ -87,8 +86,6 @@ class RoleController extends Controller
         $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
             ->where("role_has_permissions.role_id", $id)
             ->get();
-
-        // dd($rolePermissions);
 
         return view('admin.roles.show', [
             'role' => $role,
@@ -139,7 +136,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->input('permission'));
 
-        return redirect('role');
+        return redirect('manajemen');
     }
     /**
      * Remove the specified resource from storage.
@@ -153,6 +150,6 @@ class RoleController extends Controller
         $id = Crypt::decryptString($data);
         DB::table("roles")->where('id', $id)->delete();
         Alert::success('success', ' Berhasil Menghapus Role !!');
-        return redirect()->route('role.index');
+        return redirect()->route('manajemen.index');
     }
 }

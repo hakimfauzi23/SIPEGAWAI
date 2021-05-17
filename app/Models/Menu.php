@@ -9,25 +9,25 @@ class Menu extends Model
 {
     use HasFactory;
 
-    protected $table = 'menu';
+    public $timestamps = false;
 
-    protected $fillable = [
-        'urutan_menu',
-        'nm_menu',
-        'class_menu',
-        'url_menu',
-        'icon',
-        'id_group',
-    ];
+    protected $table = 'menus';
 
-    public function group_menu()
+    protected $fillable = array('id_parent', 'judul', 'url', 'icon', 'id_hak_akses', 'order');
+
+    public function parent()
     {
-        return $this->belongsTo('App\Models\Group_menu', 'id_jabatan', 'id');
+        return $this->belongsTo('App\Models\Menu', 'id_parent', 'id');
     }
 
-    public function role()
+    public function children()
     {
-        return $this->belongsToMany('App\Models\Role');
+        return $this->hasMany('App\Models\Menu', 'id_parent');
     }
 
+
+    public function hak_akses()
+    {
+        return $this->belongsTo('App\Models\Permission', 'id_hak_akses', 'id');
+    }
 }

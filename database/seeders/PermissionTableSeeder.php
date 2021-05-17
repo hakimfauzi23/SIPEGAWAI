@@ -25,6 +25,8 @@ class PermissionTableSeeder extends Seeder
             'menu-cuti',
             'dashboard-admin',
             'dashboard-hrd',
+            'menu-surat-peringatan',
+            'menu-gaji',
         ];
 
         foreach ($permissions as $permission) {
