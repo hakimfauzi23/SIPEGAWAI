@@ -70,6 +70,12 @@ class Pegawai extends Authenticatable
         return $this->hasMany('App\Models\Pegawai');
     }
 
+    public function gaji()
+    {
+        return $this->hasMany('App\Models\Gaji');
+    }
+
+
 
 
 

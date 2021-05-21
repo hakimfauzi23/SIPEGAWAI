@@ -159,9 +159,10 @@ class RiwayatJabatanController extends Controller
         //
         $id = Crypt::decryptString($data);
         $riwayatJabatan = Riwayat_jabatan::find($id);
+        $encrypt = Crypt::encryptString($riwayatJabatan->id_pegawai);
+        dd($encrypt);
         $riwayatJabatan->delete();
 
-        $encrypt = Crypt::encryptString($riwayatJabatan->id_pegawai);
 
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect(route('riwayatJabatan.show', $encrypt));

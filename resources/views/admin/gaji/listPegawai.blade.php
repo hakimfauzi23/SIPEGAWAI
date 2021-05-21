@@ -1,15 +1,15 @@
 @extends('layout.base')
 
 
-@section('title', 'Data Riwayat Divisi')
+@section('title', 'Slip Gaji')
 
 
 @section('content_header')
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-hat"></i> <span class="text-semibold">Riwayat Divisi</span>
-                    - List Data Pegawai</h4>
+                <h4><i class="icon-cash3"></i> <span class="text-semibold">Data Gaji</span>
+                    - Slip Gaji</h4>
             </div>
 
         </div>
@@ -26,9 +26,8 @@
     <div class="panel bg-info">
         <div class="panel-heading">
             <em>
-                <h6>Pada halaman merupakan daftar list pegawai yang bisa dipilih untuk dilihat riwayat divisinya. klik saja
-                    tombol "Lihat" maka daftar riwayat divisi akan muncul.
-                </h6>
+                <h6>Pada halaman merupakan daftar list pegawai yang bisa dipilih untuk dilihat daftar slip gaji per Bulan di
+                    tahun ini. </h6>
             </em>
             <div class="heading-elements">
                 <ul class="icons-list">
@@ -48,7 +47,7 @@
                     <tr>
                         <th>No</th>
                         <th>Pegawai</th>
-                        <th hidden>Nama</th>
+                        <th>Status</th>
                         <th hidden>Jabatan</th>
                         <th hidden>Divisi</th>
                         <th class="text-center">Actions</th>
@@ -85,13 +84,20 @@
                                     <br>
                                     {{ $p->email . ' / ' . $p->no_hp }}
                                 </td>
-                                <td hidden></td>
+                                <td>
+                                    @if (App\Models\Gaji::where('id_pegawai', $p->id)->whereMonth('tanggal', date('m'))->count() != 0)
+                                        <span class="label bg-success">Slip Gaji Bulan Ini sudah Ada</span>
+                                    @else
+                                        <span class="label bg-danger">Slip Gaji Bulan Ini Belum Ada</span>
+                                    @endif
+                                </td>
                                 <td hidden></td>
                                 <td hidden><span class="label label-success">Active</span></td>
                                 <td> <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                    <a href="{{ route('riwayatDivisi.show', $encyrpt) }}" class="btn btn bg-info-300"><i
+                                    <a href="{{ route('gaji.show', $encyrpt) }}" class="btn btn bg-info-300"><i
                                             class=" icon-eye"></i> Lihat
                                     </a>
+
                                 </td>
                             </tr>
                         @endforeach

@@ -18,7 +18,7 @@
             <ul class="breadcrumb">
                 <li> <a href="{{ route('riwayatJabatan.index') }}"> <i class="active icon-home2 position-left"></i> List
                         Data
-                        Jabatan
+                        Pegawai
                     </a>
                 </li>
                 <li> <a href="{{ route('riwayatJabatan.show', $id) }}"> Data Riwayat Jabatan

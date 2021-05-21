@@ -30,14 +30,17 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\GajiController;
 use App\Http\Controllers\Hrd\HrdDashboardController;
 use App\Http\Controllers\ManajemenRoleMenuController;
+use App\Http\Controllers\PotonganController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Staff\StaffCutiController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\Staff\StaffPengajuanCutiController;
+use App\Http\Controllers\TunjanganController;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -182,6 +185,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/manajemen/createHakAkses', [ManajemenRoleMenuController::class, 'createHakAkses'])->name('manajemen.createHakAkses');
     Route::post('/manajemen/storeHakAkses', [ManajemenRoleMenuController::class, 'storeHakAkses'])->name('manajemen.storeHakAkses');
 
+
+    // Menu Gaji
+    Route::resource('tunjangan', TunjanganController::class);
+    Route::get('/tunjangan/destroy/{data}', [TunjanganController::class, 'destroy'])->name('tunjangan.destroy');
+
+
+    Route::resource('potongan', PotonganController::class);
+    Route::get('/potongan/destroy/{data}', [PotonganController::class, 'destroy'])->name('potongan.destroy');
+
+
+    Route::resource('gaji', GajiController::class);
+    Route::get('/gaji/createData/{data}', [GajiController::class, 'createData'])->name('gaji.createData');
+    Route::get('/gaji/download/{data}', [GajiController::class, 'downloadSlipGaji'])->name('gaji.download');
+    Route::get('/gaji/destroy/{data}', [GajiController::class, 'destroy'])->name('gaji.destroy');
+    Route::get('/gaji/send/{id_pegawai}/{id_gaji}', [GajiController::class, 'sendEmail'])->name('gaji.send');
 });
 
 Auth::routes();

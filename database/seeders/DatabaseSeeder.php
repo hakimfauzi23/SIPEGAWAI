@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             // RiwayatJabatanSeeder::class,
             // RiwayatDivisiSeeder::class,
             PeraturanSeeder::class,
+            PotonganSeeder::class,
+            TunjanganSeeder::class,
         ]);
     }
 }

@@ -25,7 +25,8 @@ class MenuSeeder extends Seeder
             'List Data Divisi', 'Data Riwayat Divisi', 'Data Presensi',
             'List Data Presensi', 'Rekapan Data Presensi Pegawai', 'Data Cuti',
             'List Data Cuti', 'Atur Tanggal Cuti Bersama', 'Rekapan Data Cuti Pegawai',
-            'Data Gaji', 'Surat Peringatan'
+            'Data Gaji', 'Surat Peringatan', 'Data Tunjangan',
+            'Data Potongan', 'Data Slip Gaji '
         ];
 
         $parent = [
@@ -37,7 +38,8 @@ class MenuSeeder extends Seeder
             15, 15, null,
             18, 18, null,
             21, 21, 21,
-            null, null,
+            null, null, 25,
+            25, 25,
         ];
 
         $url = [
@@ -49,7 +51,8 @@ class MenuSeeder extends Seeder
             'divisi', 'riwayatDivisi', null,
             'presensi', 'rekapPresensi', null,
             'cuti', 'cuti/cutiBersama', 'rekapCuti',
-            null, null
+            null, null, 'tunjangan',
+            'potongan', 'gaji',
         ];
 
         $icon = [
@@ -61,7 +64,8 @@ class MenuSeeder extends Seeder
             null, null, 'icon-notebook',
             null, null, 'icon-furniture',
             null, null, null,
-            'icon-cash3', 'icon-mail'
+            'icon-cash3', 'icon-mail', null,
+            null, null
 
         ];
 
@@ -74,7 +78,8 @@ class MenuSeeder extends Seeder
             8, 8, 9,
             9, 9, 10,
             10, 10, 10,
-            11, 12
+            11, 12, 11,
+            11, 11
         ];
 
         $num = count($judul);
