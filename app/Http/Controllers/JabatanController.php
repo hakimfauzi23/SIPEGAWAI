@@ -16,7 +16,7 @@ class JabatanController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:menu-jabatan', ['only' => ['index', 'destroy']]);
+        $this->middleware('permission:menu-jabatan', ['all']);
     }
 
     /**

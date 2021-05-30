@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Divisi;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
+use App\Models\PegawaiPotongan;
+use App\Models\PegawaiTunjangan;
+use App\Models\Potongan;
 use App\Models\Presensi_harian;
 use App\Models\Riwayat_divisi;
 use App\Models\Riwayat_jabatan;
 use App\Models\Role;
+use App\Models\Tunjangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -29,7 +33,7 @@ class PegawaiController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:menu-pegawai', ['only' => ['index', 'destroy']]);
+        $this->middleware('permission:menu-pegawai', ['all']);
     }
 
     public function index()
@@ -53,11 +57,17 @@ class PegawaiController extends Controller
         $divisi = Divisi::pluck('nm_divisi', 'id');
         $pegawai = Pegawai::pluck('nama', 'id');
         $role = Role::pluck('name', 'id');
+        $tunjangan = Tunjangan::get();
+        $potongan = Potongan::where('nama', 'not like', "%terlambat%")
+            ->where('nama', 'not like', "%bolos%")->get();
         return view('admin.pegawai.create', [
             'jabatan' => $jabatan,
             'divisi' => $divisi,
             'role' => $role,
             'pegawai' => $pegawai,
+            'tunjangan' => $tunjangan,
+            'potongan' => $potongan,
+
         ]);
     }
 
@@ -70,6 +80,7 @@ class PegawaiController extends Controller
     public function store(Request $request)
     {
         //
+
         $this->validate($request, [
             'id_role' => 'required',
             'nik' => 'required',
@@ -143,7 +154,17 @@ class PegawaiController extends Controller
         }
 
         $int = (int)$request->id_role;
+
+        // Asign Role 
         $user->assignRole($int);
+
+        //Asign Tunjangan
+        $tunjangan = $request->tunjangan;
+        $user->tunjangan()->attach($tunjangan);
+
+        //Asign Potongan
+        $potongan = $request->potongan;
+        $user->potongan()->attach($potongan);
 
         Alert::success('success', ' Berhasil Input Data !');
         return redirect('pegawai');
@@ -160,6 +181,8 @@ class PegawaiController extends Controller
         //
         $id = Crypt::decryptString($data);
         $pegawai = Pegawai::find($id);
+
+        dd($pegawai->potongan);
         $riwayat_jabatan = Riwayat_jabatan::where('id_pegawai', $id)
             ->orderBy('id')
             ->get();
@@ -208,6 +231,15 @@ class PegawaiController extends Controller
         $divisi = Divisi::pluck('nm_divisi', 'id');
         $role = Role::pluck('name', 'id');
         $atasan = Pegawai::pluck('nama', 'id');
+        $tunjangan = Tunjangan::get();
+        $potongan = Potongan::where('nama', 'not like', "%terlambat%")
+            ->where('nama', 'not like', "%bolos%")->get();
+
+        $pegawaiTunjangan = PegawaiTunjangan::where('pegawai_id', $id)
+            ->pluck('tunjangan_id', 'tunjangan_id')->all();
+        $pegawaiPotongan = PegawaiPotongan::where('pegawai_id', $id)
+            ->pluck('potongan_id', 'potongan_id')->all();
+
         return view('admin.pegawai.edit', [
             'id' => $data,
             'pegawai' => $pegawai,
@@ -215,6 +247,10 @@ class PegawaiController extends Controller
             'divisi' => $divisi,
             'role' => $role,
             'atasan' => $atasan,
+            'tunjangan' => $tunjangan,
+            'potongan' => $potongan,
+            'pegawaiTunjangan' => $pegawaiTunjangan,
+            'pegawaiPotongan' => $pegawaiPotongan,
         ]);
     }
 
@@ -274,6 +310,10 @@ class PegawaiController extends Controller
             $input = $request->all();
             $pegawai = Pegawai::find($id);
             $pegawai->update($input);
+
+            //Sync Potongan & Tunjangan Pivot Table
+            $pegawai->tunjangan()->sync($request->tunjangan);
+            $pegawai->potongan()->sync($request->potongan);
 
             DB::table('model_has_roles')->where('model_id', $id)->delete();
             $int = (int)$request->id_role;
@@ -341,6 +381,10 @@ class PegawaiController extends Controller
             $input = $request->all();
             $pegawai = Pegawai::find($id);
             $pegawai->update($input);
+
+            //Sync Potongan & Tunjangan Pivot Table
+            $pegawai->tunjangan()->sync($request->tunjangan);
+            $pegawai->potongan()->sync($request->potongan);
 
             DB::table('model_has_roles')->where('model_id', $id)->delete();
             $int = (int)$request->id_role;

@@ -17,7 +17,7 @@ class PeraturanController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:menu-kebijakan-kantor', ['only' => ['index', 'destroy']]);
+        $this->middleware('permission:menu-kebijakan-kantor', ['all']);
     }
 
     public function index()

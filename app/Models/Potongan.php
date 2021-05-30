@@ -9,10 +9,16 @@ class Potongan extends Model
 {
     use HasFactory;
 
-    protected $table ='potongan';
+    protected $table = 'potongan';
 
     protected $fillable = [
         'nama',
         'jumlah',
     ];
+
+
+    public function pegawai()
+    {
+        return $this->belongsToMany(Pegawai::class, 'pegawai_potongan');
+    }
 }

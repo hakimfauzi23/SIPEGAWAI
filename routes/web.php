@@ -40,6 +40,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Staff\StaffCutiController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\Staff\StaffPengajuanCutiController;
+use App\Http\Controllers\SuratPeringatanController;
 use App\Http\Controllers\TunjanganController;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -200,11 +201,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/gaji/download/{data}', [GajiController::class, 'downloadSlipGaji'])->name('gaji.download');
     Route::get('/gaji/destroy/{data}', [GajiController::class, 'destroy'])->name('gaji.destroy');
     Route::get('/gaji/send/{id_pegawai}/{id_gaji}', [GajiController::class, 'sendEmail'])->name('gaji.send');
+
+
+    //Menu Surat Peringatan
+    Route::resource('suratPeringatan', SuratPeringatanController::class);
+    Route::get('/suratPeringatan/search/', [SuratPeringatanController::class, 'searchSurat'])->name('suratPeringatan.search');
+    Route::get('/suratPeringatan/destroy/{data}', [SuratPeringatanController::class, 'destroy'])->name('suratPeringatan.destroy');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // // !!!!!DI SINI ADALAH ROUTES UNTUK MENU HRD!!!!! //
     // Route::resource('hrd', HrdDashboardController::class);

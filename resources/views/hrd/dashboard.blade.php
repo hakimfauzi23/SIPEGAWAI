@@ -20,8 +20,10 @@
     <div class="panel bg-info">
         <div class="panel-heading">
             <em>
-                <h6>Berikut adalah dashboard untuk <b>HRD</b> yang berisi informasi aktivitas pegawai seperti yang Pegawai yang Cuti Minggu Ini, Grafik kehadiran 
-                    <br>pegawai perbulan, Pegawai yang Sering terlambat, dan lain-lain.</h6>
+                <h6>Berikut adalah dashboard untuk <b>HRD</b> yang berisi informasi aktivitas pegawai seperti yang Pegawai
+                    yang Cuti Minggu Ini, Grafik kehadiran
+                    <br>pegawai perbulan, Pegawai yang Sering terlambat, dan lain-lain.
+                </h6>
             </em>
             <div class="heading-elements">
                 <ul class="icons-list">
@@ -88,46 +90,6 @@
         <div class="col-md-5">
             <div class="panel">
                 <div class="panel-heading">
-                    <h6 class="panel-title">Pemohon Cuti Terbanyak</h6>
-                </div>
-
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table  table-xs">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th> Nama </th>
-                                    <th>Divisi</th>
-                                </tr>
-                            </thead>
-                            @if ($pegawaiCuti->count())
-                                <tbody>
-                                    @foreach ($pegawaiCuti as $key => $p)
-                                        <tr>
-                                            <td>{{ $p->id }}</td>
-                                            <td> {{ $p->nama }}</td>
-                                            <td> {{ $p->divisi->nm_divisi }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            @else
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td>Belum Ada Data!!</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            @endif
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="panel-heading">
                     <h6 class="panel-title">Grafik Kehadiran Pegawai Per Bulan</h6>
                     <div class="heading-elements">
                         <form class="heading-form" method="post" action="{{ route('hrd.grafKehadiran') }}">
@@ -154,7 +116,7 @@
 
             <div class="panel">
                 <div class="panel-heading">
-                    <h6 class="panel-title">Pegawai yang Sering Terlambat </h6>
+                    <h6 class="panel-title">Pegawai Dalam Pengawasan</h6>
                 </div>
 
                 <div class="panel-body">
@@ -163,19 +125,19 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th> Nama </th>
-                                    <th>Divisi</th>
+                                    <th>Nama</th>
+                                    <th>Keterangan</th>
                                 </tr>
                             </thead>
-                            @if ($pegawaiTelat->count())
+                            @if ($pegawaiDlmPengawasan->count())
                                 <tbody>
-                                    @foreach ($pegawaiTelat as $key => $p)
+                                    @foreach ($pegawaiDlmPengawasan as $key => $p)
                                         <tr>
-                                            <td>{{ $p->id }}</td>
-                                            <td> {{ $p->nama }}</td>
-                                            <td> {{ $p->divisi->nm_divisi }}</td>
+                                            <td>{{ $p->id_pegawai }}</td>
+                                            <td> {{ $p->pegawai->nama }}</td>
+                                            <td> SP-{{ $p->tingkat }}</td>
                                         </tr>
-                                    @endforeach 
+                                    @endforeach
                                 </tbody>
                             @else
                                 <tbody>

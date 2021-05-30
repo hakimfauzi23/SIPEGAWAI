@@ -395,6 +395,44 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col">
+                        <legend class="text-semibold"><i class="icon-cash3 position-left"></i> Data Tunjangan & Potongan
+                        </legend>
+                    </div>
+                </div>
+                <div class="row">
+                    <fieldset>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="display-block text-semibold">Tunjangan</label>
+                                @foreach ($tunjangan as $value)
+                                    <label class="checkbox-inline">
+                                        {{ Form::checkbox('tunjangan[]', $value->id, false, ['class' => 'styled']) }}
+                                        {{ $value->nama }}
+                                        : @currency($value->jumlah)
+
+                                    </label>
+                                    <br />
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="display-block text-semibold">Potongan</label>
+                                @foreach ($potongan as $value)
+                                    <label class="checkbox-inline">
+                                        {{ Form::checkbox('potongan[]', $value->id, false, ['class' => 'styled']) }}{{ $value->nama }}
+                                        : @currency($value->jumlah)
+                                    </label>
+                                    <br />
+                                @endforeach
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div>
+
                 <div class="text-right mt-3">
                     <button type="submit" class="btn btn-primary">Submit form <i
                             class="icon-arrow-right14 position-right"></i></button>

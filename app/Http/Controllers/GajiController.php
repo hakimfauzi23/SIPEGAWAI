@@ -53,9 +53,13 @@ class GajiController extends Controller
 
         $id = Crypt::decryptString($data);
         $pegawai = Pegawai::find($id);
-        $tunjangan = Tunjangan::get();
-        $potongan = Potongan::where('nama', 'not like', "%terlambat%")
-            ->where('nama', 'not like', "%bolos%")->get();
+
+        // Get Tunjangan
+        $tunjangan = $pegawai->tunjangan;
+
+        // Get Potongan
+        $potongan = $pegawai->potongan;
+        
         return view('admin.gaji.create', [
             'id' => $data,
             'pegawai' => $pegawai,
@@ -74,6 +78,7 @@ class GajiController extends Controller
     public function store(Request $request)
     {
         $id = Crypt::decryptString($request->data);
+        $pegawai = Pegawai::find($id);
 
         $this->validate($request, [
             'dari' => 'required',
@@ -86,9 +91,7 @@ class GajiController extends Controller
         $status = Gaji::where('id_pegawai', $id)
             ->whereMonth('tanggal', date('m', strtotime($period_dari)))->whereYear('tanggal', date('Y', strtotime($period_dari)))->count();
 
-        // dd($status);
         if ($status != 0) {
-            //Tambah Data
             Alert::error('warning', ' Slip Dengan Periode Gaji Yang Baru Anda Buat Sudah Ada, Hapus Slip Gaji Lama Terlebih Dahulu!!');
             return redirect(route('gaji.show', $request->data));
         } else {
@@ -100,22 +103,29 @@ class GajiController extends Controller
             $jam_plg = $peraturan->jam_plg;
 
 
+            //Get Gaji Pokok
             $gaji_pokok = (int)$request->gaji_pokok;
 
-            if ($request->tunjangan == null) {
+            // Get Tunjangan
+            $tunj = $pegawai->tunjangan;
+
+            // Get Potongan
+            $pot = $pegawai->potongan;
+            // dd($tunj);
+            if ($tunj == null) {
                 $tunjangan = 0;
                 $att_tunjangan = [];
             } else {
-                $tunjangan = Tunjangan::whereIn('id', $request->tunjangan)->sum('jumlah');
-                $att_tunjangan = Tunjangan::whereIn('id', $request->tunjangan)->get();
+                $tunjangan = $tunj->sum('jumlah');
+                $att_tunjangan = $tunj;
             }
 
-            if ($request->potongan == null) {
+            if ($pot == null) {
                 $potongan = 0;
                 $att_potongan = [];
             } else {
-                $potongan = Potongan::whereIn('id', $request->potongan)->sum('jumlah');
-                $att_potongan = Potongan::whereIn('id', $request->potongan)->get();
+                $potongan = $pot->sum('jumlah');
+                $att_potongan = $pot;
             }
 
             //Potongan Terlambat & Alpha
@@ -140,7 +150,6 @@ class GajiController extends Controller
             $jml_tunj = (int)$tunjangan;
             $jml_ptgn = (int)$potongan + $jml_ptgn_telat + $jml_ptgn_bolos;
             $tot_gaji_diterima = ($gaji_pokok + $jml_tunj) - $jml_ptgn;
-            $pegawai = Pegawai::find($id);
             $tot_pemasukan = $gaji_pokok + $jml_tunj;
             $data  = [
                 'att_tunjangan' => $att_tunjangan,

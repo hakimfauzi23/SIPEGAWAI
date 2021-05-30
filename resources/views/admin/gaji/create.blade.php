@@ -130,33 +130,37 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label class="display-block text-semibold">Tunjangan</label>
-                        @foreach ($tunjangan as $value)
-                            <label class="checkbox-inline">
-                                {{ Form::checkbox('tunjangan[]', $value->id, false, ['class' => 'styled']) }}
-                                {{ $value->nama }}
-                                : @currency($value->jumlah)
-
-                            </label>
-                            <br />
-                        @endforeach
+                        <label class="display-block text-semibold">Tunjangan yg Didapatkan</label>
+                        <ul>
+                            @if ($tunjangan->count())
+                                @foreach ($tunjangan as $item)
+                                    <li>{{ $item->nama . ' - ' }} @currency($item->jumlah)</li>
+                                @endforeach
+                            @else
+                                <li>Pegawai tidak terdaftar tunjangan apapun.</li>
+                            @endif
+                        </ul>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label class="display-block text-semibold">Potongan</label>
-                        @foreach ($potongan as $value)
-                            <label class="checkbox-inline">
-                                {{ Form::checkbox('potongan[]', $value->id, false, ['class' => 'styled']) }}{{ $value->nama }}
-                                : @currency($value->jumlah)
-                            </label>
-                            <br />
-                        @endforeach
+                        <label class="display-block text-semibold">Potongan yg Didapatkan</label>
+                        <ul>
+                            @if ($potongan->count())
+                                @foreach ($potongan as $item)
+                                    <li>{{ $item->nama . ' - ' }} @currency($item->jumlah)</li>
+                                @endforeach
+                            @else
+                                <li>Pegawai tidak terdaftar potongan apapun.</li>
+                            @endif
+                        </ul>
+
                     </div>
+
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Buat Slip Gaji!</button>
             </div>
         </div>
     </div>

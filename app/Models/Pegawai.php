@@ -75,6 +75,11 @@ class Pegawai extends Authenticatable
         return $this->hasMany('App\Models\Gaji');
     }
 
+    public function surat_peringatan()
+    {
+        return $this->hasMany('App\Models\SuratPeringatan');
+    }
+
 
 
 
@@ -98,5 +103,17 @@ class Pegawai extends Authenticatable
     public function bawahan()
     {
         return $this->belongsTo('App\Models\Pegawai', 'id_atasan', 'id');
+    }
+
+
+
+    public function potongan()
+    {
+        return $this->belongsToMany(Potongan::class, 'pegawai_potongan');
+    }
+
+    public function tunjangan()
+    {
+        return $this->belongsToMany(Tunjangan::class, 'pegawai_tunjangan');
     }
 }
