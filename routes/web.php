@@ -36,6 +36,7 @@ use App\Http\Controllers\ManajemenRoleMenuController;
 use App\Http\Controllers\PotonganController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ReportKinerjaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Staff\StaffCutiController;
 use App\Http\Controllers\Staff\StaffDashboardController;
@@ -207,6 +208,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('suratPeringatan', SuratPeringatanController::class);
     Route::get('/suratPeringatan/search/', [SuratPeringatanController::class, 'searchSurat'])->name('suratPeringatan.search');
     Route::get('/suratPeringatan/destroy/{data}', [SuratPeringatanController::class, 'destroy'])->name('suratPeringatan.destroy');
+
+
+    //Menu Report Kinerja
+    Route::get('report/export/getYear',[ReportKinerjaController::class,'getList'])->name('report.getYear');
+    Route::resource('report', ReportKinerjaController::class);
+    Route::get('/report/export/{id_pegawai}/{year}', [ReportKinerjaController::class, 'exportKinerja'])->name('report.exportKinerja');
 });
 
 Auth::routes();
