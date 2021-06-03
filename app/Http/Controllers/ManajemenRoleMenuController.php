@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Icon;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -33,6 +34,7 @@ class ManajemenRoleMenuController extends Controller
     public function createMenu()
     {
         $hak_akses = Permission::pluck('name', 'id');
+        $icon = Icon::pluck('code');
         $parent = Menu::pluck('judul', 'id');
         $last_order = Menu::latest('order')->first();
         $order = $last_order->order + 1;
@@ -40,6 +42,7 @@ class ManajemenRoleMenuController extends Controller
             'hak_akses' => $hak_akses,
             'parent' => $parent,
             'order' => $order,
+            'icon' => $icon,
         ]);
     }
 
@@ -63,6 +66,7 @@ class ManajemenRoleMenuController extends Controller
     public function editMenu($data)
     {
         $id = Crypt::decryptString($data);
+        $icon = Icon::pluck('code');
         $menu = Menu::find($id);
         $hak_akses = Permission::pluck('name', 'id');
         $parent = Menu::pluck('judul', 'id');
@@ -72,7 +76,7 @@ class ManajemenRoleMenuController extends Controller
             'menu' => $menu,
             'hak_akses' => $hak_akses,
             'parent' => $parent,
-
+            'icon' => $icon,
         ]);
     }
 
@@ -82,7 +86,6 @@ class ManajemenRoleMenuController extends Controller
 
         $this->validate($request, [
             'judul' => 'required',
-            'id_hak_akses' => 'required',
             'order' => 'required',
         ]);
 

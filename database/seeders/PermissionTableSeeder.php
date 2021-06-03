@@ -21,6 +21,7 @@ class PermissionTableSeeder extends Seeder
             'manajemen-role',
             'menu-kebijakan-kantor',
             'menu-pegawai',
+            'menu-export-kinerja',
             'menu-jabatan',
             'menu-divisi',
             'menu-presensi',

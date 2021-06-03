@@ -82,8 +82,6 @@
                         <div class="form-group">
                             <label>Hak Akses</label>
                             <select class="select" name="id_hak_akses">
-                                <option>Pilih Hak Akses</option>
-                                <option value=''> Tidak Ada Hak Akses Khusus</option>
                                 @foreach ($hak_akses as $key => $value)
                                     <option value="{{ $key }}">
                                         {{ $value }}
@@ -102,7 +100,6 @@
                         <div class="form-group">
                             <label>Parent Menu</label>
                             <select class="select" name="id_parent">
-                                <option>Pilih Parent Menu</option>
                                 <option value=''> Independen</option>
                                 @foreach ($parent as $key => $value)
                                     <option value="{{ $key }}">
@@ -124,8 +121,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Kode Icon Menu (khusus independen Menu)</label>
-                            <input type="text" name="icon" class="form-control" placeholder="Kode icon menu   "
-                                value="{{ old('icon') }}">
+                            <select style="font-weight:900px" class="select-icons" name="icon">
+                                <option value=''> Tidak Ada Icon</option>
+                                @foreach ($icon as $value)
+                                    <option data-icon="{{ str_replace('icon-', '', $value) }}"
+                                        value="{{ $value }}">
+                                        {{ $value }}
+                                    </option>
+                                @endforeach
+                            </select>
 
                             @if ($errors->has('icon'))
                                 <div class="text-danger">
