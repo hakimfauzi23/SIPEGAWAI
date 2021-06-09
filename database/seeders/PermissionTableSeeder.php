@@ -21,13 +21,13 @@ class PermissionTableSeeder extends Seeder
             'manajemen-role',
             'menu-kebijakan-kantor',
             'menu-pegawai',
-            'menu-export-kinerja',
             'menu-jabatan',
             'menu-divisi',
             'menu-presensi',
             'menu-cuti',
             'menu-gaji',
             'menu-surat-peringatan',
+            'menu-export-kinerja',
         ];
 
         foreach ($permissions as $permission) {

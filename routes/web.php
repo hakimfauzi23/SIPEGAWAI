@@ -146,6 +146,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/cuti/cutiBersama/store', [CutiController::class, 'storeCutiBersama'])->name('cuti.storeCutiBersama');
     Route::resource('cuti', CutiController::class);
     Route::get('/cuti/destroy/{data}', [CutiController::class, 'destroy'])->name('cuti.destroy');
+    Route::resource('hrdPengajuanCuti', HrdPengajuanCutiController::class); // pengajuan cuti tingkat HRD
+    Route::put('/hrdPengajuanCuti/keputusan/{data}', [HrdPengajuanCutiController::class, 'keputusan'])->name('hrdPengajuanCuti.keputusan');
+
 
 
     //RiwayatJabatan
@@ -211,7 +214,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     //Menu Report Kinerja
-    Route::get('report/export/getYear',[ReportKinerjaController::class,'getList'])->name('report.getYear');
+    Route::get('report/export/getYear', [ReportKinerjaController::class, 'getList'])->name('report.getYear');
     Route::resource('report', ReportKinerjaController::class);
     Route::get('/report/export/{id_pegawai}/{year}', [ReportKinerjaController::class, 'exportKinerja'])->name('report.exportKinerja');
 });
@@ -259,7 +262,4 @@ Auth::routes();
     // Route::get('/hrdCuti/destroy/{data}', [HrdCutiController::class, 'destroy'])->name('hrdCuti.destroy');
 
 
-    // //Pengajuan Cuti
-    // Route::resource('hrdPengajuanCuti', HrdPengajuanCutiController::class);
-    // Route::put('/hrdPengajuanCuti/keputusan/{data}', [HrdPengajuanCutiController::class, 'keputusan'])->name('hrdPengajuanCuti.keputusan');
     // /**  End Menu HRD**/

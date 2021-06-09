@@ -30,9 +30,27 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web'
         ]);
 
-        $permissions = Permission::pluck('id', 'id')->all();
+        // 'dashboard-admin' = 1
+        // 'dashboard-hrd'= 2
+        // 'menu-staff'= 3
+        // 'manajemen-role'= 4
+        // 'menu-kebijakan-kantor' = 5
+        // 'menu-pegawai'= 6
+        // 'menu-jabatan'= 7
+        // 'menu-divisi' = 8
+        // 'menu-presensi'= 9
+        // 'menu-cuti', = 10
+        // 'menu-gaji', = 11
+        // 'menu-surat-peringatan' = 12
+        // 'menu-export-kinerja', =13
+
+        $permissions = Permission::where('id', '!=', 2)->pluck('id', 'id');
         $admin->syncPermissions($permissions);
-        $hrd->syncPermissions([2, 5, 6, 7, 8, 10, 11, 12]);
-        $staff->syncPermissions([2]);
+        $hrd->syncPermissions([
+            2, 3, 6, 9, 10, 11, 12, 13
+        ]);
+        $staff->syncPermissions([
+            3
+        ]);
     }
 }
