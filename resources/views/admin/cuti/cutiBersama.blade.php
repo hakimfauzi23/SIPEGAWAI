@@ -8,7 +8,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-furniture"></i> <span class="text-semibold">Cuti</span>
+                <h4><i class="icon-furniture"></i> <span class="text-semibold">Data Cuti</span>
                     - Atur Cuti Bersama</h4>
             </div>
 
@@ -16,11 +16,8 @@
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li> <a href="{{ route('cuti.index') }}"> <i class="active icon-home2 position-left"></i> List Data
-                        Cuti
-                    </a>
-                </li>
-                <li class="active">Atur Cuti Bersama </li>
+                <li><i class="active icon-home2 position-left"></i> Atur Cuti Bersama</li>
+                {{-- <li class="active">Dashboard</li> --}}
             </ul>
         </div>
     </div>

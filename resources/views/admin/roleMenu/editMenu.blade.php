@@ -16,12 +16,11 @@
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li> <a href="{{ route('manajemen.index') }}"> <i class="active icon-home2 position-left"></i> Manajemen
-                        Menu &
-                        Role
+                <li> <a href="{{ route('manajemen.index') }}"> <i class="active icon-home2 position-left"></i>
+                        Role & Menu
                     </a>
                 </li>
-                <li class="active">Edit Menu </li>
+                <li class="active">Edit Data Menu </li>
             </ul>
         </div>
     </div>

@@ -8,7 +8,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-furniture position-left"></i> <span class="text-semibold">Rekap Data Cuti</span>
+                <h4><i class="icon-furniture position-left"></i> <span class="text-semibold">Data Cuti</span>
                     - Rekap Data Cuti </h4>
             </div>
         </div>

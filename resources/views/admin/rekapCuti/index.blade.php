@@ -8,7 +8,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-furniture"></i> <span class="text-semibold">Rekap Cuti </span>
+                <h4><i class="icon-furniture"></i> <span class="text-semibold">Data Cuti </span>
                     - List Data Pegawai</h4>
             </div>
 

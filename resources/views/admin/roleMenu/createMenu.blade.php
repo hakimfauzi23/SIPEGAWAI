@@ -9,16 +9,15 @@
         <div class="page-header-content">
             <div class="page-title">
                 <h4><i class="icon-key"></i> <span class="text-semibold">Manajamen Role & Menu</span>
-                    - Tambah Data Menu</h4>
+                    - Tambah Menu Baru</h4>
             </div>
 
         </div>
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li> <a href="{{ route('manajemen.index') }}"> <i class="active icon-home2 position-left"></i> Manajemen
-                        Menu &
-                        Role
+                <li> <a href="{{ route('manajemen.index') }}"> <i class="active icon-home2 position-left"></i>
+                        Role & Menu
                     </a>
                 </li>
                 <li class="active">Tambah Menu Baru</li>

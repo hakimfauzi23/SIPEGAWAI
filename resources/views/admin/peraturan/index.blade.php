@@ -8,8 +8,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-info3 position-left"></i> <span class="text-semibold">Kebijakan Kantor</span>
-                    - Kebijakan Jam Kerja & Cuti Pegawai</h4>
+                <h4><i class="icon-info3 position-left"></i> <span class="text-semibold">Kebijakan Cuti & Jam Kantor</span>
             </div>
 
         </div>

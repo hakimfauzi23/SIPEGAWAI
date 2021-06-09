@@ -8,7 +8,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-notebook position-left"></i> <span class="text-semibold">Rekap Data Presensi</span>
+                <h4><i class="icon-notebook position-left"></i> <span class="text-semibold">Data Presensi</span>
                     - Rekap Data Presensi </h4>
             </div>
 

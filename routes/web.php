@@ -95,7 +95,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/pass', PasswordController::class);
 
 
-    //Cuti
+    //Cuti Staff
     Route::resource('staffCuti', StaffCutiController::class);
     Route::post('/staffCuti/tahun/', [StaffCutiController::class, 'tahunCuti'])->name('staffCuti.search');
 
@@ -148,7 +148,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/cuti/destroy/{data}', [CutiController::class, 'destroy'])->name('cuti.destroy');
     Route::resource('hrdPengajuanCuti', HrdPengajuanCutiController::class); // pengajuan cuti tingkat HRD
     Route::put('/hrdPengajuanCuti/keputusan/{data}', [HrdPengajuanCutiController::class, 'keputusan'])->name('hrdPengajuanCuti.keputusan');
-
 
 
     //RiwayatJabatan

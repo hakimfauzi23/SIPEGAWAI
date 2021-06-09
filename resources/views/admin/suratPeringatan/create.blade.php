@@ -14,7 +14,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-file-openoffice"></i> <span class="text-semibold">Surat Peringatan</span>
+                <h4><i class="icon-file-text2"></i> <span class="text-semibold">Surat Peringatan</span>
                     - Buat Surat Peringatan</h4>
             </div>
 

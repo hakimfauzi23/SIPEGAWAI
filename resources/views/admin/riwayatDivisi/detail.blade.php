@@ -8,7 +8,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-hat"></i> <span class="text-semibold">Riwayat Divisi</span>
+                <h4><i class="icon-hat"></i> <span class="text-semibold">Data Divisi</span>
                     - Data Riwayat Divisi Pegawai</h4>
             </div>
 

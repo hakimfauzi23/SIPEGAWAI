@@ -8,7 +8,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-user-tie"></i> <span class="text-semibold">Riwayat Jabatan</span>
+                <h4><i class="icon-user-tie"></i> <span class="text-semibold">Data Jabatan</span>
                     - Data Riwayat Jabatan Pegawai</h4>
             </div>
 

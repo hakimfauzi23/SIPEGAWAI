@@ -6,7 +6,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-furniture"></i> <span class="text-semibold">Cuti</span>
+                <h4><i class="icon-furniture"></i> <span class="text-semibold">Data Cuti</span>
                     - Details Pengajuan Cuti</h4>
             </div>
 

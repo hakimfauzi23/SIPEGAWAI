@@ -23,15 +23,15 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-furniture"></i> <span class="text-semibold">Cuti</span>
-                    - Pengajuan Cuti</h4>
+                <h4><i class="icon-user"></i> <span class="text-semibold">Menu Staff</span>
+                    - Buat Pengajuan Cuti</h4>
             </div>
 
         </div>
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li> <i class="active icon-home2 position-left"></i> Pengajuan
+                <li> <i class="active icon-home2 position-left"></i> Buat Pengajuan
                     Cuti
                 </li>
             </ul>

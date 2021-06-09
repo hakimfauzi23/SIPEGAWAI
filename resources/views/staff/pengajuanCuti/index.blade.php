@@ -8,7 +8,7 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-furniture"></i> <span class="text-semibold">Cuti</span>
+                <h4><i class="icon-user"></i> <span class="text-semibold">Menu Staff</span>
                     - Pengajuan Cuti</h4>
             </div>
 
@@ -45,39 +45,42 @@
     <div class="row">
         <div class="col">
             <div class="panel panel-flat">
-                <table class="table datatable-basic table-bordered table-striped table-hover">
-                    <thead class="bg-primary">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama</th>
-                            <th>Tipe Cuti</th>
-                            <th>Tgl Pengajuan</th>
-                            <th>Keterangan</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if ($pengajuan->count())
-                            @foreach ($pengajuan as $key => $p)
-                                <tr>
-                                    <td>{{ $p->id }}</td>
-                                    <td>{{ $p->pegawai->nama }}</td>
-                                    <td>{{ $p->tipe_cuti }}</td>
-                                    <td>{{ $p->tgl_pengajuan }}</td>
-                                    <td>{{ $p->ket }}</td>
-                                    <td class="text-center">
-                                        <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                <div class="panel-body">
 
-                                        <a href="{{ route('staffPengajuanCuti.show', $encyrpt) }}"
-                                            class="btn btn bg-info-300"><i class=" icon-eye"></i> Lihat
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endif
+                    <table class="table datatable-basic table-bordered table-striped table-hover">
+                        <thead class="bg-primary">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Tipe Cuti</th>
+                                <th>Tgl Pengajuan</th>
+                                <th>Keterangan</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ($pengajuan->count())
+                                @foreach ($pengajuan as $key => $p)
+                                    <tr>
+                                        <td>{{ $p->id }}</td>
+                                        <td>{{ $p->pegawai->nama }}</td>
+                                        <td>{{ $p->tipe_cuti }}</td>
+                                        <td>{{ $p->tgl_pengajuan }}</td>
+                                        <td>{{ $p->ket }}</td>
+                                        <td class="text-center">
+                                            <?php $encyrpt = Crypt::encryptString($p->id); ?>
 
-                    </tbody>
-                </table>
+                                            <a href="{{ route('staffPengajuanCuti.show', $encyrpt) }}"
+                                                class="btn btn bg-info-300"><i class=" icon-eye"></i> Lihat
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

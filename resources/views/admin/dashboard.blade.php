@@ -8,7 +8,7 @@
         <div class="page-header-content">
             <div class="page-title">
                 <h4><i class="icon-rocket position-left"></i> <span class="text-semibold">Dashboard</span>
-                    - Super Admin</h4>
+                    - Admin</h4>
             </div>
 
         </div>

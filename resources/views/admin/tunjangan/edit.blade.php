@@ -15,8 +15,11 @@
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li><i class="active icon-home2 position-left"></i> Edit Data Tunjangan</li>
-                {{-- <li class="active">Dashboard</li> --}}
+                <li><a href="{{ route('tunjangan.index') }}"><i class="active icon-home2 position-left"></i> List
+                        Data
+                        Tunjangan</a>
+                </li>
+                <li class="active">Edit Data Tunjangan</li>
             </ul>
         </div>
     </div>

@@ -8,15 +8,15 @@
     <div class="page-header page-header-default">
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-key"></i> <span class="text-semibold">Manajemen Role dan Menu</span>
-                    - List Data Role dan Menu</h4>
+                <h4><i class="icon-key"></i> <span class="text-semibold">Manajemen Role & Menu</span>
+                    - Role dan Menu</h4>
             </div>
 
         </div>
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li><i class="active icon-home2 position-left"></i> List Data Role</li>
+                <li><i class="active icon-home2 position-left"></i> Role & Menu</li>
                 {{-- <li class="active">Dashboard</li> --}}
             </ul>
         </div>
@@ -24,27 +24,25 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="panel bg-info">
-            <div class="panel-heading">
-                <em>
-                    <h6>Ini adalah halaman yang menampilkan semua role di dalam SIPEGAWAI ini, secara default hanya Super
-                        Admin yang bisa mengedit fungsi role.
-                    </h6>
-                </em>
-                <div class="heading-elements">
-                    <ul class="icons-list">
-                        <li><a data-action="close"></a></li>
-                    </ul>
-                </div>
-
+    <div class="panel bg-info">
+        <div class="panel-heading">
+            <em>
+                <h6>Ini adalah halaman yang menampilkan semua role di dalam SIPEGAWAI ini, secara default hanya
+                    Admin yang bisa mengedit fungsi role.
+                </h6>
+            </em>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="close"></a></li>
+                </ul>
             </div>
+
         </div>
     </div>
 
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h4 class="panel-title"> Menu Dinamis </h4>
+            <h4 class="panel-title">Data Menu </h4>
             <a href="{{ route('manajemen.createMenu') }}"><i class="icon-file-plus"></i> Tambah Menu Baru</a>
         </div>
         <div class="panel-body table-responsive">
@@ -122,7 +120,7 @@
 
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h4 class="panel-title"> Roles </h4>
+            <h4 class="panel-title"> Data Role </h4>
             <a href="{{ route('role.create') }}"><i class="icon-file-plus"></i> Tambah Data Role Baru</a>
         </div>
         <div class="panel-body table-responsive">

@@ -15,9 +15,13 @@
 
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li><i class="active icon-home2 position-left"></i> Tambah Data Potongan</li>
-                {{-- <li class="active">Dashboard</li> --}}
-            </ul>
+                <li><a href="{{ route('potongan.index') }}"><i class="active icon-home2 position-left"></i> List
+                    Data
+                    Potongan</a>
+            </li>
+
+            <li class="active">Tambah Data Potongan</li>
+        </ul>
         </div>
     </div>
 @endsection

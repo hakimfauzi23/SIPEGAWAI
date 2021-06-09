@@ -8,8 +8,8 @@
 
         <div class="page-header-content">
             <div class="page-title">
-                <h4><i class="icon-rocket position-left"></i> <span class="text-semibold">Dashboard</span>
-                    - Staff</h4>
+                <h4><i class="icon-user position-left"></i> <span class="text-semibold">Menu Staff</span>
+                    - Dashboard Staff</h4>
             </div>
 
         </div>
