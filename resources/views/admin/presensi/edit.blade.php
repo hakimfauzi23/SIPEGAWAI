@@ -54,8 +54,8 @@
 
                     <div class="form-group">
                         <label for="inputState">Pegawai</label>
-                        <select class="select" name="id_pegawai">
-                            <option>Pilih Pegawai</option>
+                        <select class="select" name="id_pegawai" data-placeholder = "Pilih Pegawai">
+                            <option value="">Pilih Pegawai</option>
                             @foreach ($pegawai as $key => $value)
                                 <option value="{{ $key }}" {{ $presensi->id_pegawai == $key ? 'selected' : '' }}>
                                     {{ $value }}
@@ -86,8 +86,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="inputState">Keterangan</label>
-                                <select class="select" name="ket">
-                                    <option>Pilih Keterangan</option>
+                                <select class="select" name="ket" data-placeholder = "Pilih Keterangan">
+                                    <option value="">Pilih Keterangan</option>
                                     <option value="Hadir" {{ $presensi->ket == 'Hadir' ? 'selected' : '' }}> Hadir
                                     </option>
                                     <option value="Cuti" {{ $presensi->ket == 'Cuti' ? 'selected' : '' }}> Cuti </option>

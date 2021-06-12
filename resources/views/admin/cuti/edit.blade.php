@@ -61,8 +61,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Pegawai</label>
-                                    <select class="select" name="id_pegawai">
-                                        <option>Pilih Pegawai</option>
+                                    <select class="select" name="id_pegawai" data-placeholder = "Pilih Pegawai">
+                                        <option value="">Pilih Pegawai</option>
                                         @foreach ($pegawai as $key => $value)
                                             <option value="{{ $key }}"
                                                 {{ $cuti->id_pegawai == $key ? 'selected' : '' }}>
@@ -82,8 +82,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="inputState">Tipe Cuti</label>
-                                    <select class=" select" name="tipe_cuti">
-                                        <option>Pilih Tipe Cuti</option>
+                                    <select class=" select" name="tipe_cuti" data-placeholder = "Pilih Tipe Cuti">
+                                        <option value="">Pilih Tipe Cuti</option>
                                         <option value="Tahunan" {{ $cuti->tipe_cuti == 'Tahunan' ? 'selected' : '' }}>
                                             Tahunan
                                         </option>

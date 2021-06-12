@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 
 class Dashboard extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:dashboard-admin', ['all']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +25,7 @@ class Dashboard extends Controller
     public function index()
     {
         //
+
 
         $bulanIni = date('m');
 

@@ -17,6 +17,12 @@ class RiwayatJabatanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:menu-jabatan', ['all']);
+    }
+
     public function index()
     {
         //

@@ -102,7 +102,6 @@
                         <div class="form-group">
                             <label>Parent Menu</label>
                             <select class="select" name="id_parent">
-                                <option>Pilih Parent Menu</option>
                                 <option value='' {{ $menu->id_parent == null ? 'selected' : '' }}> Independen</option>
                                 @foreach ($parent as $key => $value)
                                     <option value="{{ $key }}"

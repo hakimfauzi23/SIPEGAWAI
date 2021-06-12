@@ -207,8 +207,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     //Menu Surat Peringatan
-    Route::resource('suratPeringatan', SuratPeringatanController::class);
     Route::get('/suratPeringatan/search/', [SuratPeringatanController::class, 'searchSurat'])->name('suratPeringatan.search');
+    Route::resource('suratPeringatan', SuratPeringatanController::class);
     Route::get('/suratPeringatan/destroy/{data}', [SuratPeringatanController::class, 'destroy'])->name('suratPeringatan.destroy');
 
 

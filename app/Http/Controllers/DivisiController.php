@@ -18,7 +18,7 @@ class DivisiController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:menu-divisi', ['only' => ['index', 'destroy']]);
+        $this->middleware('permission:menu-divisi', ['all']);
     }
 
     public function index()

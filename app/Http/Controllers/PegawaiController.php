@@ -182,7 +182,6 @@ class PegawaiController extends Controller
         $id = Crypt::decryptString($data);
         $pegawai = Pegawai::find($id);
 
-        dd($pegawai->potongan);
         $riwayat_jabatan = Riwayat_jabatan::where('id_pegawai', $id)
             ->orderBy('id')
             ->get();

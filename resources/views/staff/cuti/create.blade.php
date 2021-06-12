@@ -76,8 +76,8 @@
 
                     <div class="form-group">
                         <label for="inputState">Tipe Cuti</label>
-                        <select class=" select" name="tipe_cuti">
-                            <option>Pilih Tipe Cuti</option>
+                        <select class=" select" name="tipe_cuti" data-placeholder="Pilih Tipe Cuti">
+                            <option value="">Pilih Tipe Cuti</option>
                             <option value="Tahunan" @if ($months < $syarat_bulan_cuti_tahunan) {{ 'disabled' }} @endif> Tahunan </option>
                             <option value="Besar" @if ($months < $syarat_bulan_cuti_besar) {{ 'disabled' }} @endif> Besar </option>
                             <option value="Hamil" @if (Auth::user()->jk != 'Wanita') {{ 'disabled' }} @endif> Hamil </option>

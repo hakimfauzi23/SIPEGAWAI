@@ -15,6 +15,12 @@ class ReportKinerjaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:menu-export-kinerja', ['all']);
+    }
+
     public function index()
     {
         //

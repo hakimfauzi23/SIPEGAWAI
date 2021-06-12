@@ -21,7 +21,7 @@ class CutiController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:menu-cuti', ['only' => ['index', 'cutiBersama']]);
+        $this->middleware('permission:menu-cuti', ['all']);
     }
 
     public function index()

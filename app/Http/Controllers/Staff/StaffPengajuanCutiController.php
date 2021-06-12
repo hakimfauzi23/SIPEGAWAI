@@ -14,6 +14,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class StaffPengajuanCutiController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:menu-staff', ['all']);
+    }
+
     /**
      * Display a listing of the resource.
      *

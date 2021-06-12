@@ -93,12 +93,12 @@
                                 <label class="display-block">Gender:</label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" class="styled" value="pria" name="jk" required>
+                                    <input type="radio" class="styled" value="pria" name="jk" {{ old('jk') == 'pria' ? 'checked' : '' }}>
                                     Pria
                                 </label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" class="styled" value="wanita" name="jk" required>
+                                    <input type="radio" class="styled" value="wanita" name="jk" {{ old('jk') == 'wanita' ? 'checked' : '' }}>
                                     Wanita
                                 </label>
 
@@ -155,15 +155,23 @@
                                 <label for="inputState">Agama</label>
                                 <select class=" select" data-placeholder="Pilih salah satu" searchable="Search here.."
                                     name="agama">
-                                    <option>Pilih Agama</option>
-                                    <option value="Buddha"> Buddha </option>
-                                    <option value="Hindu"> Hindu </option>
-                                    <option value="Islam"> Islam </option>
-                                    <option value="Katholik"> Katholik </option>
-                                    <option value="Kristen"> Kristen </option>
-                                    <option value="Konghucu"> Konghucu </option>
-                                    <option value="Konghucu"> Protestan </option>
-                                    <option value="Konghucu"> Lainya </option>
+                                    <option value=""> Pilih Agama< /option>
+                                    <option {{ old('agama') == 'Buddha' ? 'selected' : '' }} value="Buddha"> Buddha
+                                    </option>
+                                    <option {{ old('agama') == 'Hindu' ? 'selected' : '' }} value="Hindu"> Hindu
+                                    </option>
+                                    <option {{ old('agama') == 'Islam' ? 'selected' : '' }} value="Islam"> Islam
+                                    </option>
+                                    <option {{ old('agama') == 'Katholik' ? 'selected' : '' }} value="Katholik"> Katholik
+                                    </option>
+                                    <option {{ old('agama') == 'Kristen' ? 'selected' : '' }} value="Kristen"> Kristen
+                                    </option>
+                                    <option {{ old('agama') == 'Konghucu' ? 'selected' : '' }} value="Konghucu"> Konghucu
+                                    </option>
+                                    <option {{ old('agama') == 'Protestan' ? 'selected' : '' }} value="Protestan">
+                                        Protestan </option>
+                                    <option {{ old('agama') == 'Lainya' ? 'selected' : '' }} value="Lainya"> Lainya
+                                    </option>
                                 </select>
 
                                 @if ($errors->has('agama'))
@@ -178,10 +186,12 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Status</label>
-                                        <select class="select" name="status">
-                                            <option>Pilih Status</option>
-                                            <option value="Menikah"> Menikah </option>
-                                            <option value="Lajang"> Lajang </option>
+                                        <select class="select" data-placeholder="Pilih Status" name="status">
+                                            <option value="">Pilih Status</option>
+                                            <option {{ old('status') == 'Menikah' ? 'selected' : '' }} value="Menikah">
+                                                Menikah </option>
+                                            <option {{ old('status') == 'Lajang' ? 'selected' : '' }} value="Lajang">
+                                                Lajang </option>
                                         </select>
 
                                         @if ($errors->has('status'))
@@ -195,10 +205,10 @@
                                     <div class="form-group ">
                                         <label>Jumlah Anak</label>
                                         <input type="number" name="jml_anak" class="form-control"
-                                            placeholder="Jumlah Anak . . .">
-                                        @if ($errors->has('id_role'))
+                                            placeholder="Jumlah Anak . . ." value="{{old('jml_anak')}}">
+                                        @if ($errors->has('jml_anak'))
                                             <div class="text-danger">
-                                                {{ $errors->first('id_role') }}
+                                                {{ $errors->first('jml_anak') }}
                                             </div>
                                         @endif
 
@@ -287,10 +297,12 @@
 
                             <div class="form-group">
                                 <label>Role</label>
-                                <select class="select" data-live-search="true" searchable="Search here.." name="id_role">
-                                    <option>Pilih Role Pegawai</option>
+
+                                <select class="select" data-live-search="true" data-placeholder="Pilih Role" searchable="Search here.." name="id_role">
+                                    <option value="">Pilih Role</option>
                                     @foreach ($role as $key => $value)
-                                        <option value="{{ $key }}">
+                                        <option {{ old('id_role') == $key ? 'selected' : '' }}
+                                            value="{{ $key }}">
                                             {{ $value }}
                                         </option>
                                     @endforeach
@@ -323,10 +335,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Jabatan</label>
-                                        <select class="select" name="id_jabatan">
-                                            <option>Pilih Jabatan</option>
+                                        <select class="select" data-placeholder="Pilih Jabatan" name="id_jabatan">
+                                            <option value="">Pilih Jabatan</option>
                                             @foreach ($jabatan as $key => $value)
-                                                <option value="{{ $key }}">
+                                                <option {{ old('id_jabatan') == $key ? 'selected' : '' }}
+                                                    value="{{ $key }}">
                                                     {{ $value }}
                                                 </option>
                                             @endforeach
@@ -342,10 +355,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Divisi</label>
-                                        <select class="select" name="id_divisi">
-                                            <option>Pilih Divisi</option>
+                                        <select data-placeholder="Pilih Divisi" class="select" name="id_divisi">
+                                            <option value="">Pilih Divisi</option>
                                             @foreach ($divisi as $key => $value)
-                                                <option value="{{ $key }}">
+                                                <option {{ old('id_divisi') == $key ? 'selected' : '' }}
+                                                    value="{{ $key }}">
                                                     {{ $value }}
                                                 </option>
                                             @endforeach
@@ -364,11 +378,12 @@
 
                             <div class="form-group">
                                 <label>Atasan</label>
-                                <select class="select" name="id_atasan">
+                                <select class="select" data-placeholder="Pilih Atasan (Kosongi Bila Tidak Ada)" name="id_atasan">
                                     <option value="">Pilih Atasan</option>
                                     <option value="">Tidak Ada</option>
                                     @foreach ($pegawai as $key => $value)
-                                        <option value="{{ $key }}">
+                                        <option {{ old('id_atasan') == $key ? 'selected' : '' }}
+                                            value="{{ $key }}">
                                             {{ $key . ' - ' . $value }}
                                         </option>
                                     @endforeach

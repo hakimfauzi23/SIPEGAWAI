@@ -10,8 +10,10 @@ use App\Models\SuratPeringatan;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class KinerjaExport implements FromView, ShouldAutoSize
+class KinerjaExport implements FromView, ShouldAutoSize, WithEvents
 {
 
     protected $id_peg, $year;
@@ -21,6 +23,53 @@ class KinerjaExport implements FromView, ShouldAutoSize
         $this->id_peg = $id_peg;
         $this->year = $year;
     }
+
+    public function registerEvents(): array
+    {
+
+        return [
+            AfterSheet::class    => function (AfterSheet $event) {
+                $tahun = $this->year;
+                $pegawai = Pegawai::find($this->id_peg);
+
+                /* GET DATA RIWAYAT SURAT PERINGATAN  */
+                $suratPeringatan = SuratPeringatan::where('id_pegawai', $pegawai->id)
+                    ->whereYear('tanggal', $tahun)
+                    ->orderBy('id', 'desc')->count();
+                $lastCell = 71 + $suratPeringatan;
+                /* END GET DATA RIWAYAT SURAT PERINGATAN  */
+
+                if ($lastCell <= 71) {
+                    $event->sheet->getStyle("A7:F72")->applyFromArray([
+                        'borders' => [
+                            'allBorders' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                                'color' => ['argb' => '000000'],
+                            ],
+                        ],
+                    ]);
+                } elseif ($lastCell > 72) {
+                    $event->sheet->getStyle("A7:F$lastCell")->applyFromArray([
+                        'borders' => [
+                            'allBorders' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                                'color' => ['argb' => '000000'],
+                            ],
+                        ],
+                    ]);
+                }
+
+                $event->sheet->getStyle("E11:E58")->applyFromArray([
+                    'alignment' => [
+                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    ],
+                ]);
+
+                $event->sheet->getDelegate()->getStyle('A1:A7')->getFont()->setSize(14);
+            },
+        ];
+    }
+
     public function view(): View
     {
         $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
@@ -64,7 +113,8 @@ class KinerjaExport implements FromView, ShouldAutoSize
         ];
 
         for ($i = 1; $i <= 12; $i++) {
-            $Telat[$i] = Presensi_harian::whereYear('tanggal', $tahun)
+            $Telat[$i] = Presensi_harian::where('id_pegawai', $pegawai->id)
+                ->whereYear('tanggal', $tahun)
                 ->where('id_pegawai', $pegawai->id)
                 ->whereMonth('tanggal', $i)
                 ->where('jam_dtg', '>', $peraturan->jam_masuk)
@@ -95,7 +145,8 @@ class KinerjaExport implements FromView, ShouldAutoSize
         ];
 
         for ($i = 1; $i <= 12; $i++) {
-            $Awal[$i] = Presensi_harian::whereYear('tanggal', $tahun)
+            $Awal[$i] = Presensi_harian::where('id_pegawai', $pegawai->id)
+                ->whereYear('tanggal', $tahun)
                 ->where('id_pegawai', $pegawai->id)
                 ->whereMonth('tanggal', $i)
                 ->where('jam_plg', '<', $peraturan->jam_plg)
@@ -125,7 +176,8 @@ class KinerjaExport implements FromView, ShouldAutoSize
         ];
 
         for ($i = 1; $i <= 12; $i++) {
-            $Hadir[$i] = Presensi_harian::whereYear('tanggal', $tahun)
+            $Hadir[$i] = Presensi_harian::where('id_pegawai', $pegawai->id)
+                ->whereYear('tanggal', $tahun)
                 ->whereMonth('tanggal', $i)
                 ->where('ket', 'Hadir')
                 ->count();
@@ -155,14 +207,50 @@ class KinerjaExport implements FromView, ShouldAutoSize
         ];
 
         for ($i = 1; $i <= 12; $i++) {
-            $Alpha[$i] = Presensi_harian::whereYear('tanggal', $tahun)
+            $Alpha[$i] = Presensi_harian::where('id_pegawai', $pegawai->id)
+                ->whereYear('tanggal', $tahun)
                 ->whereMonth('tanggal', $i)
                 ->where('ket', 'Alpha')
                 ->count();
         }
-        /* END MENGHITUNG JUMLAH HADIR PEGAWAI */
+        /* END MENGHITUNG ALPHA PEGAWAI */
+
+
+        /* MENGHITUNG JUMLAH CUTI PEGAWAI */
+
+        $JanCuti = 0;
+        $FebCuti = 0;
+        $MarCuti = 0;
+        $AprCuti = 0;
+        $MayCuti = 0;
+        $JunCuti = 0;
+        $JulCuti = 0;
+        $AugCuti = 0;
+        $SepCuti = 0;
+        $OctCuti = 0;
+        $NovCuti = 0;
+        $DecCuti = 0;
+
+        $Cuti = [
+            $JanCuti, $FebCuti, $MarCuti, $AprCuti,
+            $MayCuti, $JunCuti, $JulCuti, $AugCuti,
+            $SepCuti, $OctCuti, $NovCuti, $DecCuti,
+        ];
+
+        for ($i = 1; $i <= 12; $i++) {
+            $Cuti[$i] = Presensi_harian::where('id_pegawai', $pegawai->id)
+                ->whereYear('tanggal', $tahun)
+                ->whereMonth('tanggal', $i)
+                ->where('ket', 'Cuti')
+                ->count();
+        }
+        /* END MENGHITUNG CUTI PEGAWAI */
 
         /* MENGHITUNG JUMLAH CUTI TERPAKAI */
+
+
+        /* MENGHITUNG JUMLAH CUTI TERPAKAI */
+
 
         $Tahunan = Cuti::where('id_pegawai', $pegawai->id)
             ->whereYear('tgl_mulai', $tahun)
@@ -213,7 +301,8 @@ class KinerjaExport implements FromView, ShouldAutoSize
             ->whereYear('tanggal', $tahun)
             ->orderBy('id', 'desc')->get();
         /* END GET DATA RIWAYAT SURAT PERINGATAN  */
-            // dd($suratPeringatan);
+
+
         return view('admin.report.export', [
             'pegawai' => $pegawai,
             'months' => $months,
@@ -223,6 +312,7 @@ class KinerjaExport implements FromView, ShouldAutoSize
             'Awal' => $Awal,
             'Hadir' => $Hadir,
             'Alpha' => $Alpha,
+            'Cuti' => $Cuti,
 
             'Tahunan' => $Tahunan,
             'Bersama' => $Bersama,

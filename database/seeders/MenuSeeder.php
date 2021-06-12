@@ -52,7 +52,7 @@ class MenuSeeder extends Seeder
 
         $icon = [
             'icon-rocket', 'icon-rocket', 'icon-user', null, null,
-            null, null, 'icon-key', 'icon-info3', 'icon-users',
+            null, null, 'icon-key', 'icon-info3', 'icon-users4',
             'icon-user-tie', null, null, 'icon-hat', null,
             null, 'icon-notebook', null, null, 'icon-furniture',
             null, null, null, null, 'icon-cash3',

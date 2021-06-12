@@ -73,8 +73,8 @@
 
                             <div class="form-group">
                                 <label class="text-semibold">Pegawai</label>
-                                <select class="select" name="id_pegawai">
-                                    <option>Pilih Pegawai</option>
+                                <select class="select" name="id_pegawai" data-placeholder = "Pilih Pegawai">
+                                    <option value="">Pilih Pegawai</option>
                                     @foreach ($pegawai as $key => $value)
                                         <option value="{{ $key }}">
                                             {{ $value }}
@@ -92,8 +92,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="text-semibold">Tingkat/SP</label>
-                                <select class="select" name="tingkat">
-                                    <option>Pilih Tingkat</option>
+                                <select class="select" name="tingkat" data-placeholder = "Pilih Tingkatan / SP Ke - ">
+                                    <option value="">Pilih Tingkat</option>
                                     <option value="I">SP-I</option>
                                     <option value="II">SP-II</option>
                                     <option value="III">SP-III</option>

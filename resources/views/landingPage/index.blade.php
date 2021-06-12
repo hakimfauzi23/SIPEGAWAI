@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SIPEGAWAI</title>
-    <link rel="shortcut icon" href="{{ URL::to('/landing') }}/image/png/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ URL::to('/img') }}/favicon.ico" type="image/x-icon">
     <!-- Bootstrap , fonts & icons  -->
     <link rel="stylesheet" href="{{ URL::to('/landing') }}/css/bootstrap.css">
     <link rel="stylesheet" href="{{ URL::to('/landing') }}/fonts/icon-font/css/style.css">

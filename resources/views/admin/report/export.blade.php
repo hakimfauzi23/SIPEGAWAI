@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <table>
+    <table border="1">
         <tr>
             <td align="center" colspan="6">REKAP KINERJA PEGAWAI SELAMA TAHUN {{ $tahun }}</td>
         </tr>
@@ -33,7 +33,7 @@
         </tr>
         <tr></tr>
         <tr></tr>
-        
+
         <table class="presensi">
             <tr>
                 <td rowspan="2" colspan="6" valign="center" align="center" style="background-color: #ff8400">
@@ -88,7 +88,7 @@
                         :
                     </td>
                     <td align="left" style="background-color: #ffcc00">
-                        {{ $Hadir[$key] . ' / ' . ($Hadir[$key] + $Alpha[$key]) }}
+                        {{ $Hadir[$key] + $Cuti[$key] . ' / ' . ($Hadir[$key] + $Alpha[$key] + $Cuti[$key]) }}
                     </td>
                 </tr>
                 <tr>
@@ -99,7 +99,8 @@
                         :
                     </td>
                     <td align="left" style="background-color: #ffcc00">
-                        {{ number_format($Hadir[$key] + $Alpha[$key] != 0 ? ($Hadir[$key] / ($Hadir[$key] + $Alpha[$key])) * 100 : 0, 2) }}
+                        {{ number_format($Hadir[$key] + $Alpha[$key] + $Cuti[$key] != 0 ? (($Hadir[$key] + $Cuti[$key]) / ($Hadir[$key] + $Alpha[$key] + $Cuti[$key])) * 100 : 0, 2) }}
+                        {{-- {{ number_format($Hadir[$key] + $Alpha[$key] + $Cuti[$key] != 0 ? (16 / ($Hadir[$key] + $Alpha[$key] + $Cuti[$key])) * 100 : 0, 2) }} --}}
                         %
                     </td>
                 </tr>
@@ -196,18 +197,18 @@
                 @foreach ($suratPeringatan as $p)
                     <?php $no++; ?>
                     <tr>
-                        <td colspan="2" valign="center" align="center" @if ($no % 2 == 0) style="background-color: #e6e6e6"  
+                        <td colspan="2" valign="center" align="center" @if ($no % 2 == 0) style="background-color: #979797"  
 @else 
-                                        style="background-color: #979797" @endif>
+                                        style="background-color:#e6e6e6 " @endif>
                             {{ $p->tanggal }}
                         </td>
                         <td valign="center" align="center" @if ($p->id % 2 == 0) style="background-color: #e6e6e6"  
-        @else 
+@else 
                                                     style="background-color: #979797" @endif>
                             SP-{{ $p->tingkat }}
                         </td>
                         <td colspan="3" valign="center" align="center" @if ($p->id % 2 == 0) style="background-color: #e6e6e6"  
-        @else 
+@else 
                                                     style="background-color: #979797" @endif>
                             @foreach ($p->pelanggaran as $item)
                                 {{ $item }} ,

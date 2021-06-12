@@ -151,9 +151,9 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="inputState">Agama</label>
-                                <select class=" select" data-placeholder="Pilih salah satu" searchable="Search here.."
+                                <select class=" select" data-placeholder="Pilih Agama" searchable="Search here.."
                                     name="agama">
-                                    <option>Pilih Agama</option>
+                                    <option value="">Pilih Agama</option>
                                     <option value="Buddha" {{ $pegawai->agama == 'Buddha' ? 'selected' : '' }}> Buddha
                                     </option>
                                     <option value="Hindu" {{ $pegawai->agama == 'Hindu' ? 'selected' : '' }}> Hindu
@@ -187,8 +187,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Status</label>
-                                        <select class="select" name="status">
-                                            <option>Pilih Status</option>
+                                        <select class="select" name="status" data-placeholder="Pilih Status">
+                                            <option value="">Pilih Status</option>
                                             <option value="Menikah"
                                                 {{ $pegawai->status == 'Menikah' ? 'selected' : '' }}> Menikah
                                             </option>
@@ -299,9 +299,9 @@
                             <div class="row">
                                 <div class="form-group">
                                     <label>Role</label>
-                                    <select class="select" data-live-search="true" searchable="Search here.."
-                                        name="id_role">
-                                        <option>Pilih Role Pegawai</option>
+                                    <select class="select" data-live-search="true" data-placeholder="Pilih Role"
+                                        searchable="Search here.." name="id_role">
+                                        <option value="">Pilih Role</option>
                                         @foreach ($role as $key => $value)
                                             <option value="{{ $key }}"
                                                 {{ $pegawai->id_role == $key ? 'selected' : '' }}>
@@ -339,8 +339,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Jabatan</label>
-                                        <select class="select" name="id_jabatan">
-                                            <option>Pilih Jabatan</option>
+                                        <select class="select" name="id_jabatan"   data-placeholder="Pilih Jabatan">
+                                            <option value="">Pilih Jabatan</option>
                                             @foreach ($jabatan as $key => $value)
                                                 <option value="{{ $key }}"
                                                     {{ $pegawai->id_jabatan == $key ? 'selected' : '' }}>
@@ -359,8 +359,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Divisi</label>
-                                        <select class="select" name="id_divisi">
-                                            <option>Pilih Divisi</option>
+                                        <select class="select" name="id_divisi" data-placeholder="Pilih Divisi">
+                                            <option value="">Pilih Divisi</option>
                                             @foreach ($divisi as $key => $value)
                                                 <option value="{{ $key }}"
                                                     {{ $pegawai->id_divisi == $key ? 'selected' : '' }}>
@@ -382,9 +382,9 @@
 
                             <div class="form-group">
                                 <label>Atasan</label>
-                                <select class="select" name="id_atasan">
-                                    <option>Pilih Atasan</option>
-                                    <option value="" {{ $pegawai->id_atasan == null ? 'selected' : '' }}>Tidak Ada
+                                <select class="select" name="id_atasan" data-placeholder="Pilih Atasan">
+                                    <option value="">Pilih Atasan</option>
+                                    <option value=null {{ $pegawai->id_atasan == null ? 'selected' : '' }}>Tidak Ada
                                     </option>
                                     @foreach ($atasan as $key => $value)
                                         <option value="{{ $key }}"

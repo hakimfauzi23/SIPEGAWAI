@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="{{ URL::to('/login_template') }}/images/icons/favicon.ico" />
+    <link rel="shortcut icon" href="{{ URL::to('/img') }}/favicon.ico" type="image/x-icon">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css"
         href="{{ URL::to('/login_template') }}/vendor/bootstrap/css/bootstrap.min.css">

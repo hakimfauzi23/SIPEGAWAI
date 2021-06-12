@@ -17,6 +17,12 @@ class RiwayatDivisiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:menu-divisi', ['all']);
+    }
+
     public function index()
     {
         //

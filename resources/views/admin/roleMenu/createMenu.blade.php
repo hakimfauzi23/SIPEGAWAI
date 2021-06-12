@@ -80,7 +80,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Hak Akses</label>
-                            <select class="select" name="id_hak_akses">
+                            <select class="select" name="id_hak_akses" data-placeholder="Pilih Hak Akses">
+                                <option value=""></option>
                                 @foreach ($hak_akses as $key => $value)
                                     <option value="{{ $key }}">
                                         {{ $value }}
@@ -98,8 +99,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Parent Menu</label>
-                            <select class="select" name="id_parent">
-                                <option value=''> Independen</option>
+                            <select class="select" name="id_parent" >
+                                <option value=""> Independen</option>
                                 @foreach ($parent as $key => $value)
                                     <option value="{{ $key }}">
                                         {{ $value }}
@@ -120,7 +121,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Kode Icon Menu (khusus independen Menu)</label>
-                            <select style="font-weight:900px" class="select-icons" name="icon">
+                            <select style="font-weight:900px" class="select-icons" name="icon" data-placeholder="Pilih Icon Menu">
+                                <option value=""></option>
                                 <option value=''> Tidak Ada Icon</option>
                                 @foreach ($icon as $value)
                                     <option data-icon="{{ str_replace('icon-', '', $value) }}"

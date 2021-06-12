@@ -12,7 +12,7 @@ class TunjanganController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:menu-gaji', ['only' => ['index', 'destroy', 'store', 'update']]);
+        $this->middleware('permission:menu-gaji', ['all']);
     }
 
     /**

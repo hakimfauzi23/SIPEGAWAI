@@ -22,8 +22,8 @@ class PeraturanSeeder extends Seeder
 
 
             DB::table('peraturan')->insert([
-                'jam_masuk' => "07:00",
-                'jam_plg' => "17:00",
+                'jam_masuk' => "08:30",
+                'jam_plg' => "16:30",
                 'jml_cuti_tahunan' => 12,
                 'jml_cuti_besar' => 30,
                 'jml_cuti_hamil' => 30,

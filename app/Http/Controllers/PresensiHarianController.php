@@ -20,7 +20,7 @@ class PresensiHarianController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:menu-presensi', ['only' => ['index', 'destroy']]);
+        $this->middleware('permission:menu-presensi', ['all']);
     }
 
     public function index()
@@ -178,9 +178,14 @@ class PresensiHarianController extends Controller
 
     public function import()
     {
-        Excel::import(new PresensiCsvImport, request()->file('file'));
-        Alert::success('success', ' Berhasil Import Data !!');
-        return redirect('presensi');
+        try {
+            Excel::import(new PresensiCsvImport, request()->file('file'));
+            Alert::success('success', ' Berhasil Import Data !!');
+            return redirect('presensi');
+        } catch (\Exception $ex) {
+            Alert::error('error', 'Terjadi Kesalahan, Cek Kembali Anda & Lihat Cara Import!');
+            return redirect(route('presensi.create'));
+        }
     }
 
     public function download()

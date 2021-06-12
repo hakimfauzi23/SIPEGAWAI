@@ -144,9 +144,9 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="inputState">Agama</label>
-                                <select class=" select" data-placeholder="Pilih salah satu" searchable="Search here.."
+                                <select class=" select" data-placeholder="Pilih Agama" searchable="Search here.."
                                     name="agama">
-                                    <option>Pilih Agama</option>
+                                    <option value="">Pilih Agama</option>
                                     <option value="Buddha" {{ $pegawai->agama == 'Buddha' ? 'selected' : '' }}> Buddha
                                     </option>
                                     <option value="Hindu" {{ $pegawai->agama == 'Hindu' ? 'selected' : '' }}> Hindu
@@ -180,8 +180,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Status</label>
-                                        <select class="select" name="status">
-                                            <option>Pilih Status</option>
+                                        <select class="select" name="status" data-placeholder="Pilih Status" > 
+                                            <option value="">Pilih Status</option>
                                             <option value="Menikah"
                                                 {{ $pegawai->status == 'Menikah' ? 'selected' : '' }}> Menikah
                                             </option>

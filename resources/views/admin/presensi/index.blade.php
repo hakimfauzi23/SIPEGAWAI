@@ -28,7 +28,8 @@
             <div class="panel-heading">
                 <em>
                     <h6>Ini adalah halaman yang menampilkan semua data presensi pegawai yang berada di dalam sistem.
-                        <br> Untuk pencarian data presensi pada waktu tertentu bisa mengubah range dari formuir tanggal <b>Dari</b> & <b>Ke</b>.
+                        <br> Untuk pencarian data presensi pada waktu tertentu bisa mengubah range dari formuir tanggal
+                        <b>Dari</b> & <b>Ke</b>.
                     </h6>
                 </em>
                 <div class="heading-elements">
@@ -45,7 +46,9 @@
         <div class="col">
             <div class="panel panel-info">
                 <div class="panel-body">
-
+                    @if (session('error'))
+                        <div class="alert alert-danger"> {{ session('error') }}</div>
+                    @endif
                     <form method="get" action="{{ route('presensi.search') }}">
 
                         {{ csrf_field() }}

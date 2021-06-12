@@ -16,7 +16,7 @@ class ManajemenRoleMenuController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:manajemen-role', ['only' => ['index', 'destroy']]);
+        $this->middleware('permission:manajemen-role', ['all']);
     }
 
     public function index(Request $request)

@@ -15,6 +15,12 @@ class RekapPresensiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:menu-presensi', ['all']);
+    }
+
     public function index()
     {
         //
