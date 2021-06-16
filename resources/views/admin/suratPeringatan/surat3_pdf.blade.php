@@ -101,13 +101,13 @@
         }
 
         .right {
-            height: 90px;
-            width: 160px;
+            width: 75%;
+            text-align: center;
         }
 
         .column img {
-            height: 60px;
-            width: 130px;
+            height: 90px;
+            width: 160px;
         }
 
         /* Clear floats after the columns */

@@ -80,7 +80,7 @@
                             <div class="col-lg-10">
                                 <input type="text" name="password"
                                     placeholder=" Kosongi apabila tidak mengubah alamat e-mail . . ." class="form-control"
-                                    required>
+                                    >
                             </div>
                         </div>
                     </div>

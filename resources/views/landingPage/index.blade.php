@@ -71,7 +71,7 @@
         <!-- Header start end -->
         <!-- hero area -->
         <div
-            class="gradient-bg-1 pt-23 pt-sm-25 pt-md-25 pt-lg-31 pb-lg-0 pb-md-15 pb-11 position-relative z-index-1 font-family-5">
+            class="gradient-bg-1 pt-23 pt-sm-25 pt-md-25 pt-lg-31 pb-lg-15 pb-md-15 pb-11 position-relative z-index-1 font-family-5">
             <div class="section-bg-img-2 pos-abs-tl w-100 h-100 z-index-n1"></div>
             <div class="container">
                 <div class="row position-relative justify-content-center">
@@ -80,184 +80,13 @@
                         data-aos-duration="800" data-aos-once="true">
                         <div class="hero-content text-center">
                             <!-- hero area section title start -->
-                            <h1 class="font-size-22 font-family-5 text-white letter-spacing-np3 mb-6 ">Kelola Data
-                                Pegawai Perusahaan
-                                Anda !</h1>
+                            <h1 class="font-size-22 font-family-5 text-white letter-spacing-np3 mb-6 ">Sistem Informasi
+                                Pemantauan Pegawai</h1>
                             <p
                                 class="font-size-8 text-periwinkle-gray letter-spacing-np4 font-family-5 pr-xl-15 pr-lg-0 pr-md-15 pr-0 mb-11">
-                                Website ini akan membantu dalam mengelola data pegawai perusahaan seperti cuti dan
-                                presensi harian</p>
+                                Mempermudah mengelola data yang berhubungan dengan kinerja pegawai anda seperti data presensi hingga data cuti.</p>
                             <!-- hero area section title end -->
                         </div>
-                    </div>
-                    <div class="col-xl-8 col-lg-9">
-                        <!-- abs img start -->
-                        <div class="abs-img-1 mb-xl-n34 mb-lg-n30 mb-md-n32 mb-n5 mr-n1 w-100 shadow-9 z-index-1">
-                            <img src="{{ URL::to('/landing') }}/image/l8/png/sipegawai-ui.png" alt=""
-                                class="w-100 light-shape default-shape">
-                        </div>
-                        <!-- abs img end -->
-                    </div>
-                    <!-- hero area content end -->
-                </div>
-            </div>
-        </div>
-        <!-- features-section start -->
-        <div class=" pt-xl-35 pt-md-28 pt-9 pb-lg-12 pb-0 position-relative font-family-5 ">
-            <div class="container">
-                <div class="row pr-xl-16 pr-0 pt-lg-15 justify-content-center text-center">
-                    <!-- single-features start -->
-                    <div class="col-lg-4 col-md-6 col-sm-9 mb-lg-0 mb-9">
-                        <div
-                            class="single-features position-relative after-border border-0 px-xl-7 px-lg-5 px-md-4 px-8 py-9 rounded-5">
-                            <!-- card texts start -->
-                            <div class="circle-50 bg-froly-opacity-1 flex-all-center mx-auto mb-10">
-                                <div class="circle-9 bg-carnation"></div>
-                            </div>
-                            <h4
-                                class="font-size-19 text-default-color-2 font-weight-bold mb-6 line-height-1p63 font-family-5">
-                                Dinamis
-                            </h4>
-                            <p class="text-dovegray font-size-7 font-family-5 mb-8">Aplikasi ini sangat dinamis, karena
-                                jam kantor dan
-                                prasyarat untuk pengajuan cuti bisa diatur oleh admin</p>
-                            <!-- card texts end -->
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-9 mb-lg-0 mb-9">
-                        <div
-                            class="single-features position-relative after-border border-0 px-xl-7 px-lg-5 px-md-4 px-8 py-9 rounded-5">
-                            <!-- card texts start -->
-                            <div class="circle-50 bg-turquoise-opacity-1 flex-all-center mx-auto mb-10">
-                                <div class="circle-9 bg-turquoise"></div>
-                                <!-- <img src="image/l1/svg/chat-46.svg" alt=""> -->
-                            </div>
-                            <h4
-                                class="font-size-19 text-default-color-2 font-weight-bold mb-6 line-height-1p63 font-family-5">
-                                Secure</h4>
-                            <p class="text-dovegray font-size-7 font-family-5 mb-8"> Tiap route yang melibatkan id suatu
-                                data
-                                terenkripsi dengan baik di <em>Back-end</em> maupun di <em>Front-end</em>
-                                <!-- card texts start -->
-                        </div>
-                    </div>
-                    <!-- single-features end -->
-                    <!-- single-features start -->
-                    <div class="col-lg-4 col-md-6 col-sm-9 mb-lg-0 mb-0">
-                        <div class="single-features border-0 px-xl-7 px-lg-5 px-md-4 px-8 py-9 rounded-5">
-                            <!-- card texts start -->
-                            <div class="circle-50 bg-heliotrope-opacity-1 flex-all-center mx-auto mb-10">
-                                <div class="circle-9 bg-heliotrope"></div>
-                                <!-- <img src="image/l1/svg/settings-gear-64.svg" alt=""> -->
-                            </div>
-                            <h4
-                                class="font-size-19 text-default-color-2 font-weight-bold mb-6 line-height-1p63 font-family-5">
-                                Traceable</h4>
-                            <p class="text-dovegray font-size-7 font-family-5 mb-8">Semua Data seperti presensi dan cuti
-                                tiap
-                                pegawai bisa ditemukan dengan mudah</p>
-                            <!-- card texts start -->
-                        </div>
-                    </div>
-                    <!-- single-features end -->
-                </div>
-            </div>
-        </div>
-        <!-- content-1 section start -->
-        <div class="bg-selago-3 pt-lg-25 pt-15 pb-lg-21 pb-15">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6 col-md-8" data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
-                        <!-- content img start -->
-                        <div class="content-img">
-                            <img src="{{ URL::to('/landing') }}/image/l8/svg/jabatan-divisi.svg" alt="" class="w-75">
-                        </div>
-                        <!-- content img end -->
-                    </div>
-                    <div class="col-lg-6 col-md-9" data-aos="fade-left" data-aos-duration="800" data-aos-once="true">
-                        <!-- content-1 start -->
-                        <div
-                            class="d-flex flex-column justify-content-center text-lg-left text-center h-100 pl-xl-21 pl-0 pr-lg-7 pr-xxl-25 pr-0 ">
-                            <!-- content-1 section-title start -->
-                            <h2 class="font-size-20 font-family-5 letter-spacing-np3 text-default-color-2 mb-7">
-                                Menu Divisi dan Jabatan
-                            </h2>
-                            <p class="font-size-7 text-default-color-4 font-family-5 mb-10 mb-lg-11 pr-lg-12">Di dalam
-                                sebuah perusahaan pasti
-                                terdapat jabatan beserta dengan divisi yang berkaitan dengan suatu pegawai</p>
-                            <p class="font-size-7 text-default-color-4 font-family-5 mb-10 mb-lg-11 pr-lg-12">Aplikasi
-                                ini terdapat menu data divisi dan jabatan untuk mempermudah pengelolaan data suatu
-                                pegawai</p>
-                            <!-- content-1 section-title end -->
-                        </div>
-                        <!-- content-1 end -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- content-2 section start -->
-        <div class="position-relative pt-lg-25 pt-15 pb-lg-21 pb-15 z-index-1">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-5 col-lg-6 col-md-9" data-aos="fade-right" data-aos-duration="800"
-                        data-aos-once="true">
-                        <!-- content-2 start -->
-                        <div
-                            class="d-flex flex-column justify-content-center text-lg-left text-center h-100 pb-lg-0 pb-15">
-                            <!-- content-1 section-title start -->
-                            <h2 class="font-size-20 font-family-5 letter-spacing-np3 text-default-color-2 mb-7">Menu
-                                Presensi</h2>
-                            <p class="font-size-7 text-default-color-4 font-family-5 mb-10 mb-lg-11 pr-lg-12">Aplikasi
-                                ini memiliki fitur untuk mengolah data presensi,
-                                dengan data presensi HRD bisa mengamati kinerja pegawai</p>
-                            <p class="font-size-7 text-default-color-4 font-family-5 mb-10 mb-lg-11 pr-lg-12">Menu
-                                presensi in juga akan memantau seberapa efektif jam kerja yang digunakan pegawai,
-                                apakah pegawai berangkat terlambat atau pulang lebih awal dari jam kantor</p>
-                            <!-- content-1 section-title end -->
-                        </div>
-                        <!-- content-2 end -->
-                    </div>
-                    <div class="col-lg-6 col-md-8 pl-0 offset-xl-1" data-aos="fade-left" data-aos-duration="800"
-                        data-aos-once="true">
-                        <!-- content img start -->
-                        <div class="content-img">
-                            <img src="{{ URL::to('/landing') }}/image/l8/svg/presensi.png" alt="" class="w-60">
-                        </div>
-                        <!-- content img end -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- content-3 section start -->
-        <div class="bg-selago-3 pt-lg-25 pt-15 pb-lg-21 pb-15">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6 col-md-8" data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
-                        <!-- content img start -->
-                        <div class="content-img">
-                            <img src="{{ URL::to('/landing') }}/image/l8/svg/cuti.png" alt="" class="w-60">
-                        </div>
-                        <!-- content img end -->
-                    </div>
-                    <div class="col-lg-6 col-md-9" data-aos="fade-left" data-aos-duration="800" data-aos-once="true">
-                        <!-- content-1 start -->
-                        <div
-                            class="d-flex flex-column justify-content-center text-lg-left text-center h-100 pl-xl-21 pl-0 pr-lg-7 pr-xxl-25 pr-0 ">
-                            <!-- content-1 section-title start -->
-                            <h2 class="font-size-20 font-family-5 letter-spacing-np3 text-default-color-2 mb-7">
-                                Menu Cuti
-                            </h2>
-                            <p class="font-size-7 text-default-color-4 font-family-5 mb-10 mb-lg-11 pr-lg-12">Aplikasi
-                                ini juga memiliki fitur pengajuan cuti yang bisa diawasi langsung oleh atasan dan
-                                HRD,masing-masing perusahaan pasti memiliki prosedur pengajuan cuti sendiri,
-                                maka dari itu untuk aplikasi ini secara <em>default</em> akan mengikuti aturan
-                                pemerintah yaitu Undang-Undang (UU) Ketenagakerjaan Nomor 13 Tahun 2003</p>
-                            <p class="font-size-7 text-default-color-4 font-family-5 mb-10 mb-lg-11 pr-lg-12">Tetapi
-                                aplikasi ini memungkinkan untuk prosedur cuti seperti syarat lama kerja dan lain-lain
-                                bisa diubah kapan saja oleh Admin. </p>
-                            <!-- content-1 section-title end -->
-                        </div>
-                        <!-- content-1 end -->
                     </div>
                 </div>
             </div>
