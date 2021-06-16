@@ -17,12 +17,14 @@
 4. Setelah itu **jalankan** composer install.
 5. Lalu untuk membuat .env dengan cara **jalankan** cp .env.example .env
 6. Selanjutnya salin teks yang berada di dalam **file env.txt** ke dalam file **.env**
-7. Setelah itu buka **.env** lalu pada bagian "MAIL_USERNAME" & "MAIL_PASSWORD" masukan alamat dan password email yang nantinya berfungsi sebagai email pengirim notifikasi.
-8. Lalu selanjutnya adalah **jalankan** php artisan key:generate di terminal/git bash.
+7. Lalu selanjutnya adalah **jalankan** php artisan key:generate.
+8. Lalu selanjutnya adalah **jalankan** php artisan storage:link.
 9. Langkah Selanjutnya adalah **jalankan** php artisan migrate.
 10. Lalu **jalankan** php artisan db:seed.
 11. Setelah itu **jalankan** php artisan serve.
 12. Ketikan localhost:8000 di dalam *browser*.
+13. Login Sebagai Admin.
+13. Masukan informasi perusahaan seperti nama perusahaan, alamat, kota, lalu no.telp, dll.
 
 
 

@@ -7,6 +7,7 @@ use App\Models\Divisi;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
 use App\Models\Peraturan;
+use App\Models\Perusahaan;
 use App\Models\Presensi_harian;
 use Illuminate\Http\Request;
 
@@ -49,6 +50,7 @@ class Dashboard extends Controller
             'October' => 10, 'November' => 11, 'December' => 12
         ];
 
+        $perusahaan = Perusahaan::all()->count();
 
         return view('admin.dashboard', [
             'jml_pegawai' => $pegawai->count(),
@@ -67,6 +69,7 @@ class Dashboard extends Controller
 
 
             'bulanIni' => $bulanIni,
+            'perusahaan' => $perusahaan,
         ]);
     }
 
@@ -113,6 +116,7 @@ class Dashboard extends Controller
             'October' => 10, 'November' => 11, 'December' => 12
         ];
 
+        $perusahaan = Perusahaan::all()->count();
 
         return view('admin.dashboard', [
             'jml_pegawai' => $pegawai->count(),
@@ -131,6 +135,8 @@ class Dashboard extends Controller
 
 
             'bulanIni' => $bulanIni,
+            'perusahaan' => $perusahaan,
+
         ]);
     }
 

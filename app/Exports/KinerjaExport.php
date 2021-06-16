@@ -65,7 +65,7 @@ class KinerjaExport implements FromView, ShouldAutoSize, WithEvents
                     ],
                 ]);
 
-                $event->sheet->getDelegate()->getStyle('A1:A7')->getFont()->setSize(14);
+                $event->sheet->getDelegate()->getStyle('A1:E1')->getFont()->setSize(14);
             },
         ];
     }

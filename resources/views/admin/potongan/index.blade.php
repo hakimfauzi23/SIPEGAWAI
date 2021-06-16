@@ -26,7 +26,8 @@
     <div class="panel bg-info">
         <div class="panel-heading">
             <em>
-                <h6>Pada halaman ini terdapat list daftar potongan gaji yang ada di dalam perusahaan ini. masing-masing potongan bisa
+                <h6>Pada halaman ini terdapat list daftar potongan gaji yang ada di dalam perusahaan ini. masing-masing
+                    potongan bisa
                     dihapus dan diedit.
                 </h6>
             </em>
@@ -52,7 +53,7 @@
                         <th>No</th>
                         <th>Nama </th>
                         <th> Jumlah </th>
-                        <th hidden></th>
+                        <th> Status</th>
                         <th hidden></th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -61,11 +62,26 @@
                     <?php $i = 1; ?>
                     @if ($potongan->count())
                         @foreach ($potongan as $key => $p)
+                            <?php $encyrpt = Crypt::encryptString($p->id); ?>
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $p->nama }}</td>
                                 <td> @currency($p->jumlah)</td>
-                                <td hidden></td>
+                                <td class="text-center">
+                                    <form method="POST" action="{{ route('potongan.active', $encyrpt) }}">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PUT') }}
+
+                                        @if ($p->is_active == 1)
+                                            <input type="checkbox" name="is_active" value="0" checked
+                                                onchange="this.form.submit()">
+                                        @else
+
+                                            <input type="checkbox" name="is_active" value="1"
+                                                onchange="this.form.submit()">
+                                        @endif
+                                    </form>
+                                </td>
                                 <td hidden><span class="label label-success">Active</span></td>
                                 <td class="text-center">
                                     <ul class="icons-list">
@@ -75,7 +91,6 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <?php $encyrpt = Crypt::encryptString($p->id); ?>
                                                 <li><a href="{{ route('potongan.destroy', $encyrpt) }}"><i
                                                             class=" icon-trash"></i> Hapus</a>
                                                 </li>

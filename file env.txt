@@ -1,7 +1,3 @@
-//Buat file dengan nama ".env" setelah itu copas semua yang di bawah ini
-// Masukan Email & Password Email Kantor Anda ke dalam 'MAIL_USERNAME' & 'MAIL_PASSWORD'
-
-
 APP_NAME=SIPEGAWAI
 APP_ENV=local
 APP_KEY=base64:7/kunXuxsqXEA4JqitGSSmHTpIwxGJoWLPvur762haI=

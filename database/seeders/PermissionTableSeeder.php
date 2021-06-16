@@ -28,6 +28,7 @@ class PermissionTableSeeder extends Seeder
             'menu-gaji',
             'menu-surat-peringatan',
             'menu-export-kinerja',
+            'manajemen-perusahaan',
         ];
 
         foreach ($permissions as $permission) {

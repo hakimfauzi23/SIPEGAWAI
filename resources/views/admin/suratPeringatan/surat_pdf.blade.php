@@ -107,8 +107,8 @@
         }
 
         .column img {
-            height: 60px;
-            width: 130px;
+            height: 90px;
+            width: 160px;
         }
 
         /* Clear floats after the columns */
@@ -125,18 +125,19 @@
     <div class="container">
         <div class="row">
             <div class="column left">
-                <img src="{{ public_path('img/logo-refactory2.png') }}">
+                <?php $path = Storage::url('images/' . $perusahaan->path_logo); ?>
+                <img src="{{ public_path() . $path }}">
             </div>
             <div class="column right">
-                <h4>REFACTORY YOGYAKARTA</h4>
-                <h5>Jln. Palagan Tentara Pelajar Km. 9,8 Ngaglik, Kab. Sleman DI Yogyakarta 55581</h5>
-                <h6>Email: marketing@refactory.id, website:https://refactory.id/</h6>
+                <h4>{{ $perusahaan->nama }}</h4>
+                <h5>{{ $perusahaan->alamat }}</h5>
+                <h6>Email: {{ $perusahaan->email }}, No. Telp:{{ $perusahaan->no_telp }}</h6>
             </div>
         </div>
         <hr class="hitam">
         <div class="info-surat">
             <h4>SURAT PERINGATAN</h4>
-            <h5>Nomor : {{$id_surat}}/HRD/SP-I/{{ $bulan }}/{{ $tahun }}</h5>
+            <h5>Nomor : {{ $id_surat }}/HRD/SP-I/{{ $bulan }}/{{ $tahun }}</h5>
         </div>
 
         <div class="info-pegawai">
@@ -200,7 +201,7 @@
         <div class="sign text-right">
 
             <div class="tanggal" style="padding-bottom: 20px">
-                {{ 'Yogyakarta, ' . date('d F Y', strtotime($tanggal)) }}
+                {{ $perusahaan->kota . ', ' . date('d F Y', strtotime($tanggal)) }}
             </div>
             <br>
             {{ Auth::user()->jabatan->nm_jabatan }}

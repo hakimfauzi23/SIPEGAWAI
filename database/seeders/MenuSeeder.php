@@ -18,32 +18,32 @@ class MenuSeeder extends Seeder
 
         $judul = [
             'Dashboard Admin', 'Dashboard HRD', 'Menu Staff', 'Dashboard Staff', 'Riwayat Pengajuan Cuti',
-            'Buat Pengajuan Cuti', 'Pengajuan Cuti (Tahap Atasan)', 'Manajemen Role & Menu', 'Kebijakan Cuti & Jam Kantor', 'Data Pegawai',
+            'Buat Pengajuan Cuti', 'Pengajuan Cuti (Tahap Atasan)', 'Manajemen Role & Menu', 'Manajemen Perusahaan', 'Kebijakan Cuti & Jam Kantor', 'Data Pegawai',
             'Data Jabatan', 'List Data Jabatan', 'Data Riwayat Jabatan', 'Data Divisi', 'List Data Divisi',
             'Data Riwayat Divisi', 'Data Presensi', 'List Data Presensi', 'Rekapan Data Presensi Pegawai', 'Data Cuti',
             'List Data Cuti', 'Atur Tanggal Cuti Bersama', 'Pengajuan Cuti (Tahap HRD)', 'Rekapan Data Cuti Pegawai', 'Data Gaji',
             'Data Tunjangan', 'Data Potongan', 'Data Slip Gaji ', 'Surat Peringatan', 'Export Kinerja Pegawai'
         ];
 
-        // 3 = Menu Staff
-        // 11 = Data Jabatan
-        // 14 = Data Divisi
-        // 17 = Data Presensi
-        // 20 = Data Cuti
-        // 25 = Data Gaji
+        // 4 = Menu Staff
+        // 12 = Data Jabatan
+        // 15 = Data Divisi
+        // 18 = Data Presensi
+        // 21 = Data Cuti
+        // 26 = Data Gaji
 
         $parent = [
             null, null, null, 3, 3,
-            3, 3, null, null, null,
-            null, 11, 11, null, 14,
-            14, null, 17, 17, null,
-            20, 20, 20, 20, null,
-            25, 25, 25, null, null
+            3, 3, null, null, null, null,
+            null, 12, 12, null, 15,
+            15, null, 18, 18, null,
+            21, 21, 21, 21, null,
+            26, 26, 26, null, null
         ];
 
         $url = [
             'superAdmin', 'hrd', null, 'staff', 'staffCuti',
-            'staffCuti/create', 'staffPengajuanCuti', 'manajemen', 'peraturan', 'pegawai',
+            'staffCuti/create', 'staffPengajuanCuti', 'manajemen', 'perusahaan', 'peraturan', 'pegawai',
             null, 'jabatan', 'riwayatJabatan', null, 'divisi',
             'riwayatDivisi', null, 'presensi', 'rekapPresensi', null,
             'cuti', 'cuti/cutiBersama', 'hrdPengajuanCuti', 'rekapCuti', null,
@@ -52,7 +52,7 @@ class MenuSeeder extends Seeder
 
         $icon = [
             'icon-rocket', 'icon-rocket', 'icon-user', null, null,
-            null, null, 'icon-key', 'icon-info3', 'icon-users4',
+            null, null, 'icon-key', ' icon-highlight', 'icon-info3', 'icon-users4',
             'icon-user-tie', null, null, 'icon-hat', null,
             null, 'icon-notebook', null, null, 'icon-furniture',
             null, null, null, null, 'icon-cash3',
@@ -74,10 +74,11 @@ class MenuSeeder extends Seeder
         // 'menu-gaji', = 11
         // 'menu-surat-peringatan' = 12
         // 'menu-export-kinerja', =13
+        // 'manajemen-perusahaan', =14
 
         $id_hak_akses = [
             1, 2, 3, 3, 3,
-            3, 3, 4, 5, 6,
+            3, 3, 4, 14, 5, 6,
             7, 7, 7, 8, 8,
             8, 9, 9, 9, 10,
             10, 10, 10, 10, 11,

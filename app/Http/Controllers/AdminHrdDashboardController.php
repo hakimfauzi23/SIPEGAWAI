@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cuti;
 use App\Models\Pegawai;
 use App\Models\Peraturan;
+use App\Models\Perusahaan;
 use App\Models\Presensi_harian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -299,8 +300,11 @@ class AdminHrdDashboardController extends Controller
         $syarat_bulan_cuti_besar = $peraturan->syarat_bulan_cuti_besar;
         /* End Lama Kerja */
 
+        $perusahaan = Perusahaan::find(1);
+
         return view('dashboard', [
             'pegawai' => $pegawai,
+            'perusahaan' => $perusahaan,
 
             'persentaseHadir' => $persentaseHadir,
             'persentaseTdkHadir' => $persentaseTdkHadir,
@@ -615,8 +619,10 @@ class AdminHrdDashboardController extends Controller
         $syarat_bulan_cuti_besar = $peraturan->syarat_bulan_cuti_besar;
         /* End Lama Kerja */
 
+        $perusahaan = Perusahaan::find(1);
         return view('dashboard', [
             'pegawai' => $pegawai,
+            'perusahaan' => $perusahaan,
 
             'persentaseHadir' => $persentaseHadir,
             'persentaseTdkHadir' => $persentaseTdkHadir,

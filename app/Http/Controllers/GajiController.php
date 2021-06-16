@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gaji;
 use App\Models\Pegawai;
 use App\Models\Peraturan;
+use App\Models\Perusahaan;
 use App\Models\Potongan;
 use App\Models\Presensi_harian;
 use App\Models\Tunjangan;
@@ -59,7 +60,7 @@ class GajiController extends Controller
 
         // Get Potongan
         $potongan = $pegawai->potongan;
-        
+
         return view('admin.gaji.create', [
             'id' => $data,
             'pegawai' => $pegawai,
@@ -146,7 +147,7 @@ class GajiController extends Controller
             $jml_ptgn_telat = $telat * $pot_telat;
             $jml_ptgn_bolos = $bolos * $pot_bolos;
 
-
+            $perusahaan = Perusahaan::orderBy('id', 'desc')->first();
             $jml_tunj = (int)$tunjangan;
             $jml_ptgn = (int)$potongan + $jml_ptgn_telat + $jml_ptgn_bolos;
             $tot_gaji_diterima = ($gaji_pokok + $jml_tunj) - $jml_ptgn;
@@ -163,6 +164,7 @@ class GajiController extends Controller
                 'period_dari' => $period_dari,
                 'period_ke' => $period_ke,
                 'telat' => $telat,
+                'perusahaan' => $perusahaan,
 
 
                 //Terlambat dan Bolos

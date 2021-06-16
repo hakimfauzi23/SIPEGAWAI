@@ -19,6 +19,7 @@ class CreatePegawaiPotongansTable extends Migration
             $table->unsignedBigInteger('potongan_id');
 
 
+
             $table->index('potongan_id');
             $table->index('pegawai_id');
 

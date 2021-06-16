@@ -17,6 +17,7 @@ class CreatePotongansTable extends Migration
             $table->id();
             $table->string('nama', 100);
             $table->integer('jumlah');
+            $table->boolean('is_active')->nullable()->default(true);
             $table->timestamps();
         });
     }

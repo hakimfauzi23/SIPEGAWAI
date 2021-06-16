@@ -66,7 +66,7 @@
                     <tr>
                         <td>Nama Perusahaan</td>
                         <td>:</td>
-                        <td>REFACTORY</td>
+                        <td>{{ $perusahaan->nama }}</td>
                     </tr>
                     <tr>
                         <td>Periode</td>

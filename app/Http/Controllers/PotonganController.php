@@ -128,6 +128,16 @@ class PotonganController extends Controller
         return redirect('potongan');
     }
 
+    public function updateVisible(Request $request, $data)
+    {
+        $id = Crypt::decryptString($data);
+
+        $potongan = Potongan::find($id);
+        $potongan->is_active = $request->is_active;
+        $potongan->save();
+        return redirect('potongan');
+
+    }
     /**
      * Remove the specified resource from storage.
      *

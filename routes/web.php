@@ -32,6 +32,7 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\Hrd\HrdDashboardController;
+use App\Http\Controllers\ManajemenPerusahaanController;
 use App\Http\Controllers\ManajemenRoleMenuController;
 use App\Http\Controllers\PotonganController;
 use App\Http\Controllers\ResetPasswordController;
@@ -197,7 +198,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('potongan', PotonganController::class);
     Route::get('/potongan/destroy/{data}', [PotonganController::class, 'destroy'])->name('potongan.destroy');
-
+    Route::put('potongan/updateVisbility/{data}', [PotonganController::class, 'updateVisible'])->name('potongan.active');
 
     Route::resource('gaji', GajiController::class);
     Route::get('/gaji/createData/{data}', [GajiController::class, 'createData'])->name('gaji.createData');
@@ -216,6 +217,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('report/export/getYear', [ReportKinerjaController::class, 'getList'])->name('report.getYear');
     Route::resource('report', ReportKinerjaController::class);
     Route::get('/report/export/{id_pegawai}/{year}', [ReportKinerjaController::class, 'exportKinerja'])->name('report.exportKinerja');
+
+
+    //Menu Manajemen Perusahaan
+    Route::resource('perusahaan', ManajemenPerusahaanController::class);
 });
 
 Auth::routes();

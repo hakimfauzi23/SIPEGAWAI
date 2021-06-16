@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use App\Models\Perusahaan;
 use App\Models\SuratPeringatan;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
@@ -114,6 +115,7 @@ class SuratPeringatanController extends Controller
         $tahun = date('Y');
         $lastIncreament = substr($newSp->id, -3);
         $id_surat = str_pad($lastIncreament, 3, 0, STR_PAD_LEFT);
+        $perusahaan = Perusahaan::orderBy('id', 'desc')->first();
 
         $data = [
             'pegawai' => $pegawai,
@@ -122,6 +124,7 @@ class SuratPeringatanController extends Controller
             'bulan' => $bulan,
             'tahun' => $tahun,
             'id_surat' => $id_surat,
+            'perusahaan' => $perusahaan,
         ];
 
         if ($tingkat == 'I') {
@@ -185,6 +188,7 @@ class SuratPeringatanController extends Controller
         $tahun = date('Y', strtotime($suratPeringatan->tanggal));
         $lastIncreament = substr($suratPeringatan->id, -3);
         $id_surat = str_pad($lastIncreament, 3, 0, STR_PAD_LEFT);
+        $perusahaan = Perusahaan::orderBy('id', 'desc')->first();
 
         $data = [
             'pegawai' => $pegawai,
@@ -193,6 +197,8 @@ class SuratPeringatanController extends Controller
             'bulan' => $bulan,
             'tahun' => $tahun,
             'id_surat' => $id_surat,
+            'perusahaan' => $perusahaan,
+
         ];
 
         if ($tingkat == 'I') {

@@ -58,8 +58,7 @@ class PegawaiController extends Controller
         $pegawai = Pegawai::pluck('nama', 'id');
         $role = Role::pluck('name', 'id');
         $tunjangan = Tunjangan::get();
-        $potongan = Potongan::where('nama', 'not like', "%terlambat%")
-            ->where('nama', 'not like', "%bolos%")->get();
+        $potongan = Potongan::where('is_active', true)->get();
         return view('admin.pegawai.create', [
             'jabatan' => $jabatan,
             'divisi' => $divisi,
@@ -231,8 +230,7 @@ class PegawaiController extends Controller
         $role = Role::pluck('name', 'id');
         $atasan = Pegawai::pluck('nama', 'id');
         $tunjangan = Tunjangan::get();
-        $potongan = Potongan::where('nama', 'not like', "%terlambat%")
-            ->where('nama', 'not like', "%bolos%")->get();
+        $potongan = Potongan::where('is_active', true)->get();
 
         $pegawaiTunjangan = PegawaiTunjangan::where('pegawai_id', $id)
             ->pluck('tunjangan_id', 'tunjangan_id')->all();
@@ -280,7 +278,6 @@ class PegawaiController extends Controller
 
             $extension = $request->file('imgupload')->extension();
             $imgname = $request->nik . '_' . date('dmyHi') . '.' . $extension;
-            // dd($imgname);
             $this->validate($request, [
                 'id_role' => 'required',
                 'nik' => 'required',
