@@ -51,7 +51,8 @@ class ManajemenPerusahaanController extends Controller
             'alamat' => 'required',
             'kota' => 'required',
             'no_telp' => 'required',
-            'email' => 'required',
+            'email_public' => 'required',
+            'email_private' => 'required',
             'password' => 'required',
             'path_logo' => 'required|mimes:jpeg,png,jpg,gif,svg|file|max:5000'
         ]);
@@ -62,7 +63,7 @@ class ManajemenPerusahaanController extends Controller
         $env = new DotenvEditor();
 
         $env->changeEnv([
-            'MAIL_USERNAME'   => $request->email,
+            'MAIL_USERNAME'   => $request->email_private,
             'MAIL_PASSWORD'   => $request->password,
         ]);
 
@@ -71,7 +72,8 @@ class ManajemenPerusahaanController extends Controller
             'alamat' => $request->alamat,
             'kota' => $request->kota,
             'no_telp' => $request->no_telp,
-            'email' => $request->email,
+            'email_public' => $request->email_public,
+            'email_private' => $request->email_private,
             'password' => bcrypt($request->password),
             'path_logo' => $imgname,
         ]);
@@ -133,13 +135,15 @@ class ManajemenPerusahaanController extends Controller
             if ($request->password === null) {
                 $perusahaan->nama = $request->nama;
                 $perusahaan->alamat = $request->alamat;
+                $perusahaan->email_public = $request->email_public;
                 $perusahaan->kota = $request->kota;
                 $perusahaan->no_telp = $request->no_telp;
                 $perusahaan->path_logo = $imgname;
                 $perusahaan->update();
             } else {
                 $perusahaan->nama = $request->nama;
-                $perusahaan->email = $request->email;
+                $perusahaan->email_public = $request->email_public;
+                $perusahaan->email_private = $request->email_private;
                 $perusahaan->alamat = $request->alamat;
                 $perusahaan->kota = $request->kota;
                 $perusahaan->no_telp = $request->no_telp;
@@ -148,7 +152,7 @@ class ManajemenPerusahaanController extends Controller
                 $perusahaan->update();
 
                 $env->changeEnv([
-                    'MAIL_USERNAME'   => $request->email,
+                    'MAIL_USERNAME'   => $request->email_private,
                     'MAIL_PASSWORD'   => $request->password,
                 ]);
             }
@@ -161,20 +165,22 @@ class ManajemenPerusahaanController extends Controller
             if ($request->password === null) {
                 $perusahaan->nama = $request->nama;
                 $perusahaan->alamat = $request->alamat;
+                $perusahaan->email_public = $request->email_public;
                 $perusahaan->kota = $request->kota;
                 $perusahaan->no_telp = $request->no_telp;
-                $perusahaan->save();
+                $perusahaan->update();
             } else {
                 $perusahaan->nama = $request->nama;
-                $perusahaan->email = $request->email;
+                $perusahaan->email_public = $request->email_public;
+                $perusahaan->email_private = $request->email_private;
                 $perusahaan->alamat = $request->alamat;
                 $perusahaan->kota = $request->kota;
                 $perusahaan->no_telp = $request->no_telp;
                 $perusahaan->password = bcrypt($request->password);
-                $perusahaan->save();
+                $perusahaan->update();
 
                 $env->changeEnv([
-                    'MAIL_USERNAME'   => $request->email,
+                    'MAIL_USERNAME'   => $request->email_private,
                     'MAIL_PASSWORD'   => $request->password,
                 ]);
             }

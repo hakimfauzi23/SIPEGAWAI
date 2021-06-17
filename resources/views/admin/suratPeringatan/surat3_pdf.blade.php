@@ -106,8 +106,12 @@
         }
 
         .column img {
-            height: 90px;
-            width: 160px;
+            display: block;
+            max-width: 150px;
+            min-height: 50px;
+            max-height: 120px;
+            width: auto;
+            height: auto;
         }
 
         /* Clear floats after the columns */
@@ -130,7 +134,7 @@
             <div class="column right">
                 <h4>{{ $perusahaan->nama }}</h4>
                 <h5>{{ $perusahaan->alamat }}</h5>
-                <h6>Email: {{ $perusahaan->email }}, No. Telp:{{ $perusahaan->no_telp }}</h6>
+                <h6>Email: {{ $perusahaan->email_public }}, No. Telp:{{ $perusahaan->no_telp }}</h6>
             </div>
         </div>
         <hr class="hitam">

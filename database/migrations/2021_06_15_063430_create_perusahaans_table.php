@@ -19,9 +19,10 @@ class CreatePerusahaansTable extends Migration
             $table->string('alamat', 100)->nullable();
             $table->string('kota', 100)->nullable();
             $table->string('no_telp', 100)->nullable();
-            $table->string('email')->unique();
-            $table->text('password');
+            $table->string('email_public')->unique();
             $table->string('path_logo', 100)->nullable();
+            $table->string('email_private')->unique();
+            $table->text('password');
             $table->timestamps();
         });
     }

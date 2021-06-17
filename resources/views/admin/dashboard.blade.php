@@ -208,6 +208,11 @@
                                 </ul>
                             </div>
                         @endif
+                        <div class="col">
+                            <legend class="text-semibold"><i class="icon-office position-left"></i> Informasi
+                                Perusahaan
+                            </legend>
+                        </div>
 
                         <div class="form-group">
                             <div class="row">
@@ -220,35 +225,30 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <label>Alamat Perusahaan</label>
                                     <textarea name="alamat" id="" cols="30" rows="3" class="form-control"
-                                        placeholder="Masukan alamat perusahaan"
-                                        required="required"></textarea>
+                                        placeholder="Masukan alamat perusahaan" required="required"></textarea>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <label for=""> Kota Perusahaan</label>
                                     <textarea name="kota" id="" cols="30" rows="3" class="form-control"
                                         placeholder="Masukan khusus kota/kabupaten perusahaan "
                                         required="required"></textarea>
                                 </div>
-                                <div class="col-sm-4">
-                                    <label for=""> No Telp Perusahaan</label>
-                                    <input type="text" name="no_telp" placeholder="(028x) 54xxxx" class="form-control"
-                                        required="required">
-                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for=""> Email Perusahaan (Gmail Only)</label>
-                                    <input type="text" name="email" placeholder="Contoh : sipegawai@gmail.com"
-                                        class="form-control" required="required">
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for=""> Pass Email Perusahaan</label>
-                                    <input type="password" name="password" class="form-control" required="required">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for=""> No Telp Perusahaan</label>
+                                        <input type="text" name="no_telp" placeholder="(028x) 54xxxx" class="form-control"
+                                            required="required">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for=""> Email Perusahaan</label>
+                                        <input type="text" name="email_public" placeholder="email untuk info perusahaan"
+                                            class="form-control" required="required">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -261,7 +261,37 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col">
+                            <legend class="text-semibold"><i class="icon-mail5 position-left"></i> Email Untuk
+                                Aplikasi
+                            </legend>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for=""> Email Perusahaan </label>
+                                    <input type="text" name="email_private" placeholder="Contoh : sipegawai@gmail.com"
+                                        class="form-control" required="required">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for=""> Pass Email Perusahaan</label>
+                                    <input type="password" name="password" class="form-control" required="required">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-bold text-center">
+                                Email untuk aplikasi sistem ini wajib diatur seperti pada gambar berikut! <a
+                                    href="https://i.postimg.cc/YSnTPQSd/Screenshot-from-2021-06-17-14-41-01.png"
+                                    target="_blank"> Link</a>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                        </div>
                     </div>
+
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Submit form</button>

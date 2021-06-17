@@ -140,13 +140,20 @@ class SuratPeringatanController extends Controller
         $email["body"] = 'PENERBITAN SURAT';
         $email["nama"] = $pegawai->nama;
 
-        Mail::send('emails.sendSuratPeringatan', $email, function ($message) use ($email, $pdf, $pegawai) {
-            $message->to($email["email"], $email["email"])
-                ->subject($email["title"])->attachData($pdf->output(), "Surat-Peringatan-" . $pegawai->nama . ".pdf");
-        });
+        try {
+            Mail::send('emails.sendSuratPeringatan', $email, function ($message) use ($email, $pdf, $pegawai) {
+                $message->to($email["email"], $email["email"])
+                    ->subject($email["title"])->attachData($pdf->output(), "Surat-Peringatan-" . $pegawai->nama . ".pdf");
+            });
 
-        Alert::success('success', ' Berhasil Membuat Surat Peringatan & Dikirim ke Email Pegawai !');
-        return redirect(route('suratPeringatan.index'));
+            Alert::success('success', ' Berhasil Membuat Surat Peringatan & Dikirim ke Email Pegawai !');
+            return redirect(route('suratPeringatan.index'));
+        } catch (\Exception $ex) {
+            Alert::error('error', 'Gagal! cek kembali pengaturan gmail anda');
+            $Destorysurat = SuratPeringatan::find($newSp->id);
+            $Destorysurat->delete();
+            return redirect(route('suratPeringatan.create'));
+        }
     }
 
     /**

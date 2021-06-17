@@ -16,8 +16,9 @@ class Perusahaan extends Model
         'alamat',
         'kota',
         'no_telp',
-        'email',
-        'password',
+        'email_public',
         'path_logo',
+        'email_private',
+        'password',
     ];
 }

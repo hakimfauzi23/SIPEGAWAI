@@ -245,17 +245,22 @@ class GajiController extends Controller
         $data["nama"] = $pegawai->nama;
         $file = public_path('/slip_gaji/' . $gaji->path);
 
-        Mail::send('emails.sendSlipGaji', $data, function ($message) use ($data, $file) {
-            $message->to($data["email"], $data["email"])
-                ->subject($data["title"])->attach($file);
-        });
+        try {
+            Mail::send('emails.sendSlipGaji', $data, function ($message) use ($data, $file) {
+                $message->to($data["email"], $data["email"])
+                    ->subject($data["title"])->attach($file);
+            });
 
-        $gaji->dikirim_tgl = date("Y-m-d");
-        $gaji->is_sent = true;
-        $gaji->save();
+            $gaji->dikirim_tgl = date("Y-m-d");
+            $gaji->is_sent = true;
+            $gaji->save();
 
-        Alert::success('success', ' Berhasil Mengirim Slip Gaji ke Email Pegawai !');
-        return redirect(route('gaji.show', $id_pegawai));
+            Alert::success('success', ' Berhasil Mengirim Slip Gaji ke Email Pegawai !');
+            return redirect(route('gaji.show', $id_pegawai));
+        } catch (\Exception $ex) {
+            Alert::error('error', 'Gagal! cek kembali pengaturan gmail anda');
+            return redirect(route('gaji.show', $id_pegawai));
+        }
     }
     /**
      * Show the form for editing the specified resource.
