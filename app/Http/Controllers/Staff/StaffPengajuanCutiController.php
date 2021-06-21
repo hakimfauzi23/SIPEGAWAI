@@ -150,11 +150,20 @@ class StaffPengajuanCutiController extends Controller
 
             ];
 
-            Mail::to($pegawai->email)->send(new \App\Mail\KeputusanAtasanMail($details));
+            try {
+                //code...
+                Mail::to($pegawai->email)->send(new \App\Mail\KeputusanAtasanMail($details));
 
-            foreach ($hrd as $key => $p) {
+                foreach ($hrd as $key => $p) {
 
-                Mail::to($p->email)->send(new \App\Mail\PengajuanCutiMail($details));
+                    Mail::to($p->email)->send(new \App\Mail\PengajuanCutiMail($details));
+                }
+            } catch (\Exception $ex) {
+                Alert::error('Email Sistem Error', 'terdapat kesalahan pada email sistem informasi, hubungi admin/hrd segera!');
+                $cuti->status = 'Diproses';
+                $cuti->tgl_disetujui_atasan = NULL;
+                $cuti->save();
+                return redirect(route('staffPengajuanCuti.show', $data));
             }
 
 
@@ -178,10 +187,20 @@ class StaffPengajuanCutiController extends Controller
                 'keputusan' => 'Ditolak',
             ];
 
-            Mail::to($pegawai->email)->send(new \App\Mail\KeputusanAtasanMail($details));
+            try {
+                //code...
+                Mail::to($pegawai->email)->send(new \App\Mail\KeputusanAtasanMail($details));
+                Alert::success('success', ' Berhasil Menolak Pengajuan Cuti !');
+                return redirect(route('staffPengajuanCuti.index'));
+    
+            } catch (\Exception $ex) {
+                Alert::error('Email Sistem Error', 'terdapat kesalahan pada email sistem informasi, hubungi admin/hrd segera!');
+                $cuti->status = 'Diproses';
+                $cuti->tgl_ditolak_atasan = NULL;
+                $cuti->save();
+                return redirect(route('staffPengajuanCuti.show', $data));
+            }
 
-            Alert::success('success', ' Berhasil Menolak Pengajuan Cuti !');
-            return redirect(route('staffPengajuanCuti.index'));
         }
     }
 }

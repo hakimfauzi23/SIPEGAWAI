@@ -78,11 +78,11 @@
                         <label for="inputState">Tipe Cuti</label>
                         <select class=" select" name="tipe_cuti" data-placeholder="Pilih Tipe Cuti">
                             <option value="">Pilih Tipe Cuti</option>
-                            <option value="Tahunan" @if ($months < $syarat_bulan_cuti_tahunan) {{ 'disabled' }} @endif> Tahunan </option>
-                            <option value="Besar" @if ($months < $syarat_bulan_cuti_besar) {{ 'disabled' }} @endif> Besar </option>
-                            <option value="Hamil" @if (Auth::user()->jk != 'Wanita') {{ 'disabled' }} @endif> Hamil </option>
-                            <option value="Sakit"> Sakit </option>
-                            <option value="Penting"> Penting </option>
+                            <option value="Tahunan" @if ($months < $syarat_bulan_cuti_tahunan || $sisaTahunan <= 0) {{ 'disabled' }} @endif> Tahunan </option>
+                            <option value="Besar" @if ($months < $syarat_bulan_cuti_besar || $sisaBesar <= 0) {{ 'disabled' }} @endif> Besar </option>
+                            <option value="Hamil" @if (Auth::user()->jk != 'Wanita' || $sisaHamil <= 0) {{ 'disabled' }} @endif> Hamil </option>
+                            <option value="Sakit" @if ($sisaSakit <= 0) {{ 'disabled' }} @endif>Sakit </option>
+                            <option value="Penting" @if ($sisaPenting <= 0) {{ 'disabled' }} @endif> Penting </option>
                         </select>
                         @if ($errors->has('tipe_cuti'))
                             <div class="text-danger">

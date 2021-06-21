@@ -83,27 +83,35 @@
                         @else
                             <tr>
                                 <td>Tipe Cuti</td>
-                                <td>: {{ $cuti->tipe_cuti }}</td>
+                                <td>: </td>
+                                <td>
+                                    {{ $cuti->tipe_cuti }}
+                                </td>
                             </tr>
                             <tr>
                                 <td>Tanggal Pengajuan</td>
-                                <td>: {{ date('d F Y', strtotime($cuti->tgl_pengajuan)) }}</td>
+                                <td>: </td>
+                                <td>{{ date('d F Y', strtotime($cuti->tgl_pengajuan)) }}</td>
                             </tr>
                             <tr>
                                 <td>Tanggal Cuti</td>
                                 <td>:
-                                    {{ date('d F Y', strtotime($cuti->tgl_mulai)) . ' s.d. ' . date('d F Y', strtotime($cuti->tgl_selesai)) }}
+                                </td>
+                                <td>{{ date('d F Y', strtotime($cuti->tgl_mulai)) . ' s.d. ' . date('d F Y', strtotime($cuti->tgl_selesai)) }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>Keterangan</td>
                                 <td>:
-                                    {{ $cuti->ket }}
                                 </td>
+                                <td>{{ $cuti->ket }}</td>
                             </tr>
                             <tr>
                                 <td>Status</td>
-                                <td>: <span <?php if ($cuti->status == 'Disetujui HRD' || $cuti->status ==
+                                <td>:
+                                </td>
+                                <td>
+                                    <span <?php if ($cuti->status == 'Disetujui HRD' || $cuti->status ==
                                         'Disetujui Atasan') {
                                         echo 'class="label bg-success"';
                                         }
@@ -263,7 +271,7 @@
                                 @if ($lamaKerja < $syarat_bulan_cuti_besar)
                                     0
                                 @else
-                                    {{ $sisaTahunan }}
+                                    {{ $sisaBesar }}
                                 @endif
                             </h5>
                             <span class="text-muted text-size-small">Besar</span>

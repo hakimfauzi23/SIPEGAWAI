@@ -141,12 +141,14 @@ class HrdPengajuanCutiController extends Controller
             $date1 = new DateTime($request->tgl_mulai);
             $date2 = new DateTime($request->tgl_selesai);
 
+
             $interval = $date1->diff($date2);
             $dt = $request->tgl_mulai;
+
             // $gg = date("Y-m-d", strtotime($dt . ' + 40 days'));
             // dd($request->id_pegawai);
-            for ($i = 0; $i < $interval->d; $i++) {
-                Presensi_harian::create([
+            for ($i = 0; $i <= $interval->d; $i++) {
+                $presensi[$i] = Presensi_harian::create([
                     'id_pegawai' => $request->id_pegawai,
                     'tanggal' => date("Y-m-d", strtotime($dt . ' + ' . $i . 'days')),
                     'ket' => 'Cuti',
@@ -154,6 +156,25 @@ class HrdPengajuanCutiController extends Controller
                     'jam_plg' => NULL,
                 ]);
             }
+
+
+            $x = 1;
+            for ($i = 0; $i <= $interval->d; $i++) {
+                $disetujui[$i] = Cuti::create([
+                    'id_pegawai' => $cuti->id_pegawai,
+                    'tipe_cuti' => $cuti->tipe_cuti,
+                    'tgl_pengajuan' => $cuti->tgl_pengajuan,
+                    'tgl_mulai' => date("Y-m-d", strtotime($cuti->tgl_mulai . ' + ' . $i . 'days')),
+                    'tgl_selesai' => date("Y-m-d", strtotime($cuti->tgl_mulai . ' + ' . $x++ . 'days')),
+                    'ket' => $cuti->ket . ' ( Dari tanggal ' . date('d-m-Y', strtotime($cuti->tgl_mulai)) . ' S.D ' . date('d-m-Y', strtotime($cuti->tgl_selesai)) . ' )',
+                    'status' => $request->keputusan,
+                    'tgl_disetujui_atasan' => NULL,
+                    'tgl_disetujui_hrd' => date("Y-m-d"),
+                    'tgl_ditolak_atasan' => NULL,
+                    'tgl_ditolak_hrd' => NULL,
+                ]);
+            }
+
 
 
             $details = [
@@ -168,10 +189,32 @@ class HrdPengajuanCutiController extends Controller
                 'keputusan' => 'Disetujui',
             ];
 
-            Mail::to($pegawai->email)->send(new \App\Mail\KeputusanHrdMail($details));
 
-            Alert::success('success', ' Berhasil Menyetujui Pengajuan Cuti !');
-            return redirect(route('hrdPengajuanCuti.index'));
+            try {
+                //code...
+                Mail::to($pegawai->email)->send(new \App\Mail\KeputusanHrdMail($details));
+                $cuti->delete();
+                Alert::success('success', ' Berhasil Menyetujui Pengajuan Cuti !');
+                return redirect(route('hrdPengajuanCuti.index'));
+            } catch (\Exception $ex) {
+                if ($cuti->pegawai->id_atasan == null) {
+                    $cuti->status = 'Diproses';
+                    $cuti->tgl_disetujui_hrd = null;
+                    $cuti->save();
+                } else {
+                    $cuti->status = 'Disetujui Atasan';
+                    $cuti->tgl_disetujui_hrd = null;
+                    $cuti->save();
+                }
+
+                for ($i = 0; $i <= $interval->d; $i++) {
+                    $disetujui[$i]->delete();
+                    $presensi[$i]->delete();
+                }
+
+                Alert::error('Email Sistem Error', 'terdapat kesalahan pada email sistem informasi, hubungi admin/hrd segera!');
+                return redirect(route('hrdPengajuanCuti.show', $data));
+            }
         } else {
             $cuti->status = $request->keputusan;
             $cuti->tgl_ditolak_hrd = date("Y-m-d");
@@ -190,10 +233,26 @@ class HrdPengajuanCutiController extends Controller
                 'keputusan' => 'Ditolak',
             ];
 
-            Mail::to($pegawai->email)->send(new \App\Mail\KeputusanHrdMail($details));
+            try {
+                Mail::to($pegawai->email)->send(new \App\Mail\KeputusanHrdMail($details));
+                Alert::success('success', ' Berhasil Menolak Pengajuan Cuti !');
+                return redirect(route('hrdPengajuanCuti.index'));
+                //code...
+            } catch (\Exception $ex) {
+                //throw $th;
+                if ($cuti->pegawai->id_atasan == null) {
+                    $cuti->status = 'Diproses';
+                    $cuti->tgl_disetujui_hrd = null;
+                    $cuti->save();
+                } else {
+                    $cuti->status = 'Disetujui Atasan';
+                    $cuti->tgl_disetujui_hrd = null;
+                    $cuti->save();
+                }
 
-            Alert::success('success', ' Berhasil Menolak Pengajuan Cuti !');
-            return redirect(route('hrdPengajuanCuti.index'));
+                Alert::error('Email Sistem Error', 'terdapat kesalahan pada email sistem informasi, hubungi admin/hrd segera!');
+                return redirect(route('hrdPengajuanCuti.show', $data));
+            }
         }
     }
 }

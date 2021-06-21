@@ -1,6 +1,6 @@
 @extends('layout.base')
 
-@section('title', 'Data Potongan')
+@section('title', 'Manajemen Perusahaan')
 
 
 @section('content_header')

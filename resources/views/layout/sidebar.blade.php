@@ -17,56 +17,192 @@
                 @endcan
             @else
                 @can($menuItem->hak_akses->name)
-                    <li>
-                        <a href="#"><i class="{{ $menuItem->icon }}"></i> <span>{{ $menuItem->judul }}</span></a>
-                        <ul>
-                            @foreach ($menuItem->children as $subMenuItem)
+                    @if (strpos($menuItem->judul, 'Cuti') !== false)
+                        <li>
+                            <a href="#"><i class="{{ $menuItem->icon }}"></i> <span>{{ $menuItem->judul }}
+                                </span>
+                                @if ($jml_cuti_hrd != 0 && Auth::user()->role->name == 'HRD')
+                                    <span class="badge bg-warning-400">{{ $jml_cuti_hrd }}</span>
+                                @endif
 
-                                @if ($subMenuItem->url == 'staffPengajuanCuti')
-                                    @if ($jml_bawahan != 0)
+                            </a>
+                            <ul>
+                                @foreach ($menuItem->children as $subMenuItem)
 
-                                        <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}">
-                                            <a href="{{ '/' . $subMenuItem->url }}"> <span
-                                                    class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
-                                                {{ $subMenuItem->judul }}</a>
+                                    @if ($subMenuItem->url == 'hrdPengajuanCuti')
+                                        @if (Auth::user()->role->name == 'HRD')
+                                            <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}">
+                                                <a href="{{ '/' . $subMenuItem->url }}"> <span
+                                                        class="badge bg-warning-400">{{ $jml_cuti_hrd }}</span>
+                                                    {{ $subMenuItem->judul }}</a>
+                                            </li>
+                                        @endif
+                                    @elseif ($subMenuItem->url != null)
+                                        <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}"><a
+                                                href="{{ '/' . $subMenuItem->url }}">
+                                                {{ $subMenuItem->judul }}
+                                            </a>
                                         </li>
-                                    @endif
 
-                                @elseif ($subMenuItem->url != null)
-                                    <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}"><a
-                                            href="{{ '/' . $subMenuItem->url }}">
-                                            {{ $subMenuItem->judul }}
-                                        </a>
-                                    </li>
-                                @else
-                                    <li>
-                                        <a href="#"><span>{{ $subMenuItem->judul }}</span></a>
-                                        <ul>
-                                            @foreach ($subMenuItem->children as $thirdMenuItem)
-                                                @if ($thirdMenuItem->url == 'staffPengajuanCuti')
-                                                    @if ($jml_bawahan != 0)
+                                    @else
+                                        <li>
+                                            <a href="#"><span>{{ $subMenuItem->judul }}</span></a>
+                                            <ul>
+                                                @foreach ($subMenuItem->children as $thirdMenuItem)
+                                                    @if ($thirdMenuItem->url == 'staffPengajuanCuti')
+                                                        @if ($jml_bawahan != 0)
 
+                                                            <li
+                                                                class="{{ Request::is($thirdMenuItem->url) ? 'active' : null }}">
+                                                                <a href="{{ '/' . $thirdMenuItem->url }}"> <span
+                                                                        class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
+                                                                    {{ $thirdMenuItem->judul }}</a>
+                                                            </li>
+                                                        @endif
+                                                    @else
                                                         <li
                                                             class="{{ Request::is($thirdMenuItem->url) ? 'active' : null }}">
-                                                            <a href="{{ '/' . $thirdMenuItem->url }}"> <span
-                                                                    class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
-                                                                {{ $thirdMenuItem->judul }}</a>
+                                                            <a href="{{ '/' . $thirdMenuItem->url }}">
+                                                                {{ $thirdMenuItem->judul }}
+                                                            </a>
                                                         </li>
                                                     @endif
-                                                @else
-                                                    <li class="{{ Request::is($thirdMenuItem->url) ? 'active' : null }}">
-                                                        <a href="{{ '/' . $thirdMenuItem->url }}">
-                                                            {{ $thirdMenuItem->judul }}
-                                                        </a>
-                                                    </li>
-                                                @endif
-                                            @endforeach
-                                        </ul>
-                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+
+                        </li>
+
+                    @elseif (strpos($menuItem->judul, 'Staff') !== false)
+                        <li>
+                            <a href="#"><i class="{{ $menuItem->icon }}"></i> <span>{{ $menuItem->judul }}
+                                </span>
+                                @if ($jml_pengajuan_cuti_bawahan != 0)
+                                    <span class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
                                 @endif
-                            @endforeach
-                        </ul>
-                    </li>
+
+                            </a>
+                            <ul>
+                                @foreach ($menuItem->children as $subMenuItem)
+
+                                    @if ($subMenuItem->url == 'staffPengajuanCuti')
+                                        @if ($jml_bawahan != 0)
+
+                                            <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}">
+                                                <a href="{{ '/' . $subMenuItem->url }}"> <span
+                                                        class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
+                                                    {{ $subMenuItem->judul }}</a>
+                                            </li>
+                                        @endif
+                                    @elseif ($subMenuItem->url == 'hrdPengajuanCuti' && Auth::user()->role == 'HRD')
+                                        <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}">
+                                            <a href="{{ '/' . $subMenuItem->url }}"> <span
+                                                    class="badge bg-warning-400">{{ $jml_cuti_hrd }}</span>
+                                                {{ $subMenuItem->judul }}</a>
+                                        </li>
+
+                                    @elseif ($subMenuItem->url != null)
+                                        <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}"><a
+                                                href="{{ '/' . $subMenuItem->url }}">
+                                                {{ $subMenuItem->judul }}
+                                            </a>
+                                        </li>
+
+                                    @else
+                                        <li>
+                                            <a href="#"><span>{{ $subMenuItem->judul }}</span></a>
+                                            <ul>
+                                                @foreach ($subMenuItem->children as $thirdMenuItem)
+                                                    @if ($thirdMenuItem->url == 'staffPengajuanCuti')
+                                                        @if ($jml_bawahan != 0)
+
+                                                            <li
+                                                                class="{{ Request::is($thirdMenuItem->url) ? 'active' : null }}">
+                                                                <a href="{{ '/' . $thirdMenuItem->url }}"> <span
+                                                                        class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
+                                                                    {{ $thirdMenuItem->judul }}</a>
+                                                            </li>
+                                                        @endif
+                                                    @else
+                                                        <li
+                                                            class="{{ Request::is($thirdMenuItem->url) ? 'active' : null }}">
+                                                            <a href="{{ '/' . $thirdMenuItem->url }}">
+                                                                {{ $thirdMenuItem->judul }}
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+
+                        </li>
+
+                    @else
+                        <li>
+                            <a href="#"><i class="{{ $menuItem->icon }}"></i> <span>{{ $menuItem->judul }}</span></a>
+                            <ul>
+                                @foreach ($menuItem->children as $subMenuItem)
+
+                                    @if ($subMenuItem->url == 'staffPengajuanCuti')
+                                        @if ($jml_bawahan != 0)
+
+                                            <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}">
+                                                <a href="{{ '/' . $subMenuItem->url }}"> <span
+                                                        class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
+                                                    {{ $subMenuItem->judul }}</a>
+                                            </li>
+                                        @endif
+                                    @elseif ($subMenuItem->url == 'hrdPengajuanCuti')
+                                        <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}">
+                                            <a href="{{ '/' . $subMenuItem->url }}"> <span
+                                                    class="badge bg-warning-400">{{ $jml_cuti_hrd }}</span>
+                                                {{ $subMenuItem->judul }}</a>
+                                        </li>
+
+                                    @elseif ($subMenuItem->url != null)
+                                        <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}"><a
+                                                href="{{ '/' . $subMenuItem->url }}">
+                                                {{ $subMenuItem->judul }}
+                                            </a>
+                                        </li>
+
+                                    @else
+                                        <li>
+                                            <a href="#"><span>{{ $subMenuItem->judul }}</span></a>
+                                            <ul>
+                                                @foreach ($subMenuItem->children as $thirdMenuItem)
+                                                    @if ($thirdMenuItem->url == 'staffPengajuanCuti')
+                                                        @if ($jml_bawahan != 0)
+
+                                                            <li
+                                                                class="{{ Request::is($thirdMenuItem->url) ? 'active' : null }}">
+                                                                <a href="{{ '/' . $thirdMenuItem->url }}"> <span
+                                                                        class="badge bg-warning-400">{{ $jml_pengajuan_cuti_bawahan }}</span>
+                                                                    {{ $thirdMenuItem->judul }}</a>
+                                                            </li>
+                                                        @endif
+                                                    @else
+                                                        <li
+                                                            class="{{ Request::is($thirdMenuItem->url) ? 'active' : null }}">
+                                                            <a href="{{ '/' . $thirdMenuItem->url }}">
+                                                                {{ $thirdMenuItem->judul }}
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
                 @endcan
             @endif
         @endif
@@ -305,7 +441,7 @@
 
         <li>
             <a href="#"><i class="icon-furniture"></i> <span>Data Cuti</span><span
-                    class="badge bg-warning-400">{{ $jml_cuti }}</span></a>
+                    class="badge bg-warning-400">{{ $jml_cuti_hrd }}</span></a>
             <ul>
                 <li class="<?php if (Route::is('hrdCuti.index') || Route::is('hrdCuti.search')) {
                     echo 'active';
@@ -315,7 +451,7 @@
                         href="{{ route('hrdCuti.cutiBersama') }}">Atur Tanggal Cuti Bersama</a></li>
                 <li class="{{ Request::segment(1) === 'hrdPengajuanCuti' ? 'active' : null }}"><a
                         href="{{ route('hrdPengajuanCuti.index') }}"> <span
-                            class="badge bg-warning-400">{{ $jml_cuti }}</span>
+                            class="badge bg-warning-400">{{ $jml_cuti_hrd }}</span>
                         Pengajuan Cuti Pegawai</a>
                 </li>
                 <li class="{{ Request::segment(1) === 'rekapCuti' ? 'active' : null }}"><a

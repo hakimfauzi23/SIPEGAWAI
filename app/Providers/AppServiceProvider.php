@@ -45,15 +45,14 @@ class AppServiceProvider extends ServiceProvider
 
             if (Auth::check()) {
                 $id_peg_non_bawahan = Pegawai::where('id_atasan', null)->pluck('id');
-                $jml_cuti = Cuti::where('status', 'Disetujui Atasan')
+                $jml_cuti_hrd = Cuti::where('status', 'Disetujui Atasan')
                     ->orWhere(function ($query) use ($id_peg_non_bawahan) {
                         $query->whereIn('id_pegawai', $id_peg_non_bawahan)->where('status', 'Diproses');
                     })->count();
-
                 $hak_akses = Permission::where('name', '!=', 'menu-staff')->pluck('name');
                 $role_hak_akses = Pegawai::where('id', Auth::user()->id)->permission($hak_akses)->get();
 
-                View::share('jml_cuti', $jml_cuti);
+                View::share('jml_cuti_hrd', $jml_cuti_hrd);
                 $bawahan = Pegawai::where('id_atasan', Auth::user()->id)->get();
                 $id_bawahan = $bawahan->pluck('id');
 
