@@ -4,7 +4,7 @@
 Project:    Shade
 Version:    1.0
 Last change:    17/10/2020 [fixed Float bug, vf]
-Assigned to:    Grayic 
+Assigned to:    Grayic
 -------------------------------------------------------------------*/
 /*********** CSS TABLE OF CONTENTS *******************
 
@@ -303,7 +303,7 @@ body[data-theme='light'] .dark-mode-texts .light-shape.default-shape, .light-mod
 
 /*=== Media Query ===*/
 /* ---------------------------
-  01.Component -> { Header } 
+  01.Component -> { Header }
 ------------------------------*/
 @media (min-width: 992px) {
   .header-btn {
@@ -651,11 +651,11 @@ body[data-theme='light'] .dark-mode-texts .light-shape.default-shape, .light-mod
 }
 
 /* ---------------------------
-  01.Component -> { Menu } 
+  01.Component -> { Menu }
 ------------------------------*/
 .main-menu {
   /* ----------------------
-Custom toggle arrow 
+Custom toggle arrow
 ------------------------*/
 }
 
@@ -1753,7 +1753,7 @@ button.offcanvas-btn-close:focus {
 }
 
 /* ---------------------------
-  01.Component -> { Button } 
+  01.Component -> { Button }
 ------------------------------*/
 .btn {
   border-radius: 3px;
@@ -1885,7 +1885,7 @@ button.offcanvas-btn-close:focus {
 }
 
 /* ---------------------------
-  01.Component -> { Form } 
+  01.Component -> { Form }
 ------------------------------*/
 .gr-check-input {
   margin-bottom: 20px;
@@ -2283,7 +2283,7 @@ button.offcanvas-btn-close:focus {
 }
 
 /* ---------------------------
-  01.Component -> { Shapes } 
+  01.Component -> { Shapes }
 ------------------------------*/
 /* Landing-1,3,4,5 */
 .bg-shape {
@@ -2623,7 +2623,7 @@ button.offcanvas-btn-close:focus {
 }
 
 /* ---------------------------
-  01.Component -> { pricing } 
+  01.Component -> { pricing }
 ------------------------------*/
 [data-pricing-dynamic][data-value-active="yearly"] .dynamic-value:before {
   display: inline-block;
@@ -2839,7 +2839,7 @@ button.offcanvas-btn-close:focus {
 }
 
 /* ---------------------------
-  02.Utility -> { Color } 
+  02.Utility -> { Color }
 ------------------------------*/
 .bg-primary-opacity-visible {
   background-color: #1290a4;
@@ -9842,7 +9842,7 @@ button.offcanvas-btn-close:focus {
 }
 
 /* ---------------------------
-  02.Utility -> { Flex } 
+  02.Utility -> { Flex }
 ------------------------------*/
 .flex-all-center {
   display: flex;
@@ -9861,7 +9861,7 @@ button.offcanvas-btn-close:focus {
 }
 
 /* ---------------------------
-  02.Utility -> { Grid } 
+  02.Utility -> { Grid }
 ------------------------------*/
 @media (min-width: 576px) {
   .row-sm {
@@ -9900,7 +9900,7 @@ button.offcanvas-btn-close:focus {
 }
 
 /* ---------------------------
-  02.Utility -> { Shadows } 
+  02.Utility -> { Shadows }
 ------------------------------*/
 /*~~~~~ Normal Shadows ~~~~~*/
 .shadow-1 {
@@ -9960,7 +9960,7 @@ button.offcanvas-btn-close:focus {
 }
 
 /* ---------------------------
-  02.Utility -> { Size } 
+  02.Utility -> { Size }
 ------------------------------*/
 /*~~~~~ Circle Sizes ~~~~~*/
 .circle-9 {
@@ -10414,7 +10414,7 @@ button.offcanvas-btn-close:focus {
 }
 
 /* ---------------------------
-  02.Utility -> { Borders } 
+  02.Utility -> { Borders }
 ------------------------------*/
 .rounded-xs {
   border-radius: 3px;
@@ -10693,7 +10693,7 @@ button.offcanvas-btn-close:focus {
 }
 
 /* ---------------------------
-  02.Utility -> { Common } 
+  02.Utility -> { Common }
 ------------------------------*/
 span, a {
   display: inline-block;
@@ -10758,7 +10758,7 @@ span, a {
 }
 
 /* ---------------------------
-  02.Utility -> { Typography } 
+  02.Utility -> { Typography }
 ------------------------------*/
 p {
   font-size: 1.125rem;
@@ -11025,7 +11025,7 @@ p {
 }
 
 /* ---------------------------
-  02.Utility -> { Typography } 
+  02.Utility -> { Typography }
 ------------------------------*/
 @media (min-width: 992px) {
   .position-lg-static {
@@ -11192,10 +11192,10 @@ p {
 }
 
 /* --------------------------------
-  03.Theme Utility -> { Overlay } 
+  03.Theme Utility -> { Overlay }
 -----------------------------------*/
 /* --------------------------------
-  03.Theme Utility -> { Rotate } 
+  03.Theme Utility -> { Rotate }
 -----------------------------------*/
 /* Used in Landing-2 */
 .rotate-n3 {
@@ -11223,7 +11223,7 @@ p {
 }
 
 /* --------------------------------
-  03.Theme Utility -> { gradient-bg } 
+  03.Theme Utility -> { gradient-bg }
 -----------------------------------*/
 .gradient-bg {
   position: absolute;
@@ -11258,7 +11258,7 @@ p {
 }
 
 /* ---------------------------
-  03.Theme Utility -> { Hovers } 
+  03.Theme Utility -> { Hovers }
 ------------------------------*/
 /* Used in Landing-6 */
 .hover {
@@ -11318,7 +11318,7 @@ p {
 }
 
 /* ---------------------------
-  03.Theme Utility -> { icon-animation } 
+  03.Theme Utility -> { icon-animation }
 ------------------------------*/
 /* css animation */
 .mypath1, .mypath2, .mypath3, .mypath4 {
@@ -11486,7 +11486,7 @@ p {
 }
 
 /* ---------------------------
-  03.Theme Utility -> { accordion } 
+  03.Theme Utility -> { accordion }
 ------------------------------*/
 /* Used in Landing-6 */
 .accordion-trigger.arrow-icon {
@@ -11545,7 +11545,7 @@ p {
 }
 
 /* --------------------------------
-  03.Theme Utility -> { Typograpy } 
+  03.Theme Utility -> { Typograpy }
 -----------------------------------*/
 /* ===============================
     letter-spacing custom css
@@ -11965,11 +11965,11 @@ p {
 }
 
 /* ---------------------------------
-  03.Theme Utility -> { Gradient } 
+  03.Theme Utility -> { Gradient }
 ------------------------------------*/
-/* 
+/*
 ---------------------------------
--------> THEME CUSTOM STYLES 
+-------> THEME CUSTOM STYLES
 ---------------------------------
 */
 /* Used in Landing-1,2,3,4,5,6 Header area */

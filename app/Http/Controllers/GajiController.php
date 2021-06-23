@@ -239,7 +239,7 @@ class GajiController extends Controller
         $pegawai = Pegawai::find($id_peg);
 
         // $data["email"] = Pegawai::where('id', $id_peg)->pluck('email')->first();
-        $data["email"] = 'haniffauzihakim5059@gmail.com';
+        $data["email"] = $pegawai->email;
         $data["title"] = 'SLIP GAJI PERIODE ' . date('F Y', strtotime($gaji->tanggal));
         $data["body"] = 'Halo!! Slip gaji kamu udah ada nih! bisa di download di Email Ini!!';
         $data["nama"] = $pegawai->nama;

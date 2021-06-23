@@ -148,24 +148,32 @@ class HrdPengajuanCutiController extends Controller
             // $gg = date("Y-m-d", strtotime($dt . ' + 40 days'));
             // dd($request->id_pegawai);
             for ($i = 0; $i <= $interval->d; $i++) {
-                $presensi[$i] = Presensi_harian::create([
-                    'id_pegawai' => $request->id_pegawai,
-                    'tanggal' => date("Y-m-d", strtotime($dt . ' + ' . $i . 'days')),
-                    'ket' => 'Cuti',
-                    'jam_dtg' => NULL,
-                    'jam_plg' => NULL,
-                ]);
+                if (date("D", strtotime($dt . ' + ' . $i . 'days')) != 'Sat' && date("D", strtotime($dt . ' + ' . $i . 'days')) != 'Sun'){
+
+                    $presensi[$i] = Presensi_harian::create([
+                        'id_pegawai' => $request->id_pegawai,
+                        'tanggal' => date("Y-m-d", strtotime($dt . ' + ' . $i . 'days')),
+                        'ket' => 'Cuti',
+                        'jam_dtg' => NULL,
+                        'jam_plg' => NULL,
+                    ]);
+                }
             }
 
-
             $x = 1;
-            for ($i = 0; $i <= $interval->d; $i++) {
+            for ($i = 0; $i < $interval->d; $i++) {
+
+                $tglMulai = date("Y-m-d", strtotime($cuti->tgl_mulai . ' + ' . $i . 'days'));
+                $tglSelesai =date("Y-m-d", strtotime($cuti->tgl_mulai . ' + ' . $x++ . 'days'));
+
+
+                if ( (date('D', strtotime($tglMulai)) != 'Sat') && (date('D',  strtotime($tglSelesai)) != 'Sun')) {
                 $disetujui[$i] = Cuti::create([
                     'id_pegawai' => $cuti->id_pegawai,
                     'tipe_cuti' => $cuti->tipe_cuti,
                     'tgl_pengajuan' => $cuti->tgl_pengajuan,
-                    'tgl_mulai' => date("Y-m-d", strtotime($cuti->tgl_mulai . ' + ' . $i . 'days')),
-                    'tgl_selesai' => date("Y-m-d", strtotime($cuti->tgl_mulai . ' + ' . $x++ . 'days')),
+                    'tgl_mulai' => $tglMulai ,
+                    'tgl_selesai' => $tglSelesai,
                     'ket' => $cuti->ket . ' ( Dari tanggal ' . date('d-m-Y', strtotime($cuti->tgl_mulai)) . ' S.D ' . date('d-m-Y', strtotime($cuti->tgl_selesai)) . ' )',
                     'status' => $request->keputusan,
                     'tgl_disetujui_atasan' => NULL,
@@ -173,6 +181,7 @@ class HrdPengajuanCutiController extends Controller
                     'tgl_ditolak_atasan' => NULL,
                     'tgl_ditolak_hrd' => NULL,
                 ]);
+                }
             }
 
 

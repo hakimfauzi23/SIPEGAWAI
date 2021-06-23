@@ -135,7 +135,7 @@ class SuratPeringatanController extends Controller
             $pdf = PDF::loadView('admin.suratPeringatan.surat3_pdf', $data)->setPaper('a4', 'potrait');;
         }
 
-        $email["email"] = 'haniffauzihakim5059@gmail.com';
+        $email["email"] = $pegawai->email;
         $email["title"] = 'SURAT PERINGATAN ';
         $email["body"] = 'PENERBITAN SURAT';
         $email["nama"] = $pegawai->nama;

@@ -71,7 +71,7 @@
         <!-- Header start end -->
         <!-- hero area -->
         <div
-            class="gradient-bg-1 pt-23 pt-sm-25 pt-md-25 pt-lg-31 pb-lg-15 pb-md-15 pb-11 position-relative z-index-1 font-family-5">
+            class="gradient-bg-1 pt-23 pt-sm-25 pt-md-25 pt-lg-31 pb-lg-12 pb-md-15 pb-11 position-relative z-index-1 font-family-5">
             <div class="section-bg-img-2 pos-abs-tl w-100 h-100 z-index-n1"></div>
             <div class="container">
                 <div class="row position-relative justify-content-center">
@@ -92,13 +92,13 @@
             </div>
         </div>
         <!-- footer section -->
-        <footer class="gradient-bg-6 position-relative l8-footer">
+        <footer class="gradient-bg-6  position-relative l8-footer " >
             <div class="shape l8-footer-shape-top-left">
                 <img src="{{ URL::to('/landing') }}/image/l8/svg/footer-shape.svg" alt=""
                     class="w-100 light-shape default-shape z-index-n2">
             </div>
             <!-- footer-bottom start -->
-            <div class="pt-6 pb-5">
+            <div class="pt-0 pb-0">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 px-0">
@@ -116,7 +116,7 @@
                                     <div class="navbar-nav-wrapper">
                                         <!-- main-menu start-->
                                         <ul class="mb-0 list-unstyled d-flex flex-row justify-content-center">
-                                            <li class="mx-3">
+                                            <li class="mx-0">
                                                 <a class="text-periwinkle-gray font-size-1 font-weight-normal font-family-inter"
                                                     href="#features">D3 Teknik Informatika Sekolah Vokasi UNS</a>
                                             </li>
