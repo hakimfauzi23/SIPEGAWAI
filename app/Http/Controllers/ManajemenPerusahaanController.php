@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Perusahaan;
-use Brotzka\DotenvEditor\DotenvEditor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 
 class ManajemenPerusahaanController extends Controller
 {
@@ -60,12 +60,17 @@ class ManajemenPerusahaanController extends Controller
         $extension = $request->file('path_logo')->extension();
         $imgname = 'logo_' . date('dmyHi') . '.' . $extension;
         $path = Storage::putFileAs('public/images', $request->file('path_logo'), $imgname);
-        $env = new DotenvEditor();
-
-        $env->changeEnv([
-            'MAIL_USERNAME'   => $request->email_private,
-            'MAIL_PASSWORD'   => $request->password,
+        $file = DotenvEditor::setKeys([
+            [
+                'key'     => 'MAIL_USERNAME',
+                'value'   => $request->email_private,
+            ],
+            [
+                'key'     => 'MAIL_PASSWORD',
+                'value'   => $request->password,
+            ],
         ]);
+        $file = DotenvEditor::save();
 
         $perusahaan = Perusahaan::create([
             'nama' => $request->nama,
@@ -151,10 +156,17 @@ class ManajemenPerusahaanController extends Controller
                 $perusahaan->path_logo = $imgname;
                 $perusahaan->update();
 
-                $env->changeEnv([
-                    'MAIL_USERNAME'   => $request->email_private,
-                    'MAIL_PASSWORD'   => $request->password,
+                $file = DotenvEditor::setKeys([
+                    [
+                        'key'     => 'MAIL_USERNAME',
+                        'value'   => $request->email_private,
+                    ],
+                    [
+                        'key'     => 'MAIL_PASSWORD',
+                        'value'   => $request->password,
+                    ],
                 ]);
+                $file = DotenvEditor::save();
             }
 
             Alert::success('success', ' Berhasil Update Informasi Perusahaan !');
@@ -179,10 +191,17 @@ class ManajemenPerusahaanController extends Controller
                 $perusahaan->password = bcrypt($request->password);
                 $perusahaan->update();
 
-                $env->changeEnv([
-                    'MAIL_USERNAME'   => $request->email_private,
-                    'MAIL_PASSWORD'   => $request->password,
+                $file = DotenvEditor::setKeys([
+                    [
+                        'key'     => 'MAIL_USERNAME',
+                        'value'   => $request->email_private,
+                    ],
+                    [
+                        'key'     => 'MAIL_PASSWORD',
+                        'value'   => $request->password,
+                    ],
                 ]);
+                $file = DotenvEditor::save();
             }
 
             Alert::success('success', ' Berhasil Update Informasi Perusahaan !');

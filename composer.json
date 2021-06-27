@@ -10,12 +10,12 @@
     "require": {
         "php": "^7.3|^8.0",
         "barryvdh/laravel-dompdf": "^0.9.0",
-        "brotzka/laravel-dotenv-editor": "^2.1",
         "fakerphp/faker": "^1.9.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "haruncpi/laravel-id-generator": "^1.0",
+        "jackiedo/dotenv-editor": "^1.2",
         "kyslik/column-sortable": "^6.4",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
