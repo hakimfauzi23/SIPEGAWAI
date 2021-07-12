@@ -113,22 +113,48 @@
                         <tr>
                             <td>Tanggal Ditolak Atasan</td>
                             <td>:</td>
-                            <td>{{ date('d-M-Y', strtotime($cuti->tgl_ditolak_atasan)) }}</td>
+                            <td>
+                                @if (!($cuti->tgl_ditolak_atasan))
+                                {{ '-'}}
+                                @else
+                                {{ date('d-M-Y', strtotime($cuti->tgl_ditolak_atasan)) }}
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Tanggal Disetujui Atasan</td>
                             <td>:</td>
-                            <td>{{ date('d-M-Y', strtotime($cuti->tgl_disetujui_atasan)) }}</td>
+                            <td>
+                                @if (!($cuti->tgl_disetujui_atasan))
+                                {{ '-'}}
+                                @else
+                                {{ date('d-M-Y', strtotime($cuti->tgl_disetujui_atasan)) }}
+                                @endif
+
+                            </td>
                         </tr>
                         <tr>
                             <td>Tanggal Ditolak HRD</td>
                             <td>:</td>
-                            <td>{{ date('d-M-Y', strtotime($cuti->tgl_ditolak_hrd)) }}</td>
+                            <td>
+                                @if (!($cuti->tgl_ditolak_hrd))
+                                {{ '-'}}
+                                @else
+                                {{ date('d-M-Y', strtotime($cuti->tgl_ditolak_hrd)) }}
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td>Tanggal Disetujui HRD</td>
                             <td>:</td>
-                            <td>{{ date('d-M-Y', strtotime($cuti->tgl_disetujui_hrd)) }}</td>
+                            <td>
+                                @if (!($cuti->tgl_disetujui_hrd))
+                                {{ '-'}}
+                                @else
+                                {{ date('d-M-Y', strtotime($cuti->tgl_disetujui_hrd)) }}
+                                @endif
+
+                            </td>
                         </tr>
                     </table>
                 </div>

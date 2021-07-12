@@ -61,40 +61,40 @@ class PegawaiSeeder extends Seeder
             $pegawai->assignRole([$role[$i]]);
         }
 
-        for ($i = 0; $i <= 2; $i++) {
-            $id = IdGenerator::generate(['table' => 'pegawai', 'length' => 8, 'prefix' => date('ym')]);
-            $jkp = $faker->numberBetween(0, 1);
-            $jbtn = $faker->numberBetween(1, 9);
-            $relg = $faker->numberBetween(0, 5);
-            $role = [3, 3, 2];
-            $email = ['haniffauzihakim4049@gmail.com', 'haniffauzihakim5059@gmail.com', 'mr.expendables25@gmail.com'];
-            $dvs = $faker->numberBetween(2, 4);
+        // for ($i = 0; $i <= 2; $i++) {
+        //     $id = IdGenerator::generate(['table' => 'pegawai', 'length' => 8, 'prefix' => date('ym')]);
+        //     $jkp = $faker->numberBetween(0, 1);
+        //     $jbtn = $faker->numberBetween(1, 9);
+        //     $relg = $faker->numberBetween(0, 5);
+        //     $role = [3, 3, 2];
+        //     $email = ['haniffauzihakim4049@gmail.com', 'haniffauzihakim5059@gmail.com', 'mr.expendables25@gmail.com'];
+        //     $dvs = $faker->numberBetween(2, 4);
 
-            $pegawai = Pegawai::create([
-                'id' => $id,
-                'id_role' => $role[$i],
-                'nik' => $faker->nik(),
-                'nama' => $faker->name,
-                'jk' => $jk[$jkp],
-                'agama' => $agama[$relg],
-                'tempat_lahir' => $faker->city,
-                'tgl_lahir' => $faker->date,
-                'alamat_ktp' => $faker->streetAddress,
-                'alamat_dom' => $faker->streetAddress,
-                'status' => $status[$jkp],
-                'jml_anak' => $relg,
-                'no_hp' => $faker->phoneNumber,
-                'email' => $email[$i],
-                'password' => bcrypt('123456'),
-                'tgl_masuk' => $faker->date,
-                'id_jabatan' => $jbtn,
-                'id_atasan' => NULL,
-                'id_divisi' => $dvs,
-                'path' => 'foto.jpg'
-            ]);
+        //     $pegawai = Pegawai::create([
+        //         'id' => $id,
+        //         'id_role' => $role[$i],
+        //         'nik' => $faker->nik(),
+        //         'nama' => $faker->name,
+        //         'jk' => $jk[$jkp],
+        //         'agama' => $agama[$relg],
+        //         'tempat_lahir' => $faker->city,
+        //         'tgl_lahir' => $faker->date,
+        //         'alamat_ktp' => $faker->streetAddress,
+        //         'alamat_dom' => $faker->streetAddress,
+        //         'status' => $status[$jkp],
+        //         'jml_anak' => $relg,
+        //         'no_hp' => $faker->phoneNumber,
+        //         'email' => $email[$i],
+        //         'password' => bcrypt('123456'),
+        //         'tgl_masuk' => $faker->date,
+        //         'id_jabatan' => $jbtn,
+        //         'id_atasan' => NULL,
+        //         'id_divisi' => $dvs,
+        //         'path' => 'foto.jpg'
+        //     ]);
 
-            $pegawai->assignRole([$role[$i]]);
-        }
+        //     $pegawai->assignRole([$role[$i]]);
+        // }
 
     }
 }

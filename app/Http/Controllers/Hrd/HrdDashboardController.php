@@ -28,7 +28,7 @@ class HrdDashboardController extends Controller
 
     public function index()
     {
-        // 
+        //
         $id_peraturan = Peraturan::latest('id')->pluck('id')->first();
 
         $peraturan = Peraturan::find($id_peraturan);
@@ -210,7 +210,7 @@ class HrdDashboardController extends Controller
             'AprTelat' =>  number_format(($JmlData[4] != 0 ? ($Telat[4] / $JmlData[4] * 100) : 0), 2),
             'MayTelat' =>  number_format(($JmlData[5] != 0 ? ($Telat[5] / $JmlData[5] * 100) : 0), 2),
             'JunTelat' =>  number_format(($JmlData[6] != 0 ? ($Telat[6] / $JmlData[6] * 100) : 0), 2),
-            'JulTelat' =>  number_format(($JmlData[7] != 0 ? ($Telat[8] / $JmlData[8] * 100) : 0), 2),
+            'JulTelat' =>  number_format(($JmlData[7] != 0 ? ($Telat[7] / $JmlData[7] * 100) : 0), 2),
             'AugTelat' =>  number_format(($JmlData[8] != 0 ? ($Telat[8] / $JmlData[8] * 100) : 0), 2),
             'SepTelat' =>  number_format(($JmlData[9] != 0 ? ($Telat[9] / $JmlData[9] * 100) : 0), 2),
             'OctTelat' =>  number_format(($JmlData[10] != 0 ? ($Telat[10] / $JmlData[10] * 100) : 0), 2),
@@ -223,7 +223,7 @@ class HrdDashboardController extends Controller
             'AprTepat' =>  number_format(($JmlData[4] != 0 ? ($Tepat[4] / $JmlData[4] * 100) : 0), 2),
             'MayTepat' =>  number_format(($JmlData[5] != 0 ? ($Tepat[5] / $JmlData[5] * 100) : 0), 2),
             'JunTepat' =>  number_format(($JmlData[6] != 0 ? ($Tepat[6] / $JmlData[6] * 100) : 0), 2),
-            'JulTepat' =>  number_format(($JmlData[7] != 0 ? ($Tepat[8] / $JmlData[8] * 100) : 0), 2),
+            'JulTepat' =>  number_format(($JmlData[7] != 0 ? ($Tepat[7] / $JmlData[7] * 100) : 0), 2),
             'AugTepat' =>  number_format(($JmlData[8] != 0 ? ($Tepat[8] / $JmlData[8] * 100) : 0), 2),
             'SepTepat' =>  number_format(($JmlData[9] != 0 ? ($Tepat[9] / $JmlData[9] * 100) : 0), 2),
             'OctTepat' =>  number_format(($JmlData[10] != 0 ? ($Tepat[10] / $JmlData[10] * 100) : 0), 2),
@@ -236,7 +236,7 @@ class HrdDashboardController extends Controller
             'AprAwal' =>  number_format(($JmlData[4] != 0 ? ($Awal[4] / $JmlData[4] * 100) : 0), 2),
             'MayAwal' =>  number_format(($JmlData[5] != 0 ? ($Awal[5] / $JmlData[5] * 100) : 0), 2),
             'JunAwal' =>  number_format(($JmlData[6] != 0 ? ($Awal[6] / $JmlData[6] * 100) : 0), 2),
-            'JulAwal' =>  number_format(($JmlData[7] != 0 ? ($Awal[8] / $JmlData[8] * 100) : 0), 2),
+            'JulAwal' =>  number_format(($JmlData[7] != 0 ? ($Awal[7] / $JmlData[7] * 100) : 0), 2),
             'AugAwal' =>  number_format(($JmlData[8] != 0 ? ($Awal[8] / $JmlData[8] * 100) : 0), 2),
             'SepAwal' =>  number_format(($JmlData[9] != 0 ? ($Awal[9] / $JmlData[9] * 100) : 0), 2),
             'OctAwal' =>  number_format(($JmlData[10] != 0 ? ($Awal[10] / $JmlData[10] * 100) : 0), 2),
@@ -433,7 +433,7 @@ class HrdDashboardController extends Controller
             'AprTelat' =>  number_format(($JmlData[4] != 0 ? ($Telat[4] / $JmlData[4] * 100) : 0), 2),
             'MayTelat' =>  number_format(($JmlData[5] != 0 ? ($Telat[5] / $JmlData[5] * 100) : 0), 2),
             'JunTelat' =>  number_format(($JmlData[6] != 0 ? ($Telat[6] / $JmlData[6] * 100) : 0), 2),
-            'JulTelat' =>  number_format(($JmlData[7] != 0 ? ($Telat[8] / $JmlData[8] * 100) : 0), 2),
+            'JulTelat' =>  number_format(($JmlData[7] != 0 ? ($Telat[7] / $JmlData[7] * 100) : 0), 2),
             'AugTelat' =>  number_format(($JmlData[8] != 0 ? ($Telat[8] / $JmlData[8] * 100) : 0), 2),
             'SepTelat' =>  number_format(($JmlData[9] != 0 ? ($Telat[9] / $JmlData[9] * 100) : 0), 2),
             'OctTelat' =>  number_format(($JmlData[10] != 0 ? ($Telat[10] / $JmlData[10] * 100) : 0), 2),
@@ -446,7 +446,7 @@ class HrdDashboardController extends Controller
             'AprTepat' =>  number_format(($JmlData[4] != 0 ? ($Tepat[4] / $JmlData[4] * 100) : 0), 2),
             'MayTepat' =>  number_format(($JmlData[5] != 0 ? ($Tepat[5] / $JmlData[5] * 100) : 0), 2),
             'JunTepat' =>  number_format(($JmlData[6] != 0 ? ($Tepat[6] / $JmlData[6] * 100) : 0), 2),
-            'JulTepat' =>  number_format(($JmlData[7] != 0 ? ($Tepat[8] / $JmlData[8] * 100) : 0), 2),
+            'JulTepat' =>  number_format(($JmlData[7] != 0 ? ($Tepat[7] / $JmlData[7] * 100) : 0), 2),
             'AugTepat' =>  number_format(($JmlData[8] != 0 ? ($Tepat[8] / $JmlData[8] * 100) : 0), 2),
             'SepTepat' =>  number_format(($JmlData[9] != 0 ? ($Tepat[9] / $JmlData[9] * 100) : 0), 2),
             'OctTepat' =>  number_format(($JmlData[10] != 0 ? ($Tepat[10] / $JmlData[10] * 100) : 0), 2),
@@ -459,7 +459,7 @@ class HrdDashboardController extends Controller
             'AprAwal' =>  number_format(($JmlData[4] != 0 ? ($Awal[4] / $JmlData[4] * 100) : 0), 2),
             'MayAwal' =>  number_format(($JmlData[5] != 0 ? ($Awal[5] / $JmlData[5] * 100) : 0), 2),
             'JunAwal' =>  number_format(($JmlData[6] != 0 ? ($Awal[6] / $JmlData[6] * 100) : 0), 2),
-            'JulAwal' =>  number_format(($JmlData[7] != 0 ? ($Awal[8] / $JmlData[8] * 100) : 0), 2),
+            'JulAwal' =>  number_format(($JmlData[7] != 0 ? ($Awal[7] / $JmlData[7] * 100) : 0), 2),
             'AugAwal' =>  number_format(($JmlData[8] != 0 ? ($Awal[8] / $JmlData[8] * 100) : 0), 2),
             'SepAwal' =>  number_format(($JmlData[9] != 0 ? ($Awal[9] / $JmlData[9] * 100) : 0), 2),
             'OctAwal' =>  number_format(($JmlData[10] != 0 ? ($Awal[10] / $JmlData[10] * 100) : 0), 2),

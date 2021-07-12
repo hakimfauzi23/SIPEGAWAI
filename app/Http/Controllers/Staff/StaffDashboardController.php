@@ -605,7 +605,7 @@ class StaffDashboardController extends Controller
             'October' => 10, 'November' => 11, 'December' => 12
         ];
 
-        $cuti = Cuti::where('id_pegawai', $id)->orderBy('created_at', 'id')->first();
+        $cuti = Cuti::where('id_pegawai', $id)->orderBy('created_at', 'desc')->first();
         // dd($cuti);
         $bulanIni = $intMonth;
 

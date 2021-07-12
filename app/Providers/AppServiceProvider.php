@@ -29,13 +29,17 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(\Illuminate\Http\Request $request)
     {
         //
-        Paginator::useBootstrap();
-        if (env('APP_ENV') !== 'local') {
-            URL::forceScheme('https');
+        if (!empty(env('NGROK_URL')) && $request->server->has('HTTP_X_ORIGINAL_HOST')) {
+            $this->app['C:\UJITA-12JULI2021\SIPEGAWAI']->forceRootUrl(env('NGROK_URL'));
         }
+
+        Paginator::useBootstrap();
+        // if (env('APP_ENV') !== 'local') {
+        //     URL::forceScheme('https');
+        // }
 
         Blade::directive('currency', function ($expression) {
             return "Rp. <?php echo number_format($expression, 0, ',', '.'); ?>";
