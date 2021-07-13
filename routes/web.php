@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AdminHrdDashboardController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CutiController;
 use Illuminate\Support\Facades\Route;
@@ -14,14 +13,9 @@ use App\Http\Controllers\RiwayatDivisiController;
 use App\Http\Controllers\RekapPresensiController;
 use App\Http\Controllers\RekapCutiController;
 
-use App\Http\Controllers\Hrd\HrdPeraturanController;
-use App\Http\Controllers\Hrd\HrdPegawaiController;
-use App\Http\Controllers\Hrd\HrdPresensiHarianController;
-use App\Http\Controllers\Hrd\HrdCutiController;
 
 use App\Http\Controllers\DownloadFileController;
 use App\Http\Controllers\Hrd\HrdPengajuanCutiController;
-use App\Http\Controllers\RekapKinerjaController;
 use Illuminate\Support\Facades\Mail;
 use PhpOffice\PhpSpreadsheet\Chart\Layout;
 
@@ -141,7 +135,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/presensi/import_excel', [PresensiHarianController::class, 'import'])->name('presensi.import');
 
 
-    //Cuti 
+    //Cuti
     Route::get('/cuti/tanggal/', [CutiController::class, 'tglPresensi'])->name('cuti.search');
     Route::get('/cuti/cutiBersama', [CutiController::class, 'cutiBersama'])->name('cuti.cutiBersama');
     Route::post('/cuti/cutiBersama/store', [CutiController::class, 'storeCutiBersama'])->name('cuti.storeCutiBersama');
@@ -169,7 +163,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('peraturan', PeraturanController::class);
 
 
-    //Menu Staff 
+    //Menu Staff
     Route::resource('staff', StaffDashboardController::class);
     Route::post('/staff/pres/', [StaffDashboardController::class, 'presensi'])->name('staff.presensi');
 
@@ -224,46 +218,3 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-    // // !!!!!DI SINI ADALAH ROUTES UNTUK MENU HRD!!!!! //
-    // Route::resource('hrd', HrdDashboardController::class);
-    // Route::post('/hrd/grafKehadiran/', [HrdDashboardController::class, 'kehadiran'])->name('hrd.grafKehadiran');
-
-    // // Peraturan 
-    // Route::resource('hrdPeraturan', HrdPeraturanController::class);
-
-    // //Pegawai
-    // Route::get('/hrdPegawai/restore/{data}', [HrdPegawaiController::class, 'restore'])->name('hrdPegawai.restore');
-    // Route::get('/hrdPegawai/trash/', [HrdPegawaiController::class, 'trash'])->name('hrdPegawai.trash');
-
-    // Route::resource('hrdPegawai', HrdPegawaiController::class);
-    // Route::get('/hrdPegawai/destroy/{data}', [HrdPegawaiController::class, 'destroy'])->name('hrdPegawai.destroy');
-    // Route::get('/hrdPegawai/destroyPermanent/{data}', [HrdPegawaiController::class, 'destroyPermanent'])->name('hrdPegawai.destroyPermanent');
-
-    // Route::get('/hrdPegawai/showJabatan/{data}', [HrdPegawaiController::class, 'showJabatan'])->name('hrdPegawai.showJabatan');
-    // Route::get('/hrdPegawai/editRiwayatJabatan/{data}', [HrdPegawaiController::class, 'editRiwayatJabatan'])->name('hrdPegawai.editRiwayatJabatan');
-    // Route::put('/hrdPegawai/updateRiwayatJabatan/{data}', [HrdPegawaiController::class, 'updateRiwayatJabatan'])->name('hrdPegawai.updateRiwayatJabatan');
-
-    // Route::get('/hrdPegawai/showDivisi/{data}', [HrdPegawaiController::class, 'showDivisi'])->name('hrdPegawai.showDivisi');
-    // Route::get('/hrdPegawai/editRiwayatDivisi/{data}', [HrdPegawaiController::class, 'editRiwayatDivisi'])->name('hrdPegawai.editRiwayatDivisi');
-    // Route::put('/hrdPegawai/updateRiwayatDivisi/{data}', [HrdPegawaiController::class, 'updateRiwayatDivisi'])->name('hrdPegawai.updateRiwayatDivisi');
-
-
-    // //Presensi Harian//
-    // Route::get('/hrdPresensiHarian/template_download', [HrdPresensiHarianController::class, 'download'])->name('hrdPresensiHarian.template');
-    // Route::get('/hrdPresensiHarian/tanggal/', [HrdPresensiHarianController::class, 'tglPresensi'])->name('hrdPresensiHarian.search');
-    // Route::resource('hrdPresensiHarian', HrdPresensiHarianController::class);
-    // Route::get('/hrdPresensiHarian/destroy/{data}', [HrdPresensiHarianController::class, 'destroy'])->name('hrdPresensiHarian.destroy');
-    // Route::post('/hrdPresensiHarian/import_excel', [HrdPresensiHarianController::class, 'import'])->name('hrdPresensiHarian.import');
-
-    // //Cuti 
-    // Route::get('/hrdCuti/tanggal/', [HrdCutiController::class, 'tglPresensi'])->name('hrdCuti.search');
-    // Route::get('/hrdCuti/cutiBersama', [HrdCutiController::class, 'cutiBersama'])->name('hrdCuti.cutiBersama');
-    // Route::post('/hrdCuti/cutiBersama/store', [HrdCutiController::class, 'storeCutiBersama'])->name('hrdCuti.storeCutiBersama');
-    // Route::resource('hrdCuti', HrdCutiController::class);
-    // Route::get('/hrdCuti/destroy/{data}', [HrdCutiController::class, 'destroy'])->name('hrdCuti.destroy');
-
-
-    // /**  End Menu HRD**/
