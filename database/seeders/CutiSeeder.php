@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Pegawai;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
@@ -22,27 +23,30 @@ class CutiSeeder extends Seeder
 
         $tp_cuti = array('Tahunan', 'Besar', 'Bersama', 'Hamil', 'Sakit', 'Penting');
         $stat = array('Ditolak Atasan', 'Disetujui Atasan', 'Disetujui HRD', 'Ditolak HRD', 'Diproses');
+        $pegawai = Pegawai::pluck('id');
 
 
-        for ($i = 0; $i < 1; $i++) {
-            // $id = DB::table('pegawai')->select('id')->where('id', '==', '21020001');
+        foreach ($pegawai as $id_peg) {
+            for ($i = 0; $i < 5; $i++) {
+                // $id = DB::table('pegawai')->select('id')->where('id', '==', '21020001');
 
-            DB::table('cuti')->insert([
+                DB::table('cuti')->insert([
 
-                'id_pegawai' => date("ym") . "0004",
-                'tipe_cuti' => $tp_cuti[5],
-                // 'tgl_pengajuan' => $faker->date,
-                'tgl_pengajuan' => date("2021-6-d"),
-                'tgl_mulai' => date("2021-6-d"),
-                'tgl_selesai' => $faker->date,
-                'ket' => $faker->sentence(5),
-                'status' => $stat[2],
-                'tgl_disetujui_atasan' => $faker->date,
-                'tgl_ditolak_atasan' => $faker->date,
-                'tgl_disetujui_hrd' => $faker->date,
-                'tgl_ditolak_hrd' => $faker->date,
+                    'id_pegawai' => $id_peg,
+                    'tipe_cuti' => $tp_cuti[$faker->numberBetween(0, 4)],
+                    // 'tgl_pengajuan' => $faker->date,
+                    'tgl_pengajuan' => date("2021-m-d"),
+                    'tgl_mulai' => date("2021-m-d"),
+                    'tgl_selesai' => date("2021-m-d"),
+                    'ket' => $faker->sentence(5),
+                    'status' => $stat[$faker->numberBetween(0, 4)],
+                    'tgl_disetujui_atasan' => $faker->date,
+                    'tgl_ditolak_atasan' => $faker->date,
+                    'tgl_disetujui_hrd' => $faker->date,
+                    'tgl_ditolak_hrd' => $faker->date,
 
-            ]);
+                ]);
+            }
         }
     }
 }

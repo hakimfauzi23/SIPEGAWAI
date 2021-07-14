@@ -68,10 +68,11 @@
         </div>
 
         <div class="panel">
+            <div class="panel-heading">
+                <h5>Pengajuan Cuti Terakhir </h5>
+            </div>
 
             <div class="panel-body">
-                <h5>Pengajuan Cuti Terakhir </h5>
-
                 <div class="table-responsive">
                     <table class="table  table-borderless table-xs">
                         @if ($cuti == null)
@@ -110,10 +111,11 @@
                                 <td>:
                                 </td>
                                 <td>
-
                                     <span @if ($cuti->status == 'Disetujui HRD' || $cuti->status == 'Disetujui Atasan') class="label bg-success"
-                                        @elseif ($cuti->status == 'Ditolak HRD' || $cuti->status == 'Ditolak Atasan') class="label bg-danger"
-                                        @elseif ($cuti->status == 'Diproses')echo class="label bg-info" @endif>{{ $cuti->status }}</span>
+                                    @elseif ($cuti->status == 'Ditolak HRD' || $cuti->status == 'Ditolak Atasan')
+                                                    class="label bg-danger"
+                                    @elseif ($cuti->status == 'Diproses')
+                                                    echo class="label bg-info" @endif>{{ $cuti->status }}</span>
                                 </td>
                             </tr>
                         @endif
@@ -122,53 +124,6 @@
             </div>
         </div>
 
-        <div class="panel">
-            <div class="panel-heading">
-                <h5 class="panel-title"> Slip Gaji Tahun Ini</h5>
-            </div>
-            <div class="container-fluid">
-                @foreach ($JanJun as $key => $value)
-                    <div class="col-md-2">
-                        <div class="content-group">
-                            @php $data = Crypt::encryptString($value) @endphp
-                            @if (is_file(public_path() . '\slip_gaji\\' . Auth::user()->id . '_' . $value . '-' . $tahunIni . '.pdf'))
-                                <h5><a target="_blank" href="{{ route('staff.openFile', $data) }}"
-                                        class="btn border-success text-success btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i
-                                            class="icon-calendar52"></i> {{ $key }}
-                                    </a>
-                                </h5>
-                            @else
-                                <h5 class="btn border-grey text-grey btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"
-                                    disabled>
-                                    <i class="icon-calendar52"></i> {{ $key }}
-                                </h5>
-                            @endif
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <div class="container-fluid">
-                @foreach ($JulDec as $key => $value)
-                    <div class="col-md-2">
-                        <div class="content-group">
-                            @php $data = Crypt::encryptString($value) @endphp
-                            @if (is_file(public_path() . '\slip_gaji\\' . Auth::user()->id . '_' . $value . '-' . $tahunIni . '.pdf'))
-                                <h5><a target="_blank" href="{{ route('staff.openFile', $data) }}"
-                                        class="btn border-success text-success btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i
-                                            class="icon-calendar52"></i> {{ $key }}
-                                    </a>
-                                </h5>
-                            @else
-                                <h5 class="btn border-grey text-grey btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"
-                                    disabled>
-                                    <i class="icon-calendar52"></i> {{ $key }}
-                                </h5>
-                            @endif
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
     </div>
 
     <div class="col-md-6">
@@ -383,7 +338,6 @@
                     @endif
                 </div>
             </div>
-
         </div>
 
     </div>
@@ -404,7 +358,15 @@
                 "Tidak Hadir",
             ],
             datasets: [{
-                data: [{{ $persentaseHadir }}, {{ $persentaseTdkHadir }}],
+                data: [{
+                    {
+                        $persentaseHadir
+                    }
+                }, {
+                    {
+                        $persentaseTdkHadir
+                    }
+                }],
                 backgroundColor: [
                     "navy",
                     "red",

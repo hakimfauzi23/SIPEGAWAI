@@ -9,6 +9,7 @@ use App\Models\Peraturan;
 use App\Models\Presensi_harian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\Foreach_;
 
@@ -308,8 +309,20 @@ class StaffDashboardController extends Controller
         $syarat_bulan_cuti_besar = $peraturan->syarat_bulan_cuti_besar;
         /* End Lama Kerja */
 
+
+
+
+        /* Slip Gaji */
+
+        $JanJun = ['Jan' => '01', 'Feb' => '02', 'Mar' => '03', 'Apr' => '04', 'May' => '05', 'Jun' => '06'];
+        $JulDec = ['Jul' => '07', 'Aug' => '08', 'Sep' => '09', 'Oct' => '10', 'Nov' => '11', 'Dec' => '12'];
+
+        /* End Slip Gaji */
+
         return view('staff.dashboard', [
             'pegawai' => $pegawai,
+            'JanJun' => $JanJun,
+            'JulDec' => $JulDec,
 
             'persentaseHadir' => $persentaseHadir,
             'persentaseTdkHadir' => $persentaseTdkHadir,
@@ -660,6 +673,16 @@ class StaffDashboardController extends Controller
         ]);
     }
 
+    public function openFile($data)
+    {
+
+        $month = Crypt::decryptString($data);
+        $path = public_path() . '\slip_gaji';
+        $fileName = '\\' . Auth::user()->id . '_' . $month . '-' . date('Y') . '.pdf';
+        $pathToFile = $path . $fileName;
+        return response()->file($pathToFile);
+        // dd($path . $fileName);
+    }
     /**
      * Show the form for creating a new resource.
      *

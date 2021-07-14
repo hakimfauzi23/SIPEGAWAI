@@ -166,6 +166,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Menu Staff
     Route::resource('staff', StaffDashboardController::class);
     Route::post('/staff/pres/', [StaffDashboardController::class, 'presensi'])->name('staff.presensi');
+    Route::get('/staff/openFile/{data}', [StaffDashboardController::class, 'openFile'])->name('staff.openFile');
 
 
     //Menu Manajemen Role & Menu Dinamis
@@ -215,6 +216,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Menu Manajemen Perusahaan
     Route::resource('perusahaan', ManajemenPerusahaanController::class);
+
+
+    //Open Slip Gaji Pegawai
+
 });
 
 Auth::routes();
