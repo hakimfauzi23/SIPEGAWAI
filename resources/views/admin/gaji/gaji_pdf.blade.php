@@ -119,12 +119,25 @@
                     </tr>
 
                     @foreach ($att_tunjangan as $p)
-                        <tr>
-                            <td>{{ $p->nama }}</td>
-                            <td class="text-right">: @currency($p->jumlah)</td>
-                        </tr>
-
+                        @if ($p->is_active != 0)
+                            <tr>
+                                <td>{{ $p->nama }}</td>
+                                <td class="text-right">: @currency($p->jumlah)</td>
+                            </tr>
+                        @endif
                     @endforeach
+                    @if ($tunj_status != 0)
+                        <tr>
+                            <td>{{ 'Tunjangan Keluarga' }}</td>
+                            <td class="text-right">: @currency($tunj_status)</td>
+                        </tr>
+                    @endif
+                    @if ($tunj_anak != 0)
+                        <tr>
+                            <td>{{ 'Tunjangan Anak' }}</td>
+                            <td class="text-right">: @currency($tunj_anak)</td>
+                        </tr>
+                    @endif
                     <tr style="font-weight: bold;">
                         <td>Total Pemasukan(A)</td>
                         <td class="text-right">@currency($tot_pemasukan)</td>

@@ -189,7 +189,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Menu Gaji
     Route::resource('tunjangan', TunjanganController::class);
     Route::get('/tunjangan/destroy/{data}', [TunjanganController::class, 'destroy'])->name('tunjangan.destroy');
-
+    Route::put('/tunjangan/isActive/{data}', [TunjanganController::class, 'isActive'])->name('tunjangan.isActive');
+    Route::put('/tunjangan/isShown/{data}', [TunjanganController::class, 'isShown'])->name('tunjangan.isShown');
 
     Route::resource('potongan', PotonganController::class);
     Route::get('/potongan/destroy/{data}', [PotonganController::class, 'destroy'])->name('potongan.destroy');

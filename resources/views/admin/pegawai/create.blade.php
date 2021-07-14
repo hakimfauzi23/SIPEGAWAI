@@ -93,12 +93,14 @@
                                 <label class="display-block">Gender:</label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" class="styled" value="pria" name="jk" {{ old('jk') == 'pria' ? 'checked' : '' }}>
+                                    <input type="radio" class="styled" value="pria" name="jk"
+                                        {{ old('jk') == 'pria' ? 'checked' : '' }}>
                                     Pria
                                 </label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" class="styled" value="wanita" name="jk" {{ old('jk') == 'wanita' ? 'checked' : '' }}>
+                                    <input type="radio" class="styled" value="wanita" name="jk"
+                                        {{ old('jk') == 'wanita' ? 'checked' : '' }}>
                                     Wanita
                                 </label>
 
@@ -205,7 +207,7 @@
                                     <div class="form-group ">
                                         <label>Jumlah Anak</label>
                                         <input type="number" name="jml_anak" class="form-control"
-                                            placeholder="Jumlah Anak . . ." value="{{old('jml_anak')}}">
+                                            placeholder="Jumlah Anak . . ." value="{{ old('jml_anak') }}">
                                         @if ($errors->has('jml_anak'))
                                             <div class="text-danger">
                                                 {{ $errors->first('jml_anak') }}
@@ -298,7 +300,8 @@
                             <div class="form-group">
                                 <label>Role</label>
 
-                                <select class="select" data-live-search="true" data-placeholder="Pilih Role" searchable="Search here.." name="id_role">
+                                <select class="select" data-live-search="true" data-placeholder="Pilih Role"
+                                    searchable="Search here.." name="id_role">
                                     <option value="">Pilih Role</option>
                                     @foreach ($role as $key => $value)
                                         <option {{ old('id_role') == $key ? 'selected' : '' }}
@@ -378,7 +381,8 @@
 
                             <div class="form-group">
                                 <label>Atasan</label>
-                                <select class="select" data-placeholder="Pilih Atasan (Kosongi Bila Tidak Ada)" name="id_atasan">
+                                <select class="select" data-placeholder="Pilih Atasan (Kosongi Bila Tidak Ada)"
+                                    name="id_atasan">
                                     <option value="">Pilih Atasan</option>
                                     <option value="">Tidak Ada</option>
                                     @foreach ($pegawai as $key => $value)
@@ -422,13 +426,18 @@
                             <div class="form-group">
                                 <label class="display-block text-semibold">Tunjangan</label>
                                 @foreach ($tunjangan as $value)
-                                    <label class="checkbox-inline">
-                                        {{ Form::checkbox('tunjangan[]', $value->id, false, ['class' => 'styled']) }}
-                                        {{ $value->nama }}
-                                        : @currency($value->jumlah)
-
-                                    </label>
-                                    <br />
+                                    @if ($value->is_shown == 1)
+                                        <label class="checkbox-inline">
+                                            {{ Form::checkbox('tunjangan[]', $value->id, false, ['class' => 'styled']) }}
+                                            {{ $value->nama }}
+                                            @if (stripos($value->nama, 'anak') || stripos($value->nama, 'keluarga'))
+                                                : {{ $value->jumlah . '% x gaji pokok' }}
+                                            @else
+                                                : @currency($value->jumlah)
+                                            @endif
+                                        </label>
+                                        <br />
+                                    @endif
                                 @endforeach
                             </div>
                         </div>

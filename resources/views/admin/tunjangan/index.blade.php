@@ -26,7 +26,8 @@
     <div class="panel bg-info">
         <div class="panel-heading">
             <em>
-                <h6>Pada halaman ini terdapat list daftar tunjangan gaji yang ada di dalam perusahaan ini. masing-masing tunjangan bisa
+                <h6>Pada halaman ini terdapat list daftar tunjangan gaji yang ada di dalam perusahaan ini. masing-masing
+                    tunjangan bisa
                     dihapus dan diedit.
                 </h6>
             </em>
@@ -52,7 +53,7 @@
                         <th>No</th>
                         <th>Nama </th>
                         <th> Jumlah </th>
-                        <th hidden></th>
+                        <th> Status</th>
                         <th hidden></th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -61,11 +62,72 @@
                     <?php $i = 1; ?>
                     @if ($tunjangan->count())
                         @foreach ($tunjangan as $key => $p)
+                            @php
+                                $encyrpt = Crypt::encryptString($p->id);
+                            @endphp
+
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $p->nama }}</td>
-                                <td> @currency($p->jumlah)</td>
-                                <td hidden></td>
+                                <td>
+                                    @if (stripos($p->nama, 'anak') || stripos($p->nama, 'keluarga'))
+                                        {{ $p->jumlah . '% x gaji pokok' }}
+                                    @else
+                                        @currency($p->jumlah)
+                                    @endif
+                                </td>
+                                <td class="text-center ">
+
+                                    <div style="float:left;">
+                                        <form method="POST" action="{{ route('tunjangan.isActive', $encyrpt) }}"
+                                            id="formActive">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PUT') }}
+
+
+                                            @if ($p->is_active == 1)
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" class="styled" value="0" name="is_active"
+                                                        onchange="this.form.submit()" checked>
+                                                    Active
+                                                </label>
+                                            @else
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" class="styled" value="1" name="is_active"
+                                                        onchange="this.form.submit()">
+                                                    Active
+                                                </label>
+                                            @endif
+
+                                        </form>
+                                    </div>
+
+                                    <div style="width:50%; margin:auto;">
+                                        <div style="display:inline-block; width:45%;text-align:center;">
+                                            <form method="POST" action="{{ route('tunjangan.isShown', $encyrpt) }}"
+                                                id="formShown">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PUT') }}
+
+
+                                                @if ($p->is_shown == 1)
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="styled" value="0" name="is_shown"
+                                                            onchange="this.form.submit()" checked>
+                                                        Shown
+                                                    </label>
+                                                @else
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="styled" value="1" name="is_shown"
+                                                            onchange="this.form.submit()">
+                                                        Shown
+                                                    </label>
+                                                @endif
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td hidden><span class="label label-success">Active</span></td>
                                 <td class="text-center">
                                     <ul class="icons-list">

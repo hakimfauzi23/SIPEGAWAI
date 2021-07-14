@@ -48,7 +48,7 @@ class TunjanganController extends Controller
      */
     public function store(Request $request)
     {
-        //  
+        //
         $this->validate($request, [
             'nama' => 'required',
             'jumlah' => 'required',
@@ -67,6 +67,7 @@ class TunjanganController extends Controller
         Alert::success('success', ' Berhasil Input Data !');
         return redirect('tunjangan');
     }
+
 
     /**
      * Display the specified resource.
@@ -113,7 +114,7 @@ class TunjanganController extends Controller
             'nama' => 'required',
             'jumlah' => 'required',
         ]);
-        
+
         $rupiah_string = $request->jumlah;
         $jumlah_string = preg_replace("/[^0-9]/", "", $rupiah_string);
         $jumlah = (int) $jumlah_string;
@@ -127,6 +128,22 @@ class TunjanganController extends Controller
         return redirect('tunjangan');
     }
 
+    public function isActive(Request $request, $data)
+    {
+        $id = Crypt::decryptString($data);
+        $tunj = Tunjangan::find($id);
+        $tunj->is_active = $request->is_active;
+        $tunj->save();
+        return redirect('tunjangan');
+    }
+    public function isShown(Request $request, $data)
+    {
+        $id = Crypt::decryptString($data);
+        $tunj = Tunjangan::find($id);
+        $tunj->is_shown = $request->is_shown;
+        $tunj->save();
+        return redirect('tunjangan');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -143,6 +160,5 @@ class TunjanganController extends Controller
 
         Alert::success('success', ' Berhasil Hapus Data !');
         return redirect('/tunjangan');
-
     }
 }

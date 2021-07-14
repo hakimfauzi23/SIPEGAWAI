@@ -61,11 +61,32 @@ class GajiController extends Controller
         // Get Potongan
         $potongan = $pegawai->potongan;
 
+        // Get Tunjangan Status
+        $tunj_status = Tunjangan::where('nama', 'LIKE', '%keluarga%')->first();
+
+        // Get Tunjangan Anak
+        $tunj_anak = Tunjangan::where('nama', 'LIKE', '%anak%')->first();
+
+        // Get Status
+        $status = $pegawai->status;
+
+        // Get Jumlah Anak
+        $jml_anak = $pegawai->jml_anak;
+        if ($jml_anak > 2) {
+            $jml_anak = 2;
+        }
+
+        // dd($jml_anak);
+
         return view('admin.gaji.create', [
             'id' => $data,
             'pegawai' => $pegawai,
             'tunjangan' => $tunjangan,
             'potongan' => $potongan,
+            'jml_anak' => $jml_anak,
+            'status' => $status,
+            'tunj_status' => $tunj_status,
+            'tunj_anak' => $tunj_anak,
         ]);
     }
 
@@ -80,6 +101,8 @@ class GajiController extends Controller
     {
         $id = Crypt::decryptString($request->data);
         $pegawai = Pegawai::find($id);
+
+        // dd([$request->tunj_status, $request->tunj_anak]);
 
         $this->validate($request, [
             'dari' => 'required',
@@ -110,14 +133,20 @@ class GajiController extends Controller
             // Get Tunjangan
             $tunj = $pegawai->tunjangan;
 
+            // Get Value Tunjangan
+            $tunj_ori = $request->tunj_ori;
+            $tunj_status = $request->tunj_status;
+            $tunj_anak = $request->tunj_anak;
+
+            // dd($tunj_ori);
+
             // Get Potongan
             $pot = $pegawai->potongan;
-            // dd($tunj);
-            if ($tunj == null) {
+            if ($tunj_ori == null && $tunj_anak == null && $tunj_status == null) {
                 $tunjangan = 0;
                 $att_tunjangan = [];
             } else {
-                $tunjangan = $tunj->sum('jumlah');
+                $tunjangan = $tunj_ori + $tunj_status + $tunj_anak;
                 $att_tunjangan = $tunj;
             }
 
@@ -170,6 +199,10 @@ class GajiController extends Controller
                 //Terlambat dan Bolos
                 'jml_ptgn_telat' => $jml_ptgn_telat,
                 'jml_ptgn_bolos' => $jml_ptgn_bolos,
+
+                //Tunjangan Keluarga & Anak
+                'tunj_status' => $tunj_status,
+                'tunj_anak' => $tunj_anak,
             ];
 
             $pdf = PDF::loadView('admin.gaji.gaji_pdf', $data)->setPaper('a4', 'potrait');;

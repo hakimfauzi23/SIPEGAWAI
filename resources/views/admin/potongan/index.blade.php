@@ -73,12 +73,19 @@
                                         {{ method_field('PUT') }}
 
                                         @if ($p->is_active == 1)
-                                            <input type="checkbox" name="is_active" value="0" checked
-                                                onchange="this.form.submit()">
-                                        @else
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" class="styled" value="0" name="is_active" onchange="this.form.submit()" checked>
+                                                Active
+                                            </label>
+                                            {{-- <input type="checkbox" name="is_active" value="0" checked
+                                                onchange="this.form.submit()"> --}}
+                                                @else
+                                                <label class="checkbox-inline">
+                                            <input type="checkbox" class="styled" value="1" name="is_active" onchange="this.form.submit()">
+                                            Active
+                                        </label>
 
-                                            <input type="checkbox" name="is_active" value="1"
-                                                onchange="this.form.submit()">
+                                            {{-- <input type="checkbox" name="is_active" value="1" onchange="this.form.submit()"> --}}
                                         @endif
                                     </form>
                                 </td>

@@ -339,7 +339,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Jabatan</label>
-                                        <select class="select" name="id_jabatan"   data-placeholder="Pilih Jabatan">
+                                        <select class="select" name="id_jabatan" data-placeholder="Pilih Jabatan">
                                             <option value="">Pilih Jabatan</option>
                                             @foreach ($jabatan as $key => $value)
                                                 <option value="{{ $key }}"
@@ -384,7 +384,6 @@
                                 <label>Atasan</label>
                                 <select class="select" name="id_atasan" data-placeholder="Pilih Atasan">
                                     <option value="">Pilih Atasan</option>
-                                    <option value=null {{ $pegawai->id_atasan == null ? 'selected' : '' }}>Tidak Ada
                                     </option>
                                     @foreach ($atasan as $key => $value)
                                         <option value="{{ $key }}"
@@ -427,13 +426,18 @@
                             <div class="form-group">
                                 <label class="display-block text-semibold">Tunjangan</label>
                                 @foreach ($tunjangan as $value)
-                                    <label class="checkbox-inline">
-                                        {{ Form::checkbox('tunjangan[]', $value->id, in_array($value->id, $pegawaiTunjangan) ? true : false, ['class' => 'styled']) }}
-                                        {{ $value->nama }}
-                                        : @currency($value->jumlah)
-
-                                    </label>
-                                    <br />
+                                    @if ($value->is_shown == 1)
+                                        <label class="checkbox-inline">
+                                            {{ Form::checkbox('tunjangan[]', $value->id, in_array($value->id, $pegawaiTunjangan) ? true : false, ['class' => 'styled']) }}
+                                            {{ $value->nama }}
+                                            @if (stripos($value->nama, 'anak') || stripos($value->nama, 'keluarga'))
+                                                : {{ $value->jumlah . '% x gaji pokok' }}
+                                            @else
+                                                : @currency($value->jumlah)
+                                            @endif
+                                        </label>
+                                        <br />
+                                    @endif
                                 @endforeach
                             </div>
                         </div>

@@ -133,9 +133,27 @@
                         <label class="display-block text-semibold">Tunjangan yg Didapatkan</label>
                         <ul>
                             @if ($tunjangan->count())
+                                @php
+                                    $val_tunj_ori = 0;
+                                @endphp
                                 @foreach ($tunjangan as $item)
-                                    <li>{{ $item->nama . ' - ' }} @currency($item->jumlah)</li>
+                                    @if ($item->is_active != 0)
+                                        <li>{{ $item->nama . ': ' }} @currency($item->jumlah)</li>
+                                        <input name="tunj_ori" type="hidden" value="{{ $val_tunj_ori += $item->jumlah }}">
+                                    @endif
                                 @endforeach
+                                @if ($status == 'Menikah' && $tunj_status->is_active == 1)
+                                    <li>{{ $tunj_status->nama . ': ' . $tunj_status->jumlah . '% X ' }}
+                                        @currency($pegawai->jabatan->gaji_pokok)</li>
+                                    <input name="tunj_status" type="hidden"
+                                        value="{{ ($tunj_status->jumlah / 100) * $pegawai->jabatan->gaji_pokok }}">
+                                @endif
+                                @if ($jml_anak != 0 && $tunj_anak->is_active == 1)
+                                    <li>{{ $tunj_anak->nama . ': ' . $jml_anak . ' X ' . $tunj_anak->jumlah . '% X ' }}
+                                        @currency($pegawai->jabatan->gaji_pokok)</li>
+                                    <input name="tunj_anak" type="hidden"
+                                        value="{{ $jml_anak * ($tunj_anak->jumlah / 100) * $pegawai->jabatan->gaji_pokok }}">
+                                @endif
                             @else
                                 <li>Pegawai tidak terdaftar tunjangan apapun.</li>
                             @endif

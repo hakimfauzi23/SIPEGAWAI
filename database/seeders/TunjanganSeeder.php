@@ -21,16 +21,16 @@ class TunjanganSeeder extends Seeder
         if ($count == 0) {
             DB::table('tunjangan')->insert([
                 [
-                    'nama' => 'Bonus Project',
-                    'jumlah' => 500000,
+                    'nama' => 'Tunjangan Makan',
+                    'jumlah' => 200000,
                 ],
                 [
-                    'nama' => 'Tunjangan Menikah',
-                    'jumlah' => 250000,
+                    'nama' => 'Tunjangan Anak (Per Anak)',
+                    'jumlah' => 2,
                 ],
                 [
-                    'nama' => 'Tunjangan Kematian',
-                    'jumlah' => 1000000,
+                    'nama' => 'Tunjangan Keluarga',
+                    'jumlah' => 10,
                 ],
             ]);
         }

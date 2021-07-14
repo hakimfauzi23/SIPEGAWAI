@@ -70,8 +70,13 @@
                     <div class="col-md-6">
                         <div class="form-group ">
                             <label for="">Jumlah</label>
-                            <input type="text" id="rupiah" name="jumlah" class="form-control"
-                                value="{{ $tunjangan->jumlah }}" placeholder="Jumlah Tunjangan . . .">
+                            @if (stripos($tunjangan->nama, 'anak') || stripos($tunjangan->nama, 'keluarga'))
+                                <input type="text" name="jumlah" class="form-control" value="{{ $tunjangan->jumlah }}"
+                                    placeholder="Jumlah Tunjangan . . .">
+                            @else
+                                <input type="text" id="rupiah" name="jumlah" class="form-control"
+                                    value="{{ $tunjangan->jumlah }}" placeholder="Jumlah Tunjangan . . .">
+                            @endif
 
                             @if ($errors->has('jumlah'))
                                 <div class="text-danger">
@@ -122,7 +127,6 @@
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
-
     </script>
 
 @endsection
