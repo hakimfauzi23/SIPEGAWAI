@@ -89,6 +89,7 @@ class PresensiHarianController extends Controller
             'ket' => $request->ket,
             'jam_dtg' => $request->jam_dtg,
             'jam_plg' => $request->jam_plg,
+            'is_wfh' => $request->is_wfh,
         ]);
 
         Alert::success('success', ' Berhasil Input Data !');
@@ -152,6 +153,7 @@ class PresensiHarianController extends Controller
         $presensi->ket = $request->ket;
         $presensi->jam_dtg = $request->jam_dtg;
         $presensi->jam_plg = $request->jam_plg;
+        $presensi->is_wfh = $request->is_wfh;
         $presensi->save();
 
         Alert::success('success', ' Berhasil Update Data !');

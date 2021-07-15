@@ -21,6 +21,7 @@ class Presensi_harian extends Model
         'jam_dtg',
         'jam_plg',
         'ket',
+        'is_wfh',
     ];
 
     protected $sortable = [

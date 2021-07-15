@@ -105,16 +105,13 @@
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $p->pegawai->nama }}</td>
                                         <td class="text-center">{{ date('d F Y', strtotime($p->tanggal)) }}</td>
-                                        <td class="text-center"><span <?php if ($p->ket == 'Hadir') {
-                                                echo 'class="label bg-success"';
-                                                }
-                                                if ($p->ket == 'Alpha') {
-                                                echo 'class="label bg-danger"';
-                                                }
-                                                if ($p->ket == 'Cuti') {
-                                                echo 'class="label bg-info"';
-                                                }
-                                                ?>>{{ $p->ket }}</span></td>
+                                        <td class="text-center"><span @if ($p->ket == 'Hadir') class="label bg-success"@i
+                                            @elseif ($p->ket == 'Alpha')class="label bg-danger";
+                                            @elseif ($p->ket == 'Cuti')class="label bg-info"; @endif>{{ $p->ket }}</span>
+                                            @if ($p->ket == 'Hadir' && $p->is_wfh == 1)
+                                                <span class="label bg-purple-600" @i>{{ 'WFH' }}</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             @if ($p->ket == 'Hadir')
                                                 {{ date('H:i', strtotime($p->jam_dtg)) . ' - ' . date('H:i', strtotime($p->jam_plg)) }}

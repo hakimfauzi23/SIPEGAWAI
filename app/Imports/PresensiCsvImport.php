@@ -22,6 +22,7 @@ class PresensiCsvImport implements ToModel, WithHeadingRow
             'ket'      =>  $row["ket"],
             'jam_dtg'      =>  $row["jam_dtg"],
             'jam_plg'      =>  $row["jam_plg"],
+            'is_wfh'      =>  $row["is_wfh"],
         ]);
     }
 }

@@ -20,6 +20,7 @@ class CreatePresensiHariansTable extends Migration
             $table->enum('ket', ['Hadir', 'Cuti', 'Alpha']);
             $table->time('jam_dtg')->nullable();
             $table->time('jam_plg')->nullable();
+            $table->boolean('is_wfh')->nullable()->default(false);
             $table->timestamps();
 
             $table->index('id_pegawai');

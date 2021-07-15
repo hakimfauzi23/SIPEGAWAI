@@ -95,7 +95,7 @@
 
                     <div class="form-group">
                         <label for="inputState">Pegawai</label>
-                        <select class="select" name="id_pegawai" data-placeholder = "Pilih Pegawai">
+                        <select class="select" name="id_pegawai" data-placeholder="Pilih Pegawai">
                             <option value="">Pilih Pegawai</option>
                             @foreach ($pegawai as $key => $value)
                                 <option value="{{ $key }}">
@@ -127,7 +127,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="inputState">Keterangan</label>
-                                <select class="select" name="ket" data-placeholder = "Pilih Keterangan">
+                                <select class="select" name="ket" data-placeholder="Pilih Keterangan">
                                     <option value="">Pilih Keterangan</option>
                                     <option value="Hadir"> Hadir </option>
                                     <option value="Cuti"> Cuti </option>
@@ -144,7 +144,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group ">
                                 <label for="inputState">Jam Datang</label>
                                 <input type="time" name="jam_dtg" class="form-control" value="{{ old('jam_dtg') }}">
@@ -156,10 +156,29 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group ">
                                 <label for="inputState">Jam Pulang</label>
                                 <input type="time" name="jam_plg" class="form-control" value="{{ old('jam_plg') }}">
+                                @if ($errors->has('jam_plg'))
+                                    <div class="text-danger">
+                                        {{ $errors->first('jam_plg') }}
+                                    </div>
+                                @endif
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label for="inputState">Apakah WFH?</label>
+                                <select class="select" data-placeholder="Ya/Tidak" name="is_wfh">
+                                    <option value=""></option>
+                                    <option {{ old('is_wfh') == '1' ? 'selected' : '' }} value="1">
+                                        Ya </option>
+                                    <option {{ old('is_wfh') == '0' ? 'selected' : '' }} value="0">
+                                        Tidak </option>
+                                </select>
+
                                 @if ($errors->has('jam_plg'))
                                     <div class="text-danger">
                                         {{ $errors->first('jam_plg') }}
@@ -232,6 +251,12 @@
                                     <td>jam_plg&nbsp; </td>
                                     <td> : </td>
                                     <td>&nbsp;16:00 (hh:mm)</td>
+                                </tr>
+                                <tr>
+                                    <td>f. &nbsp;</td>
+                                    <td>is_wfh&nbsp; </td>
+                                    <td> : </td>
+                                    <td>&nbsp;(Jika WFH tulis '1' jika tidak kosongi saja.)</td>
                                 </tr>
                             </table>
                         </li>

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class HrdDashboardController extends Controller
 {
@@ -180,6 +181,7 @@ class HrdDashboardController extends Controller
         }
         /*End Jml Awal Semua Pegawai*/
 
+        /* Jml data Presensi bulan ini */
         for ($i = 1; $i <= 12; $i++) {
             $JmlData[$i] = Presensi_harian::whereYear('tanggal', date('Y'))
                 ->whereMonth('tanggal', $i)
@@ -189,12 +191,22 @@ class HrdDashboardController extends Controller
         $JmlDataBulanIni = Presensi_harian::whereYear('tanggal', date('Y'))
             ->whereMonth('tanggal', $bulanIni)
             ->count();
+        /* End Jml data Presensi bulan ini */
 
+
+        /* Get Pegawai WFH hari ini */
+
+        $pegWfh = Presensi_harian::where('tanggal', date('Y-m-d'))
+            ->where('ket', 'Hadir')
+            ->where('is_wfh', 1)->get();
+
+        /* End Get Pegawai WFH hari ini */
         return view('hrd.dashboard', [
             'cuti' => $cuti,
             'pegawaiCuti' => $pegawaiCuti,
             'pegawaiTelat' => $pegawaiTelat,
             'pegawaiDlmPengawasan' => $pegawaiDlmPengawasan,
+            'pegWfh' => $pegWfh,
 
             'JmlCuti' => number_format(($JmlDataBulanIni != 0 ? (($JmlCuti / $JmlDataBulanIni) * 100) : 0), 2),
             'JmlAlpha' => number_format(($JmlDataBulanIni != 0 ? (($JmlAlpha / $JmlDataBulanIni) * 100) : 0), 2),
@@ -409,7 +421,13 @@ class HrdDashboardController extends Controller
 
 
 
-        //Pegawai Dalam Pengawasan
+        /* Get Pegawai WFH hari ini */
+
+        $pegWfh = Presensi_harian::where('tanggal', date('Y-m-d'))
+            ->where('ket', 'Hadir')
+            ->where('is_wfh', 1)->get();
+
+        /* End Get Pegawai WFH hari ini */
 
 
         return view('hrd.dashboard', [
@@ -425,6 +443,8 @@ class HrdDashboardController extends Controller
             'bulanIni' => $bulanIni,
 
             'pegawaiDlmPengawasan' => $pegawaiDlmPengawasan,
+            'pegWfh' => $pegWfh,
+
 
 
             'JanTelat' => number_format(($JmlData[1] != 0 ? ($Telat[1] / $JmlData[1] * 100) : 0), 2),

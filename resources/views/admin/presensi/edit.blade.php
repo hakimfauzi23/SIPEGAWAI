@@ -105,7 +105,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group ">
                                 <label for="inputState">Jam Datang</label>
                                 <input type="time" name="jam_dtg" class="form-control" value="{{ $presensi->jam_dtg }}">
@@ -117,7 +117,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group ">
                                 <label for="inputState">Jam Pulang</label>
                                 <input type="time" name="jam_plg" class="form-control" value="{{ $presensi->jam_plg }}">
@@ -127,8 +127,26 @@
                                     </div>
                                 @endif
                             </div>
-
                         </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label for="inputState">Apakah WFH?</label>
+                                <select class="select" data-placeholder="Ya/Tidak" name="is_wfh">
+                                    <option value=""></option>
+                                    <option {{ $presensi->is_wfh == '1' ? 'selected' : '' }} value="1">
+                                        Ya </option>
+                                    <option {{ $presensi->is_wfh == '' ? 'selected' : '' }} value="0">
+                                        Tidak </option>
+                                </select>
+
+                                @if ($errors->has('jam_plg'))
+                                    <div class="text-danger">
+                                        {{ $errors->first('jam_plg') }}
+                                    </div>
+                                @endif
+                            </div>
+
                     </div>
 
                     <div class="">
