@@ -28,6 +28,7 @@ use App\Http\Controllers\GajiController;
 use App\Http\Controllers\Hrd\HrdDashboardController;
 use App\Http\Controllers\ManajemenPerusahaanController;
 use App\Http\Controllers\ManajemenRoleMenuController;
+use App\Http\Controllers\PenilaianKinerjaController;
 use App\Http\Controllers\PotonganController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfilController;
@@ -219,7 +220,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('perusahaan', ManajemenPerusahaanController::class);
 
 
-    //Open Slip Gaji Pegawai
+    //Penilaian Kinerja Karyawan
+    Route::resource('penilaian', PenilaianKinerjaController::class);
+    Route::get('/penilaian/createData/{data}', [PenilaianKinerjaController::class, 'createData'])->name('penilaian.createData');
+
 
 });
 

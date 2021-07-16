@@ -189,6 +189,50 @@
 
                 </div>
             </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <h6 class="panel-title">10 Pegawai Terbaik Bulan ini</h6>
+                </div>
+
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table  table-xs">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Nama</th>
+                                    <th>Divisi  </th>
+                                </tr>
+                            </thead>
+                            @php
+                                $no = 1;
+                            @endphp
+                            @if ($top10->count())
+                                <tbody>
+                                    @foreach ($top10 as $key => $p)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td> {{ $p->pegawai->nama }}</td>
+                                            <td> {{ $p->pegawai->divisi->nm_divisi }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            @else
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>Belum Ada Data!!</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            @endif
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection

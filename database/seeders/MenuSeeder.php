@@ -22,10 +22,11 @@ class MenuSeeder extends Seeder
             'Data Jabatan', 'List Data Jabatan', 'Data Riwayat Jabatan', 'Data Divisi', 'List Data Divisi',
             'Data Riwayat Divisi', 'Data Presensi', 'List Data Presensi', 'Rekapan Data Presensi Pegawai', 'Data Cuti',
             'List Data Cuti', 'Atur Tanggal Cuti Bersama', 'Pengajuan Cuti (Tahap HRD)', 'Rekapan Data Cuti Pegawai', 'Data Gaji',
-            'Data Tunjangan', 'Data Potongan', 'Data Slip Gaji ', 'Surat Peringatan', 'Export Kinerja Pegawai'
+            'Data Tunjangan', 'Data Potongan', 'Data Slip Gaji ', 'Surat Peringatan', 'Export Kinerja Pegawai',
+            'Penilaian Karyawan',
         ];
 
-        // 4 = Menu Staff
+        // 3 = Menu Staff
         // 12 = Data Jabatan
         // 15 = Data Divisi
         // 18 = Data Presensi
@@ -38,7 +39,8 @@ class MenuSeeder extends Seeder
             null, 12, 12, null, 15,
             15, null, 18, 18, null,
             21, 21, 21, 21, null,
-            26, 26, 26, null, null
+            26, 26, 26, null, null,
+            3,
         ];
 
         $url = [
@@ -47,7 +49,8 @@ class MenuSeeder extends Seeder
             null, 'jabatan', 'riwayatJabatan', null, 'divisi',
             'riwayatDivisi', null, 'presensi', 'rekapPresensi', null,
             'cuti', 'cuti/cutiBersama', 'hrdPengajuanCuti', 'rekapCuti', null,
-            'tunjangan', 'potongan', 'gaji', 'suratPeringatan', 'report'
+            'tunjangan', 'potongan', 'gaji', 'suratPeringatan', 'report',
+            'penilaian',
         ];
 
         $icon = [
@@ -57,6 +60,7 @@ class MenuSeeder extends Seeder
             null, 'icon-notebook', null, null, 'icon-furniture',
             null, null, null, null, 'icon-cash3',
             null, null, null, ' icon-file-text2', 'icon-magazine',
+            null,
 
         ];
 
@@ -83,6 +87,7 @@ class MenuSeeder extends Seeder
             8, 9, 9, 9, 10,
             10, 10, 10, 10, 11,
             11, 11, 11, 12, 13,
+            3,
 
         ];
 

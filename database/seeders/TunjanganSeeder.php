@@ -23,14 +23,17 @@ class TunjanganSeeder extends Seeder
                 [
                     'nama' => 'Tunjangan Makan',
                     'jumlah' => 200000,
+                    'is_shown' => 1,
                 ],
                 [
                     'nama' => 'Tunjangan Anak (Per Anak)',
                     'jumlah' => 2,
+                    'is_shown' => 0,
                 ],
                 [
                     'nama' => 'Tunjangan Keluarga',
                     'jumlah' => 10,
+                    'is_shown' => 0,
                 ],
             ]);
         }

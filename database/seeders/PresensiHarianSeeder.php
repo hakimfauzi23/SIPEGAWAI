@@ -24,17 +24,30 @@ class PresensiHarianSeeder extends Seeder
 
         foreach ($pegawai as $id_peg) {
 
-            for ($x = 1; $x <= 12; $x++) {
-                for ($i = 1; $i <= 22; $i++) {
-                    DB::table('presensi_harian')->insert([
-                        'id_pegawai' => $id_peg,
-                        'tanggal' => date("Y-$x-$i"),
-                        'ket' => $ket[$faker->numberBetween(0, 2)],
-                        'jam_dtg' => $faker->time('8:i'),
-                        'jam_plg' => $faker->time('16:i'),
-                    ]);
-                }
+            for ($i = 1; $i <= 22; $i++) {
+                DB::table('presensi_harian')->insert([
+                    'id_pegawai' => $id_peg,
+                    'tanggal' => date("Y-m-d"),
+                    'ket' => $ket[0],
+                    'jam_dtg' => $faker->time('8:i'),
+                    'jam_plg' => $faker->time('16:i'),
+                    'is_wfh' => 1,
+                ]);
             }
+
+
+            // for ($x = 1; $x <= 12; $x++) {
+            //     for ($i = 1; $i <= 22; $i++) {
+            //         DB::table('presensi_harian')->insert([
+            //             'id_pegawai' => $id_peg,
+            //             'tanggal' => date("Y-$x-$i"),
+            //             'ket' => $ket[$faker->numberBetween(0, 2)],
+            //             'jam_dtg' => $faker->time('8:i'),
+            //             'jam_plg' => $faker->time('16:i'),
+            //             'jam_plg' => $faker->time('16:i'),
+            //         ]);
+            //     }
+            // }
         }
     }
 }

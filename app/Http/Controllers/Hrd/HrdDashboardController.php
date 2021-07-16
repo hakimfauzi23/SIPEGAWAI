@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Hrd;
 use App\Http\Controllers\Controller;
 use App\Models\Cuti;
 use App\Models\Pegawai;
+use App\Models\PenilaianPegawai;
 use App\Models\Peraturan;
 use App\Models\Presensi_harian;
 use App\Models\SuratPeringatan;
@@ -201,12 +202,21 @@ class HrdDashboardController extends Controller
             ->where('is_wfh', 1)->get();
 
         /* End Get Pegawai WFH hari ini */
+
+        /* Get top 10 Pegawai */
+        $top10 = PenilaianPegawai::whereMonth('tanggal', date('m'))
+            ->whereYear('tanggal', date('Y'))
+            ->orderBy('final_value', 'DESC')
+            ->paginate(10);
+        /* End Get top 10 Pegawai */
+
         return view('hrd.dashboard', [
             'cuti' => $cuti,
             'pegawaiCuti' => $pegawaiCuti,
             'pegawaiTelat' => $pegawaiTelat,
             'pegawaiDlmPengawasan' => $pegawaiDlmPengawasan,
             'pegWfh' => $pegWfh,
+            'top10' => $top10,
 
             'JmlCuti' => number_format(($JmlDataBulanIni != 0 ? (($JmlCuti / $JmlDataBulanIni) * 100) : 0), 2),
             'JmlAlpha' => number_format(($JmlDataBulanIni != 0 ? (($JmlAlpha / $JmlDataBulanIni) * 100) : 0), 2),
