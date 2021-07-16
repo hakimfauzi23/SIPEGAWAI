@@ -33,6 +33,18 @@ class PenilaianKinerjaController extends Controller
         ]);
     }
 
+    public function showAll()
+    {
+        $penilaian = PenilaianPegawai::whereYear('tanggal', date('Y'))
+            ->whereMonth('tanggal', date('m'))
+            ->orderBy('final_value', 'DESC')
+            ->get();
+
+        return view('admin.penilaian.showAll', [
+            'penilaian' => $penilaian,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -218,8 +230,7 @@ class PenilaianKinerjaController extends Controller
 
         Alert::success('success', ' Berhasil Update Data !');
         return redirect(route('penilaian.show', Crypt::encryptString($penilaian->id_pegawai)));
-
-}
+    }
 
     /**
      * Remove the specified resource from storage.

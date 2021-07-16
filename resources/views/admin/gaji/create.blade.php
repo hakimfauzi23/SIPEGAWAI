@@ -132,14 +132,15 @@
                     <div class="form-group">
                         <label class="display-block text-semibold">Tunjangan yg Didapatkan</label>
                         <ul>
-                            @if ($tunjangan->count())
+                            @if ($tunjangan->count() || $tunj_status->count() || ($tunj_anak->count() || $tunj_kinerja->count()))
                                 @php
                                     $val_tunj_ori = 0;
                                 @endphp
                                 @foreach ($tunjangan as $item)
                                     @if ($item->is_active != 0)
                                         <li>{{ $item->nama . ': ' }} @currency($item->jumlah)</li>
-                                        <input name="tunj_ori" type="hidden" value="{{ $val_tunj_ori += $item->jumlah }}">
+                                        <input name="tunj_ori" type="hidden"
+                                            value="{{ $val_tunj_ori += $item->jumlah }}">
                                     @endif
                                 @endforeach
                                 @if ($status == 'Menikah' && $tunj_status->is_active == 1)
@@ -153,6 +154,10 @@
                                         @currency($pegawai->jabatan->gaji_pokok)</li>
                                     <input name="tunj_anak" type="hidden"
                                         value="{{ $jml_anak * ($tunj_anak->jumlah / 100) * $pegawai->jabatan->gaji_pokok }}">
+                                @endif
+                                @if ($tunj_kinerja != null)
+                                    <li>{{ $tunj_kinerja->nama . ': ' }} @currency($tunj_kinerja->jumlah)</li>
+                                    <input name="tunj_kinerja" type="hidden" value="{{ $tunj_kinerja->jumlah }}">
                                 @endif
                             @else
                                 <li>Pegawai tidak terdaftar tunjangan apapun.</li>

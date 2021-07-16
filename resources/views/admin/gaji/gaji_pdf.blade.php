@@ -138,6 +138,12 @@
                             <td class="text-right">: @currency($tunj_anak)</td>
                         </tr>
                     @endif
+                    @if ($tunj_kinerja != 0)
+                        <tr>
+                            <td>{{ 'Tunjangan Kinerja' }}</td>
+                            <td class="text-right">: @currency($tunj_kinerja)</td>
+                        </tr>
+                    @endif
                     <tr style="font-weight: bold;">
                         <td>Total Pemasukan(A)</td>
                         <td class="text-right">@currency($tot_pemasukan)</td>

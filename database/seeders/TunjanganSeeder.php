@@ -35,6 +35,11 @@ class TunjanganSeeder extends Seeder
                     'jumlah' => 10,
                     'is_shown' => 0,
                 ],
+                [
+                    'nama' => 'Tunjangan Kinerja',
+                    'jumlah' => 300000,
+                    'is_shown' => 0,
+                ],
             ]);
         }
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gaji;
 use App\Models\Pegawai;
+use App\Models\PenilaianPegawai;
 use App\Models\Peraturan;
 use App\Models\Perusahaan;
 use App\Models\Potongan;
@@ -76,7 +77,20 @@ class GajiController extends Controller
             $jml_anak = 2;
         }
 
-        // dd($jml_anak);
+        // Process tunjangan kinerja
+        $haystackPeg = PenilaianPegawai::whereYear('tanggal', date('Y'))
+            ->whereMonth('tanggal', date('m'))
+            ->orderBy('final_value', 'desc')
+            ->paginate(10)->pluck('id_pegawai');
+
+        $tunj_kinerja = 0;
+
+        if (in_array($id, json_decode($haystackPeg)) === true) {
+            $tunj_kinerja = Tunjangan::where('nama', 'LIKE', '%kinerja%')->first();
+        }
+
+
+        // dd($tunj_kinerja);
 
         return view('admin.gaji.create', [
             'id' => $data,
@@ -87,6 +101,7 @@ class GajiController extends Controller
             'status' => $status,
             'tunj_status' => $tunj_status,
             'tunj_anak' => $tunj_anak,
+            'tunj_kinerja' => $tunj_kinerja,
         ]);
     }
 
@@ -137,16 +152,15 @@ class GajiController extends Controller
             $tunj_ori = $request->tunj_ori;
             $tunj_status = $request->tunj_status;
             $tunj_anak = $request->tunj_anak;
-
-            // dd($tunj_ori);
+            $tunj_kinerja = $request->tunj_kinerja;
 
             // Get Potongan
             $pot = $pegawai->potongan;
-            if ($tunj_ori == null && $tunj_anak == null && $tunj_status == null) {
+            if ($tunj_ori == null && $tunj_anak == null && $tunj_status == null && $tunj_kinerja == null) {
                 $tunjangan = 0;
                 $att_tunjangan = [];
             } else {
-                $tunjangan = $tunj_ori + $tunj_status + $tunj_anak;
+                $tunjangan = $tunj_ori + $tunj_status + $tunj_anak + $tunj_kinerja;
                 $att_tunjangan = $tunj;
             }
 
@@ -203,6 +217,7 @@ class GajiController extends Controller
                 //Tunjangan Keluarga & Anak
                 'tunj_status' => $tunj_status,
                 'tunj_anak' => $tunj_anak,
+                'tunj_kinerja' => $tunj_kinerja,
             ];
 
             $pdf = PDF::loadView('admin.gaji.gaji_pdf', $data)->setPaper('a4', 'potrait');;

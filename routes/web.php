@@ -221,6 +221,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     //Penilaian Kinerja Karyawan
+    Route::get('/penilaian/showAll', [PenilaianKinerjaController::class, 'showAll'])->name('penilaian.showAll');
     Route::resource('penilaian', PenilaianKinerjaController::class);
     Route::get('/penilaian/createData/{data}', [PenilaianKinerjaController::class, 'createData'])->name('penilaian.createData');
 

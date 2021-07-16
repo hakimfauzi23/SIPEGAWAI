@@ -99,6 +99,12 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
+                            <td><a href="" data-toggle="modal" data-target="#modal_iconified">
+                                    <i class="icon-info22"></i> Lihat riwayat cuti pegawai</a></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
                             <td>Tipe Cuti</td>
                             <td>:</td>
                             <td>{{ $cuti->tipe_cuti }}</td>
@@ -165,4 +171,90 @@
         </div>
 
     </div>
+
+    <!-- Iconified modal -->
+    <div id="modal_iconified" class="modal fade">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title"><i class="icon-info3"></i> &nbsp;Riwayat Data Cuti Pegawai Tahun Ini
+                    </h5>
+                </div>
+                <div class="modal-body" id="list_item">
+                    <div class="row">
+                        <div class="col">
+                            <legend class="text-bold"></i> A. Riwayat Cuti Terakhir
+                            </legend>
+                        </div>
+                        <table id="classTable" class="table ">
+                            <thead>
+                                <tr>
+                                    <th> No</th>
+                                    <th> Tanggal Mulai</th>
+                                    <th> Tanggal Selesai</th>
+                                    <th> Tipe Cuti </th>
+                                    <th> Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i = 1; ?>
+                                @if ($riwayatCuti->count())
+                                    @foreach ($riwayatCuti as $item)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ $item->tgl_mulai }}</td>
+                                            <td>{{ $item->tgl_selesai }}</td>
+                                            <td>{{ $item->tipe_cuti }}</td>
+                                            <td>{{ $item->ket }}</td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Belum ada data</td>
+                                        <td></td>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-3"></div>
+                    <div class="row">
+                        <div class="col">
+                            <legend class="text-bold"></i> B. Detail Cuti Terpakai
+                            </legend>
+                        </div>
+                        <table id="classTable" class="table ">
+                            <thead>
+                                <tr>
+                                    <th> Tahunan</th>
+                                    <th> Bersama</th>
+                                    <th> Penting</th>
+                                    <th> Besar </th>
+                                    <th> Sakit</th>
+                                    <th> Hamil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i = 1; ?>
+                                <tr>
+                                    <td>{{ $cutiTahunan . ' / ' . $batasTahunan }}</td>
+                                    <td>{{ $cutiBersama . ' / ' . $batasBersama }}</td>
+                                    <td>{{ $cutiPenting . ' / ' . $batasPenting }}</td>
+                                    <td>{{ $cutiBesar . ' / ' . $batasBesar }}</td>
+                                    <td>{{ $cutiSakit . ' / ' . $batasSakit }}</td>
+                                    <td>{{ $cutiHamil . ' / ' . $batasHamil }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /iconified modal -->
 @endsection

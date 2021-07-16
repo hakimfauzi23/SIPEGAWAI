@@ -202,7 +202,7 @@
                                 <tr>
                                     <th>Rank</th>
                                     <th>Nama</th>
-                                    <th>Divisi  </th>
+                                    <th>Divisi </th>
                                 </tr>
                             </thead>
                             @php
@@ -217,6 +217,11 @@
                                             <td> {{ $p->pegawai->divisi->nm_divisi }}</td>
                                         </tr>
                                     @endforeach
+                                    <tr>
+                                        <td></td>
+                                        <td><a href="{{ route('penilaian.showAll') }}">Lihat selengkapnya</a></td>
+                                        <td></td>
+                                    </tr>
                                 </tbody>
                             @else
                                 <tbody>
