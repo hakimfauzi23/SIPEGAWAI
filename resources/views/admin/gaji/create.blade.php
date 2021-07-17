@@ -137,7 +137,7 @@
                                     $val_tunj_ori = 0;
                                 @endphp
                                 @foreach ($tunjangan as $item)
-                                    @if ($item->is_active != 0)
+                                    @if ($item->is_active != 0 && $item->is_shown != 0)
                                         <li>{{ $item->nama . ': ' }} @currency($item->jumlah)</li>
                                         <input name="tunj_ori" type="hidden"
                                             value="{{ $val_tunj_ori += $item->jumlah }}">
@@ -169,10 +169,27 @@
                     <div class="form-group">
                         <label class="display-block text-semibold">Potongan yg Didapatkan</label>
                         <ul>
-                            @if ($potongan->count())
+                            @if ($potongan->count() || $pot_bpjs_kes->count())
+                                @php
+                                    $val_pot_ori = 0;
+                                @endphp
                                 @foreach ($potongan as $item)
-                                    <li>{{ $item->nama . ' - ' }} @currency($item->jumlah)</li>
+                                    @if ($item->is_active != 0 && $item->is_shown != 0)
+                                        <li>{{ $item->nama . ' - ' }} @currency($item->jumlah)</li>
+                                        <input name="pot_ori" type="hidden" value="{{ $val_pot_ori += $item->jumlah }}">
+                                    @endif
                                 @endforeach
+                                @if ($pot_bpjs_kes->is_active == 1)
+                                    <li>{{ 'Iuran' . $pot_bpjs_kes->nama . ': 1% X' }}
+                                        @currency($pegawai->jabatan->gaji_pokok)</li>
+                                    <input name="pot_bpjs_kes" type="hidden" value="{{ $hsl_bpjs_kes }}">
+                                @endif
+                                @if ($pot_bpjs_ket->is_active == 1)
+                                    <li>{{ 'Iuran JHT: 2% X' }}
+                                        @currency($pegawai->jabatan->gaji_pokok)</li>
+                                    <input name="pot_bpjs_ket" type="hidden" value="{{ $hsl_bpjs_ket }}">
+                                @endif
+                                <li>{{ 'PPH 21' }}</li>
                             @else
                                 <li>Pegawai tidak terdaftar potongan apapun.</li>
                             @endif

@@ -23,14 +23,27 @@ class PotonganSeeder extends Seeder
                 [
                     'nama' => 'Potongan Keterlambatan (per Hari)',
                     'jumlah' => 50000,
+                    'is_shown' => 0,
                 ],
                 [
                     'nama' => 'Potongan Membolos Kerja (per Hari)',
                     'jumlah' => 150000,
+                    'is_shown' => 0,
                 ],
                 [
-                    'nama' => 'Potongan BPJS',
-                    'jumlah' => 33000,
+                    'nama' => 'Potongan BPJS Kesehatan',
+                    'jumlah' => 0,
+                    'is_shown' => 0,
+                ],
+                [
+                    'nama' => 'Potongan BPJS Ketenagakerjaan',
+                    'jumlah' => 0,
+                    'is_shown' => 0,
+                ],
+                [
+                    'nama' => 'Potongan PPH 21',
+                    'jumlah' => 0,
+                    'is_shown' => 0,
                 ],
             ]);
         }

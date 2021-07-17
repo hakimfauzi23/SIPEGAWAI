@@ -89,8 +89,21 @@ class GajiController extends Controller
             $tunj_kinerja = Tunjangan::where('nama', 'LIKE', '%kinerja%')->first();
         }
 
+        // Process potongan BPJS Kesehatan
+        $pot_bpjs_kes = Potongan::where('nama', 'LIKE', '%kesehatan%')->first();
+        $hsl_bpjs_kes = 0;
+        if ($pegawai->jabatan->gaji_pokok < 12000000) {
 
-        // dd($tunj_kinerja);
+            $hsl_bpjs_kes = + (0.01 * $pegawai->jabatan->gaji_pokok);
+        } else {
+
+            $hsl_bpjs_kes = + (0.01 * 12000000);
+        }
+
+        // Process potongan BPJS Ketenagakerjaan
+        $pot_bpjs_ket = Potongan::where('nama', 'LIKE', '%kerjaan%')->first();
+        $hsl_bpjs_ket = 0.02 * $pegawai->jabatan->gaji_pokok;
+
 
         return view('admin.gaji.create', [
             'id' => $data,
@@ -102,6 +115,10 @@ class GajiController extends Controller
             'tunj_status' => $tunj_status,
             'tunj_anak' => $tunj_anak,
             'tunj_kinerja' => $tunj_kinerja,
+            'pot_bpjs_kes' => $pot_bpjs_kes,
+            'hsl_bpjs_kes' => $hsl_bpjs_kes,
+            'pot_bpjs_ket' => $pot_bpjs_ket,
+            'hsl_bpjs_ket' => $hsl_bpjs_ket,
         ]);
     }
 
@@ -116,8 +133,15 @@ class GajiController extends Controller
     {
         $id = Crypt::decryptString($request->data);
         $pegawai = Pegawai::find($id);
+        // Get Status
+        $status = $pegawai->status;
 
-        // dd([$request->tunj_status, $request->tunj_anak]);
+        // Get Jumlah Anak
+        $jml_anak = $pegawai->jml_anak;
+        if ($jml_anak > 2) {
+            $jml_anak = 2;
+        }
+
 
         $this->validate($request, [
             'dari' => 'required',
@@ -156,6 +180,12 @@ class GajiController extends Controller
 
             // Get Potongan
             $pot = $pegawai->potongan;
+
+            // Get Value Potongan
+            $pot_ori = $request->pot_ori;
+            $pot_bpjs_kes = $request->pot_bpjs_kes;
+            $pot_bpjs_ket = $request->pot_bpjs_ket;
+
             if ($tunj_ori == null && $tunj_anak == null && $tunj_status == null && $tunj_kinerja == null) {
                 $tunjangan = 0;
                 $att_tunjangan = [];
@@ -164,11 +194,11 @@ class GajiController extends Controller
                 $att_tunjangan = $tunj;
             }
 
-            if ($pot == null) {
+            if ($pot_ori == null && $pot_bpjs_kes == null && $pot_bpjs_ket) {
                 $potongan = 0;
                 $att_potongan = [];
             } else {
-                $potongan = $pot->sum('jumlah');
+                $potongan = $pot_ori + $pot_bpjs_kes + $pot_bpjs_ket;
                 $att_potongan = $pot;
             }
 
@@ -190,11 +220,48 @@ class GajiController extends Controller
             $jml_ptgn_telat = $telat * $pot_telat;
             $jml_ptgn_bolos = $bolos * $pot_bolos;
 
+
             $perusahaan = Perusahaan::orderBy('id', 'desc')->first();
             $jml_tunj = (int)$tunjangan;
-            $jml_ptgn = (int)$potongan + $jml_ptgn_telat + $jml_ptgn_bolos;
+            // Process potongan PPH 21
+            $ptkp = 0;
+            if ($status == 'Menikah' && $jml_anak != 0) {
+                $ptkp += (54000000 + 4500000 + ($jml_anak * 4500000));
+            } elseif ($status == 'Lajang' && $jml_anak != 0) {
+                $ptkp += (54000000 + ($jml_anak * 4500000));
+            } else {
+                $ptkp += 54000000;
+            }
+
+            $gaji_pokok_tahunan = 12 * $pegawai->jabatan->gaji_pokok;
+            $jml_tunj_tahunan = 12 * $tunjangan;
+            $jml_potongan_tahunan = 12 * $potongan;
+
+            $upah_neto = (($gaji_pokok_tahunan + $jml_tunj_tahunan) - $jml_potongan_tahunan);
+
+            $pkp = $upah_neto - $ptkp;
+            $pkp_op = $pkp;
+            $pph_terhutang = 0;
+
+            if ($pkp <= 50000000) {
+                $pph_terhutang += 0.05 * $pkp;
+            } elseif ($pkp >= 5000000 && $pkp <= 250000000) {
+                $pph_terhutang += 0.05 * 50000000;
+                $pkp_op -= 50000000;
+                $pph_terhutang += 0.15 * $pkp_op;
+            } else {
+                $pph_terhutang += 0.05 * 50000000;
+                $pkp_op -= 50000000;
+                $pph_terhutang += 0.15 * 250000000;
+                $pkp_op -= 250000000;
+                $pph_terhutang += 0.25 * $pkp_op;
+            }
+
+            $jml_ptgn_pph = $pph_terhutang / 12;
+            $jml_ptgn = (int)$potongan + $jml_ptgn_telat + $jml_ptgn_bolos + $jml_ptgn_pph;
             $tot_gaji_diterima = ($gaji_pokok + $jml_tunj) - $jml_ptgn;
             $tot_pemasukan = $gaji_pokok + $jml_tunj;
+
             $data  = [
                 'att_tunjangan' => $att_tunjangan,
                 'att_potongan' => $att_potongan,
@@ -218,6 +285,13 @@ class GajiController extends Controller
                 'tunj_status' => $tunj_status,
                 'tunj_anak' => $tunj_anak,
                 'tunj_kinerja' => $tunj_kinerja,
+
+                //Potongan BPJS KES & KET
+                'pot_bpjs_kes' => $pot_bpjs_kes,
+                'pot_bpjs_ket' => $pot_bpjs_ket,
+
+                //Potongan PPH per Bulan
+                'pot_pph' => $jml_ptgn_pph,
             ];
 
             $pdf = PDF::loadView('admin.gaji.gaji_pdf', $data)->setPaper('a4', 'potrait');;

@@ -127,17 +127,23 @@ class PotonganController extends Controller
         Alert::success('success', ' Berhasil Update Data !');
         return redirect('potongan');
     }
-
-    public function updateVisible(Request $request, $data)
+    public function isActive(Request $request, $data)
     {
         $id = Crypt::decryptString($data);
-
-        $potongan = Potongan::find($id);
-        $potongan->is_active = $request->is_active;
-        $potongan->save();
+        $tunj = Potongan::find($id);
+        $tunj->is_active = $request->is_active;
+        $tunj->save();
         return redirect('potongan');
-
     }
+    public function isShown(Request $request, $data)
+    {
+        $id = Crypt::decryptString($data);
+        $tunj = Potongan::find($id);
+        $tunj->is_shown = $request->is_shown;
+        $tunj->save();
+        return redirect('potongan');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

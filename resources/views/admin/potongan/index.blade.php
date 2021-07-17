@@ -66,28 +66,63 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $p->nama }}</td>
-                                <td> @currency($p->jumlah)</td>
+                                <td>
+                                    @if (stripos($p->nama, 'pph') || stripos($p->nama, 'bpjs'))
+                                        {{ 'Sesuai UU' }}
+                                    @else
+                                        @currency($p->jumlah)
+                                    @endif
+                                </td>
                                 <td class="text-center">
-                                    <form method="POST" action="{{ route('potongan.active', $encyrpt) }}">
-                                        {{ csrf_field() }}
-                                        {{ method_field('PUT') }}
+                                    <div style="float:left;">
+                                        <form method="POST" action="{{ route('potongan.isActive', $encyrpt) }}"
+                                            id="formActive">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PUT') }}
 
-                                        @if ($p->is_active == 1)
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" class="styled" value="0" name="is_active" onchange="this.form.submit()" checked>
-                                                Active
-                                            </label>
-                                            {{-- <input type="checkbox" name="is_active" value="0" checked
-                                                onchange="this.form.submit()"> --}}
-                                                @else
+
+                                            @if ($p->is_active == 1)
                                                 <label class="checkbox-inline">
-                                            <input type="checkbox" class="styled" value="1" name="is_active" onchange="this.form.submit()">
-                                            Active
-                                        </label>
+                                                    <input type="checkbox" class="styled" value="0" name="is_active"
+                                                        onchange="this.form.submit()" checked>
+                                                    Active
+                                                </label>
+                                            @else
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" class="styled" value="1" name="is_active"
+                                                        onchange="this.form.submit()">
+                                                    Active
+                                                </label>
+                                            @endif
 
-                                            {{-- <input type="checkbox" name="is_active" value="1" onchange="this.form.submit()"> --}}
-                                        @endif
-                                    </form>
+                                        </form>
+                                    </div>
+
+                                    <div style="width:50%; margin:auto;">
+                                        <div style="display:inline-block; width:45%;text-align:center;">
+                                            <form method="POST" action="{{ route('potongan.isShown', $encyrpt) }}"
+                                                id="formShown">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PUT') }}
+
+
+                                                @if ($p->is_shown == 1)
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="styled" value="0" name="is_shown"
+                                                            onchange="this.form.submit()" checked>
+                                                        Shown
+                                                    </label>
+                                                @else
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" class="styled" value="1" name="is_shown"
+                                                            onchange="this.form.submit()">
+                                                        Shown
+                                                    </label>
+                                                @endif
+
+                                            </form>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td hidden><span class="label label-success">Active</span></td>
                                 <td class="text-center">
@@ -98,12 +133,17 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="{{ route('potongan.destroy', $encyrpt) }}"><i
-                                                            class=" icon-trash"></i> Hapus</a>
-                                                </li>
-                                                <li><a href="{{ route('potongan.edit', $encyrpt) }}"><i
-                                                            class=" icon-pencil5"></i> Edit</a>
-                                                </li>
+                                                @if (stripos($p->nama, 'pph') || stripos($p->nama, 'bpjs'))
+                                                    <li>'Apabila ingin mematikan hapus centang 'is shown' & 'is active'</li>
+                                                @else
+                                                    <li><a href="{{ route('potongan.destroy', $encyrpt) }}"><i
+                                                                class=" icon-trash"></i> Hapus</a>
+                                                    </li>
+                                                    <li><a href="{{ route('potongan.edit', $encyrpt) }}"><i
+                                                                class=" icon-pencil5"></i> Edit</a>
+                                                    </li>
+                                                @endif
+
                                             </ul>
                                         </li>
                                     </ul>

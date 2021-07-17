@@ -195,7 +195,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('potongan', PotonganController::class);
     Route::get('/potongan/destroy/{data}', [PotonganController::class, 'destroy'])->name('potongan.destroy');
-    Route::put('potongan/updateVisbility/{data}', [PotonganController::class, 'updateVisible'])->name('potongan.active');
+    Route::put('/potongan/isActive/{data}', [PotonganController::class, 'isActive'])->name('potongan.isActive');
+    Route::put('/potongan/isShown/{data}', [PotonganController::class, 'isShown'])->name('potongan.isShown');
 
     Route::resource('gaji', GajiController::class);
     Route::get('/gaji/createData/{data}', [GajiController::class, 'createData'])->name('gaji.createData');

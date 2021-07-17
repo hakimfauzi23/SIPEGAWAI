@@ -154,14 +154,36 @@
                         <td></td>
                         <td class="text-right">POTONGAN</td>
                     </tr>
-                    <tr>
-                        <td>Potongan Keterlambatan</td>
-                        <td class="text-right">:@currency($jml_ptgn_telat)</td>
-                    </tr>
-                    <tr>
-                        <td>Potongan Membolos</td>
-                        <td class="text-right">: @currency($jml_ptgn_bolos)</td>
-                    </tr>
+                    @if ($jml_ptgn_telat != 0)
+                        <tr>
+                            <td>Potongan Keterlambatan</td>
+                            <td class="text-right">:@currency($jml_ptgn_telat)</td>
+                        </tr>
+                    @endif
+                    @if ($jml_ptgn_bolos != 0)
+                        <tr>
+                            <td>Potongan Membolos</td>
+                            <td class="text-right">: @currency($jml_ptgn_bolos)</td>
+                        </tr>
+                    @endif
+                    @if ($pot_bpjs_kes != 0)
+                        <tr>
+                            <td>{{ 'Iuran BPJS Kesehatan' }}</td>
+                            <td class="text-right">: @currency($pot_bpjs_kes)</td>
+                        </tr>
+                    @endif
+                    @if ($pot_bpjs_ket != 0)
+                        <tr>
+                            <td>{{ 'Iuran BPJS Ketenagakerjaan (JHT)' }}</td>
+                            <td class="text-right">: @currency($pot_bpjs_ket)</td>
+                        </tr>
+                    @endif
+                    @if ($pot_pph != 0)
+                        <tr>
+                            <td>{{ 'Potongan PPH 21' }}</td>
+                            <td class="text-right">: @currency($pot_pph)</td>
+                        </tr>
+                    @endif
                     @foreach ($att_potongan as $p)
                         <tr>
                             <td>{{ $p->nama }}</td>
