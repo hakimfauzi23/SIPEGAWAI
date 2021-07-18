@@ -26,7 +26,7 @@ class RiwayatJabatanController extends Controller
     public function index()
     {
         //
-        $pegawai = Pegawai::all();
+        $pegawai = Pegawai::paginate(20);
         return view('admin.riwayatJabatan.index', [
             'pegawai' => $pegawai,
         ]);
@@ -136,7 +136,7 @@ class RiwayatJabatanController extends Controller
         //
 
         $id = Crypt::decryptString($data);
-        
+
         $this->validate($request, [
             'id_jabatan' => 'required',
             'tgl_mulai' => 'required',

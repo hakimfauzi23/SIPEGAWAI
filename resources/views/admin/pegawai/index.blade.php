@@ -49,8 +49,18 @@
             </div>
 
             <div class="panel-body">
-
-                <table class="table datatable-basic table-bordered table-striped table-hover ">
+                <div class="text-right mb-4">
+                    <form action="{{ route('pegawai.search') }}" method="GET">
+                        <input type="hidden" name="page" value="{{ $pegawai->currentPage() }}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Cari sesuatu . . ." name="query">
+                            <span class="input-group-btn">
+                                <input class="btn bg-teal" type="submit" value="Search">
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <table class="table table-bordered table-striped table-hover ">
                     <thead class="bg-primary">
                         <tr>
                             <th>No</th>
@@ -113,10 +123,22 @@
                                     </td>
                                 </tr>
                             @endforeach
+                        @else
+                            <tr>
+                                <td colspan="3" class="text-center"> Data tidak ada!</td>
+                            </tr>
                         @endif
 
                     </tbody>
                 </table>
+                <div class="text-right">
+                    <div class="mt-4">
+                        {{ $pegawai->links() }}
+                    </div>
+                    <div class="mt-4">
+                        {{ 'Total Data: ' . $pegawai->total() }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

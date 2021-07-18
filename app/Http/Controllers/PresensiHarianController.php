@@ -26,16 +26,16 @@ class PresensiHarianController extends Controller
     public function index()
     {
         //
-        $dari = date("Y-m-d");
-        $ke = date("Y-m-d");
+        $today = \Carbon\Carbon::now(); //Current Date and Time
 
-        $presensi = Presensi_harian::where('tanggal', date("Y-m-d"))->get();
-        // dd($presensi);
+        $dari = date("Y-m-01");
+        $ke = \Carbon\Carbon::parse($today)->endOfMonth()->toDateString();;
+
+        $presensi = Presensi_harian::whereBetween('tanggal', [$dari, $ke])->paginate(20);
         return view('admin.presensi.index', [
             'presensi' => $presensi,
             'dari' => $dari,
             'ke' => $ke,
-
         ]);
     }
 
@@ -43,8 +43,8 @@ class PresensiHarianController extends Controller
     {
         $dari = $request->dari;
         $ke = $request->ke;
-        // dd($ke);
-        $presensi = Presensi_harian::whereBetween('tanggal', [$dari, $ke])->get();
+        $presensi = Presensi_harian::whereBetween('tanggal', [$dari, $ke])->paginate(20);
+        $presensi->appends($request->all());
         return view('admin.presensi.index', [
             'presensi' => $presensi,
             'dari' => $dari,

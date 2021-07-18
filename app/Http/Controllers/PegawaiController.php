@@ -39,7 +39,7 @@ class PegawaiController extends Controller
     public function index()
     {
         //
-        $pegawai = Pegawai::all();
+        $pegawai = Pegawai::paginate(20);
         return view('admin.pegawai.index', [
             'pegawai' => $pegawai,
         ]);
@@ -154,7 +154,7 @@ class PegawaiController extends Controller
 
         $int = (int)$request->id_role;
 
-        // Asign Role 
+        // Asign Role
         $user->assignRole($int);
 
         //Asign Tunjangan

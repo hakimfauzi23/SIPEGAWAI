@@ -13,12 +13,6 @@
             </div>
 
         </div>
-
-        <div class="breadcrumb-line">
-            <ul class="breadcrumb">
-                <li><i class="active icon-home2 position-left"></i> Peringkat Pegawai Bulan IniBawahan</li>
-            </ul>
-        </div>
     </div>
 @endsection
 
@@ -26,7 +20,7 @@
     <div class="panel panel-flat">
         <div class="panel-body">
 
-            <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
+            <table class="table table-bordered table-striped table-hover table-xs">
                 <thead class="bg-primary">
                     <tr>
                         <th>Peringkat</th>
@@ -38,11 +32,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; ?>
                     @if ($penilaian->count())
                         @foreach ($penilaian as $key => $p)
                             <tr>
-                                <td class="text-center">{{ $i++ }}</td>
+                                <td class="text-center">{{ $penilaian->firstItem() + $key }}</td>
                                 <td><b>{{ $p->pegawai->id }}</b></span>
                                     <br>
                                     {{ $p->pegawai->nama }}
@@ -91,6 +84,14 @@
 
                 </tbody>
             </table>
+            <div class="text-right">
+                <div class="mt-4">
+                    {{ $penilaian->links() }}
+                </div>
+                <div class="mt-4">
+                    {{ 'Total Data: ' . $penilaian->total() }}
+                </div>
+            </div>
         </div>
     </div>
     <!-- /basic datatable -->

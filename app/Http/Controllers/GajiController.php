@@ -31,9 +31,8 @@ class GajiController extends Controller
         //
 
 
-        $pegawai = Pegawai::all();
+        $pegawai = Pegawai::paginate(20);
 
-        $idPegawai = $pegawai->pluck('id');
         return view('admin.gaji.listPegawai', [
             'pegawai' => $pegawai,
         ]);

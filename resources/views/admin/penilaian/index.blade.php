@@ -26,7 +26,8 @@
     <div class="panel bg-info">
         <div class="panel-heading">
             <em>
-                <h6>Pada halaman merupakan daftar list pegawai yang bisa dipilih untuk dilihat daftar riwayat penilaian per bulan . </h6>
+                <h6>Pada halaman merupakan daftar list pegawai yang bisa dipilih untuk dilihat daftar riwayat penilaian per
+                    bulan . </h6>
             </em>
             <div class="heading-elements">
                 <ul class="icons-list">
@@ -40,8 +41,18 @@
     <div class="panel panel-flat">
 
         <div class="panel-body">
-
-            <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
+            <div class="text-right mb-4">
+                <form action="{{ route('penilaian.search') }}" method="GET">
+                    <input type="hidden" name="page" value="{{ $pegawai->currentPage() }}">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Cari sesuatu . . ." name="query">
+                        <span class="input-group-btn">
+                            <input class="btn bg-teal" type="submit" value="Search">
+                        </span>
+                    </div>
+            </div>
+            </form>
+            <table class="table table-bordered table-striped table-hover table-xs">
                 <thead class="bg-primary">
                     <tr>
                         <th>No</th>
@@ -100,10 +111,23 @@
                                 </td>
                             </tr>
                         @endforeach
+                    @else
+                        <tr>
+                            <td colspan="4" class="text-center"> Data tidak ada!</td>
+                        </tr>
+
                     @endif
 
                 </tbody>
             </table>
+            <div class="text-right">
+                <div class="mt-4">
+                    {{ $pegawai->links() }}
+                </div>
+                <div class="mt-4">
+                    {{ 'Total Data: ' . $pegawai->total() }}
+                </div>
+            </div>
         </div>
     </div>
     <!-- /basic datatable -->

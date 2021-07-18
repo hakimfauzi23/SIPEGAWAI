@@ -50,8 +50,6 @@
                         <div class="alert alert-danger"> {{ session('error') }}</div>
                     @endif
                     <form method="get" action="{{ route('presensi.search') }}">
-
-                        {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -86,7 +84,19 @@
                 </div>
 
                 <div class="panel-body">
-                    <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
+                    <div class="text-right mb-4">
+                        <form action="{{ route('cuti.search.data') }}" method="GET">
+                            <input type="hidden" name="dari" value="{{ $dari }}">
+                            <input type="hidden" name="ke" value="{{ $ke }}">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Cari sesuatu . . ." name="query">
+                                <span class="input-group-btn">
+                                    <input class="btn bg-teal" type="submit" value="Search">
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="table table-bordered table-striped table-hover table-xs">
                         <thead class="bg-primary">
                             <tr>
                                 <th>No</th>
@@ -140,10 +150,21 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="6" class="text-center"> Data tidak ada!</td>
+                                </tr>
                             @endif
-
                         </tbody>
                     </table>
+                    <div class="text-right">
+                        <div class="mt-4">
+                            {{ $presensi->links() }}
+                        </div>
+                        <div class="mt-4">
+                            {{ 'Total Data: ' . $presensi->total() }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -34,6 +34,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ReportKinerjaController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Staff\StaffCutiController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\Staff\StaffPengajuanCutiController;
@@ -71,6 +72,18 @@ Route::post('/reset-password', [ResetPasswordController::class, 'updatePassword'
 
 
 Route::group(['middleware' => ['auth']], function () {
+
+    //Search
+    Route::get('/pegawai/search/', [SearchController::class, 'pegawai'])->name('pegawai.search');
+    Route::get('/penilaian/search/', [SearchController::class, 'penilaian'])->name('penilaian.search');
+    Route::get('/riwayatJabatan/search/', [SearchController::class, 'riwayatJabatan'])->name('riwayatJabatan.search');
+    Route::get('/riwayatDivisi/search/', [SearchController::class, 'riwayatDivisi'])->name('riwayatDivisi.search');
+    Route::get('/rekapPresensi/search/', [SearchController::class, 'rekapPresensi'])->name('rekapPresensi.search.pegawai');
+    Route::get('/rekapCuti/search/', [SearchController::class, 'rekapCuti'])->name('rekapCuti.search.pegawai');
+    Route::get('/gaji/search/', [SearchController::class, 'gaji'])->name('gaji.search.pegawai');
+    Route::get('/report/search/', [SearchController::class, 'report'])->name('report.search.pegawai');
+    Route::get('/presensi/search/', [SearchController::class, 'presensi'])->name('presensi.search.data');
+    Route::get('/cuti/search/', [SearchController::class, 'cuti'])->name('cuti.search.data');
 
 
     //Rekap Presensi Pegawai
@@ -225,8 +238,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/penilaian/showAll', [PenilaianKinerjaController::class, 'showAll'])->name('penilaian.showAll');
     Route::resource('penilaian', PenilaianKinerjaController::class);
     Route::get('/penilaian/createData/{data}', [PenilaianKinerjaController::class, 'createData'])->name('penilaian.createData');
-
-
 });
 
 Auth::routes();

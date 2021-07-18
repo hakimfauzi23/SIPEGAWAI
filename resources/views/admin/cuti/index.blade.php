@@ -49,8 +49,6 @@
                 <div class="panel-body">
 
                     <form method="get" action="{{ route('cuti.search') }}">
-
-                        {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -87,69 +85,94 @@
                 </div>
 
                 <div class="panel-body">
-                    <table class="table datatable-basic table-bordered table-striped table-hover">
-                        <thead class="bg-primary">
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Tipe Cuti</th>
-                                <th class="text-center">Tgl Pengajuan</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1; ?>
-                            @if ($cuti->count())
-                                @foreach ($cuti as $key => $p)
+                    <div class="panel-body">
+                        <div class="text-right mb-4">
+                            <form action="{{ route('cuti.search.data') }}" method="GET">
+                                <input type="hidden" name="dari" value="{{ $dari }}">
+                                <input type="hidden" name="ke" value="{{ $ke }}">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Cari sesuatu . . ." name="query">
+                                    <span class="input-group-btn">
+                                        <input class="btn bg-teal" type="submit" value="Search">
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Tipe Cuti</th>
+                                    <th class="text-center">Tgl Pengajuan</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i = 1; ?>
+                                @if ($cuti->count())
+                                    @foreach ($cuti as $key => $p)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ $p->pegawai->nama }}</td>
+                                            <td>{{ $p->tipe_cuti }}</td>
+                                            <td class="text-center">{{ date('d F Y', strtotime($p->tgl_pengajuan)) }}
+                                            </td>
+                                            <td class="text-center"><span <?php if ($p->status == 'Disetujui HRD' || $p->status == 'Disetujui Atasan') {
+    echo 'class="label bg-success"';
+}
+if ($p->status == 'Ditolak HRD' || $p->status == 'Ditolak Atasan') {
+    echo 'class="label bg-danger"';
+}
+if ($p->status == 'Diproses') {
+    echo 'class="label bg-info"';
+}
+?>>{{ $p->status }}</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <ul class="icons-list">
+                                                    <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="icon-menu9"></i>
+                                                        </a>
+
+                                                        <ul class="dropdown-menu dropdown-menu-right">
+                                                            <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                                            <li><a href="{{ route('cuti.show', $encyrpt) }}"><i
+                                                                        class="icon-file-eye"></i> Detail </a>
+                                                            </li>
+                                                            <li><a href="{{ route('cuti.destroy', $encyrpt) }}"><i
+                                                                        class=" icon-trash"></i> Hapus</a>
+                                                            </li>
+                                                            <li><a href="{{ route('cuti.edit', $encyrpt) }}"><i
+                                                                        class=" icon-pencil5"></i> Edit</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-                                        <td>{{ $i++ }}</td>
-                                        <td>{{ $p->pegawai->nama }}</td>
-                                        <td>{{ $p->tipe_cuti }}</td>
-                                        <td class="text-center">{{ date('d F Y', strtotime($p->tgl_pengajuan)) }}</td>
-                                        <td class="text-center"><span <?php if ($p->status == 'Disetujui HRD'
-                                                || $p->status == 'Disetujui Atasan') {
-                                                echo 'class="label bg-success"';
-                                                }
-                                                if ($p->status == 'Ditolak HRD' || $p->status == 'Ditolak Atasan') {
-                                                echo 'class="label bg-danger"';
-                                                }
-                                                if ($p->status == 'Diproses') {
-                                                echo 'class="label bg-info"';
-                                                }
-                                                ?>>{{ $p->status }}</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <ul class="icons-list">
-                                                <li class="dropdown">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="icon-menu9"></i>
-                                                    </a>
-
-                                                    <ul class="dropdown-menu dropdown-menu-right">
-                                                        <?php $encyrpt = Crypt::encryptString($p->id); ?>
-                                                        <li><a href="{{ route('cuti.show', $encyrpt) }}"><i
-                                                                    class="icon-file-eye"></i> Detail </a>
-                                                        </li>
-                                                        <li><a href="{{ route('cuti.destroy', $encyrpt) }}"><i
-                                                                    class=" icon-trash"></i> Hapus</a>
-                                                        </li>
-                                                        <li><a href="{{ route('cuti.edit', $encyrpt) }}"><i
-                                                                    class=" icon-pencil5"></i> Edit</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </td>
+                                        <td colspan="6" class="text-center"> Data tidak ada!</td>
                                     </tr>
-                                @endforeach
-                            @endif
+                                @endif
+                            </tbody>
+                        </table>
+                        <div class="text-right">
+                            <div class="mt-4">
+                                {{ $cuti->links() }}
+                            </div>
+                            <div class="mt-4">
+                                {{ 'Total Data: ' . $cuti->total() }}
+                            </div>
+                        </div>
 
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /basic datatable -->
-@endsection
+        <!-- /basic datatable -->
+    @endsection

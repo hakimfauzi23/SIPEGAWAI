@@ -29,7 +29,7 @@ class CutiController extends Controller
         //
         $dari = date("Y-m-d");
         $ke = date("Y-m-d");
-        $cuti = Cuti::where('tgl_pengajuan', date("Y-m-d"))->get();
+        $cuti = Cuti::where('tgl_pengajuan', date("Y-m-d"))->paginate(20);
         return view('admin.cuti.index', [
             'cuti' => $cuti,
             'dari' => $dari,
@@ -43,7 +43,8 @@ class CutiController extends Controller
         $dari = $request->dari;
         $ke = $request->ke;
         // dd($ke);
-        $cuti = Cuti::whereBetween('tgl_pengajuan', [$dari, $ke])->get();
+        $cuti = Cuti::whereBetween('tgl_pengajuan', [$dari, $ke])->paginate(20);
+        $cuti->appends($request->all());
         return view('admin.cuti.index', [
             'cuti' => $cuti,
             'dari' => $dari,

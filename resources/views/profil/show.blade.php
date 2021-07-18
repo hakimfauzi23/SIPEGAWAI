@@ -28,19 +28,6 @@
 
     <div class="col-md-4">
         <div class="panel panel-flat">
-            <div class="panel-heading">
-                <div class="heading-elements">
-                    <ul class="icons-list">
-                        <li class="dropdown">
-                            <a href="{{ route('profil.edit', $data) }}">
-                                <i class=" icon-pencil7"></i> Edit Biodata
-                            </a>
-
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
 
             <div class="panel-body">
                 <div class="text-center">
@@ -255,9 +242,9 @@
                             <td class="text-center">:</td>
                             <td><?php if ($pegawai->id_atasan == 0) {
                                 echo 'Belum / Tidak ada atasan.';
-                                } else {
+                            } else {
                                 echo $pegawai->bawahan->nama;
-                                } ?>
+                            } ?>
                         </tr>
                         <tr>
                             <td>Bekerja Sejak</td>

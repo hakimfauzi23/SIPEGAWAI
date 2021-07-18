@@ -27,7 +27,7 @@ class ReportKinerjaController extends Controller
 
         $year = date("Y");
 
-        $pegawai = Pegawai::all();
+        $pegawai = Pegawai::paginate(20);
         return view('admin.report.index', [
             'pegawai' => $pegawai,
             'year' => $year,
@@ -37,8 +37,8 @@ class ReportKinerjaController extends Controller
     public function getList(Request $request)
     {
         $year = $request->year;
-        $pegawai = Pegawai::all();
-
+        $pegawai = Pegawai::paginate(10);
+        $pegawai->appends($request->all());
         return view('admin.report.index', [
             'pegawai' => $pegawai,
             'year' => $year,

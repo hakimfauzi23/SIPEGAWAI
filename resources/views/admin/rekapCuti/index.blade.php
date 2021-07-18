@@ -44,7 +44,18 @@
     <div class="panel panel-flat">
 
         <div class="panel-body">
-            <table class="table datatable-basic table-bordered table-striped table-hover table-xs">
+            <div class="text-right mb-4">
+                <form action="{{ route('rekapCuti.search.pegawai') }}" method="GET">
+                    <input type="hidden" name="page" value="{{ $pegawai->currentPage() }}">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Cari sesuatu . . ." name="query">
+                        <span class="input-group-btn">
+                            <input class="btn bg-teal" type="submit" value="Search">
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <table class="table table-bordered table-striped table-hover table-xs">
                 <thead class="bg-primary">
                     <tr>
                         <th>No</th>
@@ -89,7 +100,7 @@
                                 <td hidden></td>
                                 <td hidden></td>
                                 <td hidden><span class="label label-success">Active</span></td>
-                                <td> <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                <td class="text-center"> <?php $encyrpt = Crypt::encryptString($p->id); ?>
                                     <a href="{{ route('rekapCuti.show', $encyrpt) }}" class="btn btn bg-info-300"><i
                                             class=" icon-eye"></i> Lihat
                                     </a>
@@ -97,10 +108,22 @@
                                 </td>
                             </tr>
                         @endforeach
+                    @else
+                        <tr>
+                            <td colspan="3" class="text-center"> Data tidak ada!</td>
+                        </tr>
                     @endif
 
                 </tbody>
             </table>
+            <div class="text-right">
+                <div class="mt-4">
+                    {{ $pegawai->links() }}
+                </div>
+                <div class="mt-4">
+                    {{ 'Total Data: ' . $pegawai->total() }}
+                </div>
+            </div>
         </div>
     </div>
     <!-- /basic datatable -->

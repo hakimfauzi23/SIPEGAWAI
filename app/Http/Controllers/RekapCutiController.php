@@ -26,7 +26,7 @@ class RekapCutiController extends Controller
     public function index()
     {
         //
-        $pegawai = Pegawai::all();
+        $pegawai = Pegawai::paginate(20);
         return view('admin.rekapCuti.index', [
             'pegawai' => $pegawai,
         ]);

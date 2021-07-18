@@ -1,7 +1,7 @@
 @extends('layout.base')
 
 
-@section('title', 'Data Presensi')
+@section('title', 'Export Pegawai')
 
 
 @section('content_header')
@@ -47,14 +47,13 @@
     <div class="panel">
         <div class="panel-body">
             <div class="col-mt-3"></div>
-            <form method="get" action="{{route('report.getYear')}}">
-
-                {{ csrf_field() }}
+            <form method="get" action="{{ route('report.getYear') }}">
                 <div class="row">
-                    <div class="col-md-12 text-center" >
+                    <div class="col-md-12 text-center">
                         <div class="form-group">
                             <label for="" class="text-semibold">Tahun</label>
-                            <input class="form-control text-center" type="text" id="datepicker" name="year" value="{{ $year }}">
+                            <input class="form-control text-center" type="text" id="datepicker" name="year"
+                                value="{{ $year }}">
                         </div>
                     </div>
                 </div>
@@ -71,8 +70,18 @@
     <div class="row">
         <div class="panel">
             <div class="panel-body">
-
-                <table class="table datatable-basic table-bordered table-striped table-hover ">
+                <div class="text-right mb-4">
+                    <form action="{{ route('report.search.pegawai') }}" method="GET">
+                        <input type="hidden" name="year" value="{{ $year }}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Cari sesuatu . . ." name="query">
+                            <span class="input-group-btn">
+                                <input class="btn bg-teal" type="submit" value="Search">
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <table class="table  table-bordered table-striped table-hover ">
                     <thead class="bg-primary">
                         <tr>
                             <th>No</th>
@@ -111,19 +120,30 @@
                                     <td hidden>{{ $p->nama }}</td>
                                     <td hidden></td>
                                     <td hidden></td>
-                                    <td> <?php $encyrpt = Crypt::encryptString($p->id); ?>
+                                    <td class="text-center"> <?php $encyrpt = Crypt::encryptString($p->id); ?>
                                         <a href="{{ route('report.exportKinerja', ['id_pegawai' => $encyrpt, 'year' => $year]) }}"
                                             class="btn btn bg-success"><i class=" icon-file-excel"></i> Export
                                         </a>
                                     </td>
                                 </tr>
                             @endforeach
-                        @endif
+                        @else
+                            <tr>
+                                <td colspan="6" class="text-center"> Data tidak ada!</td>
+                            </tr>
 
+                        @endif
                     </tbody>
                 </table>
+                <div class="text-right">
+                    <div class="mt-4">
+                        {{ $pegawai->links() }}
+                    </div>
+                    <div class="mt-4">
+                        {{ 'Total Data: ' . $pegawai->total() }}
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 @endsection
@@ -136,7 +156,6 @@
             viewMode: "years",
             minViewMode: "years"
         });
-
     </script>
 
 @endsection

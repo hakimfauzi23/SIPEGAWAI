@@ -26,7 +26,7 @@ class RiwayatDivisiController extends Controller
     public function index()
     {
         //
-        $pegawai = Pegawai::all();
+        $pegawai = Pegawai::paginate(20);
         return view('admin.riwayatDivisi.index', [
             'pegawai' => $pegawai,
         ]);

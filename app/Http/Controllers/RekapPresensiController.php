@@ -24,7 +24,7 @@ class RekapPresensiController extends Controller
     public function index()
     {
         //
-        $pegawai = Pegawai::all();
+        $pegawai = Pegawai::paginate(20);
         return view('admin.rekapPresensi.index', [
             'pegawai' => $pegawai,
         ]);

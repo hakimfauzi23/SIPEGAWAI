@@ -22,11 +22,11 @@ class PenilaianKinerjaController extends Controller
     {
         if (Auth::user()->id_role == 2) {
             $pegawai = Pegawai::where('id_atasan', Auth::user()->id)
-                ->orWhere('id_atasan', null)->get();
+                ->orWhere('id_atasan', null)->paginate(20);
         } elseif (Auth::user()->id_role == 1) {
-            $pegawai = Pegawai::all();
+            $pegawai = Pegawai::paginate(20);
         } else {
-            $pegawai = Pegawai::where('id_atasan', Auth::user()->id)->get();
+            $pegawai = Pegawai::where('id_atasan', Auth::user()->id)->paginate(20);
         }
         return view('admin.penilaian.index', [
             'pegawai' => $pegawai,
@@ -38,7 +38,7 @@ class PenilaianKinerjaController extends Controller
         $penilaian = PenilaianPegawai::whereYear('tanggal', date('Y'))
             ->whereMonth('tanggal', date('m'))
             ->orderBy('final_value', 'DESC')
-            ->get();
+            ->paginate(20);
 
         return view('admin.penilaian.showAll', [
             'penilaian' => $penilaian,
