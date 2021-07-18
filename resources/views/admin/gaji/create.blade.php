@@ -132,7 +132,7 @@
                     <div class="form-group">
                         <label class="display-block text-semibold">Tunjangan yg Didapatkan</label>
                         <ul>
-                            @if ($tunjangan->count() || $tunj_status->count() || ($tunj_anak->count() || $tunj_kinerja->count()))
+                            @if ($status == 'Menikah' || $tunj_kinerja != null)
                                 @php
                                     $val_tunj_ori = 0;
                                 @endphp
