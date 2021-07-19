@@ -445,11 +445,17 @@
                             <div class="form-group">
                                 <label class="display-block text-semibold">Potongan</label>
                                 @foreach ($potongan as $value)
-                                    <label class="checkbox-inline">
-                                        {{ Form::checkbox('potongan[]', $value->id, false, ['class' => 'styled']) }}{{ $value->nama }}
-                                        : @currency($value->jumlah)
-                                    </label>
-                                    <br />
+                                    @if ($value->is_shown == 1)
+                                        <label class="checkbox-inline">
+                                            {{ Form::checkbox('potongan[]', $value->id, false, ['class' => 'styled']) }}{{ $value->nama }}
+                                            @if (stripos($value->nama, 'bpjs') || stripos($value->nama, 'pph'))
+                                            : Sesuai UU
+                                            @else
+                                            : @currency($value->jumlah)
+                                            @endif
+                                        </label>
+                                        <br />
+                                    @endif
                                 @endforeach
                             </div>
                         </div>

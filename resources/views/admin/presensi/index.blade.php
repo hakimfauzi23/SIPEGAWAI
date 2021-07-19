@@ -85,7 +85,7 @@
 
                 <div class="panel-body">
                     <div class="text-right mb-4">
-                        <form action="{{ route('cuti.search.data') }}" method="GET">
+                        <form action="{{ route('presensi.search.data') }}" method="GET">
                             <input type="hidden" name="dari" value="{{ $dari }}">
                             <input type="hidden" name="ke" value="{{ $ke }}">
                             <div class="input-group">
