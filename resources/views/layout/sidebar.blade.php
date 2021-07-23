@@ -28,7 +28,6 @@
                             </a>
                             <ul>
                                 @foreach ($menuItem->children as $subMenuItem)
-
                                     @if ($subMenuItem->url == 'hrdPengajuanCuti')
                                         @if (Auth::user()->role->name == 'HRD')
                                             <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}">
@@ -38,12 +37,13 @@
                                             </li>
                                         @endif
                                     @elseif ($subMenuItem->url != null)
-                                        <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}"><a
-                                                href="{{ '/' . $subMenuItem->url }}">
-                                                {{ $subMenuItem->judul }}
-                                            </a>
-                                        </li>
-
+                                        @can($subMenuItem->hak_akses->name)
+                                            <li class="{{ Request::is($subMenuItem->url) ? 'active' : null }}"><a
+                                                    href="{{ '/' . $subMenuItem->url }}">
+                                                    {{ $subMenuItem->judul }}
+                                                </a>
+                                            </li>
+                                        @endcan
                                     @else
                                         <li>
                                             <a href="#"><span>{{ $subMenuItem->judul }}</span></a>
@@ -220,8 +220,8 @@
     @endcan
     @can('menu-staff')
         <li class="<?php if (Route::is('staffCuti.index') || Route::is('staffCuti.show')) {
-            echo 'active';
-        } ?>"><a href="staffCuti"><i class="icon-history"></i> <span>Riwayat
+    echo 'active';
+} ?>"><a href="staffCuti"><i class="icon-history"></i> <span>Riwayat
                     Pengajuan Cuti
                 </span>
             </a>
@@ -236,8 +236,8 @@
             </a>
             <ul>
                 <li class="<?php if (Route::is('staffCuti.create')) {
-                    echo 'active';
-                } ?>"><a href="{{ route('staffCuti.create') }}">Buat Pengajuan Cuti</a>
+    echo 'active';
+} ?>"><a href="{{ route('staffCuti.create') }}">Buat Pengajuan Cuti</a>
                 </li>
                 @if ($jml_bawahan != 0)
                     <li class="{{ Request::segment(1) === 'staffPengajuanCuti' ? 'active' : null }}"><a
@@ -444,8 +444,8 @@
                     class="badge bg-warning-400">{{ $jml_cuti_hrd }}</span></a>
             <ul>
                 <li class="<?php if (Route::is('hrdCuti.index') || Route::is('hrdCuti.search')) {
-                    echo 'active';
-                } ?>"><a href="{{ route('hrdCuti.index') }}">List Data Cuti</a>
+    echo 'active';
+} ?>"><a href="{{ route('hrdCuti.index') }}">List Data Cuti</a>
                 </li>
                 <li class="{{ Route::is('hrdCuti.cutiBersama') ? 'active' : null }}"><a
                         href="{{ route('hrdCuti.cutiBersama') }}">Atur Tanggal Cuti Bersama</a></li>

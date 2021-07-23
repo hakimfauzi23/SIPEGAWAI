@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             PegawaiSeeder::class,
             MenuSeeder::class,
+            // Menu2Seeder::class,
             // CutiSeeder::class,
             // PresensiHarianSeeder::class,
             // RiwayatJabatanSeeder::class,
