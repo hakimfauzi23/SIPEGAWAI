@@ -1,6 +1,6 @@
 @extends('login.base')
 
-@section('title', 'Masuk SIPEGAWAI')
+@section('title', 'SIPEGAWAI | Login')
 
 @section('content')
     <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
