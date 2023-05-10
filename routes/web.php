@@ -54,13 +54,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 |
 */
 
-Route::get('/', function () {
-    return view('landingPage.index');
-});
-
-
-// !!!!!DI SINI ADALAH ROUTES UNTUK MENU LOGIN!!!!! //
-Route::get('/login', [AuthController::class, 'index'])->name('login');
+// DI SINI ADALAH ROUTES UNTUK MENU LOGIN //
+Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
